@@ -55,7 +55,7 @@ return [
 		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'laravel',
+			'database'  => 'laravel_lan',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

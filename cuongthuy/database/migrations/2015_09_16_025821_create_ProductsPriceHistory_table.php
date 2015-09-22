@@ -13,8 +13,9 @@ class CreateProductsPriceHistoryTable extends Migration {
     public function up(){
         Schema::create('ProductsPriceHistory', function(Blueprint $table)
         {
-            $table->increments('product_id');
-            $table->string('product_price',100);
+            $table->increments('id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_price');
             $table->datetime('product_datetime');
         });
     }

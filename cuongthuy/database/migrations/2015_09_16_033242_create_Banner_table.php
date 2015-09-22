@@ -13,12 +13,13 @@ class CreateBannerTable extends Migration {
     public function up() {
         Schema::create('Banner', function(Blueprint $table)
         {
-            $table->increments('banner_id');
-            $table->string('banners_title',64);
-            $table->string('banners_url',100);
-            $table->datetime('expires_date');
-            $table->datetime('date_added');
-            $table->unsignedInteger('status');
+            $table->increments('id');
+            $table->string('banner_title',64);
+            $table->string('banner_url',100);
+            $table->datetime('banner_expires_date');
+            $table->datetime('banner_date_added');
+            $table->unsignedInteger('banner_status');
+			$table->string('banner_image_path');			
         });
     }
 

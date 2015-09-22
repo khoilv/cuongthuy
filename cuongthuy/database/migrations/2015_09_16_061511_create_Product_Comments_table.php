@@ -13,8 +13,8 @@ class CreateProductCommentsTable extends Migration {
     public function up(){
         Schema::create('Product_Comments', function(Blueprint $table)
         {
-            $table->increments('product_id');
-            $table->unsignedInteger('comment_id');
+            $table->increments('id');
+            $table->unsignedInteger('product_id');
             $table->text('comment_content');
             $table->string('comment_username',50);
             $table->datetime('comment_datetime');

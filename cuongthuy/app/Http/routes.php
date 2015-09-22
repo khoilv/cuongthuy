@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/',function(){
-    echo 'hihi';
-});
+Route::get('index','Frontend\TopController@getIndex');
+Route::get('list/{id}/{page?}','Frontend\ProductController@getIndex');

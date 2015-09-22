@@ -22,8 +22,13 @@ class CreateProductsTable extends Migration {
             $table->string('product_short_description');
             $table->text('product_description');
             $table->unsignedInteger('product_quantity');
-            $table->float('product_rating');
             $table->unsignedInteger('product_price');
+            $table->unsignedInteger('product_discount_price')->nullable();
+            $table->tinyInteger('product_discount_flag');
+            $table->tinyInteger('product_display');
+            $table->tinyInteger('product_type')->nullable();
+            $table->datetime('product_date_added');
+            $table->datetime('product_date_modify')->nullable();
         });
     }
 

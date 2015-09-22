@@ -13,3 +13,4 @@
 
 Route::get('index','Frontend\TopController@getIndex');
 Route::get('list/{id}/{page?}','Frontend\ProductController@getIndex');
+Route::get('cart', 'Frontend\CartController@getIndex');

@@ -14,13 +14,11 @@ class CartController extends Controller {
 //        }
 //        $_SESSION['cart'][$id] = $quantity;
         $_SESSION['cart'] = array(1 => 1, 2 => 2, 3 => 1);
-        foreach ($_SESSION['cart'] as $key => $value) {
-            $item[] = $key;
-        }
+        $item = array_keys($_SESSION['cart']);
         
         $products = DB::table('products')->whereIn('product_id', $item)->get();
         
-        return view('Frontend.cart', ['products'  => $products ]);
+        return view('Frontend.cart', compact('products'));
     }
 
 }

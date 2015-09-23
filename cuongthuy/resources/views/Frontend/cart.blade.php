@@ -16,12 +16,16 @@
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
                         <th>Hình ảnh sản phẩm</th>
+                        <th>Đơn giá</th>
                         <th>Thành tiền</th>
                         <th>Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $product) 
+                    <?php $totalPrice = 0 ?>
+                    @foreach($products as $product)
+                    <?php $linePrice = $product->product_price * $_SESSION['cart'][$product->product_id] ?>
+                    <?php $totalPrice += $linePrice ?>
                     <tr>
                     	<td>{!! $product->product_id !!}</td>
                         <td>{!! $product->product_code !!}</td>
@@ -32,14 +36,15 @@
                         <td>
                             <img src="public/images/upload/products/{!! $product->product_image !!}">
                         </td>
-                        <td>{!! $product->product_price * $_SESSION['cart'][$product->product_id]!!}</td>
+                        <td>{!! $product->product_price!!}</td>
+                        <td>{!! $linePrice !!}</td>
                         <td><button></button></td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             <div class="cart_c2">
-            	<p class="f_left">Tổng tiền : 300 000đ</p>
+            	<p class="f_left">Tổng tiền : {!!$totalPrice!!}đ</p>
                 <a href="#" class="f_right"><button>Mua hàng</button></a>
             </div>
         </div><!-- end cart page-->

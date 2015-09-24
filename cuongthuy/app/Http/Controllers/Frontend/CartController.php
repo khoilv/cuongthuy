@@ -8,7 +8,12 @@ use DB;
 class CartController extends Controller {
 
     public function getIndex() {
-        $_SESSION['cart'] = array(1 => 1, 2 => 2, 3 => 1);
+//        if ($_SESSION['cart']) {
+//            echo "chan vl";
+         $_SESSION['cart'] = array(1 => 1, 2 => 2, 3 => 1);
+//        }
+        var_dump($_SESSION['cart']);
+        die;
         $item = array_keys($_SESSION['cart']);
 
         $products = DB::table('products')->whereIn('product_id', $item)->get();
@@ -17,7 +22,9 @@ class CartController extends Controller {
     }
 
     public function updateCart() {
-        
+        $quantity = $_POST['quantity'];
+        $promotionId = $_POST['promotionId'];
+        $_SESSION['cart'][$promotionId] = $quantity;
     }
 
     public function deleteCart() {

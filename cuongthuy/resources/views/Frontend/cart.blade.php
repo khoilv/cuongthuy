@@ -86,23 +86,23 @@
 <!-- InstanceEndEditable -->
 @endsection
 @section('javascript')
+
 <script type="text/javascript">
     $(document).ready(function() {
-        $("input").keyup(function() {
+        $("input").change(function() {
             var quantity = $(this).val();
-            var promotionId = "<?php echo $product->product_id;?>";
-            $('.total_price').html('Tongtien:'+'5d');
-            
             $.ajax({
-                url : "updateCart",
-                type : "post",
-                dataType:"text",
+                url : 'updateCart',
+                type : 'post',
+//                dataType: 'json',
                 data : {
-                    quantity : quantity
+                    quantity : quantity,
+                    promotionId : 1,
+                    
                 },
                 success : function (result){
                     $('.line_price').html(result['linePrice']);
-                    $('.total_price').html('totalPrice');
+                    $('.total_price').html(result['totalPrice']);
                 }
             });
             

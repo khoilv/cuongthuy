@@ -38,4 +38,17 @@ class ProductModel extends TableBase {
         $options['conditions']['product_type'] = 1;
         return $this->find('all', $options);
     }
+    
+    public function getCountResult($arrWhere,$joinsArr)
+    {
+        $option = array(
+            'fields' => array('count(products.id) as count'),
+            'conditions' => $arrWhere,
+            'joins' => $joinsArr,
+        );
+        $option['conditions']['product_status'] = 1;
+        $option['conditions']['product_display'] = 1;
+        $data =  $this->find('all', $option);
+        return $data[0]['count'];
+    }
 }

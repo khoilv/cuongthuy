@@ -40,4 +40,12 @@ class CategoryModel extends TableBase {
     public function getChildList() {
         return $this->childList;
     }
+    public function getCategoryNamebyId($id){
+        $options = array(
+            'fields' => array('category_name'),
+            'conditions' => array('id' => $id),
+        );
+        $result = $this->find('first', $options);
+        return $result['category_name'];
+    }
 }

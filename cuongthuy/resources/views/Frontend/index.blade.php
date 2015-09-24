@@ -1,9 +1,13 @@
+<?php use App\Http\Controllers\Frontend\BannerController as BannerController; ?>
 @extends('Frontend.layout')
+@section('banner')
+<?php echo BannerController::getBanner();?>
+@endsection
 @section('content')
 <div class="top_content1">
     <div class="title title1">
         <div class="wrap">
-            <div class="f_left"><span class="title_red"></span><a href="#">Sản phẩm mới</a></div>
+            <div class="f_left"><span class="title_red"></span><a href="{!!action('Frontend\ProductController@getIndex')!!}">Sản phẩm mới</a></div>
         </div>
         <div class="clear"></div>
     </div>
@@ -12,7 +16,7 @@
         <?php foreach ($arrProductNew as $product) { ?>
             <li>
                 <div>
-                    <a href="#"><img src="public/images/upload/products/<?php echo $product['product_image'] ?>"></a>
+                    <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                     <div>
                         <p>Giao sản phẩm miễ phí tại Hà Nội</p>
                         <a href="#">Mua</a>
@@ -31,11 +35,11 @@
         <div class="top_content2 ">
             <div class="title title2">
                 <div class="wrap">
-                    <div class="f_left"><span class="title_orange"></span><a href="#"><?php echo $val['category_name'];?></a></div>
+                    <div class="f_left"><span class="title_orange"></span><a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $val['id']))!!}"><?php echo $val['category_name'];?></a></div>
                     <div class="f_right">
                         <ul class="owl-demo owl-carousel">
                             <?php foreach ($arrChirdList[$key] as $k => $v ){?>
-                            <li><a href="#"><?php echo $v['category_name'];?></a></li>
+                            <li><a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $v['id']))!!}"><?php echo $v['category_name'];?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -47,7 +51,7 @@
                 <?php foreach ($arrProductList[$key] as $product){?>
                 <li>
                     <div>
-                        <a href="#"><img src="public/images/upload/products/<?php echo $product['product_image']?>"></a>
+                        <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
                             <p>Giao sản phẩm miễ phí tại Hà Nội</p>
                             <a href="#">Mua</a>
@@ -84,7 +88,7 @@
             </ul>
         </div>
         <div class="f_right">
-            <img src="public/images/banner-b.png">
+            <img src="{!!Asset('public/images/banner-b.png')!!}">
         </div>
         <div class="clear"></div>
     </div>

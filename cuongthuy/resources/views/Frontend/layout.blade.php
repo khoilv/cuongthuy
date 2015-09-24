@@ -1,6 +1,5 @@
 <?php error_reporting(E_ALL & ~(E_NOTICE));
 use App\Http\Controllers\Frontend\MenuController as MenuController;
-use App\Http\Controllers\Frontend\BannerController as BannerController;
 ?>
 <!doctype html>
 <html>
@@ -11,23 +10,23 @@ use App\Http\Controllers\Frontend\BannerController as BannerController;
         <meta name="viewport" content="width=device-width, maximum-scale=1">
         <title>Home page</title>
         @section('stylesheets')
-        <link href="public/css/common.css" rel="stylesheet" type="text/css">
-        <link href="public/css/style.css" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="public/images/icon_logo.png">
+        <link href="{!!Asset('public/css/common.css')!!}" rel="stylesheet" type="text/css">
+        <link href="{!!Asset('public/css/style.css')!!}" rel="stylesheet" type="text/css">
+        <link rel="icon" type="image/png" href="{!!Asset('public/images/icon_logo.png')!!}">
         <!-- slider -->
-        <link href="public/css/nivo-slider.css" rel="stylesheet" type="text/css">
+        <link href="{!!Asset('public/css/nivo-slider.css')!!}" rel="stylesheet" type="text/css">
         <!-- navigation mobile-->
-        <link type="text/css" rel="stylesheet" href="public/css/jquery.mmenu.all.css" />
+        <link type="text/css" rel="stylesheet" href="{!!Asset('public/css/jquery.mmenu.all.css')!!}" />
         @yield('stylesheets')
         @section('javascript')
-        <script type="text/javascript" src="public/js/jquery-1.9.0.min.js"></script>
-        <script type="text/javascript" src="public/js/jquery.nivo.slider.js"></script>
+        <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
+        <script type="text/javascript" src="{!!Asset('public/js/jquery.nivo.slider.js')!!}"></script>
         <script type="text/javascript">
             $(window).load(function() {
                 $('#slider').nivoSlider();
             });
         </script>
-        <script type="text/javascript" src="public/js/jquery.mmenu.min.all.js"></script>
+        <script type="text/javascript" src="{!!Asset('public/js/jquery.mmenu.min.all.js')!!}"></script>
         <script type="text/javascript">
             $(function() {
                 $('nav#menu').mmenu({
@@ -52,7 +51,7 @@ use App\Http\Controllers\Frontend\BannerController as BannerController;
                     ]
                 });
             });
-        </script>  
+        </script>
         <!-- go to top -->
         <script>
             $(function() {
@@ -113,7 +112,7 @@ use App\Http\Controllers\Frontend\BannerController as BannerController;
         
         <!-- InstanceBeginEditable name="head" -->
         <!-- porduction -->
-        <script src="public/js/owl.carousel.js"></script>
+        <script src="{!!Asset('public/js/owl.carousel.js')!!}"></script>
 		<script>
 			$(document).ready(function() {
 
@@ -161,21 +160,23 @@ use App\Http\Controllers\Frontend\BannerController as BannerController;
             </div>
             <div class="clear"></div>
             <div class="wrap header_top">
-                <a class="f_left" href="index.html"><img src="public/images/logo.png" alt="cuongthuy.vn"></a>
-                <div class="f_right">
+                <a class="f_left" href="{!!action('Frontend\TopController@getIndex')!!}"><img src="{!!Asset('public/images/logo.png')!!}" alt="cuongthuy.vn"></a>
+                <div class="f_right ">
                     <ul>
                         <li>Giao hàng 24h miễn phí</li>
                         <li>Thương hiệu uy tín</li>
                     </ul>
-                    <div class="search">
-                        <select class="f_left">
-                            <option>Mã sản phẩm</option>
-                            <option>Tên sản phẩm</option>
-                            <option>Loại sản phẩm</option>
-                        </select>
-                        <input type="text" placeholder="Nhập từ khóa">
-                        <button></button>
-                    </div>
+                    <form name="form1" action="list" method="GET">
+                        <div class="search">
+                            <select class="f_left" name="type">
+                                <option select="selected" name="msp">Mã sản phẩm</option>
+                                <option>Tên sản phẩm</option>
+                                <option>Loại sản phẩm</option>
+                            </select>
+                            <input type="text" placeholder="Nhập từ khóa">
+                            <button onclick="document.form1.submit()"></button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="clear"></div>
@@ -237,7 +238,7 @@ use App\Http\Controllers\Frontend\BannerController as BannerController;
         </header>
         <div class="clear"></div>
         <!-- banner -->
-        <?php echo BannerController::getBanner();?>
+        @yield('banner')
         <div class="clear"></div>
         <!-- menu -->
        <?php echo MenuController::getMenu();?>

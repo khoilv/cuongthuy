@@ -3,7 +3,7 @@
         <div id="slider" class="nivoSlider">
             <?php if(!empty($arrBannerList)) { ?>
                 <?php foreach ($arrBannerList as $key => $value) { ?>
-                    <a href="#"><img src="<?php echo $value['banner_url'];?>"></a>
+                    <a href="#"><img src="{!!Asset('public/images/upload/banner/'.$value['banner_image_path'])!!}"></a>
                <?php } ?>
            <?php } ?>
         </div>

@@ -11,3 +11,10 @@
         <div class="clear"></div>
     </div>
 </footer>
+@section('javascript')
+<script type="text/javascript">
+    $.ajaxSetup({
+       headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+</script>
+@yield('javascript')

@@ -4,40 +4,71 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use DB;
+use Input;
+use Request;
+use Session;
 
 class CartController extends Controller {
 
     public function getIndex() {
-//        if ($_SESSION['cart']) {
-//            echo "chan vl";
-         $_SESSION['cart'] = array(1 => 1, 2 => 2, 3 => 1);
-//        }
-        var_dump($_SESSION['cart']);
-        die;
-        $item = array_keys($_SESSION['cart']);
-
+        $cart = Session::get('cart');
+        $item = array_keys($cart);
         $products = DB::table('products')->whereIn('product_id', $item)->get();
 
-        return view('Frontend.cart', compact('products'));
+        return view('Frontend.cart', compact('products', 'cart'));
     }
 
     public function updateCart() {
-        $quantity = $_POST['quantity'];
-        $promotionId = $_POST['promotionId'];
-        $_SESSION['cart'][$promotionId] = $quantity;
-    }
-
-    public function deleteCart() {
-        
-    }
-
-    public function addCart() {
-        if (isset($_SESSION['cart'][$id])) {
-            $quantity = $_SESSION['cart'][$id] + 1;
-        } else {
-            $quantity = 1;
+        if(Request::ajax()) {
+            $cart = Session::get('cart');
+            $data = Input::all();
+            
+            $result['linePrice'] = $data['quantity'] * $data['product_price'];
+            $result['totalPrice'] = $data['total_price'] + 
+                    ($data['quantity'] - $cart[$data['product_id']])* $data['product_price'] ;
+            //update session cart
+            $cart[$data['product_id']] = $data['quantity'];
+            Session::put('cart', $cart);
+            $result['totalCart'] = self::getCart();
+            return (json_encode($result));
         }
-        $_SESSION['cart'][$id] = $quantity;
+    }
+    
+    public function deleteCart() {
+        if(Request::ajax()) {
+            $cart = Session::get('cart');
+            $data = Input::all();
+            
+            $result['totalPrice'] = $data['total_price'] - $data['quantity'] * $data['product_price'] ;
+            
+            //update session cart
+            unset ($cart[$data['product_id']]);
+            Session::put('cart', $cart);
+            $result['totalCart'] = self::getCart();
+            return (json_encode($result));
+        }
+    }
+    
+    public function addCart() {
+        $cart = Session::get('cart');
+        $data = Input::all();
+        if (isset($cart[$data['product_id']])) {
+            $cart[$data['product_id']] += 1;
+        } else {
+            $cart[$data['product_id']] = 1;
+        }
+        $total = array_sum($cart);
+        Session::put('cart', $cart);
+        
+        return ($total);
+    }
+    
+    public static function getCart() {
+        $cart = Session::get('cart');
+        if ($cart) {
+            $totalCart = array_sum($cart);
+            return "($totalCart)";
+        }
     }
 
 }

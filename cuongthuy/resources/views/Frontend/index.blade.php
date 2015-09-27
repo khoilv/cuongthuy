@@ -18,13 +18,17 @@
                 <div>
                     <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                     <div>
-                        <p>Giao sản phẩm miễ phí tại Hà Nội</p>
+                        <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                         <a href="#">Mua</a>
                         <button></button>
                     </div>
                 </div>
                 <p><a href="#"><?php echo $product['product_name']; ?></a></p>
-                <span class="price"><?php echo $product['product_price'] . 'VND'; ?></span> <span class="sale"><?php echo $product['product_discount_price']; ?></span>
+                <span class="price"><?php echo $product['product_price'] . 'VND'; ?></span> 
+                <?php if ($product['product_discount_price']) { ?>
+                <span class="sale"><?php echo $product['product_discount_price']; ?></span>
+                <?php } ?>
+                <input type="hidden" class='product_id'  value="{!! $product['product_id']!!}">
             </li>
         <?php } ?>
     </ul>
@@ -53,13 +57,17 @@
                     <div>
                         <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
-                            <p>Giao sản phẩm miễ phí tại Hà Nội</p>
+                            <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                             <a href="#">Mua</a>
                             <button></button>
                         </div>
                     </div>
                     <p><a href="#"><?php echo $product['product_name'];?></a></p>
-                    <span class="price"><?php echo $product['product_price'].'VND';?></span> <span class="sale"><?php echo $product['product_discount_price'];?></span>
+                    <span class="price"><?php echo $product['product_price'].'VND';?></span> 
+                    <?php if ($product['product_discount_price']) { ?>
+                    <span class="sale"><?php echo $product['product_discount_price'];?></span>
+                    <?php } ?>
+                    <input type="hidden" class='product_id'  value="{!! $product['product_id']!!}">
                 </li>
                 <?php } ?>
             </ul>
@@ -93,4 +101,23 @@
         <div class="clear"></div>
     </div>
 </div><!-- end content bottom-->
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("button").click(function () {
+            var my = $(this).parent().parent().parent();
+            $.ajax({
+                url : 'addCart',
+                type : 'post',
+                dataType: 'json',
+                data : { product_id : $(".product_id", my).val() },
+                success : function (result){
+                    $(".button_cart").html("Giỏ hàng ("+result+")")
+                }
+            });
+        });
+    });
+</script>
 @endsection

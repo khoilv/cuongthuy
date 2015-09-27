@@ -23,31 +23,34 @@
         </thead>
         <tbody>
             <?php $totalPrice = 0 ?>
-            @foreach($products as $product)
-            <?php $linePrice = $product->product_price * $_SESSION['cart'][$product->product_id] ?>
+            @foreach($products as $key => $product)
+            <?php $linePrice = $product->product_price * $cart[$product->product_id] ?>
             <?php $totalPrice += $linePrice ?>
             <tr>
-                <td class="product_id">{!! $product->product_id !!}</td>
+                <td>{!!++$key!!}</td>
                 <td>{!! $product->product_code !!}</td>
                 <td>{!! $product->product_name !!}</td>
                 <td>
-                    <input type='text' name='quantity[{!!$product->product_id!!}]' size='5' value="{!! $_SESSION['cart'][$product->product_id] !!}" />
+                    <input type='text' class='product_quantity' name='quantity[{!!$product->product_id!!}]' size='5' value="{!! $cart[$product->product_id] !!}"/>
                 </td>
                 <td>
                     <img src="public/images/upload/products/{!! $product->product_image !!}">
                 </td>
-                <td>{!! $product->product_price!!}</td>
+                <td class="product_price">{!! $product->product_price!!}</td>
                 <td class="line_price">{!! $linePrice !!}</td>
-                <td><button></button></td>
+                <td><div class="button delete_product"></div></td>
+                <input type="hidden" class='product_id'  value="{!! $product->product_id!!}">
             </tr>
             @endforeach
         </tbody>
     </table>
     <div class="cart_c2">
         <p class="f_left total_price">Tổng tiền : {!!$totalPrice!!}đ</p>
+        
         <a href="#" class="f_right"><button>Mua hàng</button></a>
     </div>
-</div><!-- end cart page-->
+</div> 
+<!--end cart page-->
 <div class="clear"></div>
 
 <div class="slide">
@@ -82,31 +85,64 @@
             </li>
         </ul>
     </div>
-</div><!-- end slide-->
+</div> 
+<!--end slide-->
 <!-- InstanceEndEditable -->
 @endsection
 @section('javascript')
-
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("input").change(function() {
-            var quantity = $(this).val();
+    $(document).ready(function(){
+        $(".product_quantity").change(function() {
+            var my = $(this).parent().parent();
+            var post = {
+                    quantity : $(this).val(),
+                    product_id : $(".product_id", my).val(),
+                    product_price : $(".product_price", my).text(),
+                    total_price : $('.total_price').text().match(/\d/g).join("")
+                };
             $.ajax({
                 url : 'updateCart',
                 type : 'post',
-//                dataType: 'json',
-                data : {
-                    quantity : quantity,
-                    promotionId : 1,
-                    
-                },
+                dataType: 'json',
+                data : post,
                 success : function (result){
-                    $('.line_price').html(result['linePrice']);
-                    $('.total_price').html(result['totalPrice']);
+                    $('.line_price', my).html(result['linePrice']);
+                    $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
+                    if (result['totalCart']) {
+                        $(".button_cart").html("Giỏ hàng "+result['totalCart']);
+                    } else {
+                        $(".button_cart").html("Giỏ hàng");
+                    }
                 }
             });
+        });
+        
+        $(".delete_product").click(function() {
+            var my = $(this).parent().parent();
+            var post = {
+                    quantity : $(".product_quantity", my).val(),
+                    product_id : $(".product_id", my).val(),
+                    product_price : $(".product_price", my).text(),
+                    total_price : $('.total_price').text().match(/\d/g).join("")
+                };
             
+            $.ajax({
+                url : 'deleteCart',
+                type : 'post',
+                dataType: 'json',
+                data : post,
+                success : function (result){
+                    $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
+                    my.hide();
+                    if (result['totalCart']) {
+                        $(".button_cart").html("Giỏ hàng "+result['totalCart']);
+                    } else {
+                        $(".button_cart").html("Giỏ hàng");
+                    }
+                }
+            });
         });
     });
+    
 </script>
 @endsection

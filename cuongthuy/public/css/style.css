@@ -506,7 +506,7 @@ body footer .wrap > .f_right{
 			border:1px solid #ccc;
 			width:90%
 		}
-		.cart_page table tbody button{
+		.cart_page table tbody .button{
 			width:25px;
 			height:25px;
 			background:url(../images/icon16.png) no-repeat center center;

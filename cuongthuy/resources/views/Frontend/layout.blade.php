@@ -1,5 +1,6 @@
 <?php error_reporting(E_ALL & ~(E_NOTICE));
 use App\Http\Controllers\Frontend\MenuController as MenuController;
+use App\Http\Controllers\Frontend\CartController as CartController;
 ?>
 <!doctype html>
 <html>
@@ -7,7 +8,8 @@ use App\Http\Controllers\Frontend\MenuController as MenuController;
         <meta charset="utf-8">
         <meta name="keywords" content="Mỹ phẩm - tạp hóa Cường Thủy" />
         <meta name="description" content="Mỹ phẩm - tạp hóa Cường Thủy" />
-        <meta name="viewport" content="width=device-width, maximum-scale=1">
+        <meta name="viewport" content="width=device-width, maximum-scale=1" />
+        <meta name="_token" content="{!! csrf_token() !!}"/>
         <title>Home page</title>
         @section('stylesheets')
         <link href="{!!Asset('public/css/common.css')!!}" rel="stylesheet" type="text/css">
@@ -148,7 +150,7 @@ use App\Http\Controllers\Frontend\MenuController as MenuController;
                     <ul class="f_right">
                         <li><a href="#login">Đăng nhập</a></li>
                         <li><a href="#register">Đăng ký</a></li>
-                        <li><a href="#">Giỏ hàng</a></li>
+                        <li><a href="{!!Asset(cart)!!}" class='button_cart'>Giỏ hàng <?php echo CartController::getCart() ?></a></li>
                         <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
                     </ul>
                     <div class="clear"></div>

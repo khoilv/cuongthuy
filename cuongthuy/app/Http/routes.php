@@ -12,5 +12,9 @@
 */
 
 Route::get('index','Frontend\TopController@getIndex');
+Route::get('/','Frontend\TopController@getIndex');
 Route::get('list','Frontend\ProductController@getIndex');
 Route::get('cart', 'Frontend\CartController@getIndex');
+Route::post('updateCart', 'Frontend\CartController@updateCart');
+Route::post('deleteCart', 'Frontend\CartController@deleteCart');
+Route::post('addCart', 'Frontend\CartController@addCart');

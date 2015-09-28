@@ -19,8 +19,8 @@
                     <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                     <div>
                         <p>Giao sản phẩm miễn phí tại Hà Nội</p>
-                        <a href="#">Mua</a>
-                        <button></button>
+                        <a href="#" title="Mua sản phẩm này">Mua</a>
+                        <button class="add_cart" title="Thêm vào giỏ"></button>
                     </div>
                 </div>
                 <p><a href="#"><?php echo $product['product_name']; ?></a></p>
@@ -58,8 +58,8 @@
                         <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
-                            <a href="#">Mua</a>
-                            <button></button>
+                            <a href="#" title="Mua sản phẩm này">Mua</a>
+                            <button class="add_cart" title="Thêm vào giỏ"></button>
                         </div>
                     </div>
                     <p><a href="#"><?php echo $product['product_name'];?></a></p>
@@ -106,8 +106,8 @@
 @section('javascript')
 <script type="text/javascript">
     $(document).ready(function() {
-        $("button").click(function () {
-            var my = $(this).parent().parent().parent();
+        $(".add_cart").click(function () {
+            var my = $(this).closest("li");
             $.ajax({
                 url : 'addCart',
                 type : 'post',

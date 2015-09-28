@@ -12,9 +12,12 @@ class CartController extends Controller {
 
     public function getIndex() {
         $cart = Session::get('cart');
-        $item = array_keys($cart);
-        $products = DB::table('products')->whereIn('product_id', $item)->get();
-
+        $products = array();
+        if ($cart) {
+            $item = array_keys($cart);
+            $products = DB::table('products')->whereIn('product_id', $item)->get();
+        }
+        
         return view('Frontend.cart', compact('products', 'cart'));
     }
 
@@ -50,17 +53,19 @@ class CartController extends Controller {
     }
     
     public function addCart() {
-        $cart = Session::get('cart');
-        $data = Input::all();
-        if (isset($cart[$data['product_id']])) {
-            $cart[$data['product_id']] += 1;
-        } else {
-            $cart[$data['product_id']] = 1;
+        if(Request::ajax()) {
+            $cart = Session::get('cart');
+            $data = Input::all();
+            if (isset($cart[$data['product_id']])) {
+                $cart[$data['product_id']] += 1;
+            } else {
+                $cart[$data['product_id']] = 1;
+            }
+            $total = array_sum($cart);
+            Session::put('cart', $cart);
+
+            return ($total);
         }
-        $total = array_sum($cart);
-        Session::put('cart', $cart);
-        
-        return ($total);
     }
     
     public static function getCart() {

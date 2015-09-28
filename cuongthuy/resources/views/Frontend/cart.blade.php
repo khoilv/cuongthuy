@@ -38,7 +38,7 @@
                 </td>
                 <td class="product_price">{!! $product->product_price!!}</td>
                 <td class="line_price">{!! $linePrice !!}</td>
-                <td><div class="button delete_product"></div></td>
+                <td><button class="button delete_product"></button></td>
                 <input type="hidden" class='product_id'  value="{!! $product->product_id!!}">
             </tr>
             @endforeach
@@ -93,7 +93,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $(".product_quantity").change(function() {
-            var my = $(this).parent().parent();
+            var my = $(this).closest('tr');
             var post = {
                     quantity : $(this).val(),
                     product_id : $(".product_id", my).val(),
@@ -118,7 +118,7 @@
         });
         
         $(".delete_product").click(function() {
-            var my = $(this).parent().parent();
+            var my = $(this).closest('tr');
             var post = {
                     quantity : $(".product_quantity", my).val(),
                     product_id : $(".product_id", my).val(),

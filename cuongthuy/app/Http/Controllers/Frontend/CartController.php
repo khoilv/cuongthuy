@@ -26,12 +26,16 @@ class CartController extends Controller {
             $cart = Session::get('cart');
             $data = Input::all();
             
-            $result['linePrice'] = $data['quantity'] * $data['product_price'];
-            $result['totalPrice'] = $data['total_price'] + 
-                    ($data['quantity'] - $cart[$data['product_id']])* $data['product_price'] ;
+            //update line price
+            $productPrice = DB::table('products')->where('product_id', $data['product_id'])->pluck('product_price');
+            $result['linePrice'] = $data['quantity']*$productPrice;
+            
             //update session cart
             $cart[$data['product_id']] = $data['quantity'];
             Session::put('cart', $cart);
+            
+            //get total price and total number product in cart
+            $result['totalPrice'] = self::getTotalPriceCart();
             $result['totalCart'] = self::getCart();
             return (json_encode($result));
         }
@@ -42,11 +46,12 @@ class CartController extends Controller {
             $cart = Session::get('cart');
             $data = Input::all();
             
-            $result['totalPrice'] = $data['total_price'] - $data['quantity'] * $data['product_price'] ;
-            
             //update session cart
             unset ($cart[$data['product_id']]);
             Session::put('cart', $cart);
+            
+            //get total price and total number product in cart
+            $result['totalPrice'] = self::getTotalPriceCart();
             $result['totalCart'] = self::getCart();
             return (json_encode($result));
         }
@@ -66,6 +71,20 @@ class CartController extends Controller {
 
             return ($total);
         }
+    }
+    
+    public static function getTotalPriceCart () {
+        $cart = Session::get('cart');
+        $totalPrice = 0;
+        if ($cart) {
+            $item = array_keys($cart);
+            $products = DB::table('products')->whereIn('product_id', $item)->get();
+            
+            foreach ($products as $key => $product) {
+                $totalPrice += $product->product_price*$cart[$product->product_id];
+            }
+        }
+        return ($totalPrice);
     }
     
     public static function getCart() {

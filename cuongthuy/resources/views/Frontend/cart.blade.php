@@ -1,5 +1,6 @@
 @extends('Frontend.layout')
 @section('content')
+<?php use App\Http\Controllers\Frontend\CartController as CartController; ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -22,10 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php $totalPrice = 0 ?>
             @foreach($products as $key => $product)
-            <?php $linePrice = $product->product_price * $cart[$product->product_id] ?>
-            <?php $totalPrice += $linePrice ?>
             <tr>
                 <td>{!!++$key!!}</td>
                 <td>{!! $product->product_code !!}</td>
@@ -37,7 +35,7 @@
                     <img src="public/images/upload/products/{!! $product->product_image !!}">
                 </td>
                 <td class="product_price">{!! $product->product_price!!}</td>
-                <td class="line_price">{!! $linePrice !!}</td>
+                <td class="line_price">{!! $product->product_price * $cart[$product->product_id] !!}</td>
                 <td><button class="button delete_product"></button></td>
                 <input type="hidden" class='product_id'  value="{!! $product->product_id!!}">
             </tr>
@@ -45,7 +43,7 @@
         </tbody>
     </table>
     <div class="cart_c2">
-        <p class="f_left total_price">Tổng tiền : {!!$totalPrice!!}đ</p>
+        <p class="f_left total_price">Tổng tiền : {!!CartController::getTotalPriceCart()!!}đ</p>
         
         <a href="#" class="f_right"><button>Mua hàng</button></a>
     </div>
@@ -97,8 +95,6 @@
             var post = {
                     quantity : $(this).val(),
                     product_id : $(".product_id", my).val(),
-                    product_price : $(".product_price", my).text(),
-                    total_price : $('.total_price').text().match(/\d/g).join("")
                 };
             $.ajax({
                 url : 'updateCart',
@@ -122,8 +118,6 @@
             var post = {
                     quantity : $(".product_quantity", my).val(),
                     product_id : $(".product_id", my).val(),
-                    product_price : $(".product_price", my).text(),
-                    total_price : $('.total_price').text().match(/\d/g).join("")
                 };
             
             $.ajax({

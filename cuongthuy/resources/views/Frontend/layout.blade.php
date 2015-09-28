@@ -150,7 +150,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                     <ul class="f_right">
                         <li><a href="#login">Đăng nhập</a></li>
                         <li><a href="#register">Đăng ký</a></li>
-                        <li><a href="{!!Asset(cart)!!}" class='button_cart'>Giỏ hàng <?php echo CartController::getCart() ?></a></li>
+                        <li><a href="{!!Asset(cart)!!}" class='button_cart'>Giỏ hàng {!! CartController::getCart() !!}</a></li>
                         <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
                     </ul>
                     <div class="clear"></div>
@@ -243,7 +243,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         @yield('banner')
         <div class="clear"></div>
         <!-- menu -->
-       <?php echo MenuController::getMenu();?>
+       {!! MenuController::getMenu(); !!}
         <div class="clear"></div>
         <!-- connent -->
         @yield('content')

@@ -1,7 +1,7 @@
 <?php use App\Http\Controllers\Frontend\BannerController as BannerController; ?>
 @extends('Frontend.layout')
 @section('banner')
-<?php echo BannerController::getBanner();?>
+{!! BannerController::getBanner(); !!}
 @endsection
 @section('content')
 <div class="top_content1">

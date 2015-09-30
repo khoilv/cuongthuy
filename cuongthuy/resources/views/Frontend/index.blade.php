@@ -28,7 +28,7 @@
                 <?php if ($product['product_discount_price']) { ?>
                 <span class="sale"><?php echo $product['product_discount_price']; ?></span>
                 <?php } ?>
-                <input type="hidden" class='product_id'  value="{!! $product['product_id']!!}">
+                <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
             </li>
         <?php } ?>
     </ul>
@@ -67,7 +67,7 @@
                     <?php if ($product['product_discount_price']) { ?>
                     <span class="sale"><?php echo $product['product_discount_price'];?></span>
                     <?php } ?>
-                    <input type="hidden" class='product_id'  value="{!! $product['product_id']!!}">
+                    <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
                 </li>
                 <?php } ?>
             </ul>

@@ -251,5 +251,11 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <!-- footer -->
         @include('Frontend.footer')
         <div class="gototop"></div>
+        <script lang="javascript">
+        (function() {var _h1= document.getElementsByTagName('title')[0] || false;
+        var product_name = ''; if(_h1){product_name= _h1.textContent || _h1.innerText;}var ga = document.createElement('script'); ga.type = 'text/javascript';
+        ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=7d5b36ce59e63870cd1f00f2488f3c22&data=eyJoYXNoIjoiNDBlMTg4MDljNjYzMWIwN2UyOTFmNTA1N2VhY2I3YjEiLCJzc29faWQiOjExMTcwMDd9&pname='+product_name;
+        var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();
+        </script>
     </body>
 </html>

@@ -15,7 +15,7 @@ class CartController extends Controller {
         $products = array();
         if ($cart) {
             $item = array_keys($cart);
-            $products = DB::table('products')->whereIn('product_id', $item)->get();
+            $products = DB::table('products')->whereIn('id', $item)->get();
         }
         
         return view('Frontend.cart', compact('products', 'cart'));
@@ -27,7 +27,7 @@ class CartController extends Controller {
             $data = Input::all();
             
             //update line price
-            $productPrice = DB::table('products')->where('product_id', $data['product_id'])->pluck('product_price');
+            $productPrice = DB::table('products')->where('id', $data['product_id'])->pluck('product_price');
             $result['linePrice'] = $data['quantity']*$productPrice;
             
             //update session cart
@@ -78,10 +78,10 @@ class CartController extends Controller {
         $totalPrice = 0;
         if ($cart) {
             $item = array_keys($cart);
-            $products = DB::table('products')->whereIn('product_id', $item)->get();
+            $products = DB::table('products')->whereIn('id', $item)->get();
             
             foreach ($products as $key => $product) {
-                $totalPrice += $product->product_price*$cart[$product->product_id];
+                $totalPrice += $product->product_price*$cart[$product->id];
             }
         }
         return ($totalPrice);

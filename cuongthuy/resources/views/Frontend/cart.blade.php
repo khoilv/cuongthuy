@@ -29,15 +29,15 @@
                 <td>{!! $product->product_code !!}</td>
                 <td>{!! $product->product_name !!}</td>
                 <td>
-                    <input type='text' class='product_quantity' name='quantity[{!!$product->product_id!!}]' size='5' value="{!! $cart[$product->product_id] !!}"/>
+                    <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' value="{!! $cart[$product->id] !!}"/>
                 </td>
                 <td>
                     <img src="public/images/upload/products/{!! $product->product_image !!}">
                 </td>
                 <td class="product_price">{!! $product->product_price!!}</td>
-                <td class="line_price">{!! $product->product_price * $cart[$product->product_id] !!}</td>
+                <td class="line_price">{!! $product->product_price * $cart[$product->id] !!}</td>
                 <td><button class="button delete_product"></button></td>
-                <input type="hidden" class='product_id'  value="{!! $product->product_id!!}">
+                <input type="hidden" class='product_id'  value="{!! $product->id!!}">
             </tr>
             @endforeach
         </tbody>

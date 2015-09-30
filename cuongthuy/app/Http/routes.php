@@ -18,3 +18,4 @@ Route::get('cart', 'Frontend\CartController@getIndex');
 Route::post('updateCart', 'Frontend\CartController@updateCart');
 Route::post('deleteCart', 'Frontend\CartController@deleteCart');
 Route::post('addCart', 'Frontend\CartController@addCart');
+Route::controller('checkout', 'Frontend\CheckoutController');

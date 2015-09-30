@@ -1,6 +1,6 @@
+<?php use App\Http\Controllers\Frontend\CartController as CartController; ?>
 @extends('Frontend.layout')
 @section('content')
-<?php use App\Http\Controllers\Frontend\CartController as CartController; ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -12,7 +12,6 @@
     <table>
         <thead>
             <tr>
-                <th>STT</th>
                 <th>Mã Sản phẩm</th>
                 <th>Tên sản phẩm</th>
                 <th>Số lượng</th>
@@ -25,7 +24,6 @@
         <tbody>
             @foreach($products as $key => $product)
             <tr>
-                <td>{!!++$key!!}</td>
                 <td>{!! $product->product_code !!}</td>
                 <td>{!! $product->product_name !!}</td>
                 <td>
@@ -45,7 +43,7 @@
     <div class="cart_c2">
         <p class="f_left total_price">Tổng tiền : {!!CartController::getTotalPriceCart()!!}đ</p>
         
-        <a href="#" class="f_right"><button>Mua hàng</button></a>
+        <a href="{!!Asset('checkout/delivery')!!}" class="f_right"><button>Mua hàng</button></a>
     </div>
 </div> 
 <!--end cart page-->
@@ -94,7 +92,7 @@
             var my = $(this).closest('tr');
             var post = {
                     quantity : $(this).val(),
-                    product_id : $(".product_id", my).val(),
+                    product_id : $(".product_id", my).val()
                 };
             $.ajax({
                 url : 'updateCart',
@@ -117,7 +115,7 @@
             var my = $(this).closest('tr');
             var post = {
                     quantity : $(".product_quantity", my).val(),
-                    product_id : $(".product_id", my).val(),
+                    product_id : $(".product_id", my).val()
                 };
             
             $.ajax({

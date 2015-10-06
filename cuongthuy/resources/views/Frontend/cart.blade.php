@@ -43,7 +43,7 @@
     <div class="cart_c2">
         <p class="f_left total_price">Tổng tiền : {!!CartController::getTotalPriceCart()!!}đ</p>
         
-        <a href="{!!Asset('checkout/delivery')!!}" class="f_right"><button>Mua hàng</button></a>
+        <a href="{!!Asset('checkout/billing')!!}" class="f_right"><button>Mua hàng</button></a>
     </div>
 </div> 
 <!--end cart page-->

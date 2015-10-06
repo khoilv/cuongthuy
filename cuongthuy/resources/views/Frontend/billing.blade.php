@@ -26,20 +26,21 @@
         <div class="clear"></div>
     </div><!-- end Steps 1 content-->
     <div class="clear"></div>
+    {!! Form::open(array('url' => 'checkout/billing')) !!}
     <div class="steps1_c2">
         <p class="bs1_bold">Thông tin liên hệ</p>
         <table>
             <tr>
                 <td>Họ và tên :</td>
-                <td><input type="text"></td>
+                <td><input type="text" name="name"></td>
             </tr>
             <tr>
                 <td>Số điện thoại :</td>
-                <td><input type="text"></td>
+                <td><input type="text" name="telephone"></td>
             </tr>
             <tr>
                 <td>Email :</td>
-                <td><input type="text"></td>
+                <td><input type="text" name="email"></td>
             </tr>
         </table>
         <div class="clear"></div>
@@ -47,16 +48,20 @@
         <table>
             <tr>
                 <td>Số nhà :</td>
-                <td><input type="text"></td>
+                <td><input type="text" name="houseNumber"></td>
             </tr>
             <tr>
                 <td>Đường / Phố :</td>
-                <td><input type="text"></td>
+                <td><input type="text" name="street"></td>
+            </tr>
+            <tr>
+                <td>Quận / Huyện :</td>
+                <td><input type="text" name="district"></td>
             </tr>
             <tr>
                 <td>Tỉnh thành :</td>
                 <td>
-                    <select>
+                    <select name="city">
                         <option>Hà Nội</option>
                         <option>Tp. Hồ Chí Minh</option>
                         <option>Đà Nẵng</option>
@@ -65,26 +70,15 @@
                     </select>
                 </td>
             </tr>
-            <tr>
-                <td>Quận / Huyện :</td>
-                <td>
-                    <select>
-                        <option>Ba Đình</option>
-                        <option>Nguyễn Trãi</option>
-                        <option>Thanh Xuân</option>
-                        <option>Bắc từ liêm</option>
-                        <option>Nam Từ Liêm</option>
-                    </select>
-
-                </td>
-            </tr>
         </table>
         <div class="clear"></div>
         <ul class="bs1_button">
             <li><a href="#">Xóa</a></li>
             <li><a href="#">Hoàn thành</a></li>
-        </ul>
+            <li><input type="reset" value="Xóa"></li>
+            <li><input type="submit" name="submit" value="Hoàn thành"></li>
     </div>
+    {!! Form::close() !!}
 </div><!-- end wrap-->
 
 <!-- InstanceEndEditable -->

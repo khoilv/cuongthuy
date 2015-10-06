@@ -154,6 +154,13 @@ body footer .wrap > .f_left > div{
 	width:90%;
 	margin:0 2%;
 }
+.steps2_c,.steps3_c .f_left,.steps3_c .f_right{
+	width:98% !important;
+	margin:0 1% !important;
+}
+
+
+
 
 
 
@@ -235,8 +242,8 @@ body footer .wrap > .f_right{
 .steps1_c1,.steps1_c2 table,.bs1_button{
 	width:100% !important;
 }
-.steps1_c2{
-	width:98%;
+.steps1_c2,.steps2_c,.steps3_c .f_left,.steps3_c .f_right{
+	width:98% !important;
 	margin:0 1%;
 }
 
@@ -311,7 +318,18 @@ body footer .wrap > .f_right{
 .p_title,.p_table{
 	width:100%;
 }
-
+.steps1_c2,.steps2_c,.steps3_c .f_left,.steps3_c .f_right{
+	width:98% !important;
+	margin:0 1%;
+}
+.bs1_button li{
+	width:95%;
+	margin:10px 2.5%;
+}
+	.bs1_button li a{
+		width:100% !important;
+		padding:10px 0 !important;
+	}
 
 
 
@@ -506,7 +524,7 @@ body footer .wrap > .f_right{
 		padding: 10px 0;
 		color:#fff;
 	}
-	.cart_page table tbody select{
+	.cart_page table tbody input{
 		width:50px;
 	}	
 	.cart_page table tbody tr,.cart_page table tbody td{
@@ -718,6 +736,11 @@ display:none;
 		text-align:center;
 		color:#fff;
 		font-weight:bold;
+	}
+	.bs1_button li a:hover{
+		background-color:#F60 !important;
+		color:#fff;
+		transition:all ease 0.5s;
 	}	
 	.bs1_button li:nth-child(2) a{
 		background-color:#259a36;
@@ -728,18 +751,72 @@ display:none;
 		box-shadow:0 2px 0 #2f7239; 
 	}
 	
+/*------------ Buy steps2 ----------*/
+.steps2_c{
+	width:80%;
+	overflow:hidden;
+}	
+	.steps2_c li:nth-child(1){
+		border-bottom:1px solid #ccc;
+		background:url(../images/icon18.png) no-repeat 0px 13px;
+	}
+	.steps2_c li:nth-child(2){	
+		background:url(../images/icon19.png) no-repeat 0px 8px;
+	}
+	.steps2_c li{
+		margin:15px 0;
+		padding:10px 0 20px 90px;
+		width:100%;
+	}
+	.steps2_c li input {
+		float:left;
+		margin-top:3px;
+	}
+	.steps2_c li p{padding-left:25px;}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+/*----------- Buy steps3 ------------*/
+.steps3_c{margin-top:20px;}
+.steps3_c .f_left{
+	border-right:1px solid #ccc;
+	width:45%;
+}	
+	.steps3_c .f_left table{
+		width:100%;
+	}
+	.steps3_c .f_left table td{
+		padding:5px;
+	}
+	.steps3_c .f_left table tr > td:nth-child(1){
+	}
+.steps3_c .bs1_bold{
+	padding:20px 0 !important;
+}	
+.steps3_c .f_right{
+	width:52%;
+}	
+	.steps3_c .f_right table{
+		width:100%;
+	}
+	.steps3_c .f_right table td:nth-child(1),.steps3_c .f_right table td:nth-child(2),.steps3_c .f_right table td:nth-child(4){
+		text-align:center;
+	}
+	.steps3_c .f_right table thead td{
+		background-color:#38b54a;
+		color:#fff;
+		padding:10px 0;
+		font-weight:bold;
+	}
+	.steps3_c .f_right table,.steps3_c .f_right table tr,.steps3_c .f_right table td{
+		border-collapse:collapse;
+		border:0;
+	}
+	.steps3_c .f_right table tr:nth-child(even){
+		background-color:#f3fbf4;
+	}
+	.steps3_c .f_right table td{
+		padding:10px 0;
+	}
+.steps3_c .bs1_button{width:100% !important;margin:30px 0;}	
 	
 	
 	

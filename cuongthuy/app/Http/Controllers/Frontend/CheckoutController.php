@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Input;
 use Session;
+use Redirect;
 
 class CheckoutController extends Controller {
     
@@ -13,7 +14,13 @@ class CheckoutController extends Controller {
     }
     
     public function getBilling () {
-        return view('Frontend.billing');
+        $billSession = Session::get('billing');
+        if ($billSession) {
+            $billing = $billSession;
+        } else {
+            $billSession = Session::get('user');
+        }
+        return view('Frontend.billing', compact('billing'));
     }
     
     public function postBilling () {
@@ -23,7 +30,8 @@ class CheckoutController extends Controller {
             var_dump($data);
             Session::put('billing', $data);
         }
-        return $this->getShipping();
+        return Redirect::to('checkout/shipping');
+//        return $this->getShipping();
     }
     
     public function getShipping () {

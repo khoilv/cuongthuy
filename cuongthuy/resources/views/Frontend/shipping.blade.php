@@ -26,6 +26,7 @@
         <div class="clear"></div>
     </div><!-- end Steps 1 content-->
     <div class="clear"></div>
+    {!! Form::open(array('url' => 'checkout/shipping')) !!}
     <div class="steps1_c2">
         <ul class="steps2_c">
             <li>
@@ -41,10 +42,12 @@
         </ul>
         <div class="clear"></div>
         <ul class="bs1_button">
-            <li><a href="#">Quay lại</a></li>
+            <li><a href="{!!Asset('checkout/billing')!!}">Quay lại</a></li>
             <li><a href="#">Xác nhận</a></li>
+            <li><input type="submit" name="submit" value="Xác nhận"></li>
         </ul>
     </div>
+    {!! Form::close() !!}
 </div><!-- end wrap-->
 <!-- InstanceEndEditable -->
 @endsection

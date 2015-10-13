@@ -13,6 +13,7 @@ class CategoryModel extends TableBase {
         $options = array(
             'fields' => array('*')
         );
+        // get list category
         $arrCategory = $this->find('all', $options);
         foreach ( $arrCategory as $arrRow ) {
                 if ( $arrRow['category_parent'] == 0 ) {
@@ -24,8 +25,8 @@ class CategoryModel extends TableBase {
     }
 
     /**
-     * 
-     * @return $this->parentList
+     * Get category parrent
+     * @return array $this->parentList
      */
     
      public function getParentList() {
@@ -33,13 +34,18 @@ class CategoryModel extends TableBase {
     }
 
     /**
-     * @short 
-     *
-     * @return $this->childList 
+     * Get category chid
+     * @return array $this->childList 
      */
     public function getChildList() {
         return $this->childList;
     }
+
+    /**
+     * Get category_name by category_id
+     * @param int $id
+     * @return string
+     */
     public function getCategoryNamebyId($id){
         $options = array(
             'fields' => array('category_name'),

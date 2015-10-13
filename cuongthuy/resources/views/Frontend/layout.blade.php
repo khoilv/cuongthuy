@@ -148,8 +148,13 @@ use App\Http\Controllers\Frontend\CartController as CartController;
             <div class="content_top">
                 <div class="wrap">
                     <ul class="f_right">
+                        <?php if(Session::has('user_name')){?>
+                        <li><a><?php echo 'Xin chào '. Session::get('user_name');?></a></li>
+                        <li><a id="logout">Thoát</a></li>
+                        <?php } else {?>
                         <li><a href="#login">Đăng nhập</a></li>
                         <li><a href="#register">Đăng ký</a></li>
+                        <?php } ?>
                         <li><a href="{!!Asset(cart)!!}" class='button_cart'>Giỏ hàng {!! CartController::getCart() !!}</a></li>
                         <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
                     </ul>
@@ -170,12 +175,11 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                     </ul>
                     <form name="form1" action="list" method="GET">
                         <div class="search">
-                            <select class="f_left" name="type">
-                                <option select="selected" name="msp">Mã sản phẩm</option>
-                                <option>Tên sản phẩm</option>
-                                <option>Loại sản phẩm</option>
+                            <select class="f_left" name="search_key">
+                                <option value ="product_code" select="selected" >Mã sản phẩm</option>
+                                <option value="product_name" <?php if($search_key == 'product_name') { ?> selected="selected"<?php }?>>Tên sản phẩm</option>
                             </select>
-                            <input type="text" placeholder="Nhập từ khóa">
+                            <input type="text" name="search_value" value="<?php echo $search_value;?>" placeholder="Nhập từ khóa">
                             <button onclick="document.form1.submit()"></button>
                         </div>
                     </form>

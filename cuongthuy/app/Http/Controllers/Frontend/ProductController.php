@@ -5,8 +5,9 @@ use App\Models\Frontend\ProductModel;
 use App\Models\Frontend\CategoryModel;
 use Input;
 class ProductController extends Controller {
+     private static $PRODUCT_MAX = 3;
+
      public static function getIndex(){
-    var_dump(Input::get('product_type'));
          $productCls = new ProductModel();
          $categoryCls = new CategoryModel();
          $whereArr = array();
@@ -24,8 +25,25 @@ class ProductController extends Controller {
                     )
                 );
             } else {
-                $whereArr['product_type'] = 1;
+                $whereArr['product_sell_status LIKE'] = "%1%";
             }
+         }
+         $searchKey = '';
+         $searchValue = '';
+         if(Input::has('search_key')) {
+             $searchKey = Input::get('search_key');
+             if($searchKey == 'newer') {
+                 $whereArr['product_sell_status LIKE'] = "%1%";
+             } else if ($searchKey == 'hot'){
+                 $whereArr['product_sell_status LIKE'] = "%3%";
+             } else if ($searchKey == 'sell') {
+                 $whereArr['product_sell_status LIKE'] = "%2%";
+             } else {
+                if(Input::has('search_value')) {
+                    $searchValue = Input::get('search_value');
+                    $whereArr[$searchKey . ' LIKE'] = "%".$searchValue."%";
+                }
+             }
          }
          if (Input::has('page')) {
             $page = Input::get('page');
@@ -33,7 +51,7 @@ class ProductController extends Controller {
              $page = 1;
          }
          $totalRecord = $productCls->getCountResult($whereArr,$joinsArr);
-         $maxRec = 25;
+         $maxRec = self::$PRODUCT_MAX;
          $offset = ($page - 1) * $maxRec;
          $lastPage = ceil($totalRecord / $maxRec);
          $currentPage = $page;
@@ -48,11 +66,12 @@ class ProductController extends Controller {
              'arrProductList' => $arrProductList,
              'currentPage'    => $currentPage,
              'lastPage'       => $lastPage,
-             //'totalRecord'    => $totalRecord,
              'previousPage'   => $previousPage,
              'nextPage'       => $nextPage,
              'categoryId'     => $categoryId,
-             'categoryName'   => $categoryName
+             'categoryName'   => $categoryName,
+             'search_key'     => $searchKey,
+             'search_value'   => $searchValue
          ]);
      }
 }

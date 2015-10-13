@@ -10,12 +10,18 @@
             if ($categoryId !== '') {
                 $arrParam['category_id'] = $categoryId;
             }
+            if($search_key) {
+                $arrParam['search_key'] = $search_key;
+            }
+            if($search_value) {
+                $arrParam['search_value'] = $search_value;
+            }
         ?>
         <div class="f_right" style="margin-top:10px;">
             <ul class="list_button">
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('order_type' => 'newer'))!!}"><button>Mới nhất</button></a></li>
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('order_type' => 'sell'))!!}"><button>Bán chạy</button></a></li>
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('order_type' => 'hot'))!!}"><button>Nổi bật</button></a></li>
+                <li><a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categoryId ,'search_key' => 'newer'))!!}"><button>Mới nhất</button></a></li>
+                <li><a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categoryId ,'search_key' => 'sell'))!!}"><button>Bán chạy</button></a></li>
+                <li><a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categoryId ,'search_key' => 'hot'))!!}"><button>Nổi bật</button></a></li>
             </ul>
         </div>
     </div>
@@ -46,19 +52,24 @@
     <div class="clear"></div>
     <div class="paging f_right">
         <ul>
-            <?php if ($lastPage > 1){ ?>
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('page' => 1))!!}"><<</a></li>
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('page' => $previousPage))!!}"><</a></li>
-                <?php for($page = 1; $page <= $lastPage; $page++) {?>
-                    <?php if ($page == $currentPage) { ?>
-                        <li><?php echo $page; ?></li>
-                    <?php } else { ?>
-                        <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('page' => $page))!!}"><?php echo $page; ?></a></li>
-                    <?php } ?>
-                <?php } ?>
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('page' => $nextPage))!!}">></a></li>
-                <li><a href="{!!action('Frontend\ProductController@getIndex', $arrParam + array('page' => $lastPage))!!}">>></a></li>
-            <?php } ?>
+            <?php if ($lastPage > 1){
+               if($lastPage <= 5) {
+                   $begin = 1; 
+                   $end = $lastPage;
+               } else {
+                  if($currentPage < 5 ){
+                      $begin = 1;
+                      $end = 5;
+                  } elseif ($currentPage > $lastPage-5) {
+                      $begin = $lastPage - 4; 
+                      $end = $lastPage;
+                  } else {
+                      $begin = $currentPage-2; 
+                      $end = $currentPage +2;
+                  }
+              } ?>
+              @include('Frontend.list_page')
+          <?php } ?>
         </ul>
     </div><!-- end paging-->
 </div><!-- end content-->

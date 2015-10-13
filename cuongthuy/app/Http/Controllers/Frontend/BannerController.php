@@ -2,6 +2,7 @@
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\BannerModel;
 class BannerController extends Controller {
+
      public static function getBanner(){
          $bannerCls = new BannerModel();
          $arrBannerList = $bannerCls->getBannerList();

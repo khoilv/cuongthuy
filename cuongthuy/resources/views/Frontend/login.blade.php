@@ -1,31 +1,43 @@
+<?php 
+    $email = (Cache::has('email')? Cache::get('email'):'');
+    $password = (Cache::has('password')? Cache::get('password'):'');
+    $remember = (Cache::has('remember')? Cache::get('remember'):'');
+?>
 <div id="login" class="box_login">
     <div>
         <a href="#close" title="Close" class="close">X</a>
         <div class="f_left">
             <h2 class="p_title">Đăng nhập</h2>
+            <p style="color: red" id="error_msg"></p>
             <table class="p_table clear">
                 <tr>
                     <td>Email</td>
-                    <td><input type="text"></td>
+                    <td>
+                        <input type="text" id="email" value="<?php echo $email; ?>">
+                        <p style="color: red" id="error_email"></p>
+                    </td>
                 </tr>
                 <tr>
                     <td>Mật khẩu</td>
-                    <td><input type="text"></td>
+                    <td>
+                        <input id="password" value="<?php echo $password; ?>" type="password">
+                        <p style="color: red" id="error_pass"></p>
+                    </td>
                 </tr>
             </table>
             <div class="clear"></div>
-            <input type="checkbox"> Ghi nhớ mật khẩu
+            <input type="checkbox" name="remember" id="lg_remember" value="1" <?php if($remember){?> checked ="checked" <?php }?>> Ghi nhớ mật khẩu
             <div class="clear"></div>
-            <button class="p_bn f_right">Đăng nhập</button>
+            <button class="p_bn f_right" id="tbn_login" >Đăng nhập</button>
         </div>
         <div class="f_right">
             <h3 class="p_title2">Đăng nhập với tài khoản</h3><div class="clear"></div>
             <ul>
                 <li>
-                    <a href="#"><span></span> <p>Đăng nhập với Facebook</p></a>
+                   <a href="/login/facebook"><span></span> <p>Đăng nhập với Facebook</p></a>
                 </li>
                 <li>
-                    <a href="#"><span></span> <p>Đăng nhập với Google+</p></a>
+                    <a href="/login/google"><span></span> <p>Đăng nhập với Google+</p></a>
                 </li>
             </ul>
         </div>
@@ -33,3 +45,48 @@
         <a class="p_bottom" href="#">Bạn quên mật khẩu ?</a>
     </div>
 </div>
+<script type="text/javascript">
+    $(function() {
+       $("#tbn_login").click(function() {
+           $("#error_msg").text('');
+           $("#error_email").text('');
+           $("#error_pass").text('');
+            var post = {
+                    email : $("#email").val(),
+                    password : $("#password").val(),
+                    lg_remember: $("#lg_remember:checked").val()
+                };
+            $.ajax({
+                url : 'login',
+                type : 'post',
+                dataType: 'json',
+                data : post,
+                success : function (result){
+                    if(result['error'] == true){
+                        if(result['error_msg'].email){
+                            $("#error_email").text(result['error_msg'].email);
+                        }
+                        if(result['error_msg'].password){
+                            $("#error_pass").text(result['error_msg'].password);
+                        }
+                        if(result['error_msg'].error_login){
+                            $("#error_msg").text(result['error_msg'].error_login);
+                        }
+                    } else {
+                        var url = window.location.href;
+                        top.location.href= url.replace("#login",'')
+                    }
+                }
+            });
+        });
+        $("#logout").click(function() {
+            $.ajax({
+                    url : 'logout',
+                    type : 'post',
+                    success : function (){
+                        top.location.href = '/'
+                    }
+            });
+        });
+    });
+</script>

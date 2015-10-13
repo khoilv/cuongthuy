@@ -26,7 +26,7 @@
         <div class="clear"></div>
     </div><!-- end Steps 1 content-->
     <div class="clear"></div>
-    {!! Form::open(array('url' => 'checkout/billing')) !!}
+    {!! Form::open(array('url' => 'checkout/billing', 'name' => 'test')) !!}
     <div class="steps1_c2">
         <p class="bs1_bold">Thông tin liên hệ</p>
         <table>
@@ -73,7 +73,7 @@
         <div class="clear"></div>
         <ul class="bs1_button">
             <li><a href="#">Xóa</a></li>
-            <li><a href="#">Hoàn thành</a></li>
+            <li onclick="test.submit();"><a >Hoàn thành</a></li>
             <li><input type="reset" value="Xóa"></li>
             <li><input type="submit" name="submit" value="Hoàn thành"></li>
     </div>

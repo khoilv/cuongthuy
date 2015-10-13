@@ -30,6 +30,12 @@ ul,li{
 	width:1024px;
 	display:block;
 }
+.box1{
+	width:100%;
+}
+.box2{
+	width:48%;
+}
 /*--------- Headder --------*/
 .content_top{
 	width:100%;
@@ -297,6 +303,7 @@ ul,li{
 body footer{
 	background-color:#da2027;
 	width:100%;
+    padding-bottom: 30px;
 }
 body footer .wrap > .f_left{
 	width:60%;

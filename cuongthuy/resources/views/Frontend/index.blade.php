@@ -16,7 +16,7 @@
         <?php foreach ($arrProductNew as $product) { ?>
             <li>
                 <div>
-                    <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
+                    <a href="{!!Asset('detail/')!!}"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                     <div>
                         <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                         <a href="{!!Asset('checkout/billing')!!}" title="Mua sản phẩm này">Mua</a>
@@ -101,23 +101,4 @@
         <div class="clear"></div>
     </div>
 </div><!-- end content bottom-->
-@endsection
-
-@section('javascript')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".add_cart").click(function () {
-            var my = $(this).closest("li");
-            $.ajax({
-                url : 'addCart',
-                type : 'post',
-                dataType: 'json',
-                data : { product_id : $(".product_id", my).val() },
-                success : function (result){
-                    $(".button_cart").html("Giỏ hàng ("+result+")")
-                }
-            });
-        });
-    });
-</script>
 @endsection

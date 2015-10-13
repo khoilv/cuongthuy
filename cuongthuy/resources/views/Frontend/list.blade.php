@@ -37,11 +37,12 @@
                         <div>
                             <p>Giao sản phẩm miễ phí tại Hà Nội</p>
                             <a href="#">Mua</a>
-                            <button></button>
+                            <button class="add_cart" title="Thêm vào giỏ"></button>
                         </div>
                     </div>
                     <p><a href="#"><?php echo $product['product_name'];?></a></p>
                     <span class="price"><?php echo $product['product_price'].'VND';?></span> <span class="sale"><?php echo $product['product_discount_price'];?></span>
+                    <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
                 </li>
             <?php } ?>
         <?php } else { ?>

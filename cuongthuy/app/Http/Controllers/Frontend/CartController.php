@@ -80,7 +80,7 @@ class CartController extends Controller {
             $item = array_keys($cart);
             $products = DB::table('products')->whereIn('id', $item)->get();
             
-            foreach ($products as $key => $product) {
+            foreach ($products as $product) {
                 $totalPrice += $product->product_price*$cart[$product->id];
             }
         }

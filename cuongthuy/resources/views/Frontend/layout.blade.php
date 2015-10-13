@@ -1,4 +1,6 @@
-<?php error_reporting(E_ALL & ~(E_NOTICE));
+<?php
+error_reporting(E_ALL & ~(E_NOTICE));
+
 use App\Http\Controllers\Frontend\MenuController as MenuController;
 use App\Http\Controllers\Frontend\CartController as CartController;
 ?>
@@ -24,122 +26,126 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
         <script type="text/javascript" src="{!!Asset('public/js/jquery.nivo.slider.js')!!}"></script>
         <script type="text/javascript">
-            $(window).load(function() {
-                $('#slider').nivoSlider();
-            });
-        </script>
+                    $(window).load(function() {
+            $('#slider').nivoSlider();
+            });</script>
         <script type="text/javascript" src="{!!Asset('public/js/jquery.mmenu.min.all.js')!!}"></script>
         <script type="text/javascript">
-            $(function() {
-                $('nav#menu').mmenu({
+                    $(function() {
+                    $('nav#menu').mmenu({
                     extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                    searchfield	: true,
-                    counters	: true,
-                    navbar 		: {
-                        title		: 'Menu'
-                    },
-                    navbars		: [
-                        {
+                            searchfield	: true,
+                            counters	: true,
+                            navbar 		: {
+                            title		: 'Menu'
+                            },
+                            navbars		: [
+                            {
                             position	: 'top',
-                            content		: [ 'searchfield' ]
-                        }, {
+                                    content		: [ 'searchfield' ]
+                            }, {
                             position	: 'top',
-                            content		: [
-                                'prev',
-                                'title',
-                                'close'
+                                    content		: [
+                                            'prev',
+                                            'title',
+                                            'close'
+                                    ]
+                            }
                             ]
-                        }
-                    ]
-                });
-            });
-        </script>
+                    });
+                    });</script>
         <!-- go to top -->
         <script>
-            $(function() {
-                var showFlag = false;
-                var topBtn = $('#top_gototop');	
-                topBtn.css('bottom', '-100px');
-                var showFlag = false;
-                $(window).scroll(function () {
+                    $(function() {
+                    var showFlag = false;
+                            var topBtn = $('#top_gototop');
+                            topBtn.css('bottom', '-100px');
+                            var showFlag = false;
+                            $(window).scroll(function () {
                     if ($(this).scrollTop() > 100) {
-                        if (showFlag == false) {
-                            showFlag = true;
-                            topBtn.stop().animate({'bottom' : '55px'}, 300); 
-                        }
-                    } else {
-                        if (showFlag) {
-                            showFlag = false;
-                            topBtn.stop().animate({'bottom' : '-100px'}, 300); 
-                        }
+                    if (showFlag == false) {
+                    showFlag = true;
+                            topBtn.stop().animate({'bottom' : '55px'}, 300);
                     }
-                });
-                topBtn.click(function () {
-                    $('body,html').animate({
-                        scrollTop: 0
-                    }, 500);
-                    return false;
-                });
-            });
-        </script>
+                    } else {
+                    if (showFlag) {
+                    showFlag = false;
+                            topBtn.stop().animate({'bottom' : '-100px'}, 300);
+                    }
+                    }
+                    });
+                            topBtn.click(function () {
+                            $('body,html').animate({
+                            scrollTop: 0
+                            }, 500);
+                                    return false;
+                            });
+                    });</script>
         <!-- Navigation scroll-->
         <script type="text/javascript">
-            $("document").ready(function($){
-                    // Create a clone of the nav_top, right next to original.
-            $('.nav_top').addClass('original').clone().insertAfter('.nav_top').addClass('cloned').css('position','fixed').css('top','0').css('margin-top','0').css('z-index','500').removeClass('original').hide();
-            scrollIntervalID = setInterval(stickIt, 10);
-                function stickIt() {
-                  var orgElementPos = $('.original').offset();
-                  orgElementTop = orgElementPos.top;               
-                  if ($(window).scrollTop() >= (orgElementTop)) {
-                        // scrolled past the original position; now only show the cloned, sticky element.
-                        // Cloned element should always have same left position and width as original element.     
-                        orgElement = $('.original');
-                        coordsOrgElement = orgElement.offset();
-                        leftOrgElement = coordsOrgElement.left;  
-                        widthOrgElement = orgElement.css('width');
-                        $('.cloned').css('left',leftOrgElement+'px').css('top',0).css('width',widthOrgElement).show();
-                        $('.original').css('visibility','hidden');
-                  } else {
-                        // not scrolled past the nav_top; only show the original nav_top.
-                        $('.cloned').hide();
-                        $('.original').css('visibility','visible');
-                  }
-                }
-            });
-        </script>
+                    $("document").ready(function($){
+            // Create a clone of the nav_top, right next to original.
+            $('.nav_top').addClass('original').clone().insertAfter('.nav_top').addClass('cloned').css('position', 'fixed').css('top', '0').css('margin-top', '0').css('z-index', '500').removeClass('original').hide();
+                    scrollIntervalID = setInterval(stickIt, 10);
+                    function stickIt() {
+                    var orgElementPos = $('.original').offset();
+                            orgElementTop = orgElementPos.top;
+                            if ($(window).scrollTop() >= (orgElementTop)) {
+                    // scrolled past the original position; now only show the cloned, sticky element.
+                    // Cloned element should always have same left position and width as original element.     
+                    orgElement = $('.original');
+                            coordsOrgElement = orgElement.offset();
+                            leftOrgElement = coordsOrgElement.left;
+                            widthOrgElement = orgElement.css('width');
+                            $('.cloned').css('left', leftOrgElement + 'px').css('top', 0).css('width', widthOrgElement).show();
+                            $('.original').css('visibility', 'hidden');
+                    } else {
+                    // not scrolled past the nav_top; only show the original nav_top.
+                    $('.cloned').hide();
+                            $('.original').css('visibility', 'visible');
+                    }
+                    }
+            });</script>
         <!-- InstanceBeginEditable name="doctitle" -->
         <title>home</title>
         <!-- InstanceEndEditable -->
-        
-        <!-- InstanceBeginEditable name="head" -->
+        <link rel="stylesheet" type="text/css" href="{!!Asset('public/css/slide.css')!!}">                
+        <!--<script type="text/javascript" src="{!!Asset('public/js/jssor.js')!!}"></script>-->
+        <!--<script type="text/javascript" src="{!!Asset('public/js/jssor.slider.js')!!}"></script>--> 
         <!-- porduction -->
         <script src="{!!Asset('public/js/owl.carousel.js')!!}"></script>
-		<script>
-			$(document).ready(function() {
+        <script>
+            $(document).ready(function() {
+            var owl = $(".owl-demo"),
+                    status = $(".owlStatus");
+                    owl.owlCarousel({
+                    navigation : true,
+                            afterAction : afterAction
+                    });
+                    function updateResult(pos, value){
+                    status.find(pos).find(".result").text(value);
+                    }
 
-			  var owl = $(".owl-demo"),
-				  status = $(".owlStatus");
-
-			  owl.owlCarousel({
-				navigation : true,
-				afterAction : afterAction
-			  });
-
-			  function updateResult(pos,value){
-				status.find(pos).find(".result").text(value);
-			  }
-
-			  function afterAction(){
-				updateResult(".owlItems", this.owl.owlItems.length);
-				updateResult(".currentItem", this.owl.currentItem);
-				updateResult(".prevItem", this.prevItem);
-				updateResult(".visibleItems", this.owl.visibleItems);
-				updateResult(".dragDirection", this.owl.dragDirection);
-			  }
-
-			});
-		</script>
+            function afterAction(){
+            updateResult(".owlItems", this.owl.owlItems.length);
+                    updateResult(".currentItem", this.owl.currentItem);
+                    updateResult(".prevItem", this.prevItem);
+                    updateResult(".visibleItems", this.owl.visibleItems);
+                    updateResult(".dragDirection", this.owl.dragDirection);
+            }
+            $(".add_cart").click(function () {
+                    var my = $(this).closest("li");
+                    $.ajax({
+                        url : 'addCart',
+                        type : 'post',
+                        dataType: 'json',
+                        data : { product_id : $(".product_id", my).val() },
+                        success : function (result){
+                            $(".button_cart").html("Giỏ hàng ("+result+")");
+                        }
+                    });
+                });
+            });            </script>
         <!-- InstanceEndEditable -->
         @yield('javascript')
     </head>
@@ -148,12 +154,12 @@ use App\Http\Controllers\Frontend\CartController as CartController;
             <div class="content_top">
                 <div class="wrap">
                     <ul class="f_right">
-                        <?php if(Session::has('user_name')){?>
-                        <li><a><?php echo 'Xin chào '. Session::get('user_name');?></a></li>
-                        <li><a id="logout">Thoát</a></li>
-                        <?php } else {?>
-                        <li><a href="#login">Đăng nhập</a></li>
-                        <li><a href="#register">Đăng ký</a></li>
+                        <?php if (Session::has('user_name')) { ?>
+                            <li><a><?php echo 'Xin chào ' . Session::get('user_name'); ?></a></li>
+                            <li><a id="logout">Thoát</a></li>
+                        <?php } else { ?>
+                            <li><a href="#login">Đăng nhập</a></li>
+                            <li><a href="#register">Đăng ký</a></li>
                         <?php } ?>
                         <li><a href="{!!Asset(cart)!!}" class='button_cart'>Giỏ hàng {!! CartController::getCart() !!}</a></li>
                         <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
@@ -177,9 +183,9 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                         <div class="search">
                             <select class="f_left" name="search_key">
                                 <option value ="product_code" select="selected" >Mã sản phẩm</option>
-                                <option value="product_name" <?php if($search_key == 'product_name') { ?> selected="selected"<?php }?>>Tên sản phẩm</option>
+                                <option value="product_name" <?php if ($search_key == 'product_name') { ?> selected="selected"<?php } ?>>Tên sản phẩm</option>
                             </select>
-                            <input type="text" name="search_value" value="<?php echo $search_value;?>" placeholder="Nhập từ khóa">
+                            <input type="text" name="search_value" value="<?php echo $search_value; ?>" placeholder="Nhập từ khóa">
                             <button onclick="document.form1.submit()"></button>
                         </div>
                     </form>
@@ -191,20 +197,20 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                 <div class="header">
                     <a href="#menu"></a>
                 </div>
-                
+
                 <nav id="menu">
                     <ul>
                         <li><a href="#">Sản phẩm mới</a></li>
                         <li><a href="#">Mỹ phẩm</a>
-                        	<ul>
-                            	<li><a href="#">Mascara</a></li>
+                            <ul>
+                                <li><a href="#">Mascara</a></li>
                                 <li><a href="#">Phấn hồng</a></li>
                                 <li><a href="#">Phấn phủ - BB cream</a></li>
                                 <li><a href="#">Kem dưỡng da</a></li>
                                 <li><a href="#">Son môi</a></li>
                                 <li><a href="#">Chăm sóc tóc</a>
-                                	<ul>
-                                    	<li><a href="#">Dầu gội</a></li>
+                                    <ul>
+                                        <li><a href="#">Dầu gội</a></li>
                                         <li><a href="#">Hấp ủ tinh chất dưỡng</a></li>
                                         <li><a href="#">Dầu xả</a></li>
                                         <li><a href="#">Gôm - Gel uốn tóc</a></li>
@@ -215,11 +221,11 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                         </li>
                         <li><a href="#">Chăm sóc sức khỏe</a></li>
                         <li><a href="#">Hàng tiêu dùng</a>
-                        	<ul>
-                            	<li><a href="#">Bột giặt</a></li>
+                            <ul>
+                                <li><a href="#">Bột giặt</a></li>
                                 <li><a href="#">Bỉm</a>
-                                	<ul class="ul3">
-                                    	<li><a href="#">Bỉm người lớn</a></li>
+                                    <ul class="ul3">
+                                        <li><a href="#">Bỉm người lớn</a></li>
                                         <li><a href="#">Bỉm trẻ em</a></li>
                                     </ul>
                                 </li>
@@ -227,8 +233,8 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                             </ul>
                         </li>
                         <li><a href="#">Phụ kiện - Thời trang</a>
-                        	<ul>
-                            	<li><a href="#">Túi xách</a></li>
+                            <ul>
+                                <li><a href="#">Túi xách</a></li>
                                 <li><a href="#">Mũ thời trang</a></li>
                                 <li><a href="#">Bikini</a></li>
                                 <li><a href="#">Phụ kiện</a></li>
@@ -247,19 +253,23 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         @yield('banner')
         <div class="clear"></div>
         <!-- menu -->
-       {!! MenuController::getMenu(); !!}
+        {!! MenuController::getMenu(); !!}
         <div class="clear"></div>
         <!-- connent -->
         @yield('content')
         <div class="clear"></div>
         <!-- footer -->
         @include('Frontend.footer')
-        <div class="gototop"></div>
+        <div id="top_gototop"><a href="#" class="gototop clearfix"><img src="public/images/gotop.png" alt="lên đầu trang" /></a></div> 
+        <div class="support_ol">
+            <div class="sky"><a href="#">Hỗ trợ trực tuyến</a></div>
+            <div class="cart"><a href="#">Giỏ hàng (5)</a></div>
+        </div><!-- end support online--> 
         <script lang="javascript">
-        (function() {var _h1= document.getElementsByTagName('title')[0] || false;
-        var product_name = ''; if(_h1){product_name= _h1.textContent || _h1.innerText;}var ga = document.createElement('script'); ga.type = 'text/javascript';
-        ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=7d5b36ce59e63870cd1f00f2488f3c22&data=eyJoYXNoIjoiNDBlMTg4MDljNjYzMWIwN2UyOTFmNTA1N2VhY2I3YjEiLCJzc29faWQiOjExMTcwMDd9&pname='+product_name;
-        var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();
+        (function() {var _h1 = document.getElementsByTagName('title')[0] || false;
+        var product_name = ''; if (_h1){product_name = _h1.textContent || _h1.innerText; }var ga = document.createElement('script'); ga.type = 'text/javascript';
+        ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=7d5b36ce59e63870cd1f00f2488f3c22&data=eyJoYXNoIjoiNDBlMTg4MDljNjYzMWIwN2UyOTFmNTA1N2VhY2I3YjEiLCJzc29faWQiOjExMTcwMDd9&pname=' + product_name;
+        var s = document.getElementsByTagName('script'); s[0].parentNode.insertBefore(ga, s[0]); })();
         </script>
     </body>
 </html>

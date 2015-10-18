@@ -74,4 +74,5 @@
         </ul>
     </div><!-- end paging-->
 </div><!-- end content-->
+<div class="clear"></div>
 @endsection

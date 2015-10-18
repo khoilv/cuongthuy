@@ -77,30 +77,4 @@
         <div class="clear"></div>
     <?php }?>
 <?php } ?>
-<div class="content_bottom">
-    <div class="wrap">
-        <div class="f_left">
-            <ul>
-                <li>
-                    <h3>Giới thiệu</h3>
-                    <ul>
-                        <li><a href="#">Giới thiệu</a></li>
-                        <li><a href="#">Liên hệ</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3>Khách hàng</h3>
-                    <ul>
-                        <li><a href="#">Hướng dẫn mua hàng</a></li>
-                        <li><a href="#">Quy đổi trả sản phẩm</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="f_right">
-            <img src="{!!Asset('public/images/banner-b.png')!!}">
-        </div>
-        <div class="clear"></div>
-    </div>
-</div><!-- end content bottom-->
 @endsection

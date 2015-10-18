@@ -18,6 +18,6 @@ Route::any('register','Frontend\RegisterController@register');
 Route::post('logout','Frontend\LoginController@logout');
 Route::post('updateCart', 'Frontend\CartController@updateCart');
 Route::post('deleteCart', 'Frontend\CartController@deleteCart');
-Route::post('addCart', 'Frontend\CartController@addCart');
+Route::any('addCart', 'Frontend\CartController@addCart');
 Route::controller('checkout', 'Frontend\CheckoutController');
 Route::get('detail', 'Frontend\DetailController@getIndex');

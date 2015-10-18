@@ -110,8 +110,6 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <title>home</title>
         <!-- InstanceEndEditable -->
         <link rel="stylesheet" type="text/css" href="{!!Asset('public/css/slide.css')!!}">                
-        <!--<script type="text/javascript" src="{!!Asset('public/js/jssor.js')!!}"></script>-->
-        <!--<script type="text/javascript" src="{!!Asset('public/js/jssor.slider.js')!!}"></script>--> 
         <!-- porduction -->
         <script src="{!!Asset('public/js/owl.carousel.js')!!}"></script>
         <script>
@@ -134,7 +132,9 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                     updateResult(".dragDirection", this.owl.dragDirection);
             }
             $(".add_cart").click(function () {
+                    //$('#img_ajax').show();
                     var my = $(this).closest("li");
+                    console.log(my);
                     $.ajax({
                         url : 'addCart',
                         type : 'post',
@@ -143,9 +143,13 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                         success : function (result){
                             $(".button_cart").html("Giỏ hàng ("+result+")");
                         }
+//                        complete: function(){
+//                            $('#img_ajax').hide();
+//                        }
                     });
                 });
-            });            </script>
+            });
+            </script>
         <!-- InstanceEndEditable -->
         @yield('javascript')
     </head>
@@ -161,7 +165,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                             <li><a href="#login">Đăng nhập</a></li>
                             <li><a href="#register">Đăng ký</a></li>
                         <?php } ?>
-                        <li><a href="{!!Asset(cart)!!}" class='button_cart'>Giỏ hàng {!! CartController::getCart() !!}</a></li>
+                        <li><a href="{!!Asset(cart)!!}" class="button_cart">Giỏ hàng {!! CartController::getCart() !!}</a></li>
                         <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
                     </ul>
                     <div class="clear"></div>
@@ -255,21 +259,30 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <!-- menu -->
         {!! MenuController::getMenu(); !!}
         <div class="clear"></div>
+        <div id="img_ajax" style='display: none'> <img src="{!!Asset('public/images/loading.gif')!!}" class="ajax-loader"></div>
         <!-- connent -->
         @yield('content')
         <div class="clear"></div>
         <!-- footer -->
         @include('Frontend.footer')
-        <div id="top_gototop"><a href="#" class="gototop clearfix"><img src="public/images/gotop.png" alt="lên đầu trang" /></a></div> 
-        <div class="support_ol">
-            <div class="sky"><a href="#">Hỗ trợ trực tuyến</a></div>
-            <div class="cart"><a href="#">Giỏ hàng (5)</a></div>
-        </div><!-- end support online--> 
-        <script lang="javascript">
+        <div id="top_gototop"><a href="#" class="gototop clearfix"><img src="{!!Asset('public/images/gotop.png')!!}" alt="lên đầu trang" /></a></div> 
+<!--        <script lang="javascript">
         (function() {var _h1 = document.getElementsByTagName('title')[0] || false;
         var product_name = ''; if (_h1){product_name = _h1.textContent || _h1.innerText; }var ga = document.createElement('script'); ga.type = 'text/javascript';
         ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=7d5b36ce59e63870cd1f00f2488f3c22&data=eyJoYXNoIjoiNDBlMTg4MDljNjYzMWIwN2UyOTFmNTA1N2VhY2I3YjEiLCJzc29faWQiOjExMTcwMDd9&pname=' + product_name;
         var s = document.getElementsByTagName('script'); s[0].parentNode.insertBefore(ga, s[0]); })();
-        </script>
+        </script>-->
+        <!--Start of Tawk.to Script-->
+<!--        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/56188e9b2f8f9ad267b0d517/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>-->
     </body>
 </html>

@@ -16,14 +16,16 @@
         <?php foreach ($arrProductNew as $product) { ?>
             <li>
                 <div>
-                    <a href="{!!Asset('detail/')!!}"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
-                    <div>
-                        <p>Giao sản phẩm miễn phí tại Hà Nội</p>
-                        <a href="{!!Asset('checkout/billing')!!}" title="Mua sản phẩm này">Mua</a>
-                        <button class="add_cart" title="Thêm vào giỏ"></button>
-                    </div>
+                    <a href="{!!action('Frontend\DetailController@getIndex')!!}">
+                        <img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
+                        <div>
+                            <p>Giao sản phẩm miễn phí tại Hà Nội</p>
+                            <a href="{!!Asset('checkout/billing')!!}" title="Mua sản phẩm này">Mua</a>
+                            <button class="add_cart" title="Thêm vào giỏ"></button>
+                        </div>
+                    
                 </div>
-                <p><a href="#"><?php echo $product['product_name']; ?></a></p>
+                <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name']; ?></a></p>
                 <span class="price"><?php echo $product['product_price'] . 'VND'; ?></span> 
                 <?php if ($product['product_discount_price']) { ?>
                 <span class="sale"><?php echo $product['product_discount_price']; ?></span>
@@ -62,7 +64,7 @@
                             <button class="add_cart" title="Thêm vào giỏ"></button>
                         </div>
                     </div>
-                    <p><a href="#"><?php echo $product['product_name'];?></a></p>
+                    <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name'];?></a></p>
                     <span class="price"><?php echo $product['product_price'].'VND';?></span> 
                     <?php if ($product['product_discount_price']) { ?>
                     <span class="sale"><?php echo $product['product_discount_price'];?></span>

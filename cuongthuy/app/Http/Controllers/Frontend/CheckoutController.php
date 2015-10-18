@@ -17,8 +17,10 @@ class CheckoutController extends Controller {
         $billSession = Session::get('billing');
         if ($billSession) {
             $billing = $billSession;
-        } else {
-            $billSession = Session::get('user');
+        } else if (Session::get('user_name')) {
+            $billSession = Session::get('user_name');
+//            $billing = Session::get('user_name');
+            $billing = $billSession;
         }
         return view('Frontend.billing', compact('billing'));
     }

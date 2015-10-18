@@ -153,8 +153,9 @@ body footer .wrap > .f_left > div{
 	width:98% !important;
 	margin:0 1% !important;
 }
-
-
+.contact_page table{width:80% !important; margin:20px 10%;}
+.map{
+	width:94% !important;margin:20px 3%;}
 
 
 
@@ -242,8 +243,9 @@ body footer .wrap > .f_right{
 	width:98%;
 	margin:0 1% 10px 1%;
 }
-
-
+.contact_page table{width:98% !important;margin:20px 1%;}
+.map{
+	width:94% !important;margin:20px 3%;}
 
 
 
@@ -334,8 +336,9 @@ body footer .wrap > .f_right{
 	width:98%;
 	margin:0 1% 10px 1%;
 }
-
-
+.contact_page table{width:98% !important;margin:20px auto;}
+.map{
+	width:94% !important;margin:20px 3%;}
 
 }
 
@@ -837,6 +840,7 @@ display:none;
 		float:right;
 		margin-top:30px;
 		cursor:pointer;
+		border:none;
 	}
 .assess{
 	margin-top:20px;
@@ -876,3 +880,105 @@ display:none;
 }	
 	
 /*--------------------- Slide ------------------------*/
+/*----------------- COntact page ---------------------*/
+.contact_page{
+	padding:30px 0;
+}
+	.contact_page table{
+		margin-top:30px;
+		width:50%;
+		float:left;
+	}
+	.contact_page table td{padding:5px;}
+.input{
+	height:33px;
+	border-radius:5px;
+	border:1px solid #8c8c8c;
+}	
+.contact_page textarea{
+	border-radius:5px;
+	border:1px solid #8c8c8c;
+}	
+.btn_cm{
+	wdth:100% !important;
+	text-align:center;
+}
+	.btn_cm li{ display:inline;}
+	.btn_cm li button{ padding:5px 30px; margin:20px 10px;border:1px solid red;color:#fff;
+	font-weight:bold;
+	font-size:17px;
+	border-radius:5px;
+	cursor:pointer;
+	border:1px solid #1e0700;}	
+	.btn_cm li:nth-child(1) button{background-color:#DA2027;}
+	.btn_cm li:nth-child(2) button{background-color:#FAA21B;}	
+	.btn_cm li:nth-child(1) button:hover{background-color:#611317;}
+	.btn_cm li:nth-child(2) button:hover{background-color:#9E662A;}
+.map{
+	width:47%;
+	border:5px solid #ccc;
+	float:right;
+	margin-top:20px;
+}
+/*---------- About us page ----------------*/
+.about_page{
+	padding:20px 0;
+}
+.avanta_list{
+	margin-top:30px;
+	width:100%;
+	border-top: 1px dashed #ccc;
+}
+	.avanta_list li{
+		width:48%;
+	}
+.avanta_list > ul{
+	width:60%;
+	margin:30px auto;
+}
+.avata{
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	border:3px solid #ccc;
+	z-index:1;
+	margin-right:10px;
+}.avanta_list ul li:nth-child(1){border-right:1px solid #ccc;}
+.avanta_list ul li:nth-child(1) .avata{background:url(../images/img14.jpg) no-repeat center center;}
+.avanta_list ul li:nth-child(2) .avata{background:url(../images/img15.jpg) no-repeat center center;}
+.about_bg{
+    font-size: 0;
+    width: 17px;
+    height: 17px;
+    background: url(../images/icon20.png) no-repeat top left;
+    display: block;
+    background-size: 100% 100%;
+    z-index: 2000;
+    margin-left: 90px;
+}
+.avanta_list li > p{
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #38B54A;
+}
+
+#img_ajax {
+  height: 400px;
+  position: relative;
+  background-color: gray; /* for demonstration */
+}
+.ajax-loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto; /* presto! */
+}
+
+
+
+
+
+

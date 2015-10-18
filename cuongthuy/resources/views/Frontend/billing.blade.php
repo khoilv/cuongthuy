@@ -32,15 +32,15 @@
         <table>
             <tr>
                 <td>Họ và tên :</td>
-                <td><input type="text" name="name" value="{!!$billing['name']!!}"></td>
+                <td><input type="text" name="name" value=@if(isset($billing['name'])) {!!$billing['name']!!} @endif></td>
             </tr>
             <tr>
                 <td>Số điện thoại :</td>
-                <td><input type="text" name="telephone" value="{!!$billing['telephone']!!}"></td>
+                <td><input type="text" name="telephone" value=@if(isset($billing['telephone'])) {!!$billing['telephone']!!} @endif></td>
             </tr>
             <tr>
                 <td>Email :</td>
-                <td><input type="text" name="email" value="{!!$billing['email']!!}"></td>
+                <td><input type="text" name="email" value=@if(isset($billing['email'])) {!!$billing['email']!!} @endif></td>
             </tr>
         </table>
         <div class="clear"></div>
@@ -48,24 +48,24 @@
         <table>
             <tr>
                 <td>Số nhà :</td>
-                <td><input type="text" name="houseNumber" value="{!!$billing['houseNumber']!!}"></td>
+                <td><input type="text" name="houseNumber" value=@if(isset($billing['houseNumber'])) {!!$billing['houseNumber']!!} @endif></td>
             </tr>
             <tr>
                 <td>Đường / Phố :</td>
-                <td><input type="text" name="street" value="{!!$billing['street']!!}"></td>
+                <td><input type="text" name="street" value=@if(isset($billing['street'])) {!!$billing['street']!!} @endif></td>
             </tr>
             <tr>
                 <td>Quận / Huyện :</td>
-                <td><input type="text" name="district" value="{!!$billing['district']!!}"></td>
+                <td><input type="text" name="district" value=@if(isset($billing['district'])) {!!$billing['district']!!} @endif></td>
             </tr>
             <tr>
                 <td>Tỉnh thành :</td>
                 <td>
                     <select name="city">
-                        <option @if ($billing['city'] == "Hà Nội") selected @endif value="Hà Nội">Hà Nội</option>
-                        <option @if ($billing['city'] == "Tp. Hồ Chí Minh") selected @endif value="Tp. Hồ Chí Minh">Tp. Hồ Chí Minh</option>
-                        <option @if ($billing['city'] == "Hải Phòng") selected @endif value="Hải Phòng">Hải Phòng</option>
-                        <option @if ($billing['city'] == "Đà Nẵng") selected @endif value="Đà Nẵng">Đà Nẵng</option>
+                        <option @if (isset( $billing['city']) && $billing['city'] == "Hà Nội") selected @endif value="Hà Nội">Hà Nội</option>
+                        <option @if (isset ($billing['city']) && $billing['city'] == "Tp. Hồ Chí Minh") selected @endif value="Tp. Hồ Chí Minh">Tp. Hồ Chí Minh</option>
+                        <option @if (isset ($billing['city']) && $billing['city'] == "Hải Phòng") selected @endif value="Hải Phòng">Hải Phòng</option>
+                        <option @if (isset ($billing['city']) && $billing['city'] == "Đà Nẵng") selected @endif value="Đà Nẵng">Đà Nẵng</option>
                     </select>
                 </td>
             </tr>

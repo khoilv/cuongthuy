@@ -21,7 +21,11 @@ class BannerModel extends TableBase {
      public function getBannerList() {
         $options = array(
             'fields' => array('*'),
-            'conditions' => array('banner_expires_date >=' => date('Y-m-d H:i:s')),
+            'conditions' => array(
+                'banner_expires_date >=' => date('Y-m-d H:i:s'),
+                'banner_status' => 1,
+                'banner_date_added <=' => date('Y-m-d H:i:s'),
+                ),
             'limit'  => array($this->BANNER_MAX)
         );
         return $this->find('all', $options);

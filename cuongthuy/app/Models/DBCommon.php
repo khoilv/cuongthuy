@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 class DBCommon {
-
     /**
      *  INSERT用の文字列を返す
      *

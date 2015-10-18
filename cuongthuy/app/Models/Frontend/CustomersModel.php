@@ -1,19 +1,23 @@
 <?php
 namespace App\Models\Frontend;
 use App\Models\TableBase;
-use Laravel\Socialite\Contracts\Factory as Socialite;
 use Session;
+use App\Models\AutoGenerate;
 class CustomersModel extends TableBase {
-    
-    private $socialite;
+
     protected $table = 'customers';
 
-    public function __construct(Socialite $socialite) {
+    public function __construct() {
         parent::__construct();
         $this->setTableName($this->table);
-        $this->socialite = $socialite;
     }
-
+    
+    /**
+     * Check user login
+     * @param string $email
+     * @param string $password
+     * @return boolean
+     */
     public function checkLogin($email, $password)
     {
         $options = array(
@@ -30,6 +34,11 @@ class CustomersModel extends TableBase {
         return false;
     }
     
+    /**
+     * Get user info by id
+     * @param int $id
+     * @return string
+     */
     public function getUserNameById($id)
     {
         $options = array(
@@ -41,6 +50,12 @@ class CustomersModel extends TableBase {
         $result =  $this->find('first', $options);
         return $result['customer_name'];
     }
+    
+    /**
+     * Get user info by email
+     * @param string $email
+     * @return array
+     */
     public function getUserByEmail($email)
     {
         $options = array(
@@ -52,48 +67,50 @@ class CustomersModel extends TableBase {
         $result =  $this->find('first', $options);
         return $result;
     }
-    
-    public function execute($request, $listener, $provider) {
-       if (!$request) return $this->getAuthorizationFirst($provider);
-       $this->findByUserNameOrCreate($this->getSocialUser($provider));
-       return redirect('/');
-    }
 
-    private function getAuthorizationFirst($provider) {
-        return $this->socialite->driver($provider)->redirect();
-    }
-
-    private function getSocialUser($provider) {
-        $ch = curl_init();
-        curl_setopt ($ch, CURLOPT_CAINFO, "D:\xampp\php\ext\cacert.pem");
-        return $this->socialite->driver($provider)->user();
-    }
-    
+    /**
+     * Check user login, then insert or update info of user
+     * @param object $userData
+     */
     public function findByUserNameOrCreate($userData) {
         $user = $this->getUserByEmail($userData->email);
         if(!$user) {
             $user = array(
                 'customer_email' => $userData->email,
                 'customer_name' => $userData->name,
-                'customer_code' => 'KH' . $userData->id
+                'customer_code' => AutoGenerate::generateUniqueCustomersCode()
             );
            $this->insert($user);
         }
 
         $this->checkIfUserNeedsUpdating($userData, $user);
-        //Session::put('user_login', $user['id']);
-        Session::put('user_name', $userData->name);
+        Session::put('customer_email', $userData->email);
+        Session::put('customer_name', $userData->name);
     }
 
+    /**
+     * Update user info
+     * @param object $userData
+     * @param array $user
+     */
     public function checkIfUserNeedsUpdating($userData, $user) {
 
         $socialData = [
             'customer_email' => $userData->email,
-            'customer_name' => $userData->name,
-            'customer_code' => 'KH' . $userData->id
+            'customer_name' => $userData->name
         ];
         if (!empty(array_diff($socialData, $user))) {
             $this->update($socialData,array('id'=> $user['id']));
         }
+    }
+    
+    public function checkCustomerCode($customerCode){
+        $options = array(
+            'fields' => array('id'),
+            'conditions' => array(
+                'customer_code' => $customerCode,
+            )
+        );
+        return $this->find('all', $options);
     }
 }

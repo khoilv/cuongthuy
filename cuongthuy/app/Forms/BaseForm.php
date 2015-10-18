@@ -1,8 +1,10 @@
 <?php
-// File: app\Acme\Forms\BaseForm.php
-
+/**
+ * @author LanNT
+ * @version 1.00
+ * @create 2015/10/15
+ */
 namespace App\Forms;
-
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Factory as ValidatorFactory;
 use Illuminate\Validation\Validator;
@@ -22,8 +24,7 @@ abstract class BaseForm
     /**
      * @param \Illuminate\Validation\Factory $validator
      */
-    public function __construct(ValidatorFactory $validator)
-    {
+    public function __construct(ValidatorFactory $validator) {
         $this->validator = $validator;
     }
 
@@ -32,10 +33,10 @@ abstract class BaseForm
      *
      * @throws FormValidationException
      */
-    public function validate(array $formData)
-    {
+    public function validate(array $formData){
         // Instantiate validator instance by factory
         $this->validation = $this->validator->make($formData, $this->rules());
+        $this->validation->setAttributeNames($this->setAttributeNames());
 
         // Validate
         if ($this->validation->fails()) {
@@ -48,8 +49,7 @@ abstract class BaseForm
     /**
      * @return MessageBag
      */
-    protected function getValidationErrors()
-    {
+    protected function getValidationErrors(){
         return $this->validation->errors();
     }
 
@@ -57,4 +57,8 @@ abstract class BaseForm
      * @return array
      */
     abstract protected function rules();
+    /**
+     * @return array
+     */
+    abstract protected function setAttributeNames();
 }

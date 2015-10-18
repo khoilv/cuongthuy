@@ -158,8 +158,8 @@ use App\Http\Controllers\Frontend\CartController as CartController;
             <div class="content_top">
                 <div class="wrap">
                     <ul class="f_right">
-                        <?php if (Session::has('user_name')) { ?>
-                            <li><a><?php echo 'Xin chào ' . Session::get('user_name'); ?></a></li>
+                        <?php if (Session::has('customer_name')) { ?>
+                            <li><a><?php echo 'Xin chào ' . Session::get('customer_name'); ?></a></li>
                             <li><a id="logout">Thoát</a></li>
                         <?php } else { ?>
                             <li><a href="#login">Đăng nhập</a></li>
@@ -262,6 +262,32 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <div id="img_ajax" style='display: none'> <img src="{!!Asset('public/images/loading.gif')!!}" class="ajax-loader"></div>
         <!-- connent -->
         @yield('content')
+        <div class="content_bottom">
+            <div class="wrap">
+                <div class="f_left">
+                    <ul>
+                        <li>
+                            <h3>Giới thiệu</h3>
+                            <ul>
+                                <li><a href="/about">Giới thiệu</a></li>
+                                <li><a href="/contact">Liên hệ</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h3>Khách hàng</h3>
+                            <ul>
+                                <li><a href="#">Hướng dẫn mua hàng</a></li>
+                                <li><a href="#">Quy đổi trả sản phẩm</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="f_right">
+                    <img src="{!!Asset('public/images/banner-b.png')!!}">
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div><!-- end content bottom-->
         <div class="clear"></div>
         <!-- footer -->
         @include('Frontend.footer')

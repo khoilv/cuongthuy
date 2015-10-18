@@ -42,10 +42,10 @@
             </ul>
         </div>
         <div class="clear"></div>
-        <a class="p_bottom" href="#">Bạn quên mật khẩu ?</a>
+        <a class="p_bottom" >Bạn quên mật khẩu ?</a>
     </div>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript">
     $(function() {
        $("#tbn_login").click(function() {
            $("#error_msg").text('');
@@ -87,6 +87,31 @@
                         top.location.href = '/'
                     }
             });
+        });
+        $(".p_bottom").click(function() {
+           $("#error_msg").text('');
+           $("#error_email").text('');
+           $("#error_pass").text('');
+            var retVal = confirm("Bạn có muốn gửi mật khẩu vào địa chỉ email vừa nhập không?");
+            var post = {
+                email : $("#email").val()
+            };
+            if( retVal == true ){
+                    $.ajax({
+                    url : 'recover_pass',
+                    type : 'post',
+                    dataType: 'json',
+                    data : post,
+                    success : function (result){
+                        if(result['error_email']){
+                            $("#error_email").text(result['error_email']);
+                        } else {
+                            alert('Mật khảu của bạn đã được gửi vào mail.Vui lòng check mail của bạn!');
+                        }
+                    }
+                });
+            } else {
+            }
         });
     });
 </script>

@@ -1,12 +1,21 @@
-<?php namespace App\Http\Controllers\Frontend;
+<?php
+/**
+ * @author LanNT
+ * @version 1.00
+ * @create 2015/10/15
+ */
+namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\CustomersModel;
 use App\Forms\RegisterForm as registerForm;
 use App\Forms\FormValidationException;
+use App\Models\AutoGenerate;
 use Input;
 use Request;
+use Session;
+use Mail;
 class RegisterController extends Controller {
-    
+
     protected $registerForm;
     protected $customersCls;
     
@@ -30,18 +39,25 @@ class RegisterController extends Controller {
             }
             if (!$error) {
                 if ($this->customersCls->getUserByEmail($data['email'])) {
-                    $errorMsg = (object)array('email' => 'Email was registered.Please enter different email!');
+                    $errorMsg = (object)array('email' => 'Email này đã đuwọc đăng kí.Vui lòng nhập email khác!');
                     $error = true;
                 } else {
                     $insertArray = array(
                         'customer_email' => $data['email'],
                         'customer_password' => $data['password'],
-                        'customer_code' => 'KH12345',
+                        'customer_code' => AutoGenerate::generateUniqueCustomersCode(),
                         'customer_name' => $data['username'],
                         'customer_address' => $data['address'],
                         'customer_phone'  => $data['phone']
                     );
-                    $this->customersCls->insert($insertArray);
+                    if ($this->customersCls->insert($insertArray)) {
+                        Session::put('customer_email',$data['email']);
+                        Session::put('customer_name',$data['username']);
+//                        Mail::send('Frontend.email.register',['username'=> $data['username'],'email'=> $data['email']], function($message) use ($data)
+//                        {
+//                            $message->to($data['email'],$data['username'])->subject('Cường thuỷ - Xác nhận đăng kí!');
+//                        });
+                    }
                 }
             }
             $result = array(

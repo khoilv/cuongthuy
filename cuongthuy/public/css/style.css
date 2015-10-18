@@ -963,19 +963,6 @@ display:none;
     color: #38B54A;
 }
 
-#img_ajax {
-  height: 400px;
-  position: relative;
-  background-color: gray; /* for demonstration */
-}
-.ajax-loader {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto; /* presto! */
-}
 
 
 

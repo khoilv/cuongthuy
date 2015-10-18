@@ -1,11 +1,17 @@
 <?php
+/**
+ * @author LanNT
+ * @version 1.00
+ * @create 2015/10/15
+ */
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\ProductModel;
 use App\Models\Frontend\CategoryModel;
 use Input;
+
 class ProductController extends Controller {
-     private static $PRODUCT_MAX = 3;
+     private static $PRODUCT_MAX = 25;
 
      public static function getIndex(){
          $productCls = new ProductModel();
@@ -32,18 +38,23 @@ class ProductController extends Controller {
          $searchValue = '';
          if(Input::has('search_key')) {
              $searchKey = Input::get('search_key');
-             if($searchKey == 'newer') {
-                 $whereArr['product_sell_status LIKE'] = "%1%";
-             } else if ($searchKey == 'hot'){
-                 $whereArr['product_sell_status LIKE'] = "%3%";
-             } else if ($searchKey == 'sell') {
-                 $whereArr['product_sell_status LIKE'] = "%2%";
-             } else {
-                if(Input::has('search_value')) {
-                    $searchValue = Input::get('search_value');
-                    $whereArr[$searchKey . ' LIKE'] = "%".$searchValue."%";
-                }
-             }
+             switch ($searchKey) {
+                case'newer':
+                    $whereArr['product_sell_status LIKE'] = "%1%";
+                    break;
+                case 'hot':
+                    $whereArr['product_sell_status LIKE'] = "%3%";
+                    break;
+                case 'sell':
+                    $whereArr['product_sell_status LIKE'] = "%2%";
+                    break;
+                default:
+                    if(Input::has('search_value')) {
+                        $searchValue = Input::get('search_value');
+                        $whereArr[$searchKey . ' LIKE'] = "%".$searchValue."%";
+                    }
+                    break;
+            }
          }
          if (Input::has('page')) {
             $page = Input::get('page');
@@ -58,7 +69,6 @@ class ProductController extends Controller {
          $previousPage = $page > 1 ? $page - 1 : 1;
          $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
          $limitArr = array($offset, $maxRec);
-           // $orderArray = array('created_at DESC');
          $arrProductList  = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
          // get category name
          $categoryName = $categoryCls->getCategoryNamebyId($categoryId);

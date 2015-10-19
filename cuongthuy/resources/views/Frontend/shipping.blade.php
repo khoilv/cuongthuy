@@ -1,8 +1,5 @@
 @extends('Frontend.layout')
 @section('content')
-<?php 
-    var_dump(Session::get('billing')); 
-?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">

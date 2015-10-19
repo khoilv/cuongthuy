@@ -8,6 +8,7 @@
     </div>
     <div class="clear"></div>
 </div>
+@if(count($products)> 0)
 <div class="wrap cart_page">
     <table>
         <thead>
@@ -45,7 +46,12 @@
         
         <a href="{!!Asset('checkout/billing')!!}" class="f_right"><button>Mua hàng</button></a>
     </div>
-</div> 
+</div>
+@else
+    <div class="wrap">
+        Bạn không có sản phẩm nào trong giỏ hàng
+    </div>
+@endif
 <!--end cart page-->
 <div class="clear"></div>
 

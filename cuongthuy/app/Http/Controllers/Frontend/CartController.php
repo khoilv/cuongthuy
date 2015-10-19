@@ -91,7 +91,7 @@ class CartController extends Controller {
         $cart = Session::get('cart');
         if ($cart) {
             $totalCart = array_sum($cart);
-            return "($totalCart)";
+            return $totalCart;
         }
     }
 

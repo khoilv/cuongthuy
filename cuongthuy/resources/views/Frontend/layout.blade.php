@@ -165,7 +165,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                             <li><a href="#login">Đăng nhập</a></li>
                             <li><a href="#register">Đăng ký</a></li>
                         <?php } ?>
-                        <li><a href="{!!Asset(cart)!!}" class="button_cart">Giỏ hàng {!! CartController::getCart() !!}</a></li>
+                        <li><a href="{!!Asset(cart)!!}" class="button_cart">Giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif </a></li>
                         <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
                     </ul>
                     <div class="clear"></div>

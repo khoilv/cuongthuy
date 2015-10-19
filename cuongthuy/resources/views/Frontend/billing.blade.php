@@ -26,21 +26,29 @@
         <div class="clear"></div>
     </div><!-- end Steps 1 content-->
     <div class="clear"></div>
-    {!! Form::open(array('url' => 'checkout/billing', 'name' => 'test')) !!}
+    {!! Form::open(array('url' => 'checkout/billing', 'method' => 'post', 'name' => 'billing')) !!}
     <div class="steps1_c2">
         <p class="bs1_bold">Thông tin liên hệ</p>
         <table>
             <tr>
-                <td>Họ và tên :</td>
-                <td><input type="text" name="name" value=@if(isset($billing['name'])) {!!$billing['name']!!} @endif></td>
+                <td>Họ và tên : </td>
+                <td>{!! Form::text('name',(isset($billing['name']) && $billing['name']) ? $billing['name'] : '' ) !!}
+                    @if ($errors->has('name')) <p style="color: red">{!! $errors->first('name') !!}</p> @endif
+                </td>
             </tr>
             <tr>
                 <td>Số điện thoại :</td>
-                <td><input type="text" name="telephone" value=@if(isset($billing['telephone'])) {!!$billing['telephone']!!} @endif></td>
+                <td>
+                    {!! Form::text('telephone',(isset($billing['telephone']) && $billing['telephone']) ? $billing['telephone'] : '' ) !!}
+                    @if ($errors->has('telephone')) <p style="color: red">{!! $errors->first('telephone') !!}</p> @endif
+                </td>
             </tr>
             <tr>
                 <td>Email :</td>
-                <td><input type="text" name="email" value=@if(isset($billing['email'])) {!!$billing['email']!!} @endif></td>
+                <td>
+                    {!! Form::text('email',(isset($billing['email']) && $billing['email']) ? $billing['email'] : '' ) !!}
+                    @if ($errors->has('email')) <p style="color: red">{!! $errors->first('email') !!}</p> @endif
+                </td>
             </tr>
         </table>
         <div class="clear"></div>
@@ -48,15 +56,24 @@
         <table>
             <tr>
                 <td>Số nhà :</td>
-                <td><input type="text" name="houseNumber" value=@if(isset($billing['houseNumber'])) {!!$billing['houseNumber']!!} @endif></td>
+                <td>
+                    {!! Form::text('houseNumber',(isset($billing['houseNumber']) && $billing['houseNumber']) ? $billing['houseNumber'] : '' ) !!}
+                    @if ($errors->has('houseNumber')) <p style="color: red">{!! $errors->first('houseNumber') !!}</p> @endif
+                </td>
             </tr>
             <tr>
                 <td>Đường / Phố :</td>
-                <td><input type="text" name="street" value=@if(isset($billing['street'])) {!!$billing['street']!!} @endif></td>
+                <td>
+                    {!! Form::text('street',(isset($billing['street']) && $billing['street']) ? $billing['street'] : '' ) !!}
+                    @if ($errors->has('street')) <p style="color: red">{!! $errors->first('street') !!}</p> @endif
+                </td>
             </tr>
             <tr>
                 <td>Quận / Huyện :</td>
-                <td><input type="text" name="district" value=@if(isset($billing['district'])) {!!$billing['district']!!} @endif></td>
+                <td>
+                    {!! Form::text('district',(isset($billing['district']) && $billing['district']) ? $billing['district'] : '' ) !!}
+                    @if ($errors->has('district')) <p style="color: red">{!! $errors->first('district') !!}</p> @endif
+                </td>
             </tr>
             <tr>
                 <td>Tỉnh thành :</td>

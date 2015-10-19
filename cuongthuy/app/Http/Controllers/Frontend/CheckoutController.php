@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\CartController;
+use App\Forms\BillingForm;
+use App\Forms\FormValidationException;
 use Input;
 use Session;
 use Redirect;
@@ -10,18 +13,24 @@ use DB;
 
 class CheckoutController extends Controller {
     
+    protected $billingForm;
+    
+    public function __construct(BillingForm $billingForm) {
+        $this->billingForm = $billingForm;
+    }
+    
     public function getIndex () {
         return $this->getBilling();
     }
     
     public function getBilling () {
+        if (!CartController::getCart()) {
+            return Redirect::to('cart');
+        }
         if (Session::get('billing')) {
             $billing = Session::get('billing');
         } else if (Session::get('customer_email')) {
-            $emailSession = Session::get('customer_email');
-            $customerInfo = DB::table('customers')->where('customer_email', $emailSession)->get();
-            var_dump($customerInfo);
-//            echo $customerInfo[0]->customer_phone;
+            $customerInfo = DB::table('customers')->where('customer_email', Session::get('customer_email'))->get();
             $billing = array(
                 'name'          => $customerInfo[0]->customer_name,
                 'telephone'     => $customerInfo[0]->customer_phone,
@@ -34,15 +43,21 @@ class CheckoutController extends Controller {
     
     public function postBilling () {
         if (Input::has('submit')) {
-            $data = Input::all();
+            $data = Input::except('_token');
+            try {
+                // Validate
+                $this->billingForm->validate($data);
+            } catch (FormValidationException $e) {
+                return Redirect::back()->withInput()->withErrors($e->getErrors());
+            }
+            
             $data['billing'] = true;
             Session::put('billing', $data);
+            return Redirect::to('checkout/shipping');
         } elseif (Input::has('reset')){
-//            Session::put('billing', null);
             Session::forget('billing');
             return view('Frontend.billing');
         }
-        return Redirect::to('checkout/shipping');
     }
     
     public function getShipping () {

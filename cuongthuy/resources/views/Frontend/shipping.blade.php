@@ -1,5 +1,8 @@
 @extends('Frontend.layout')
 @section('content')
+<?php 
+    var_dump(Session::get('billing')); 
+?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -30,13 +33,13 @@
     <div class="steps1_c2">
         <ul class="steps2_c">
             <li>
-                <label><input type="radio" name="choose1">
+                <label><input type="radio" name="choose1" value="1">
                     <p><b>Giao hàng tận nhà (Miễn phí)</b><br>Thời gian giao hàng 1-3 ngày</p>
                 </label>
             </li>
             <li>
-                <label><input type="radio" name="choose1">
-                    <p><b>Giao hàng tận nhà (Miễn phí)</b><br>Thời gian giao hàng 1-3 ngày</p>
+                <label><input type="radio" name="choose1" value="2">
+                    <p><b>Đặt giữ hàng ở cửa hàng</b><br>Đến cửa hàng mua</p>
                 </label>
             </li>
         </ul>

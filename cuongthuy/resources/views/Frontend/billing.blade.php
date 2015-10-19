@@ -74,8 +74,9 @@
         <ul class="bs1_button">
             <li><a href="#">Xóa</a></li>
             <li onclick="test.submit();"><a >Hoàn thành</a></li>
-            <li><input type="reset" value="Xóa"></li>
+            <li><input type="submit" name="reset" value="Xóa"></li>
             <li><input type="submit" name="submit" value="Hoàn thành"></li>
+        </ul>
     </div>
     {!! Form::close() !!}
 </div><!-- end wrap-->

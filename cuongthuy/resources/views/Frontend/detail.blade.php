@@ -132,11 +132,6 @@
             max: 5,
             precision: 1,
             rating: <?php echo $average ?>,
-//            onChange: function(rating) {
-//                if (rating > 0) {
-//                    $('.rating_value').text("Đánh giá của bạn về sản phẩm này: "+rating);
-//                }
-//            },
             onSet: function(rating) {
                 if (rating !== 0) {
                     $('.rating_value').text("Cảm ơn bạn đã đánh giá");

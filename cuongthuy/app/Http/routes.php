@@ -26,3 +26,4 @@ Route::any('contact', 'Frontend\ContactController@getContact');
 Route::get('about',function(){
     return view('Frontend/about');
 });
+Route::any('updateRating', 'Frontend\RatingController@updateRating');

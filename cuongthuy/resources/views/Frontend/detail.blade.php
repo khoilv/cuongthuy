@@ -49,16 +49,11 @@
             <p>{!!$product->product_short_description!!}</p>
             <div class="assess">
                 <p class="f_left">Đánh giá : </p>
-                <ul>
-                    <li><a href="#"><img src="{!!Asset('public/images/sao-on.png')!!}"></a></li>
-                    <li><a href="#"><img src="{!!Asset('public/images/sao-on.png')!!}"></a></li>
-                    <li><a href="#"><img src="{!!Asset('public/images/sao-on.png')!!}"></a></li>
-                    <li><a href="#"><img src="{!!Asset('public/images/sao-on.png')!!}"></a></li>
-                    <li><a href="#"><img src="{!!Asset('public/images/sao-off.png')!!}"></a></li>
-                </ul>
-                <span>Ngày đăng : {!!date("d-m-Y", strtotime($product->product_date_added))!!}</span>
+                <div class="rating"></div>
+                <div class="rating_value"></div>
                 <div class="clear"></div> 
             </div>
+            <span>Ngày đăng : {!!date("d-m-Y", strtotime($product->product_date_added))!!}</span>
             <p style="margin-top:20px;">Giá bán :<span class="price2">{!!$product->product_price!!} VNĐ</span></p>
             @if ($product->product_discount_price)
                 <p>Giá cũ :<span class="price_old">{!!$product->product_discount_price!!} VNĐ</span></p>
@@ -106,7 +101,8 @@
 </div><!-- end slide-->
 <script type="text/javascript" src="public/js/jquery.flexisel.js"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.js')!!}"></script>
-<script type="text/javascript" src="{!!Asset('public/js/jssor.slider.js')!!}"></script> 
+<script type="text/javascript" src="{!!Asset('public/js/jssor.slider.js')!!}"></script>
+<script type="text/javascript" src="{!!Asset('public/js/jRate.js')!!}"></script>
 <script type="text/javascript">
     $(window).load(function () {
         $("#flexiselDemo3").flexisel({
@@ -128,6 +124,32 @@
                 tablet: {
                     changePoint: 768,
                     visibleItems: 3
+                }
+            }
+        });
+        
+        $(".rating").jRate({
+            max: 5,
+            precision: 1,
+            rating: <?php echo $average ?>,
+//            onChange: function(rating) {
+//                if (rating > 0) {
+//                    $('.rating_value').text("Đánh giá của bạn về sản phẩm này: "+rating);
+//                }
+//            },
+            onSet: function(rating) {
+                if (rating !== 0) {
+                    $('.rating_value').text("Cảm ơn bạn đã đánh giá");
+                    var post = {
+                            rating : rating,
+                            product_id : <?php echo $product->id ?>
+                        };
+                    $.ajax({
+                        url : 'updateRating',
+                        type : 'post',
+                        dataType: 'json',
+                        data : post
+                    });
                 }
             }
         });

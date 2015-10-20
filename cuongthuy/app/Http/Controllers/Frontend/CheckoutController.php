@@ -23,6 +23,18 @@ class CheckoutController extends Controller {
         return $this->getBilling();
     }
     
+    public function getBuyNow () {
+        $product_id = Input::get('product_id');
+        var_dump($product_id);
+//        if (isset($cart[$data['product_id']])) {
+//            $cart[$data['product_id']] += 1;
+//        } else {
+//            $cart[$data['product_id']] = 1;
+//        }
+//        $total = array_sum($cart);
+//        Session::put('cart', $cart);
+    }
+    
     public function getBilling () {
         if (!CartController::getCart()) {
             return Redirect::to('cart');

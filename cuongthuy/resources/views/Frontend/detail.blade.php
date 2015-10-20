@@ -22,11 +22,10 @@
                  height: 390px; background: #f8f8f8; overflow: hidden;">
                 <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 450px; height: 293px; overflow: hidden;">
                     <?php $arrImg = explode(",", $product->product_other_image); ?>
-                    <?php $path = "public/images/upload/products/product".$product->id?>
                     @foreach($arrImg as $img)
                     <div>
-                        <img u="image" src="{!!Asset($path.'/'.$img)!!}" />
-                        <img u="thumb" src="{!!Asset($path.'/thumb_'.$img)!!}" />
+                        <img u="image" src="{!!Asset('public/images/upload/products/'.$img)!!}" />
+                        <img u="thumb" src="{!!Asset('public/images/upload/products/thumb_'.$img)!!}" />
                     </div>
                     @endforeach
                 </div>

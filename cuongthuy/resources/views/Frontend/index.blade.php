@@ -1,4 +1,6 @@
-<?php use App\Http\Controllers\Frontend\BannerController as BannerController; ?>
+<?php 
+use App\Http\Controllers\Frontend\BannerController; 
+?>
 @extends('Frontend.layout')
 @section('banner')
 {!! BannerController::getBanner(); !!}
@@ -20,7 +22,7 @@
                         <img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
-                            <a href="{!!Asset('checkout/billing')!!}" title="Mua sản phẩm này">Mua</a>
+                            <a href="{!!action('Frontend\CheckoutController@getIndex', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
                             <button class="add_cart" title="Thêm vào giỏ"></button>
                         </div>
                     

@@ -22,7 +22,7 @@ use App\Http\Controllers\Frontend\BannerController;
                         <img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
-                            <a href="{!!action('Frontend\CheckoutController@getIndex', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
+                            <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
                             <button class="add_cart" title="Thêm vào giỏ"></button>
                         </div>
                     
@@ -62,7 +62,7 @@ use App\Http\Controllers\Frontend\BannerController;
                         <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
-                            <a href="#" title="Mua sản phẩm này">Mua</a>
+                            <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
                             <button class="add_cart" title="Thêm vào giỏ"></button>
                         </div>
                     </div>

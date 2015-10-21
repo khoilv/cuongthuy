@@ -7,6 +7,7 @@ use DB;
 use Input;
 use Request;
 use Session;
+use Redirect;
 
 class CartController extends Controller {
 
@@ -58,18 +59,19 @@ class CartController extends Controller {
     }
     
     public function addCart() {
-        if(Request::ajax()) {
-            $cart = Session::get('cart');
-            $data = Input::all();
-            if (isset($cart[$data['product_id']])) {
-                $cart[$data['product_id']] += 1;
-            } else {
-                $cart[$data['product_id']] = 1;
-            }
-            $total = array_sum($cart);
-            Session::put('cart', $cart);
-
-            return ($total);
+        $cart = Session::get('cart');
+        $data = Input::all();
+        if (isset($cart[$data['product_id']])) {
+            $cart[$data['product_id']] += 1;
+        } else {
+            $cart[$data['product_id']] = 1;
+        }
+        $total = array_sum($cart);
+        Session::put('cart', $cart);
+        if (Request::ajax()) {
+            return $total;
+        } else {
+            return Redirect::to('checkout/billing');
         }
     }
     

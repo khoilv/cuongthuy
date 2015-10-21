@@ -58,7 +58,7 @@
             @if ($product->product_discount_price)
                 <p>Giá cũ :<span class="price_old">{!!$product->product_discount_price!!} VNĐ</span></p>
             @endif
-            <a href="#" ><button></button></a> 
+            <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product->id))!!}" ><button></button></a> 
             <div class="clear"></div>                  
         </div> 
         <div class="clear"></div>                

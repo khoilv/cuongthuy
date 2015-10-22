@@ -15,8 +15,7 @@ class CartController extends Controller {
         $cart = Session::get('cart');
         $products = array();
         if ($cart) {
-            $item = array_keys($cart);
-            $products = DB::table('products')->whereIn('id', $item)->get();
+            $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
         }
         
         return view('Frontend.cart', compact('products', 'cart'));

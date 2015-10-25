@@ -17,32 +17,78 @@
 </div>
 <div class="detail_page wrap">
     <div class="detail_c1">
-        <div class="box2 f_left" style="border:1px solid red;">
-            <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 450px;
-                 height: 390px; background: #f8f8f8; overflow: hidden;">
-                <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 450px; height: 293px; overflow: hidden;">
-                    <?php $arrImg = explode(",", $product->product_other_image); ?>
-                    @foreach($arrImg as $img)
-                    <div>
-                        <img u="image" src="{!!Asset('public/images/upload/products/'.$img)!!}" />
-                        <img u="thumb" src="{!!Asset('public/images/upload/products/thumb_'.$img)!!}" />
-                    </div>
-                    @endforeach
-                </div>
-                <span u="arrowleft" class="jssora05l" style="top: 158px; left: 8px;"></span>
-                <span u="arrowright" class="jssora05r" style="top: 158px; right: 8px"></span>
-                <div u="thumbnavigator" class="jssort01" style="left: 0px; bottom: 0px;">
-                    <div u="slides" style="cursor: default;">
-                        <div u="prototype" class="p">
-                            <div class=w><div u="thumbnailtemplate" class="t"></div></div>
-                            <div class=c></div>
-                        </div>
-                    </div>
-                    <!-- Thumbnail Item Skin End -->
-                </div>
-            </div>
+        <div class="box2 f_left">
+            <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 492px; height: 400px; overflow: hidden; visibility: hidden;">
+				<!-- Loading Screen -->
+				<div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+					<div style="; opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+					<div style="position:absolute;display:block;top:0px;left:0px;width:100%;height:100%;"></div>
+				</div>
+				<div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 492px; height: 300px; overflow: hidden;">
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big1.jpg" />
+						<img data-u="thumb" src="public/images/img_smal1.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big2.jpg" />
+						<img data-u="thumb" src="public/images/img_smal2.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big3.jpg" />
+						<img data-u="thumb" src="public/images/img_smal3.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big4.jpg" />
+						<img data-u="thumb" src="public/images/img_smal4.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big5.jpg" />
+						<img data-u="thumb" src="public/images/img_smal5.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big1.jpg" />
+						<img data-u="thumb" src="public/images/img_smal1.jpg" />
+					</div>
+					 <div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big2.jpg" />
+						<img data-u="thumb" src="public/images/img_smal2.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big3.jpg" />
+						<img data-u="thumb" src="public/images/img_smal3.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big4.jpg" />
+						<img data-u="thumb" src="public/images/img_smal4.jpg" />
+					</div>
+					<div data-p="144.50" style="display: none;">
+						<img data-u="image" src="public/images/img_big5.jpg" />
+						<img data-u="thumb" src="public/images/img_smal5.jpg" />
+					</div>
+					
+				</div>
+				<!-- Thumbnail Navigator -->
+				<div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:490px;height:100px;" data-autocenter="1">
+					<!-- Thumbnail Item Skin Begin -->
+					<div data-u="slides" style="cursor: default;">
+						<div data-u="prototype" class="p">
+							<div class="w">
+								<div data-u="thumbnailtemplate" class="t"></div>
+							</div>
+							<div class="c"></div>
+						</div>
+					</div>
+					<!-- Thumbnail Item Skin End -->
+				</div>
+				<!-- Arrow Navigator -->
+				<span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
+				<span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
+				<a href="http://www.jssor.com" style="display:none">Jssor Slider</a>
+			</div>
+			<!-- #endregion Jssor Slider End -->
         </div>
-
+<script type="text/javascript" src="public/js/jssor.slider.mini.js"></script>
+<script type="text/javascript" src="public/js/jssor.slider.js"></script> 
 
         <div class="box2 f_right">
             <h2>{!!$product->product_name!!}</h2>
@@ -99,6 +145,7 @@
         </div>
     </div>
 </div><!-- end slide-->
+<div class="clear"></div>
 <script type="text/javascript" src="public/js/jquery.flexisel.js"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.js')!!}"></script>

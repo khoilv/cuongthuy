@@ -298,6 +298,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=7d5b36ce59e63870cd1f00f2488f3c22&data=eyJoYXNoIjoiNDBlMTg4MDljNjYzMWIwN2UyOTFmNTA1N2VhY2I3YjEiLCJzc29faWQiOjExMTcwMDd9&pname=' + product_name;
         var s = document.getElementsByTagName('script'); s[0].parentNode.insertBefore(ga, s[0]); })();
         </script>
+        Start of Tawk.to Script
 <!--        <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){

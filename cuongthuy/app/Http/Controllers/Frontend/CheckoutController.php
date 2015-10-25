@@ -23,6 +23,18 @@ class CheckoutController extends Controller {
         return $this->getBilling();
     }
     
+    public function getBuyNow () {
+        $product_id = Input::get('product_id');
+        var_dump($product_id);
+//        if (isset($cart[$data['product_id']])) {
+//            $cart[$data['product_id']] += 1;
+//        } else {
+//            $cart[$data['product_id']] = 1;
+//        }
+//        $total = array_sum($cart);
+//        Session::put('cart', $cart);
+    }
+    
     public function getBilling () {
         if (!CartController::getCart()) {
             return Redirect::to('cart');
@@ -45,11 +57,13 @@ class CheckoutController extends Controller {
         if (Input::has('submit')) {
             $data = Input::except('_token');
             try {
+                // Validate
                 $this->billingForm->validate($data);
             } catch (FormValidationException $e) {
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
             
+            $data['billing'] = true;
             Session::put('billing', $data);
             return Redirect::to('checkout/shipping');
         } elseif (Input::has('reset')){
@@ -60,7 +74,7 @@ class CheckoutController extends Controller {
     
     public function getShipping () {
         $billing = Session::get('billing');
-        if (isset($billing['submit']) && $billing['submit']) {
+        if ($billing['billing']) {
             return view('Frontend.shipping'); 
         } else {
             return Redirect::to('checkout/billing');
@@ -68,23 +82,10 @@ class CheckoutController extends Controller {
     }
     
     public function postShipping () {
-        if (Input::has('submit')) {
-            $data = Input::except('_token');
-            Session::put('shipping', $data);
-        }
         return Redirect::to('checkout/confirm');
     }
     
     public function getConfirm () {
-        $shipping = Session::get('shipping');
-        if (isset($shipping['submit']) && $shipping['submit']) {
-            $billing = Session::get('billing');
-            $cart = Session::get('cart');
-            $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
-            return view('Frontend.confirm', compact('billing', 'products', 'cart'));
-        } else {
-            return Redirect::to('checkout/shipping');
-        }
+        return view('Frontend.confirm');
     }
-    
 }

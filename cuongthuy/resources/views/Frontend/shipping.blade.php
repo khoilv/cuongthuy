@@ -30,24 +30,24 @@
     <div class="steps1_c2">
         <ul class="steps2_c">
             <li>
-                <label><input type="radio" name="shipMethod" value="1" checked>
+                <label><input type="radio" name="choose1" value="1">
                     <p><b>Giao hàng tận nhà (Miễn phí)</b><br>Thời gian giao hàng 1-3 ngày</p>
                 </label>
             </li>
             <li>
-                <label><input type="radio" name="shipMethod" value="2">
-                    <p><b>Đặt giữ hàng ở cửa hàng</b><br>Đến cửa hàng mua</p>
+                <label><input type="radio" name="choose1" value="2">
+                    <p><b>Mua và thanh toán tại cửa hàng</b></p>
                 </label>
             </li>
         </ul>
         <div class="clear"></div>
         <ul class="bs1_button">
             <li><a href="{!!Asset('checkout/billing')!!}">Quay lại</a></li>
-            <li><a href="#">Xác nhận</a></li>
             <li><input type="submit" name="submit" value="Xác nhận"></li>
         </ul>
     </div>
     {!! Form::close() !!}
+	<div class="clear"></div>
 </div><!-- end wrap-->
 <!-- InstanceEndEditable -->
 @endsection

@@ -13,15 +13,15 @@
         <table>
             <tr>
                 <td>Họ và tên :</td>
-                <td>{!!$billing['name']!!}</td>
+                <td>Phạm Huyền Chang</td>
             </tr>
             <tr>
                 <td>Số điện thoại :</td>
-                <td>{!!$billing['telephone']!!}</td>
+                <td>0988 4555 00</td>
             </tr>
             <tr>
                 <td>Email :</td>
-                <td>{!!$billing['email']!!}</td>
+                <td>phamhuyenchang102@gmail.com</td>
             </tr>
         </table>
         <div class="clear"></div>
@@ -29,19 +29,19 @@
         <table>
             <tr>
                 <td>Số nhà :</td>
-                <td>{!!$billing['houseNumber']!!}</td>
+                <td>Tầng 10 tòa nhà Rainbow Văn Quán</td>
             </tr>
             <tr>
                 <td>Đường / Phố :</td>
-                <td>{!!$billing['street']!!}</td>
-            </tr>
-            <tr>
-                <td>Quận / Huyện :</td>
-                <td>{!!$billing['district']!!}</td>
+                <td>Đường 19/5</td>
             </tr>
             <tr>
                 <td>Tỉnh thành :</td>
-                <td>{!!$billing['city']!!}</td>
+                <td>Hà Nội</td>
+            </tr>
+            <tr>
+                <td>Quận / Huyện :</td>
+                <td>Thanh Xuân</td>
             </tr>
         </table>
     </div><!-- end content left-->
@@ -58,24 +58,57 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $key => $product)
-                    <tr>
-                        <td>{!!$key+1!!}</td>
-                        <td>{!!$product->product_code!!}</td>
-                        <td>{!!$product->product_name!!}</td>
-                        <td>{!!$cart[$product->id]!!}</td>
-                        <td>{!!$product->product_price * $cart[$product->id]!!}</td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>1</td>
+                    <td>AC 000 123</td>
+                    <td>Bỉm PamPer cho bé</td>
+                    <td>1</td>
+                    <td>100 000vnđ</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>AC 000 123</td>
+                    <td>Bỉm PamPer cho bé</td>
+                    <td>1</td>
+                    <td>100 000vnđ</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>AC 000 123</td>
+                    <td>Bỉm PamPer cho bé</td>
+                    <td>1</td>
+                    <td>100 000vnđ</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>AC 000 123</td>
+                    <td>Bỉm PamPer cho bé</td>
+                    <td>1</td>
+                    <td>100 000vnđ</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>AC 000 123</td>
+                    <td>Bỉm PamPer cho bé</td>
+                    <td>1</td>
+                    <td>100 000vnđ</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>AC 000 123</td>
+                    <td>Bỉm PamPer cho bé</td>
+                    <td>1</td>
+                    <td>100 000vnđ</td>
+                </tr>
             </tbody>
         </table>
     </div><!-- end content right-->
     <div class="clear"></div>
     <ul class="bs1_button">
-        <li><a href="{!!Asset('checkout/shipping')!!}">Quay lại</a></li>
+        <li><a href="#">Quay lại</a></li>
         <li><a href="#">Xác nhận</a></li>
-        <li><input type="submit" name="submit" value="Xác nhận"></li>
     </ul>
+    <div class="clear"></div>
 </div><!-- end wrap-->
 <!-- InstanceEndEditable -->
 @endsection

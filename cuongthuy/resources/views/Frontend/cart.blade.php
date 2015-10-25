@@ -13,6 +13,7 @@
     <table>
         <thead>
             <tr>
+				<th>STT</th>
                 <th>Mã Sản phẩm</th>
                 <th>Tên sản phẩm</th>
                 <th>Số lượng</th>
@@ -25,6 +26,7 @@
         <tbody>
             @foreach($products as $key => $product)
             <tr>
+				<td>1</td>
                 <td>{!! $product->product_code !!}</td>
                 <td>{!! $product->product_name !!}</td>
                 <td>

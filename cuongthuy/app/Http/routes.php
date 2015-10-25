@@ -26,4 +26,10 @@ Route::any('contact', 'Frontend\ContactController@getContact');
 Route::get('about',function(){
     return view('Frontend/about');
 });
+Route::get('shopping_guide',function(){
+    return view('Frontend/shopping_guide');
+});
+Route::get('rule_change_pay',function(){
+    return view('Frontend/rule_change_pay');
+});
 Route::any('updateRating', 'Frontend\RatingController@updateRating');

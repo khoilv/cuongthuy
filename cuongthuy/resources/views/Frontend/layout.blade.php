@@ -276,8 +276,8 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                         <li>
                             <h3>Khách hàng</h3>
                             <ul>
-                                <li><a href="#">Hướng dẫn mua hàng</a></li>
-                                <li><a href="#">Quy đổi trả sản phẩm</a></li>
+                                <li><a href="/shopping_guide">Hướng dẫn mua hàng</a></li>
+                                <li><a href="/rule_change_pay">Quy đổi trả sản phẩm</a></li>
                             </ul>
                         </li>
                     </ul>

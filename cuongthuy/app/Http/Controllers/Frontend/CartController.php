@@ -15,8 +15,7 @@ class CartController extends Controller {
         $cart = Session::get('cart');
         $products = array();
         if ($cart) {
-            $item = array_keys($cart);
-            $products = DB::table('products')->whereIn('id', $item)->get();
+            $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
         }
         
         return view('Frontend.cart', compact('products', 'cart'));
@@ -71,7 +70,7 @@ class CartController extends Controller {
         if (Request::ajax()) {
             return $total;
         } else {
-            return Redirect::to('checkout/billing');
+            return Redirect::to('cart');
         }
     }
     
@@ -79,8 +78,7 @@ class CartController extends Controller {
         $cart = Session::get('cart');
         $totalPrice = 0;
         if ($cart) {
-            $item = array_keys($cart);
-            $products = DB::table('products')->whereIn('id', $item)->get();
+            $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
             
             foreach ($products as $product) {
                 $totalPrice += $product->product_price*$cart[$product->id];

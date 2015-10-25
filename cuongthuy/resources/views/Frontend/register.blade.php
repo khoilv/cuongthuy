@@ -10,7 +10,7 @@
                         <input type="text" id="username">
                         <p style="color: red" id="error_username"></p>
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td>Địa chỉ</td>
@@ -18,7 +18,7 @@
                         <input type="text" id="address">
                         <p style="color: red" id="error_address"></p>
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td>Số điện thoại</td>
@@ -26,7 +26,7 @@
                         <input type="text" id="phone">
                         <p style="color: red" id="error_phone"></p>
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td>Email(*)</td>
@@ -34,7 +34,7 @@
                         <input type="text" id="email">
                         <p style="color: red" id="error_email"></p>
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td>Mật khẩu(*)</td>
@@ -42,7 +42,7 @@
                         <input type="password" id="password">
                         <p style="color: red" id="error_password"></p>
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td>Xác nhận lại mật khẩu(*)</td>
@@ -50,7 +50,7 @@
                         <input type="password" id="password_confirm">
                         <p style="color: red" id="error_password_confirm"></p>
                     </td>
-                    
+
                 </tr>
 
             </table>
@@ -74,50 +74,50 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function() {
-       $("#tbn_register").click(function() {
-           $("#register #error_email").text('');
-           $("#error_password").text('');
-           $("#error_username").text('');
-           $("#error_password_confirm").text('');
-           $("#error_phone").text('');
-           $("#error_address").text('');
+    $(function () {
+        $("#tbn_register").click(function () {
+            $("#register #error_email").text('');
+            $("#error_password").text('');
+            $("#error_username").text('');
+            $("#error_password_confirm").text('');
+            $("#error_phone").text('');
+            $("#error_address").text('');
             var post = {
-                    username:$("#username").val(),
-                    address:$("#address").val(),
-                    email:$("#register #email").val(),
-                    password :$("#register #password").val(),
-                    password_confirm:$("#password_confirm").val(),
-                    phone:$("#phone").val()
-                };
+                username: $("#username").val(),
+                address: $("#address").val(),
+                email: $("#register #email").val(),
+                password: $("#register #password").val(),
+                password_confirm: $("#password_confirm").val(),
+                phone: $("#phone").val()
+            };
             $.ajax({
-                url : 'register',
-                type : 'post',
+                url: 'register',
+                type: 'post',
                 dataType: 'json',
-                data : post,
-                success : function (result){
-                    if(result['error'] == true){
-                        if(result['error_msg'].email){
+                data: post,
+                success: function (result) {
+                    if (result['error'] == true) {
+                        if (result['error_msg'].email) {
                             $("#register #error_email").text(result['error_msg'].email);
                         }
-                        if(result['error_msg'].password){
+                        if (result['error_msg'].password) {
                             $("#register #error_password").text(result['error_msg'].password);
                         }
-                        if(result['error_msg'].password_confirm){
+                        if (result['error_msg'].password_confirm) {
                             $("#error_password_confirm").text(result['error_msg'].password_confirm);
                         }
-                        if(result['error_msg'].username){
+                        if (result['error_msg'].username) {
                             $("#error_username").text(result['error_msg'].username);
                         }
-                        if(result['error_msg'].phone){
+                        if (result['error_msg'].phone) {
                             $("#error_phone").text(result['error_msg'].phone);
                         }
-                        if(result['error_msg'].address){
+                        if (result['error_msg'].address) {
                             $("#error_address").text(result['error_msg'].address);
                         }
                     } else {
                         var url = window.location.href;
-                        top.location.href= url.replace("#register",'')
+                        top.location.href = url.replace("#register", '')
                     }
                 }
             });

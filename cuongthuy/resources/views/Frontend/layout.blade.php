@@ -115,39 +115,39 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <script>
             $(document).ready(function() {
             var owl = $(".owl-demo"),
-                    status = $(".owlStatus");
-                    owl.owlCarousel({
-                    navigation : true,
-                            afterAction : afterAction
-                    });
-                    function updateResult(pos, value){
-                    status.find(pos).find(".result").text(value);
-                    }
+                status = $(".owlStatus");
+                owl.owlCarousel({
+                navigation : true,
+                        afterAction : afterAction
+                });
+                function updateResult(pos, value){
+                status.find(pos).find(".result").text(value);
+                }
 
             function afterAction(){
-            updateResult(".owlItems", this.owl.owlItems.length);
-                    updateResult(".currentItem", this.owl.currentItem);
-                    updateResult(".prevItem", this.prevItem);
-                    updateResult(".visibleItems", this.owl.visibleItems);
-                    updateResult(".dragDirection", this.owl.dragDirection);
+                updateResult(".owlItems", this.owl.owlItems.length);
+                updateResult(".currentItem", this.owl.currentItem);
+                updateResult(".prevItem", this.prevItem);
+                updateResult(".visibleItems", this.owl.visibleItems);
+                updateResult(".dragDirection", this.owl.dragDirection);
             }
             $(".add_cart").click(function () {
-                    //$('#img_ajax').show();
-                    var my = $(this).closest("li");
-                    console.log(my);
-                    $.ajax({
-                        url : 'addCart',
-                        type : 'post',
-                        dataType: 'json',
-                        data : { product_id : $(".product_id", my).val() },
-                        success : function (result){
-                            $(".button_cart").html("Giỏ hàng ("+result+")");
-                        }
+                //$('#img_ajax').show();
+                var my = $(this).closest("li");
+                console.log(my);
+                $.ajax({
+                    url : 'addCart',
+                    type : 'post',
+                    dataType: 'json',
+                    data : { product_id : $(".product_id", my).val() },
+                    success : function (result){
+                        $(".button_cart").html("Giỏ hàng ("+result+")");
+                    }
 //                        complete: function(){
 //                            $('#img_ajax').hide();
 //                        }
-                    });
                 });
+            });
             });
             </script>
         <!-- InstanceEndEditable -->
@@ -298,7 +298,6 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=7d5b36ce59e63870cd1f00f2488f3c22&data=eyJoYXNoIjoiNDBlMTg4MDljNjYzMWIwN2UyOTFmNTA1N2VhY2I3YjEiLCJzc29faWQiOjExMTcwMDd9&pname=' + product_name;
         var s = document.getElementsByTagName('script'); s[0].parentNode.insertBefore(ga, s[0]); })();
         </script>
-        Start of Tawk.to Script
 <!--        <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){

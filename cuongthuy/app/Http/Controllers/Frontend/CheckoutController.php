@@ -10,6 +10,7 @@ use Input;
 use Session;
 use Redirect;
 use DB;
+use DateTime;
 
 class CheckoutController extends Controller {
     
@@ -21,18 +22,6 @@ class CheckoutController extends Controller {
     
     public function getIndex () {
         return $this->getBilling();
-    }
-    
-    public function getBuyNow () {
-        $product_id = Input::get('product_id');
-        var_dump($product_id);
-//        if (isset($cart[$data['product_id']])) {
-//            $cart[$data['product_id']] += 1;
-//        } else {
-//            $cart[$data['product_id']] = 1;
-//        }
-//        $total = array_sum($cart);
-//        Session::put('cart', $cart);
     }
     
     public function getBilling () {
@@ -47,7 +36,8 @@ class CheckoutController extends Controller {
                 'name'          => $customerInfo[0]->customer_name,
                 'telephone'     => $customerInfo[0]->customer_phone,
                 'email'         => $customerInfo[0]->customer_email,
-                'city'          => $customerInfo[0]->customer_city
+                'city'          => $customerInfo[0]->customer_city,
+                'customer_id'   => $customerInfo[0]->id
             );
         }
         return view('Frontend.billing', compact('billing'));
@@ -57,13 +47,11 @@ class CheckoutController extends Controller {
         if (Input::has('submit')) {
             $data = Input::except('_token');
             try {
-                // Validate
                 $this->billingForm->validate($data);
             } catch (FormValidationException $e) {
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
             
-            $data['billing'] = true;
             Session::put('billing', $data);
             return Redirect::to('checkout/shipping');
         } elseif (Input::has('reset')){
@@ -74,7 +62,7 @@ class CheckoutController extends Controller {
     
     public function getShipping () {
         $billing = Session::get('billing');
-        if ($billing['billing']) {
+        if (isset($billing['submit']) && $billing['submit']) {
             return view('Frontend.shipping'); 
         } else {
             return Redirect::to('checkout/billing');
@@ -82,10 +70,67 @@ class CheckoutController extends Controller {
     }
     
     public function postShipping () {
+        if (Input::has('submit')) {
+            $data = Input::except('_token');
+            Session::put('shipping', $data);
+        }
         return Redirect::to('checkout/confirm');
     }
     
     public function getConfirm () {
-        return view('Frontend.confirm');
+        $shipping = Session::get('shipping');
+        if (isset($shipping['submit']) && $shipping['submit']) {
+            $billing = Session::get('billing');
+            $cart = Session::get('cart');
+            $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
+            return view('Frontend.confirm', compact('billing', 'products', 'cart'));
+        } else {
+            return Redirect::to('checkout/shipping');
+        }
     }
+    
+    public function postConfirm () {
+        $billing = Session::get('billing');
+        $shipping = Session::get('shipping');
+        $cart = Session::get('cart');
+        
+        var_dump($billing);
+        var_dump($shipping);
+        var_dump($cart);
+        
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        //update order
+        $lastId = DB::table('orders')->insertGetId([
+            'customer_id'           => '',
+            'order_code'            => '',
+            'order_date'            => date("Y-m-d H:i:s"),
+            'order_email'           => $billing['email'],
+            'order_phone'           => $billing['telephone'],
+            'order_customer_name'   => $billing['name'],
+            'order_status'          => 1,
+            'order_ship_city'       => $billing['city'],
+            'order_ship_address'    => $billing['email'],
+            'order_note'            => '',
+            'payment_method'        => $shipping['shipMethod']
+            ]);
+        
+        //Update order detail
+        foreach ($cart as $key => $value) {
+            $arrOrder[] = [
+                'order_id'      => $lastId,
+                'product_id'    => $key,
+                'unitPrice'     => 120,
+                'quantity'      => $value
+            ];
+        }
+        DB::table('orderdetail')->insert($arrOrder);
+        
+        //Delete session
+        Session::forget('billing');
+        Session::forget('shipping');
+        Session::forget('cart');
+        
+        echo "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
+    }
+    
 }

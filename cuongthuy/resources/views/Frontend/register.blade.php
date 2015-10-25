@@ -5,7 +5,7 @@
             <h2 class="p_title">Đăng ký</h2>
             <table class="p_table clear">
                 <tr>
-                    <td>Họ tên</td>
+                    <td>Họ tên(*)</td>
                     <td>
                         <input type="text" id="username">
                         <p style="color: red" id="error_username"></p>
@@ -29,7 +29,7 @@
                     
                 </tr>
                 <tr>
-                    <td>Email</td>
+                    <td>Email(*)</td>
                     <td>
                         <input type="text" id="email">
                         <p style="color: red" id="error_email"></p>
@@ -37,7 +37,7 @@
                     
                 </tr>
                 <tr>
-                    <td>Mật khẩu</td>
+                    <td>Mật khẩu(*)</td>
                     <td>
                         <input type="password" id="password">
                         <p style="color: red" id="error_password"></p>
@@ -45,7 +45,7 @@
                     
                 </tr>
                 <tr>
-                    <td>Xác nhận lại mật khẩu</td>
+                    <td>Xác nhận lại mật khẩu(*)</td>
                     <td>
                         <input type="password" id="password_confirm">
                         <p style="color: red" id="error_password_confirm"></p>
@@ -71,7 +71,6 @@
             </ul>
         </div>
         <div class="clear"></div>
-        <a class="p_bottom" href="#">Bạn quên mật khẩu ?</a>
     </div>
 </div>
 <script type="text/javascript">

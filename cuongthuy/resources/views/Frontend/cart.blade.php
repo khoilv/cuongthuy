@@ -26,7 +26,7 @@
         <tbody>
             @foreach($products as $key => $product)
             <tr>
-				<td>1</td>
+				<td>{!! $key+1 !!}</td>
                 <td>{!! $product->product_code !!}</td>
                 <td>{!! $product->product_name !!}</td>
                 <td>
@@ -89,7 +89,7 @@
             </li>
         </ul>
     </div>
-</div> 
+</div>
 <!--end slide-->
 <!-- InstanceEndEditable -->
 @endsection

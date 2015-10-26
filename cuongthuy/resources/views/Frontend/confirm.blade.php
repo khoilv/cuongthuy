@@ -12,7 +12,7 @@
         <p class="bs1_bold">Thông tin liên hệ</p>
          <table>
             <tr>
-                <td>Họ và tên :</td>
+                <td style="width:128px;">Họ và tên :</td>
                 <td>{!!$billing['name']!!}</td>
             </tr>
             <tr>
@@ -28,7 +28,7 @@
         <p class="bs1_bold">Địa chỉ nhận hàng</p>
         <table>
             <tr>
-                <td>Số nhà :</td>
+                <td style="width:128px;">Số nhà :</td>
                 <td>{!!$billing['houseNumber']!!}</td>
             </tr>
             <tr>

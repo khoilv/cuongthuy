@@ -131,21 +131,21 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                 updateResult(".visibleItems", this.owl.visibleItems);
                 updateResult(".dragDirection", this.owl.dragDirection);
             }
-            $(".add_cart").click(function () {
-                //$('#img_ajax').show();
+            $(".add_cart").click(function () {                
                 var my = $(this).closest("li");
-                console.log(my);
                 $.ajax({
                     url : 'addCart',
                     type : 'post',
                     dataType: 'json',
                     data : { product_id : $(".product_id", my).val() },
+                    beforeSend: function() {
+                        $('#img_ajax').addClass('loading');
+                    },
                     success : function (result){
                         $(".button_cart").html("Giỏ hàng ("+result+")");
+                        $('#img_ajax').removeClass('loading');
                     }
-//                        complete: function(){
-//                            $('#img_ajax').hide();
-//                        }
+
                 });
             });
             });
@@ -259,7 +259,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <!-- menu -->
         {!! MenuController::getMenu(); !!}
         <div class="clear"></div>
-        <div id="img_ajax" style='display: none'> <img src="{!!Asset('public/images/loading.gif')!!}" class="ajax-loader"></div>
+        <div id="img_ajax"></div>
         <!-- connent -->
         @yield('content')
         <div class="content_bottom">

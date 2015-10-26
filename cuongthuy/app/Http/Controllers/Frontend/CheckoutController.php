@@ -10,7 +10,6 @@ use Input;
 use Session;
 use Redirect;
 use DB;
-use DateTime;
 
 class CheckoutController extends Controller {
     
@@ -62,8 +61,9 @@ class CheckoutController extends Controller {
     
     public function getShipping () {
         $billing = Session::get('billing');
+        $shipping = Session::get('shipping');
         if (isset($billing['submit']) && $billing['submit']) {
-            return view('Frontend.shipping'); 
+            return view('Frontend.shipping', compact('shipping')); 
         } else {
             return Redirect::to('checkout/billing');
         }
@@ -94,13 +94,9 @@ class CheckoutController extends Controller {
         $shipping = Session::get('shipping');
         $cart = Session::get('cart');
         
-        var_dump($billing);
-        var_dump($shipping);
-        var_dump($cart);
-        
+        //Insert order
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        //update order
-        $lastId = DB::table('orders')->insertGetId([
+        $lastOrderId = DB::table('orders')->insertGetId([
             'customer_id'           => '',
             'order_code'            => '',
             'order_date'            => date("Y-m-d H:i:s"),
@@ -114,10 +110,10 @@ class CheckoutController extends Controller {
             'payment_method'        => $shipping['shipMethod']
             ]);
         
-        //Update order detail
+        //Insert order detail
         foreach ($cart as $key => $value) {
             $arrOrder[] = [
-                'order_id'      => $lastId,
+                'order_id'      => $lastOrderId,
                 'product_id'    => $key,
                 'unitPrice'     => 120,
                 'quantity'      => $value
@@ -130,7 +126,8 @@ class CheckoutController extends Controller {
         Session::forget('shipping');
         Session::forget('cart');
         
-        echo "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
+        echo "Đặt hàng thành công. "
+        . "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
     }
     
 }

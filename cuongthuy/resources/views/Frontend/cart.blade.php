@@ -26,7 +26,7 @@
             <tbody>
             @foreach($products as $key => $product)
                 <tr>
-                    <td>{!! $key+1 !!}</td>
+                    <td class="serial">{!! $key+1 !!}</td>
                     <td>{!! $product->product_code !!}</td>
                     <td>{!! $product->product_name !!}</td>
                     <td>
@@ -53,7 +53,7 @@
     <div class="wrap">
         Bạn không có sản phẩm nào trong giỏ hàng
     </div>
-    @endif
+@endif
             <!--end cart page-->
     <div class="clear"></div>
     <div class="slide">
@@ -105,14 +105,18 @@
                     type : 'post',
                     dataType: 'json',
                     data : post,
+                    beforeSend: function() {
+                        $('#img_ajax').addClass('loading');
+                    },
                     success : function (result){
                         $('.line_price', my).html(result['linePrice']);
                         $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
                         if (result['totalCart']) {
-                            $(".button_cart").html("Giỏ hàng "+result['totalCart']);
+                            $(".button_cart").html("Giỏ hàng ("+result['totalCart']+")");
                         } else {
                             $(".button_cart").html("Giỏ hàng");
                         }
+                        $('#img_ajax').removeClass('loading');
                     }
                 });
             });
@@ -129,14 +133,21 @@
                     type : 'post',
                     dataType: 'json',
                     data : post,
+                    beforeSend: function() {
+                        $('#img_ajax').addClass('loading');
+                    },
                     success : function (result){
                         $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
-                        my.hide();
+                        my.remove();
                         if (result['totalCart']) {
-                            $(".button_cart").html("Giỏ hàng "+result['totalCart']);
+                            $(".button_cart").html("Giỏ hàng ("+result['totalCart']+")");
                         } else {
                             $(".button_cart").html("Giỏ hàng");
                         }
+                        $.each($('.serial'),function(i){
+                            $(this).text(i+1);
+                        });
+                        $('#img_ajax').removeClass('loading');
                     }
                 });
             });

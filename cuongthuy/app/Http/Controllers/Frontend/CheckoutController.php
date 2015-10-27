@@ -40,7 +40,10 @@ class CheckoutController extends Controller {
                 'customer_id'   => $customerInfo[0]->id
             );
         }
-        return view('Frontend.checkout.billing', compact('billing'));
+        $data = file_get_contents('public/data/city.dat');
+        $arrCity = explode(",", $data);
+        
+        return view('Frontend.checkout.billing', compact('billing', 'arrCity'));
     }
     
     public function postBilling () {
@@ -99,7 +102,11 @@ class CheckoutController extends Controller {
             Session::forget('billing');
             Session::forget('shipping');
             Session::forget('cart');
-
+            
+//            Mail::send('Frontend.email.order', ['pass' => $user['customer_password'],'user_name' => $user['customer_name']], function($message) use ($user) {
+//            $message->to($user['customer_email'],$user['customer_name'])->subject('Cường thuỷ - Lấy lại mật khẩu!');
+//        });
+        
             echo "Đặt hàng thành công. "
             . "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
         }

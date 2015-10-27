@@ -79,11 +79,20 @@
                 <td>Tỉnh thành :</td>
                 <td>
                     <select name="city">
-                        <option @if (isset( $billing['city']) && $billing['city'] == "Hà Nội") selected @endif value="Hà Nội">Hà Nội</option>
-                        <option @if (isset ($billing['city']) && $billing['city'] == "Tp. Hồ Chí Minh") selected @endif value="Tp. Hồ Chí Minh">Tp. Hồ Chí Minh</option>
-                        <option @if (isset ($billing['city']) && $billing['city'] == "Hải Phòng") selected @endif value="Hải Phòng">Hải Phòng</option>
-                        <option @if (isset ($billing['city']) && $billing['city'] == "Đà Nẵng") selected @endif value="Đà Nẵng">Đà Nẵng</option>
+                        @foreach ($arrCity as $value)
+                        <option @if (isset( $billing['city']) && $billing['city'] == $value) selected @endif value="{!!$value!!}">{!!$value!!}</option>
+                        @endforeach
                     </select>
+                </td>
+            </tr>
+        </table>
+        <div class="clear"></div>
+        <p class="bs1_bold">Ghi chú</p>
+        <table>
+            <tr>
+                <td>Ghi chú về đơn hàng</td>
+                <td>
+                    <textarea name="note" rows="4" cols="57" ></textarea>
                 </td>
             </tr>
         </table>

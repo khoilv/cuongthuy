@@ -36,7 +36,7 @@ class CheckoutModel {
             'order_status'          => 1,
             'order_ship_city'       => $this->billing['city'],
             'order_ship_address'    => $shipAddres,
-            'order_note'            => '',
+            'order_note'            => $this->billing['note'],
             'payment_method'        => $this->shipping['shipMethod']
             ]);
         

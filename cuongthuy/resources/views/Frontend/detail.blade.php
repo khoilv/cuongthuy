@@ -1,5 +1,6 @@
 @extends('Frontend.layout')
 @section('content')
+<?php use App\Http\Controllers\Frontend\FrameRelativeProductsController; ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -78,35 +79,7 @@
         {!!$product->product_description!!}
     </div><!-- edn detail content 2-->
 </div><!-- end content-->
-<div class="slide">
-    <div class="title5">
-        <h2 class="wrap">Sản phẩm khác</h2>
-    </div>
-    <div class="wrap">
-        <div class="slide-chantrang">
-            <ul id="flexiselDemo3">
-                <li>
-                    <a href="#"><img src="public/images/img10.jpg" /><p>Cafe Việt</p></a>
-                </li>
-                <li>
-                    <a href="#"><img src="public/images/img9.jpg" /><p>Thực phẩm chức năng</p></a>
-                </li>
-                <li>
-                    <a href="#"><img src="public/images/img10.jpg" /><p>Cafe Việt</p></a>
-                </li>
-                <li>
-                    <a href="#"><img src="public/images/img11.jpg" /><p>Trà sữa</p></a>
-                </li>
-                <li>
-                    <a href="#"><img src="public/images/img9.jpg" /><p>Bỉm người lớn</p></a>
-                </li>
-                <li>
-                    <a href="#"><img src="public/images/img11.jpg" /><p>Phụ kiện - thời trang</p></a>
-                </li>
-            </ul> 
-        </div>
-    </div>
-</div><!-- end slide-->
+{{--{!!FrameRelativeProductsController::getProducts($product->category);!!} --}}
 <div class="clear"></div>
 <script type="text/javascript" src="{!!Asset('public/js/jquery.flexisel.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.mini.js')!!}"></script>

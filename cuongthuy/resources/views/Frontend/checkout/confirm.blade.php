@@ -25,7 +25,7 @@
             </tr>
         </table>
         <div class="clear"></div>
-        <p class="bs1_bold">Địa chỉ nhận hàng</p>
+        <p class="bs1_bold">Địa chỉ nhận hàng :</p>
         <table>
             <tr>
                 <td style="width:128px;">Số nhà, Đường / phố :</td>
@@ -44,6 +44,16 @@
                 <td>{!!$billing['city']!!}</td>
             </tr>
         </table>
+        @if ($billing['city'])
+        <div class="clear"></div>
+        <p class="bs1_bold">Ghi chú</p>
+        <table>
+            <tr>
+                <td style="width:128px;">Ghi chú về đơn hàng :</td>
+                <td>{!!$billing['note']!!}</td>
+            </tr>
+        </table>
+        @endif
     </div><!-- end content left-->
     <div class="f_right">
         <p class="bs1_bold">Thông tin đơn hàng</p>
@@ -62,8 +72,8 @@
                 @foreach ($products as $key => $product)
                     <tr>
                         <td>{!!$key+1!!}</td>
-                        <td>{!!$product->product_code!!}</td>
-                        <td>{!!$product->product_name!!}</td>
+                        <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!!$product->product_code!!}</a></td>
+                        <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!!$product->product_name!!}</a></td>
                         <td>{!!$cart[$product->id]!!}</td>
                         <td>{!!$product->product_price * $cart[$product->id]!!}</td>
                     </tr>

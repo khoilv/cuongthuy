@@ -27,13 +27,13 @@
             @foreach($products as $key => $product)
                 <tr>
                     <td class="serial">{!! $key+1 !!}</td>
-                    <td>{!! $product->product_code !!}</td>
-                    <td>{!! $product->product_name !!}</td>
+                    <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_code !!}</a></td>
+                    <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_name !!}</a></td>
                     <td>
                         <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' value="{!! $cart[$product->id] !!}"/>
                     </td>
                     <td>
-                        <img src="public/images/upload/products/{!! $product->product_image !!}">
+                        <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
                     </td>
                     <td class="product_price">{!! $product->product_price!!}</td>
                     <td class="line_price">{!! $product->product_price * $cart[$product->id] !!}</td>

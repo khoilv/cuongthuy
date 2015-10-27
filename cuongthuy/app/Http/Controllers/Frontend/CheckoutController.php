@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\CartController;
 use App\Forms\BillingForm;
 use App\Forms\FormValidationException;
+use App\Models\Frontend\CheckoutModel;
 use Input;
 use Session;
 use Redirect;
@@ -90,46 +91,18 @@ class CheckoutController extends Controller {
     }
     
     public function postConfirm () {
-        $billing = Session::get('billing');
-        $shipping = Session::get('shipping');
-        $cart = Session::get('cart');
-        $shipAddres = str_replace(";",",",$billing['street']).";".str_replace(";",",",$billing['ward'])
-                .";".str_replace(";",",",$billing['district']);
-        
-        //Insert order table
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $lastOrderId = DB::table('orders')->insertGetId([
-            'customer_id'           => '',
-            'order_code'            => '',
-            'order_date'            => date("Y-m-d H:i:s"),
-            'order_email'           => $billing['email'],
-            'order_phone'           => $billing['telephone'],
-            'order_customer_name'   => $billing['name'],
-            'order_status'          => 1,
-            'order_ship_city'       => $billing['city'],
-            'order_ship_address'    => $shipAddres,
-            'order_note'            => '',
-            'payment_method'        => $shipping['shipMethod']
-            ]);
-        
-        //Insert order detail table
-        foreach ($cart as $key => $value) {
-            $arrOrder[] = [
-                'order_id'      => $lastOrderId,
-                'product_id'    => $key,
-                'unitPrice'     => 120,
-                'quantity'      => $value
-            ];
-        }
-        DB::table('orderdetail')->insert($arrOrder);
+        $checkOutObject = new CheckoutModel;
+        $result = $checkOutObject->InsertOrder();
         
         //Clear session
-        Session::forget('billing');
-        Session::forget('shipping');
-        Session::forget('cart');
-        
-        echo "Đặt hàng thành công. "
-        . "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
+        if ($result) {
+            Session::forget('billing');
+            Session::forget('shipping');
+            Session::forget('cart');
+
+            echo "Đặt hàng thành công. "
+            . "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
+        }
     }
     
 }

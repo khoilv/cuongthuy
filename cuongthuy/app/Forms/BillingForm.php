@@ -12,7 +12,7 @@ class BillingForm extends BaseForm {
             'name'          => ['required', 'min:1','max:25'],
             'telephone'     => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/','min:9','max:11'],
             'email'         => ['required', 'email'],
-            'houseNumber'   => ['required'],
+            'ward'          => ['required', 'min:1','max:25'],
             'street'        => ['required', 'min:1','max:25'],
             'district'      => ['required', 'min:1','max:25']
         ];
@@ -22,12 +22,11 @@ class BillingForm extends BaseForm {
     protected function setAttributeNames(){
         return array(
             'name'          => "Họ tên",
-            'address'       => 'Địa chỉ',
             'telephone'     => 'Số điện thoại',
-            'street'        => 'Đường phố',
+            'street'        => 'Số nhà, Đường/phố',
             'email'         => 'Email',
-            'houseNumber'   => 'Số nhà',
-            'district'      => 'Quận huyện'
+            'ward'          => 'Phường/xã',
+            'district'      => 'Quận/huyện'
         );
     }
 

@@ -39,7 +39,7 @@ class CheckoutController extends Controller {
                 'customer_id'   => $customerInfo[0]->id
             );
         }
-        return view('Frontend.billing', compact('billing'));
+        return view('Frontend.checkout.billing', compact('billing'));
     }
     
     public function postBilling () {
@@ -55,15 +55,15 @@ class CheckoutController extends Controller {
             return Redirect::to('checkout/shipping');
         } elseif (Input::has('reset')){
             Session::forget('billing');
-            return view('Frontend.billing');
+            return view('Frontend.checkout.billing');
         }
     }
     
     public function getShipping () {
         $billing = Session::get('billing');
         $shipping = Session::get('shipping');
-        if (isset($billing['submit']) && $billing['submit']) {
-            return view('Frontend.shipping', compact('shipping')); 
+        if (isset($billing['submit']) && $billing['submit'] && !empty(Session::get('cart'))) {
+            return view('Frontend.checkout.shipping', compact('shipping')); 
         } else {
             return Redirect::to('checkout/billing');
         }
@@ -79,11 +79,11 @@ class CheckoutController extends Controller {
     
     public function getConfirm () {
         $shipping = Session::get('shipping');
-        if (isset($shipping['submit']) && $shipping['submit']) {
+        if (isset($shipping['submit']) && $shipping['submit'] && !empty(Session::get('cart'))) {
             $billing = Session::get('billing');
             $cart = Session::get('cart');
             $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
-            return view('Frontend.confirm', compact('billing', 'products', 'cart'));
+            return view('Frontend.checkout.confirm', compact('billing', 'products', 'cart'));
         } else {
             return Redirect::to('checkout/shipping');
         }
@@ -93,8 +93,10 @@ class CheckoutController extends Controller {
         $billing = Session::get('billing');
         $shipping = Session::get('shipping');
         $cart = Session::get('cart');
+        $shipAddres = str_replace(";",",",$billing['street']).";".str_replace(";",",",$billing['ward'])
+                .";".str_replace(";",",",$billing['district']);
         
-        //Insert order
+        //Insert order table
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $lastOrderId = DB::table('orders')->insertGetId([
             'customer_id'           => '',
@@ -105,12 +107,12 @@ class CheckoutController extends Controller {
             'order_customer_name'   => $billing['name'],
             'order_status'          => 1,
             'order_ship_city'       => $billing['city'],
-            'order_ship_address'    => $billing['email'],
+            'order_ship_address'    => $shipAddres,
             'order_note'            => '',
             'payment_method'        => $shipping['shipMethod']
             ]);
         
-        //Insert order detail
+        //Insert order detail table
         foreach ($cart as $key => $value) {
             $arrOrder[] = [
                 'order_id'      => $lastOrderId,
@@ -121,7 +123,7 @@ class CheckoutController extends Controller {
         }
         DB::table('orderdetail')->insert($arrOrder);
         
-        //Delete session
+        //Clear session
         Session::forget('billing');
         Session::forget('shipping');
         Session::forget('cart');

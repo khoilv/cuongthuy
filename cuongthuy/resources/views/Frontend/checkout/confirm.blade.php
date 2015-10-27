@@ -28,12 +28,12 @@
         <p class="bs1_bold">Địa chỉ nhận hàng</p>
         <table>
             <tr>
-                <td style="width:128px;">Số nhà :</td>
-                <td>{!!$billing['houseNumber']!!}</td>
+                <td style="width:128px;">Số nhà, Đường / phố :</td>
+                <td>{!!$billing['street']!!}</td>
             </tr>
             <tr>
-                <td>Đường / Phố :</td>
-                <td>{!!$billing['street']!!}</td>
+                <td>Phường / Xã :</td>
+                <td>{!!$billing['ward']!!}</td>
             </tr>
             <tr>
                 <td>Quận / Huyện :</td>

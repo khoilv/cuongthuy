@@ -55,17 +55,17 @@
         <p class="bs1_bold">Địa chỉ nhận hàng</p>
         <table>
             <tr>
-                <td>Số nhà :</td>
-                <td>
-                    {!! Form::text('houseNumber',(isset($billing['houseNumber']) && $billing['houseNumber']) ? $billing['houseNumber'] : '' ) !!}
-                    @if ($errors->has('houseNumber')) <p style="color: red">{!! $errors->first('houseNumber') !!}</p> @endif
-                </td>
-            </tr>
-            <tr>
-                <td>Đường / Phố :</td>
+                <td>Số nhà, Đường / Phố :</td>
                 <td>
                     {!! Form::text('street',(isset($billing['street']) && $billing['street']) ? $billing['street'] : '' ) !!}
                     @if ($errors->has('street')) <p style="color: red">{!! $errors->first('street') !!}</p> @endif
+                </td>
+            </tr>
+            <tr>
+                <td>Phường / Xã</td>
+                <td>
+                    {!! Form::text('ward',(isset($billing['ward']) && $billing['ward']) ? $billing['ward'] : '' ) !!}
+                    @if ($errors->has('ward')) <p style="color: red">{!! $errors->first('ward') !!}</p> @endif
                 </td>
             </tr>
             <tr>

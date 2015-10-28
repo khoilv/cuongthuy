@@ -11,6 +11,7 @@ use Input;
 use Session;
 use Redirect;
 use DB;
+use Mail;
 
 class CheckoutController extends Controller {
     
@@ -99,14 +100,21 @@ class CheckoutController extends Controller {
         
         //Clear session
         if ($result) {
+            Mail::send('Frontend.email.order',
+//                'pass'      => $user['customer_password'], 
+//                'user_name' => $user['customer_name']],
+                compact('result'),
+                
+                function($message) {
+                    $message->from('noreply@cuongthuy.vn', $name = 'cuongthuy.vn');
+                    $message->to(Session::get('billing')['email'])->subject('Tiếp nhận đơn hàng');
+                }
+            );
+            
             Session::forget('billing');
             Session::forget('shipping');
             Session::forget('cart');
             
-//            Mail::send('Frontend.email.order', ['pass' => $user['customer_password'],'user_name' => $user['customer_name']], function($message) use ($user) {
-//            $message->to($user['customer_email'],$user['customer_name'])->subject('Cường thuỷ - Lấy lại mật khẩu!');
-//        });
-        
             echo "Đặt hàng thành công. "
             . "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
         }

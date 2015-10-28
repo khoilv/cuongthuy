@@ -43,7 +43,7 @@ class CheckoutModel {
         //Insert order detail table
         $this->InsertOrderDetail($lastOrderId);
         
-        return true;
+        return $lastOrderId;
     }
     
     public function InsertOrderDetail ($lastOrderId) {

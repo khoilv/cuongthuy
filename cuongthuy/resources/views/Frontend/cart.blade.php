@@ -37,7 +37,7 @@
                     </td>
                     <td class="product_price">{!! $product->product_price!!}</td>
                     <td class="line_price">{!! $product->product_price * $cart[$product->id] !!}</td>
-                    <td><button class="button delete_product"></button></td>
+                    <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
                     <input type="hidden" class='product_id'  value="{!! $product->id!!}">
                 </tr>
             @endforeach

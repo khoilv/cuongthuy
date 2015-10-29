@@ -1,5 +1,6 @@
 <?php
 namespace App\Models\Frontend;
+use App\Models\AutoGenerate;
 use DB;
 use Session;
 
@@ -28,7 +29,7 @@ class CheckoutModel {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $lastOrderId = DB::table('orders')->insertGetId([
             'customer_id'           => $this->customerId ? $this->customerId : '',
-            'order_code'            => '',
+            'order_code'            => AutoGenerate::generateUniqueOrdersCode(),
             'order_date'            => date("Y-m-d H:i:s"),
             'order_email'           => $this->billing['email'],
             'order_phone'           => $this->billing['telephone'],
@@ -56,5 +57,19 @@ class CheckoutModel {
             ];
         }
         DB::table('orderdetail')->insert($arrOrder);
+        
+        $this->sendMail();
     }
+    
+    public function sendMail () {
+        Mail::send('Frontend.email.order1', [
+                'billing' => $this->billing,
+            ],
+            function($message) {
+                $message->from('noreply@cuongthuy.vn', $name = 'cuongthuy.vn');
+                $message->to($this->billing['email'])->subject('Tiếp nhận đơn hàng');
+            }
+        );
+    }
+    
 }

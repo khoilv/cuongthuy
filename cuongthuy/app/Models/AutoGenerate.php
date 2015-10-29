@@ -6,6 +6,7 @@
  */
 namespace App\Models;
 use App\Models\Frontend\CustomersModel;
+use App\Models\Frontend\OrdersModel;
 class AutoGenerate
 {
 
@@ -14,8 +15,7 @@ class AutoGenerate
      * Probability in duplicate number 0.1 ~ 0.5%
      * @return string
      */
-    public static function generateUniqueCustomersCode()
-    {
+    public static function generateUniqueCustomersCode() {
         $customersModel = new CustomersModel();
         $result = 1;
         $customerCode = '';
@@ -27,6 +27,20 @@ class AutoGenerate
             }
         }
         return $customerCode;
+    }
+    
+    public static function generateUniqueOrdersCode() {
+        $ordersModel = new OrdersModel;
+        $result = 1;
+        $orderCode = '';
+        while (!empty($result)) {
+            $ranNumber = self::generateUniqueDigital();
+            if (is_numeric($ranNumber) && isset($ranNumber)) {
+                $orderCode = 'OD' . $ranNumber;
+                $result = $ordersModel->checkOrderCode($orderCode);
+            }
+        }
+        return $orderCode;
     }
     
     public static function generateUniqueDigital()

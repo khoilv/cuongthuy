@@ -11,9 +11,8 @@ use DB;
 class FrameRelativeProductsController extends Controller {
     
     public static function getProducts ($category) {
-        var_dump($category);
-        //$user = DB::table('products')->where('name', 'John')->first();
-        return view('Frontend.RelativeProducts');
+        $relativeProducts = DB::table('products')->where('product_category', $category)->take(10)->get();
+        return view('Frontend.relative_products', compact('relativeProducts'));
     }
     
 }

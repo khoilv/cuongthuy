@@ -79,7 +79,7 @@
         {!!$product->product_description!!}
     </div><!-- edn detail content 2-->
 </div><!-- end content-->
-{{--{!!FrameRelativeProductsController::getProducts($product->category);!!} --}}
+{!!FrameRelativeProductsController::getProducts($product->product_category)!!}
 <div class="clear"></div>
 <script type="text/javascript" src="{!!Asset('public/js/jquery.flexisel.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.mini.js')!!}"></script>

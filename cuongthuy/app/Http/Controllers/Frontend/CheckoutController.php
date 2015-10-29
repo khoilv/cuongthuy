@@ -38,7 +38,6 @@ class CheckoutController extends Controller {
                 'telephone'     => $customerInfo[0]->customer_phone,
                 'email'         => $customerInfo[0]->customer_email,
                 'city'          => $customerInfo[0]->customer_city,
-                'customer_id'   => $customerInfo[0]->id
             );
         }
         $data = file_get_contents('public/data/city.dat');
@@ -98,19 +97,8 @@ class CheckoutController extends Controller {
         $checkOutObject = new CheckoutModel;
         $result = $checkOutObject->InsertOrder();
         
-        //Clear session
         if ($result) {
-            Mail::send('Frontend.email.order',
-//                'pass'      => $user['customer_password'], 
-//                'user_name' => $user['customer_name']],
-                compact('result'),
-                
-                function($message) {
-                    $message->from('noreply@cuongthuy.vn', $name = 'cuongthuy.vn');
-                    $message->to(Session::get('billing')['email'])->subject('Tiếp nhận đơn hàng');
-                }
-            );
-            
+            //Clear session
             Session::forget('billing');
             Session::forget('shipping');
             Session::forget('cart');

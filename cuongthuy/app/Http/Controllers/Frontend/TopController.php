@@ -8,7 +8,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\CategoryModel;
 use App\Models\Frontend\ProductModel;
-
+use App\Models\Frontend\CustomersModel;
+use Session;
+use Mail;
 class TopController extends Controller {
 
     private static $PRODUCT_MAX = 10;
@@ -16,6 +18,16 @@ class TopController extends Controller {
     public static function getIndex(){
         $categoryCls = new CategoryModel();
         $productCls = new ProductModel();
+        $customersModel = new CustomersModel();
+        // check if user login later register
+        if (Session::has('register_flag')) {
+             $data = $customersModel->getUserByEmail(Session::get('customer_email'));
+             Mail::send('Frontend.email.register',$data, function($message) use ($data)
+             {
+                $message->to($data['customer_email'],$data['customer_name'])->subject('Cường thuỷ - Xác nhận đăng kí!');
+             });
+             Session::forget('register_flag');
+        }
         $arrParentList = $categoryCls->getParentList();
         $arrChirdList = $categoryCls->getChildList();
         foreach ($arrParentList as $key => $val) {

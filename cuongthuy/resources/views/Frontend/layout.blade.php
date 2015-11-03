@@ -21,6 +21,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <link href="{!!Asset('public/css/nivo-slider.css')!!}" rel="stylesheet" type="text/css">
         <!-- navigation mobile-->
         <link type="text/css" rel="stylesheet" href="{!!Asset('public/css/jquery.mmenu.all.css')!!}" />
+        <link rel="canonical" href="http://cuongthuy.pe.hu/" />
         @yield('stylesheets')
         @section('javascript')
         <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
@@ -149,7 +150,19 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                 });
             });
             });
-            </script>
+        </script>
+        <!--like facebook -->
+        <script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1632899020301830";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+         <!--like google -->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <!-- InstanceEndEditable -->
         @yield('javascript')
     </head>
@@ -157,6 +170,10 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <header>
             <div class="content_top">
                 <div class="wrap">
+                    <div class="f_left" style="margin-top:7px;">
+                        <div class="fb-like" data-href="http://cuongthuy.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                        <div class="g-plusone" data-size="medium" ></div>
+                    </div>
                     <ul class="f_right">
                         <?php if (Session::has('customer_name')) { ?>
                             <li><a><?php echo 'Xin chào ' . Session::get('customer_name'); ?></a></li>

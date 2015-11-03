@@ -33,3 +33,11 @@ Route::get('rule_change_pay',function(){
     return view('Frontend/rule_change_pay');
 });
 Route::any('updateRating', 'Frontend\RatingController@updateRating');
+Route::get('test',function(){
+    return view('test');
+});
+Route::group(array('prefix'=>'test'),function(){
+//    Route::get('index.php',function(){
+//             echo 'jjk';
+//    });
+});

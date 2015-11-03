@@ -53,10 +53,7 @@ class RegisterController extends Controller {
                     if ($this->customersCls->insert($insertArray)) {
                         Session::put('customer_email',$data['email']);
                         Session::put('customer_name',$data['username']);
-//                        Mail::send('Frontend.email.register',['username'=> $data['username'],'email'=> $data['email']], function($message) use ($data)
-//                        {
-//                            $message->to($data['email'],$data['username'])->subject('Cường thuỷ - Xác nhận đăng kí!');
-//                        });
+                        Session::put('register_flag',true);
                     }
                 }
             }

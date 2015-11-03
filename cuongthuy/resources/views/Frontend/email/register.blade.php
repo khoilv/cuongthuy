@@ -27,7 +27,7 @@
     <body>
     	<div class="wrapper">
         	<div class="content1">
-            	<img src="images/logo.png" class="f_left">
+            	<img src="{!!Asset('public/images/logo.png')!!}" class="f_left">
                 <ul>
                 	<li><a href="#">Liên hệ</a> </li> 
                 	<li><a href="#">cuongthuy.vn</a> | </li>
@@ -38,10 +38,10 @@
             <p class="content2">
 				Kính chào Quý khách ! <br><br>
                 Quý khách đã đăng ký tài khoản trên cuongthuy.vn<br>
-                &nbsp;&nbsp; - Họ và tên : {!!$user_name!!}<br>
-                &nbsp;&nbsp; - Điện thoại: {!!$phone!!}<br>
-                &nbsp;&nbsp; - Email: {!!$email!!}<br>
-                &nbsp;&nbsp; - Mật khẩu: {!!$password!!}<br>
+                &nbsp;&nbsp; - Họ và tên : {!!$customer_name!!}<br>
+                &nbsp;&nbsp; - Điện thoại: {!!$customer_phone!!}<br>
+                &nbsp;&nbsp; - Email: {!!$customer_email!!}<br>
+                &nbsp;&nbsp; - Mật khẩu: {!!$customer_password!!}<br>
                 <br><br><br>
                 <span style="font-style:italic;">Cường thủy rất hận hạnh được phục vụ quý khách !</span>
             </p>

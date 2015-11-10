@@ -1,5 +1,6 @@
 @extends('Frontend.layout')
 @section('content')
+<?php use App\Http\Controllers\Frontend\CartController ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -44,7 +45,7 @@
                 <td>{!!$billing['city']!!}</td>
             </tr>
         </table>
-        @if ($billing['city'])
+        @if ($billing['note'])
         <div class="clear"></div>
         <p class="bs1_bold">Ghi chú</p>
         <table>
@@ -68,7 +69,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tbody>
                 @foreach ($products as $key => $product)
                     <tr>
                         <td>{!!$key+1!!}</td>
@@ -79,7 +79,7 @@
                     </tr>
                 @endforeach
             </tbody>
-            </tbody>
+            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền : {!!CartController::getTotalPriceCart()!!}đ</td>
         </table>
     </div><!-- end content right-->
     <div class="clear"></div>

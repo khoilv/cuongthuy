@@ -11,7 +11,6 @@ use Input;
 use Session;
 use Redirect;
 use DB;
-use Mail;
 
 class CheckoutController extends Controller {
     
@@ -42,8 +41,9 @@ class CheckoutController extends Controller {
         }
         $data = file_get_contents('public/data/city.dat');
         $arrCity = explode(",", $data);
+        Session::put('arrCity', $arrCity);
         
-        return view('Frontend.checkout.billing', compact('billing', 'arrCity'));
+        return view('Frontend.checkout.billing', compact('billing'));
     }
     
     public function postBilling () {
@@ -94,17 +94,19 @@ class CheckoutController extends Controller {
     }
     
     public function postConfirm () {
+        Session::put('buy', Session::get('cart'));
         $checkOutObject = new CheckoutModel;
         $result = $checkOutObject->InsertOrder();
+        $shipping = Session::get('shipping');
         
         if ($result) {
             //Clear session
             Session::forget('billing');
             Session::forget('shipping');
             Session::forget('cart');
+            Session::forget('buy');
             
-            echo "Đặt hàng thành công. "
-            . "Cảm ơn bạn đã mua hàng ở cuongthuy.vn";
+            return view('Frontend.checkout.success_order', compact('shipping'));
         }
     }
     

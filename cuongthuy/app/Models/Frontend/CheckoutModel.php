@@ -3,18 +3,20 @@ namespace App\Models\Frontend;
 use App\Models\AutoGenerate;
 use DB;
 use Session;
-
+use Mail;
 class CheckoutModel {
     
     protected $billing;
     protected $shipping;
-    protected $cart;
+    protected $productBuy;
     protected $customerId;
+    protected $orderCode;
 
     public function __construct() {
         $this->billing = Session::get('billing');
         $this->shipping = Session::get('shipping');
-        $this->cart = Session::get('cart');
+        $this->productBuy = Session::get('buy');
+        $this->orderCode = AutoGenerate::generateUniqueOrdersCode();
         
         if (Session::get('customer_email')) {
             $this->customerId = DB::table('customers')->where('customer_email', Session::get('customer_email'))->pluck('id');
@@ -29,7 +31,7 @@ class CheckoutModel {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $lastOrderId = DB::table('orders')->insertGetId([
             'customer_id'           => $this->customerId ? $this->customerId : '',
-            'order_code'            => AutoGenerate::generateUniqueOrdersCode(),
+            'order_code'            => $this->orderCode,
             'order_date'            => date("Y-m-d H:i:s"),
             'order_email'           => $this->billing['email'],
             'order_phone'           => $this->billing['telephone'],
@@ -48,11 +50,12 @@ class CheckoutModel {
     }
     
     public function InsertOrderDetail ($lastOrderId) {
-        foreach ($this->cart as $key => $value) {
+        foreach ($this->productBuy as $key => $value) {
+            $unitPrice = DB::table('products')->where('id', $key)->pluck('product_price');
             $arrOrder[] = [
                 'order_id'      => $lastOrderId,
                 'product_id'    => $key,
-                'unitPrice'     => 120,
+                'unitPrice'     => $unitPrice,
                 'quantity'      => $value
             ];
         }
@@ -62,11 +65,21 @@ class CheckoutModel {
     }
     
     public function sendMail () {
-        Mail::send('Frontend.email.order1', [
-                'billing' => $this->billing,
+        $totalOrderPrice = 0;
+        $products = DB::table('products')->whereIn('id', array_keys($this->productBuy))->get();
+        foreach ($products as $product) {
+            $totalOrderPrice += $product['product_price'] * $this->productBuy[$product['id']];
+        }
+        Mail::send('Frontend.email.order', [
+                'billing'         => $this->billing,
+                'shipping'        => $this->shipping,
+                'products'        => $products,
+                'orderCode'       => $this->orderCode,
+                'productBuy'      => $this->productBuy,
+                'totalOrderPrice' => $totalOrderPrice
             ],
             function($message) {
-                $message->from('noreply@cuongthuy.vn', $name = 'cuongthuy.vn');
+                $message->from('noreply@cuongthuy.vn', $name = 'Cường Thủy');
                 $message->to($this->billing['email'])->subject('Tiếp nhận đơn hàng');
             }
         );

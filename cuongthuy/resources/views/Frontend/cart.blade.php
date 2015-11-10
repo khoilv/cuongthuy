@@ -8,7 +8,7 @@
     </div>
     <div class="clear"></div>
 </div>
-@if(count($products)> 0)
+
     <div class="wrap cart_page">
         <table>
             <thead>
@@ -24,36 +24,39 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $key => $product)
+            @if(count($products)> 0)
+                @foreach($products as $key => $product)
+                    <tr>
+                        <td class="serial">{!! $key+1 !!}</td>
+                        <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_code !!}</a></td>
+                        <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_name !!}</a></td>
+                        <td>
+                            <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' value="{!! $cart[$product->id] !!}"/>
+                        </td>
+                        <td>
+                            <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
+                        </td>
+                        <td class="product_price">{!! $product->product_price!!}</td>
+                        <td class="line_price">{!! $product->product_price * $cart[$product->id] !!}</td>
+                        <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
+                        <input type="hidden" class='product_id'  value="{!! $product->id!!}">
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td class="serial">{!! $key+1 !!}</td>
-                    <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_code !!}</a></td>
-                    <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_name !!}</a></td>
-                    <td>
-                        <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' value="{!! $cart[$product->id] !!}"/>
-                    </td>
-                    <td>
-                        <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
-                    </td>
-                    <td class="product_price">{!! $product->product_price!!}</td>
-                    <td class="line_price">{!! $product->product_price * $cart[$product->id] !!}</td>
-                    <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
-                    <input type="hidden" class='product_id'  value="{!! $product->id!!}">
+                    <td colspan="8"><span class="notification">Bạn không có sản phẩm nào trong giỏ hàng</span></td>
                 </tr>
-            @endforeach
             </tbody>
+            @endif
         </table>
+        @if(count($products)> 0)
         <div class="cart_c2">
             <p class="f_left total_price">Tổng tiền : {!!CartController::getTotalPriceCart()!!}đ</p>
 
-            <a href="{!!Asset('checkout/billing')!!}" class="f_right"><button>Mua hàng</button></a>
+            <a href="{!!action('Frontend\CheckoutController@getBilling')!!}" class="f_right"><button class="buy">Mua hàng</button></a>
         </div>
+        @endif
     </div>
-@else
-    <div class="wrap">
-        Bạn không có sản phẩm nào trong giỏ hàng
-    </div>
-@endif
             <!--end cart page-->
     <div class="clear"></div>
     <div class="slide">

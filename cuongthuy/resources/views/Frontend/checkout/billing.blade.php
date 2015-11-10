@@ -1,5 +1,6 @@
 @extends('Frontend.layout')
 @section('content')
+<?php $arrCity = Session::get('arrCity'); ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -90,9 +91,9 @@
         <p class="bs1_bold">Ghi chú</p>
         <table>
             <tr>
-                <td>Ghi chú về đơn hàng</td>
+                <td>Ghi chú của quý khách về đơn hàng</td>
                 <td>
-                    <textarea name="note" rows="4" cols="57" ></textarea>
+                    <textarea name="note" rows="4" cols="57" >{!!(isset($billing['note']) && $billing['note']) ? $billing['note'] : ''!!}</textarea>
                 </td>
             </tr>
         </table>

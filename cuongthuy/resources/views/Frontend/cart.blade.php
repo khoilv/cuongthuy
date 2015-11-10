@@ -1,4 +1,4 @@
-<?php use App\Http\Controllers\Frontend\CartController as CartController; ?>
+<?php use App\Http\Controllers\Frontend\CartController; ?>
 @extends('Frontend.layout')
 @section('content')
         <!-- InstanceBeginEditable name="Content" -->
@@ -31,7 +31,7 @@
                         <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_code !!}</a></td>
                         <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_name !!}</a></td>
                         <td>
-                            <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' value="{!! $cart[$product->id] !!}"/>
+                            <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' maxlength="3" value="{!! $cart[$product->id] !!}"/>
                         </td>
                         <td>
                             <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
@@ -99,29 +99,31 @@
 
             $(".product_quantity").change(function() {
                 var my = $(this).closest('tr');
-                var post = {
-                    quantity : $(this).val(),
-                    product_id : $(".product_id", my).val()
-                };
-                $.ajax({
-                    url : 'updateCart',
-                    type : 'post',
-                    dataType: 'json',
-                    data : post,
-                    beforeSend: function() {
-                        $('#img_ajax').addClass('loading');
-                    },
-                    success : function (result){
-                        $('.line_price', my).html(result['linePrice']);
-                        $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
-                        if (result['totalCart']) {
-                            $(".button_cart").html("Giỏ hàng ("+result['totalCart']+")");
-                        } else {
-                            $(".button_cart").html("Giỏ hàng");
+                if ($(this).val() < 1000) {
+                    var post = {
+                        quantity : $(this).val(),
+                        product_id : $(".product_id", my).val()
+                    };
+                    $.ajax({
+                        url : 'updateCart',
+                        type : 'post',
+                        dataType: 'json',
+                        data : post,
+                        beforeSend: function() {
+                            $('#img_ajax').addClass('loading');
+                        },
+                        success : function (result){
+                            $('.line_price', my).html(result['linePrice']);
+                            $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
+                            if (result['totalCart']) {
+                                $(".button_cart").html("Giỏ hàng ("+result['totalCart']+")");
+                            } else {
+                                $(".button_cart").html("Giỏ hàng");
+                            }
+                            $('#img_ajax').removeClass('loading');
                         }
-                        $('#img_ajax').removeClass('loading');
-                    }
-                });
+                    });
+                }
             });
 
             $(".delete_product").click(function() {

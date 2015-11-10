@@ -1,6 +1,9 @@
 @extends('Frontend.layout')
 @section('content')
-<?php use App\Http\Controllers\Frontend\FrameRelativeProductsController; ?>
+<?php 
+use App\Http\Controllers\Frontend\FrameRelativeProductsController; 
+use App\Http\Controllers\Frontend\CartController as CartController;
+?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -56,6 +59,14 @@
         </div>
         <div class="box2 f_right">
             <h2>{!!$product->product_name!!}</h2>
+            <div class="add_cart">
+                <ul>
+                    <li class="cart_add_detail">Thêm vào giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</li>
+                    <li><a href="#"><img src="images/face.png"></a></li>
+                    <li><a href="#"><img src="images/g.png"></a></li>
+                </ul>
+                <div class="clear"></div>
+            </div><!-- end add cart-->
             <p>{!!$product->product_short_description!!}</p>
             <div class="assess">
                 <p class="f_left">Đánh giá : </p>
@@ -119,7 +130,7 @@ $(window).load(function () {
             $('.rating_value').text("Cảm ơn bạn đã đánh giá");
                 var post = {
                 rating : rating,
-                    product_id : <?php echo $product->id ?>
+                product_id : <?php echo $product->id ?>
                 };
                 $.ajax({
                 url : 'updateRating',
@@ -129,8 +140,26 @@ $(window).load(function () {
                 });
             }
         }
+    });
+    
+    $(".cart_add_detail").click(function () {
+        $.ajax({
+            url : 'addCart',
+            type : 'post',
+            dataType: 'json',
+            data : { product_id : <?php echo $product->id ?> },
+            beforeSend: function() {
+                $('#img_ajax').addClass('loading');
+            },
+            success : function (result){
+                $(".button_cart").html("Giỏ hàng ("+result+")");
+                $(".cart_add_detail").html("Thêm vào giỏ hàng ("+result+")");
+                $('#img_ajax').removeClass('loading');
+            }
+
         });
     });
+ });
 </script>  
 <!-- InstanceEndEditable -->
 @endsection

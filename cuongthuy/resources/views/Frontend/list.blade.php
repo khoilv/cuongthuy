@@ -37,7 +37,7 @@
                         <div>
                             <p>Giao sản phẩm miễ phí tại Hà Nội</p>
                             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
-                            <button class="add_cart" title="Thêm vào giỏ"></button>
+                            <button class="add_to_cart" title="Thêm vào giỏ"></button>
                         </div>
                     </div>
                     <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name'];?></a></p>

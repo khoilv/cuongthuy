@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @author LinhNV
+ * @version 1.00
+ * @create 2015/10/5
+ */
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
@@ -58,6 +62,7 @@ class CartController extends Controller {
     }
     
     public function addCart() {
+        
         $cart = Session::get('cart');
         $data = Input::all();
         if (isset($cart[$data['product_id']])) {

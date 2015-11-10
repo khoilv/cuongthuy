@@ -22,7 +22,7 @@
             <li class="f_left">
                 <div class="avata f_left"></div>
                 <span class="about_bg">"</span>
-                <p>Lại Viết Cường</p>
+                <p>Lại Huy Cường</p>
             </li>
             <li class="f_right">
                 <div class="avata f_left"></div>

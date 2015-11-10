@@ -132,7 +132,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                 updateResult(".visibleItems", this.owl.visibleItems);
                 updateResult(".dragDirection", this.owl.dragDirection);
             }
-            $(".add_cart").click(function () {                
+            $(".add_to_cart").click(function () {                
                 var my = $(this).closest("li");
                 $.ajax({
                     url : 'addCart',
@@ -149,7 +149,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
 
                 });
             });
-            });
+        });
         </script>
         <!--like facebook -->
         <script>
@@ -326,5 +326,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         s0.parentNode.insertBefore(s1,s0);
         })();
         </script>
+        <!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=96204503"></script>-->
+        <!--<script src='https://livesupporti.com/Scripts/client.js?acc=dcb5276e-02c3-449b-9e74-c6f89c580637&skin=Modern'></script>-->
     </body>
 </html>

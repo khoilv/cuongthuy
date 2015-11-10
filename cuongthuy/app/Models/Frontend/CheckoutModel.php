@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author LinhNV
+ * @version 1.00
+ * @create 2015/10/21
+ */
 namespace App\Models\Frontend;
 use App\Models\AutoGenerate;
 use DB;

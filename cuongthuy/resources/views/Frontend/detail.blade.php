@@ -75,9 +75,9 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                 <div class="clear"></div> 
             </div>
             <span>Ngày đăng : {!!date("d-m-Y", strtotime($product->product_date_added))!!}</span>
-            <p style="margin-top:20px;">Giá bán :<span class="price2">{!!$product->product_price!!} VNĐ</span></p>
+            <p style="margin-top:20px;">Giá bán :<span class="price2">{!!number_format ($product->product_price)!!} VNĐ</span></p>
             @if ($product->product_discount_price)
-            <p>Giá cũ :<span class="price_old">{!!$product->product_discount_price!!} VNĐ</span></p>
+            <p>Giá cũ :<span class="price_old">{!!number_format ($product->product_discount_price)!!} VNĐ</span></p>
             @endif
             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product->id))!!}" ><button></button></a> 
             <div class="clear"></div>                  

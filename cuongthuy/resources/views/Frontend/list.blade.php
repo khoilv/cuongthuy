@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name'];?></a></p>
-                    <span class="price"><?php echo $product['product_price'].'VND';?></span> <span class="sale"><?php echo $product['product_discount_price'];?></span>
+                    <span class="price"><?php echo number_format($product['product_price']).'VNĐ';?></span> <span class="sale"><?php echo number_format($product['product_discount_price']).'VNĐ';?></span>
                     <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
                 </li>
             <?php } ?>

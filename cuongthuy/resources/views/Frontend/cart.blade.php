@@ -36,8 +36,8 @@
                         <td>
                             <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
                         </td>
-                        <td class="product_price">{!! $product->product_price!!}</td>
-                        <td class="line_price">{!! $product->product_price * $cart[$product->id] !!}</td>
+                        <td class="product_price">{!! number_format ($product->product_price)!!} đ</td>
+                        <td class="line_price">{!! number_format ($product->product_price * $cart[$product->id]) !!} đ</td>
                         <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
                         <input type="hidden" class='product_id'  value="{!! $product->id!!}">
                     </tr>
@@ -51,7 +51,7 @@
         </table>
         @if(count($products)> 0)
         <div class="cart_c2">
-            <p class="f_left total_price">Tổng tiền : {!!CartController::getTotalPriceCart()!!}đ</p>
+            <p class="f_left total_price">Tổng tiền : {!!number_format(CartController::getTotalPriceCart())!!} đ</p>
 
             <a href="{!!action('Frontend\CheckoutController@getBilling')!!}" class="f_right"><button class="buy">Mua hàng</button></a>
         </div>
@@ -91,72 +91,11 @@
     </div><!-- end slide-->
     <div class="clear"></div>
     <!-- InstanceEndEditable -->
-    @endsection
-@section('javascript')
+    
     <script type="text/javascript" src="public/js/jquery.flexisel.js"></script>
+    <script type="text/javascript" src="public/js/jquery_cart.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-
-            $(".product_quantity").change(function() {
-                var my = $(this).closest('tr');
-                if ($(this).val() < 1000) {
-                    var post = {
-                        quantity : $(this).val(),
-                        product_id : $(".product_id", my).val()
-                    };
-                    $.ajax({
-                        url : 'updateCart',
-                        type : 'post',
-                        dataType: 'json',
-                        data : post,
-                        beforeSend: function() {
-                            $('#img_ajax').addClass('loading');
-                        },
-                        success : function (result){
-                            $('.line_price', my).html(result['linePrice']);
-                            $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
-                            if (result['totalCart']) {
-                                $(".button_cart").html("Giỏ hàng ("+result['totalCart']+")");
-                            } else {
-                                $(".button_cart").html("Giỏ hàng");
-                            }
-                            $('#img_ajax').removeClass('loading');
-                        }
-                    });
-                }
-            });
-
-            $(".delete_product").click(function() {
-                var my = $(this).closest('tr');
-                var post = {
-                    quantity : $(".product_quantity", my).val(),
-                    product_id : $(".product_id", my).val()
-                };
-
-                $.ajax({
-                    url : 'deleteCart',
-                    type : 'post',
-                    dataType: 'json',
-                    data : post,
-                    beforeSend: function() {
-                        $('#img_ajax').addClass('loading');
-                    },
-                    success : function (result){
-                        $('.total_price').html('Tổng tiền : '+result['totalPrice']+'đ' );
-                        my.remove();
-                        if (result['totalCart']) {
-                            $(".button_cart").html("Giỏ hàng ("+result['totalCart']+")");
-                        } else {
-                            $(".button_cart").html("Giỏ hàng");
-                        }
-                        $.each($('.serial'),function(i){
-                            $(this).text(i+1);
-                        });
-                        $('#img_ajax').removeClass('loading');
-                    }
-                });
-            });
-
             $("#sliderOtherProducts").flexisel({
                 visibleItems: 5,
                 animationSpeed: 1000,

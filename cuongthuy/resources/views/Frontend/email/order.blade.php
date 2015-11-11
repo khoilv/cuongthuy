@@ -48,11 +48,11 @@
             </div>
             <p class="content2">
                 <span style="font-size:18px;font-weight:bold;">Xác nhận đặt hàng thành công !</span> <br><br>
-                Chào Phạm Huyền Chang<br>
+                Chào {!!$billing['name']!!}<br>
                 Bạn đã đặt hàng thành công trên Cuongthuy.vn. <br>
                 @if($shipping['shipMethod'] == 1)
                     Chúng tôi sẽ gọi điện để xác nhận lại đơn hàng của quý khách.
-                    Và sẽ giao hàng cho Quý khách trong thời gian từ 1-3 ngày làm việc.<br>
+                    Và sẽ giao hàng cho quý khách trong thời gian từ 1-3 ngày làm việc.<br>
                 @else
                     Chúng tôi trân trọng mời bạn đến cửa hàng mua các sản phẩm mà bạn đã đặt.
                 @endif
@@ -80,12 +80,12 @@
                             <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}">{!!$product['product_code']!!}</a></td>
                             <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}">{!!$product['product_name']!!}</a></td>
                             <td>{!!$productBuy[$product['id']]!!}</td>
-                            <td>{!!$product['product_price']!!}</td>
-                            <td>{!!$product['product_price'] * $productBuy[$product['id']]!!}</td>
+                            <td>{!!number_format ($product['product_price'])!!} đ</td>
+                            <td>{!!number_format ($product['product_price'] * $productBuy[$product['id']])!!} đ</td>
                         </tr>
                         @endforeach
                         <tr>
-                            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền: {!!$totalOrderPrice!!} đ</td>
+                            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền: {!!number_format($totalOrderPrice)!!} đ</td>
                         </tr>
                     </tbody>
                 </table><div class="clear"></div>

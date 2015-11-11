@@ -1138,5 +1138,24 @@ display:none;
     width:139px;
     height:129px;
 }
+.error-message {
+    width: 100%;
+    margin-left: 0px;
+    float: right;
+}
+.error-message .message {
+    background-color: #bf2819;
+    color: #FFF;
+    padding: 4px 5px;
+}
+.error-message .arrow {
+    border: 5px solid transparent;
+    border-bottom-color: #bf2819;
+    border-top-width: 0;
+    width: 0;
+    margin-left: 10px;
+    font-size: 1px;
+    line-height: 1px;
+}
 
 

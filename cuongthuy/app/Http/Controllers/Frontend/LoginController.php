@@ -128,7 +128,7 @@ class LoginController extends Controller {
             if (!$errorMail) {
                  $user = $this->customersCls->getUserByEmail($data['email']);
                 if (!$user) {
-                    $errorMail = 'This email is not registered';
+                    $errorMail = 'Email chưa được đăng kí!';
                 } else {
                     Mail::send('Frontend.email.recover_pass', ['pass' => $user['customer_password'],'user_name' => $user['customer_name']], function($message) use ($user)
                     {

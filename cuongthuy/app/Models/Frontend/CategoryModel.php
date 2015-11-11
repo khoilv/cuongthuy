@@ -47,11 +47,20 @@ class CategoryModel extends TableBase {
      * @return string
      */
     public function getCategoryNamebyId($id){
+        $categories = array();
         $options = array(
-            'fields' => array('category_name'),
+            'fields' => array('*'),
             'conditions' => array('id' => $id),
         );
         $result = $this->find('first', $options);
-        return $result['category_name'];
+        if (!empty($result)) {
+            if ($result['category_parent'] != 0) {
+                $options['conditions']['id'] = $result['category_parent'];
+                $result1 = $this->find('first', $options);
+                $categories[] = $result1;
+            }
+            $categories[] = $result;
+        }
+        return $categories;
     }
 }

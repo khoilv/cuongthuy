@@ -8,7 +8,10 @@
                     <td>Họ tên(*)</td>
                     <td>
                         <input type="text" id="username">
-                        <p style="color: red" id="error_username"></p>
+                        <div class="error-message error_username">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_username"></p></div>
+                        </div>
                     </td>
 
                 </tr>
@@ -16,7 +19,10 @@
                     <td>Địa chỉ</td>
                     <td>
                         <input type="text" id="address">
-                        <p style="color: red" id="error_address"></p>
+                        <div class="error-message error_address">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_address"></p></div>
+                        </div>
                     </td>
 
                 </tr>
@@ -24,7 +30,10 @@
                     <td>Số điện thoại</td>
                     <td>
                         <input type="text" id="phone">
-                        <p style="color: red" id="error_phone"></p>
+                        <div class="error-message error_phone">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_phone"></p></div>
+                        </div>
                     </td>
 
                 </tr>
@@ -32,7 +41,10 @@
                     <td>Email(*)</td>
                     <td>
                         <input type="text" id="email">
-                        <p style="color: red" id="error_email"></p>
+                        <div class="error-message error_email">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_email"></p></div>
+                        </div>
                     </td>
 
                 </tr>
@@ -40,7 +52,10 @@
                     <td>Mật khẩu(*)</td>
                     <td>
                         <input type="password" id="password">
-                        <p style="color: red" id="error_password"></p>
+                        <div class="error-message error_password">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_password"></p></div>
+                        </div>
                     </td>
 
                 </tr>
@@ -48,11 +63,12 @@
                     <td>Xác nhận lại mật khẩu(*)</td>
                     <td>
                         <input type="password" id="password_confirm">
-                        <p style="color: red" id="error_password_confirm"></p>
+                        <div class="error-message error_password_confirm">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_password_confirm"></p></div>
+                        </div>
                     </td>
-
                 </tr>
-
             </table>
             <div class="clear"></div>
             <div>
@@ -75,13 +91,9 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        $("[class*=error_]").css("display", "none");
         $("#tbn_register").click(function () {
-            $("#register #error_email").text('');
-            $("#error_password").text('');
-            $("#error_username").text('');
-            $("#error_password_confirm").text('');
-            $("#error_phone").text('');
-            $("#error_address").text('');
+            $("[class*=error_]").css("display", "none");
             var post = {
                 username: $("#username").val(),
                 address: $("#address").val(),
@@ -98,21 +110,27 @@
                 success: function (result) {
                     if (result['error'] == true) {
                         if (result['error_msg'].email) {
+                            $("#register .error_email").css("display", "initial");
                             $("#register #error_email").text(result['error_msg'].email);
                         }
                         if (result['error_msg'].password) {
+                            $(".error_password").css("display", "initial");
                             $("#register #error_password").text(result['error_msg'].password);
                         }
                         if (result['error_msg'].password_confirm) {
+                            $(".error_password_confirm").css("display", "initial");
                             $("#error_password_confirm").text(result['error_msg'].password_confirm);
                         }
                         if (result['error_msg'].username) {
+                            $(".error_username").css("display", "initial");
                             $("#error_username").text(result['error_msg'].username);
                         }
                         if (result['error_msg'].phone) {
+                            $(".error_phone").css("display", "initial");
                             $("#error_phone").text(result['error_msg'].phone);
                         }
                         if (result['error_msg'].address) {
+                            $(".error_address").css("display", "initial");
                             $("#error_address").text(result['error_msg'].address);
                         }
                     } else {

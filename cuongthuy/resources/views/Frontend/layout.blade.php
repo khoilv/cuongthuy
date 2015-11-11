@@ -157,7 +157,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
                 js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1632899020301830";
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1086178621393432";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
@@ -171,13 +171,13 @@ use App\Http\Controllers\Frontend\CartController as CartController;
             <div class="content_top">
                 <div class="wrap">
                     <div class="f_left" style="margin-top:7px;">
-                        <div class="fb-like" data-href="http://cuongthuy.com/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                        <div class="fb-like" data-href="http://cuongthuy.pe.hu/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                         <div class="g-plusone" data-size="medium" ></div>
                     </div>
                     <ul class="f_right">
                         <?php if (Session::has('customer_name')) { ?>
                             <li><a><?php echo 'Xin chào ' . Session::get('customer_name'); ?></a></li>
-                            <li><a id="logout">Thoát</a></li>
+                            <li><a style="cursor:pointer" id="logout">Thoát</a></li>
                         <?php } else { ?>
                             <li><a href="#login">Đăng nhập</a></li>
                             <li><a href="#register">Đăng ký</a></li>

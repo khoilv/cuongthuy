@@ -8,20 +8,28 @@
         <a href="#close" title="Close" class="close">X</a>
         <div class="f_left">
             <h2 class="p_title">Đăng nhập</h2>
-            <p style="color: red" id="error_msg"></p>
+            <div class="error-message error_msg">
+                <div class="message"><p id="error_msg"></p></div>
+            </div>
             <table class="p_table clear">
                 <tr>
                     <td>Email</td>
                     <td>
                         <input type="text" id="email" value="<?php echo $email; ?>">
-                        <p style="color: red" id="error_email"></p>
+                        <div class="error-message error_email">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_email"></p></div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Mật khẩu</td>
                     <td>
                         <input id="password" value="<?php echo $password; ?>" type="password">
-                        <p style="color: red" id="error_pass"></p>
+                        <div class="error-message error_pass">
+                            <div class="arrow"></div>
+                            <div class="message"><p id="error_pass"></p></div>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -47,10 +55,9 @@
 </div>
 <script type="text/javascript" language="javascript">
     $(function() {
+       $("[class*=error_]").css("display", "none");
        $("#tbn_login").click(function() {
-           $("#error_msg").text('');
-           $("#error_email").text('');
-           $("#error_pass").text('');
+           $("[class*=error_]").css("display", "none");
             var post = {
                     email : $("#email").val(),
                     password : $("#password").val(),
@@ -64,12 +71,15 @@
                 success : function (result){
                     if(result['error'] == true){
                         if(result['error_msg'].email){
+                            $("#login .error_email").css("display", "initial");
                             $("#error_email").text(result['error_msg'].email);
                         }
                         if(result['error_msg'].password){
+                            $(".error_pass").css("display", "initial");
                             $("#error_pass").text(result['error_msg'].password);
                         }
                         if(result['error_msg'].error_login){
+                            $(".error_msg").css("display", "initial");
                             $("#error_msg").text(result['error_msg'].error_login);
                         }
                     } else {
@@ -89,9 +99,7 @@
             });
         });
         $(".p_bottom").click(function() {
-           $("#error_msg").text('');
-           $("#error_email").text('');
-           $("#error_pass").text('');
+             $("[class*=error_]").css("display", "none");
             var retVal = confirm("Bạn có muốn gửi mật khẩu vào địa chỉ email vừa nhập không?");
             var post = {
                 email : $("#email").val()
@@ -104,6 +112,7 @@
                     data : post,
                     success : function (result){
                         if(result['error_email']){
+                            $("#login .error_email").css("display", "initial");
                             $("#error_email").text(result['error_email']);
                         } else {
                             alert('Mật khảu của bạn đã được gửi vào mail.Vui lòng check mail của bạn!');

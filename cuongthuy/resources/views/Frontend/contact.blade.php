@@ -24,7 +24,12 @@
                 <td>Họ và tên (*)</td>
                 <td>
                     {!! Form::text('contact_name','',['class' => 'input box1']) !!}
-                    @if ($errors->has('contact_name')) <p style="color: red">{!! $errors->first('contact_name') !!}</p> @endif
+                    @if ($errors->has('contact_name'))
+                    <div class="error-message">
+                        <div class="arrow"></div>
+                        <div class="message"><p>{!! $errors->first('contact_name') !!}</p></div>
+                    </div>
+                    @endif
                 </td>
             </tr>
             <tr>
@@ -35,7 +40,12 @@
                 <td>Email (*)</td>
                 <td>
                     {!! Form::text('contact_email','',['class' => 'input box1']) !!}
-                    @if ($errors->has('contact_email')) <p style="color: red">{!! $errors->first('contact_email') !!}</p> @endif
+                    @if ($errors->has('contact_email'))
+                    <div class="error-message">
+                        <div class="arrow"></div>
+                        <div class="message"><p>{!! $errors->first('contact_email') !!}</p></div>
+                    </div>
+                    @endif
                 </td>
             </tr>
             <tr>
@@ -46,7 +56,12 @@
                 <td>Nội dung (*)</td>
                 <td>
                     {!! Form::textarea('contact_content','',['class' => 'box1']) !!}
-                    @if ($errors->has('contact_content')) <p style="color: red">{!! $errors->first('contact_content') !!}</p> @endif
+                    @if ($errors->has('contact_content'))
+                    <div class="error-message">
+                        <div class="arrow"></div>
+                        <div class="message"><p>{!! $errors->first('contact_content') !!}</p></div>
+                    </div>
+                    @endif
                 </td>
             </tr>
         </table>

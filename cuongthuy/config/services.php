@@ -35,14 +35,14 @@ return [
 	],
     
         'google'   => [
-              'client_id'     => '851608474462-eotov7nplp3olc5san1v61bhc9nsangd.apps.googleusercontent.com',
-              'client_secret' => 'xVieUc0rP0xbgbEL8S_xdnz2',
-              'redirect'      => 'http://cuongthuy.com/login/google',
+              'client_id'     => '162082679789-pnipgiqu9p4f0cko0fpjd6610j9r94no.apps.googleusercontent.com',
+              'client_secret' => 'fhq8gyhtAeL8L1oFvBAQ68sa',
+              'redirect'      => 'http://cuongthuy.pe.hu/login/google',
           ],
          'facebook'   => [
-              'client_id'     => '1632899020301830',
-              'client_secret' => '7c0e03398b1bd71f1abaeebe9c4bee84',
-              'redirect'      => 'http://cuongthuy.com/login/facebook',
+              'client_id'     => '1086178621393432',
+              'client_secret' => '8f4fa10513d9d66c3454657eebcf4932',
+              'redirect'      => 'http://cuongthuy.pe.hu/login/facebook',
               'scopes'         => 'name,email',
           ],
 ];

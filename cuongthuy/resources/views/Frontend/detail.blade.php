@@ -62,8 +62,8 @@ use App\Http\Controllers\Frontend\CartController as CartController;
             <div class="add_cart">
                 <ul>
                     <li class="cart_add_detail">Thêm vào giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</li>
-                    <li><a href="#"><img src="images/face.png"></a></li>
-                    <li><a href="#"><img src="images/g.png"></a></li>
+                    <li><div class="fb-like" data-href="http://cuongthuy.pe.hu/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
+                    <li><div class="g-plusone" data-size="medium" ></div></li>
                 </ul>
                 <div class="clear"></div>
             </div><!-- end add cart-->

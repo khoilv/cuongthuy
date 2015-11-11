@@ -71,7 +71,7 @@ class ProductController extends Controller {
          $limitArr = array($offset, $maxRec);
          $arrProductList  = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
          // get category name
-         $categoryName = $categoryCls->getCategoryNamebyId($categoryId);
+         $categories = $categoryCls->getCategoryNamebyId($categoryId);
          return view('Frontend.list',[
              'arrProductList' => $arrProductList,
              'currentPage'    => $currentPage,
@@ -79,7 +79,7 @@ class ProductController extends Controller {
              'previousPage'   => $previousPage,
              'nextPage'       => $nextPage,
              'categoryId'     => $categoryId,
-             'categoryName'   => $categoryName,
+             'categories'   => $categories,
              'search_key'     => $searchKey,
              'search_value'   => $searchValue
          ]);

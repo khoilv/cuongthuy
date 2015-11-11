@@ -2,9 +2,15 @@
 @section('content')
 <div class="title title1">
     <div class="wrap">
-        <?php if ($categoryName){?>
-            <div class="f_left"><span class="title_red"></span><a><?php echo $categoryName;?></a></div>
-        <?php } ?>
+        <div class="f_left"><span class="title_red"></span>
+            @foreach ($categories as $key => $category)
+            <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $category['id']))!!}">
+                <span>{!!$category['category_name']!!}
+                    @if ($key == 0) > @endif
+                </span>
+            </a>
+            @endforeach
+        </div>
         <?php
             $arrParam = array();
             if ($categoryId !== '') {
@@ -41,7 +47,10 @@
                         </div>
                     </div>
                     <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name'];?></a></p>
-                    <span class="price"><?php echo number_format($product['product_price']).'VNĐ';?></span> <span class="sale"><?php echo number_format($product['product_discount_price']).'VNĐ';?></span>
+                    <span class="price"><?php echo number_format($product['product_price']).'VNĐ';?></span>
+                    @if ($product['product_discount_price'])
+                        <span class="sale"><?php echo number_format($product['product_discount_price']).'VNĐ';?></span>
+                    @endif
                     <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
                 </li>
             <?php } ?>

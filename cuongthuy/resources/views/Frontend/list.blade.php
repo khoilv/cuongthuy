@@ -3,26 +3,18 @@
 <div class="title title1">
     <div class="wrap">
         <div class="f_left"><span class="title_red"></span>
-            @foreach ($categories as $key => $category)
-            <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $category['id']))!!}">
-                <span>{!!$category['category_name']!!}
-                    @if ($key == 0) > @endif
-                </span>
-            </a>
-            @endforeach
+            @if ($categoryId)
+                @foreach ($categories as $key => $category)
+                <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $category['id']))!!}">
+                    <span>{!!$category['category_name']!!}
+                        @if ($key == 0 && count($categories)> 1) > @endif
+                    </span>
+                </a>
+                @endforeach
+            @else
+            <a href="{!!action('Frontend\ProductController@getIndex')!!}"><span>Sản Phẩm Mới</span></a>
+            @endif
         </div>
-        <?php
-            $arrParam = array();
-            if ($categoryId !== '') {
-                $arrParam['category_id'] = $categoryId;
-            }
-            if($search_key) {
-                $arrParam['search_key'] = $search_key;
-            }
-            if($search_value) {
-                $arrParam['search_value'] = $search_value;
-            }
-        ?>
         <div class="f_right" style="margin-top:10px;">
             <ul class="list_button">
                 <li><a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categoryId ,'search_key' => 'newer'))!!}"><button>Mới nhất</button></a></li>

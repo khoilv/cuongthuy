@@ -25,7 +25,6 @@ class ProductModel extends TableBase {
             'conditions' => $whereArr,
             'limit' => $limitArr
         );
-        $options['conditions']['product_status'] = 1;
         $options['conditions']['product_display'] = 1;
         return $this->find('all', $options);
     }
@@ -42,7 +41,6 @@ class ProductModel extends TableBase {
             'conditions' => $whereArr,
             'limit' => $limitArr
         );
-        $options['conditions']['product_status'] = 1;
         $options['conditions']['product_display'] = 1;
         $options['conditions']['product_sell_status LIKE'] = '%1%';
         return $this->find('all', $options);
@@ -60,7 +58,6 @@ class ProductModel extends TableBase {
             'conditions' => $arrWhere,
             'joins' => $joinsArr,
         );
-        $option['conditions']['product_status'] = 1;
         $option['conditions']['product_display'] = 1;
         $data =  $this->find('all', $option);
         return $data[0]['count'];

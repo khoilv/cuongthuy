@@ -39,8 +39,8 @@ use App\Http\Controllers\Frontend\FrameRelativeProductsController;
                         <td>
                             <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
                         </td>
-                        <td class="product_price">{!! number_format ($product->product_price)!!} đ</td>
-                        <td class="line_price">{!! number_format ($product->product_price * $cart[$product->id]) !!} đ</td>
+                        <td class="product_price">{!! number_format ($product->product_price,0,",",".")!!} đ</td>
+                        <td class="line_price">{!! number_format ($product->product_price * $cart[$product->id],0,",",".") !!} đ</td>
                         <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
                         <input type="hidden" class='product_id'  value="{!! $product->id!!}">
                     </tr>
@@ -54,7 +54,7 @@ use App\Http\Controllers\Frontend\FrameRelativeProductsController;
         </table>
         @if(count($products)> 0)
         <div class="cart_c2">
-            <p class="f_left total_price">Tổng tiền : {!!number_format(CartController::getTotalPriceCart())!!} đ</p>
+            <p class="f_left total_price">Tổng tiền : {!!number_format(CartController::getTotalPriceCart(),0,",",".")!!} đ</p>
 
             <a href="{!!action('Frontend\CheckoutController@getBilling')!!}" class="f_right"><button class="buy">Mua hàng</button></a>
         </div>

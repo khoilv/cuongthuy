@@ -75,11 +75,11 @@
                         <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!!$product->product_code!!}</a></td>
                         <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!!$product->product_name!!}</a></td>
                         <td>{!!$cart[$product->id]!!}</td>
-                        <td>{!!number_format ($product->product_price * $cart[$product->id])!!} đ</td>
+                        <td>{!!number_format ($product->product_price * $cart[$product->id],0,",",".")!!} đ</td>
                     </tr>
                 @endforeach
             </tbody>
-            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền : {!!number_format (CartController::getTotalPriceCart())!!} đ</td>
+            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền : {!!number_format (CartController::getTotalPriceCart(),0,",",".")!!} đ</td>
         </table>
     </div><!-- end content right-->
     <div class="clear"></div>

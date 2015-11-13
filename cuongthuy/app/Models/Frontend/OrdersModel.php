@@ -19,7 +19,7 @@ class OrdersModel extends TableBase {
         $options = array(
             'fields' => array('id'),
             'conditions' => array(
-                'order_code' => $orderCode,
+            'order_code' => $orderCode,
             )
         );
         return $this->find('all', $options);

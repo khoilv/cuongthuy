@@ -77,9 +77,9 @@ $countCate = count($categories);
                 <div class="clear"></div> 
             </div>
             <span>Ngày đăng : {!!date("d-m-Y", strtotime($product->product_date_added))!!}</span>
-            <p style="margin-top:20px;">Giá bán :<span class="price2">{!!number_format ($product->product_price)!!} VNĐ</span></p>
+            <p style="margin-top:20px;">Giá bán :<span class="price2">{!!number_format ($product->product_price,0,",",".")!!} VNĐ</span></p>
             @if ($product->product_discount_price)
-            <p>Giá cũ :<span class="price_old">{!!number_format ($product->product_discount_price)!!} VNĐ</span></p>
+            <p>Giá cũ :<span class="price_old">{!!number_format ($product->product_discount_price,0,",",".")!!} VNĐ</span></p>
             @endif
             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product->id))!!}" ><button></button></a> 
             <div class="clear"></div>                  
@@ -92,7 +92,7 @@ $countCate = count($categories);
         {!!$product->product_description!!}
     </div><!-- edn detail content 2-->
 </div><!-- end content-->
-{!!FrameRelativeProductsController::getDetailRelativeProducts($product->product_category)!!}
+{{--{!!FrameRelativeProductsController::getDetailRelativeProducts($product->product_category)!!}--}}
 <div class="clear"></div>
 <script type="text/javascript" src="{!!Asset('public/js/jquery.flexisel.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.mini.js')!!}"></script>

@@ -11,7 +11,7 @@ class BillingForm extends BaseForm {
         $rules = [
             'name'          => ['required', 'min:1','max:25'],
             'telephone'     => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/','min:9','max:11'],
-            'email'         => ['required', 'email'],
+            'email'         => ['email'],
             'ward'          => ['required', 'min:1','max:25'],
             'street'        => ['required', 'min:1','max:25'],
             'district'      => ['required', 'min:1','max:25']

@@ -80,12 +80,12 @@
                             <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}">{!!$product['product_code']!!}</a></td>
                             <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}">{!!$product['product_name']!!}</a></td>
                             <td>{!!$productBuy[$product['id']]!!}</td>
-                            <td>{!!number_format ($product['product_price'])!!} đ</td>
-                            <td>{!!number_format ($product['product_price'] * $productBuy[$product['id']])!!} đ</td>
+                            <td>{!!number_format ($product['product_price'],0,",",".")!!} đ</td>
+                            <td>{!!number_format ($product['product_price'] * $productBuy[$product['id']],0,",",".")!!} đ</td>
                         </tr>
                         @endforeach
                         <tr>
-                            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền: {!!number_format($totalOrderPrice)!!} đ</td>
+                            <td colspan="5" style="color:#da2027; text-align:right; font-weight:bold;">Tổng tiền: {!!number_format($totalOrderPrice,0,",",".")!!} đ</td>
                         </tr>
                     </tbody>
                 </table><div class="clear"></div>

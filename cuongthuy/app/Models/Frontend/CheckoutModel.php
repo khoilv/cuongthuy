@@ -65,8 +65,9 @@ class CheckoutModel {
             ];
         }
         DB::table('orderdetail')->insert($arrOrder);
-        
-        $this->sendMail();
+        if ($this->billing['email']) {
+            $this->sendMail();
+        }
     }
     
     public function sendMail () {

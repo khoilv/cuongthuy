@@ -20,7 +20,7 @@ class ProductModel extends TableBase {
 
     public function getProductList($whereArr, $limitArr,$joinsArr) {
         $options = array(
-            'fields' => array('*'),
+            'fields' => array('products.id, product_name,product_image,product_price,product_discount_price,product_category, product_status,product_sell_status'),
             'joins' => $joinsArr,
             'conditions' => $whereArr,
             'limit' => $limitArr

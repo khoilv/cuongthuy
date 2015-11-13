@@ -21,7 +21,7 @@ class CartController extends Controller {
         if ($cart) {
             $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
         }
-        
+        BaseController::$title = 'Giỏ hàng';
         return view('Frontend.cart', compact('products', 'cart'));
     }
 

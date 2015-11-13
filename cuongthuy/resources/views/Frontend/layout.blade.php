@@ -3,6 +3,7 @@ error_reporting(E_ALL & ~(E_NOTICE));
 
 use App\Http\Controllers\Frontend\MenuController as MenuController;
 use App\Http\Controllers\Frontend\CartController as CartController;
+use App\Http\Controllers\Frontend\BaseController;
 ?>
 <!doctype html>
 <html>
@@ -12,7 +13,7 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         <meta name="description" content="Mỹ phẩm - tạp hóa Cường Thủy" />
         <meta name="viewport" content="width=device-width, maximum-scale=1" />
         <meta name="_token" content="{!! csrf_token() !!}"/>
-        <title>Home page</title>
+        <title>Cường Thủy - {!!BaseController::$title!!}</title>
         @section('stylesheets')
         <link href="{!!Asset('public/css/common.css')!!}" rel="stylesheet" type="text/css">
         <link href="{!!Asset('public/css/style.css')!!}" rel="stylesheet" type="text/css">

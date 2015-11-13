@@ -1,4 +1,7 @@
-<?php use App\Http\Controllers\Frontend\CartController; ?>
+<?php
+use App\Http\Controllers\Frontend\CartController; 
+use App\Http\Controllers\Frontend\FrameRelativeProductsController;
+?>
 @extends('Frontend.layout')
 @section('content')
         <!-- InstanceBeginEditable name="Content" -->
@@ -59,36 +62,7 @@
     </div>
             <!--end cart page-->
     <div class="clear"></div>
-    <div class="slide">
-        <div class="title5">
-            <h2 class="wrap">Sản phẩm khác</h2>
-        </div>
-        <div class="wrap">
-            <div class="slide-chantrang">
-                <ul id="sliderOtherProducts">
-                    <li>
-                        <a href="#"><img src="public/images/img10.jpg" /><p>Cafe Việt</p></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="public/images/img9.jpg" />
-                            <p>Thực phẩm chức năng</p></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="public/images/img10.jpg" /><p>Cafe Việt</p></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="public/images/img11.jpg" /><p>Trà sữa</p></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="public/images/img9.jpg" /><p>Bỉm người lớn</p></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="public/images/img11.jpg" /><p>Phụ kiện - thời trang</p></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div><!-- end slide-->
+    {{--{!!FrameRelativeProductsController::getCartRelativeProducts()!!}--}}
     <div class="clear"></div>
     <!-- InstanceEndEditable -->
     
@@ -118,10 +92,6 @@
                     }
                 }
             });
-
-            // Fix the bug of dupliate left/right arrows of the slider [Other products]
-            $("div.slide-chantrang > div.nbs-flexisel-container > div.nbs-flexisel-nav-left").hide();
-            $("div.slide-chantrang > div.nbs-flexisel-container > div.nbs-flexisel-nav-right").hide();
         });
     </script>
 @endsection

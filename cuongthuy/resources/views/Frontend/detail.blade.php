@@ -1,20 +1,22 @@
-@extends('Frontend.layout')
-@section('content')
 <?php 
 use App\Http\Controllers\Frontend\FrameRelativeProductsController; 
 use App\Http\Controllers\Frontend\CartController as CartController;
+$countCate = count($categories);
+
 ?>
+@extends('Frontend.layout')
+@section('content')
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
         <div class="f_left"><span class="title_red"></span>
-            @foreach ($categories as $key => $category)
-            <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $category->id))!!}">
-                <span>{!!$category->category_name!!}
-                    @if ($key != count($categories)-1) > @endif
+            @for ($i = $countCate; $i > 0; $i--)
+            <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categories[$i-1]->id))!!}">
+                <span>{!!$categories[$i-1]->category_name!!}
+                    @if ($i != 1) > @endif
                 </span>
             </a>
-            @endforeach
+            @endfor
         </div>
     </div>
     <div class="clear"></div>
@@ -90,16 +92,16 @@ use App\Http\Controllers\Frontend\CartController as CartController;
         {!!$product->product_description!!}
     </div><!-- edn detail content 2-->
 </div><!-- end content-->
-{!!FrameRelativeProductsController::getProducts($product->product_category)!!}
+{!!FrameRelativeProductsController::getDetailRelativeProducts($product->product_category)!!}
 <div class="clear"></div>
 <script type="text/javascript" src="{!!Asset('public/js/jquery.flexisel.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.mini.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jRate.js')!!}"></script>
 <script type="text/javascript">
-$(window).load(function () {
-    $("#flexiselDemo3").flexisel({
-    visibleItems: 5,
+$(document).ready(function(){
+    $("#sliderOtherProducts").flexisel({
+        visibleItems: 5,
         animationSpeed: 1000,
         autoPlay: true,
         autoPlaySpeed: 3000,

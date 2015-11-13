@@ -45,6 +45,7 @@ class TopController extends Controller {
             $arrProductList[$key] = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
         }
         $arrProductNew = $productCls->getProductNew(array(), array(self::$PRODUCT_MAX));
+        BaseController::$title = 'Trang chủ';
         return view('Frontend.index', [
             'arrParentList' => $arrParentList,
             'arrChirdList' => $arrChirdList,

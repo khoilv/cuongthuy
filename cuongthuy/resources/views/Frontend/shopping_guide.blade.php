@@ -1,3 +1,7 @@
+<?php
+    use App\Http\Controllers\Frontend\BaseController;
+    BaseController::$title = 'Hướng dẫn mua hàng';
+?>
 @extends('Frontend.layout')
 @section('content')
 <!-- InstanceBeginEditable name="Content" -->

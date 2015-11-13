@@ -46,6 +46,7 @@ class CheckoutController extends Controller {
         $data = file_get_contents('public/data/city.dat');
         $arrCity = explode(",", $data);
         Session::put('arrCity', $arrCity);
+        BaseController::$title = 'Thanh toán - Nhập thông tin';
         
         return view('Frontend.checkout.billing', compact('billing'));
     }
@@ -71,6 +72,7 @@ class CheckoutController extends Controller {
         $billing = Session::get('billing');
         $shipping = Session::get('shipping');
         if (isset($billing['submit']) && $billing['submit'] && !empty(Session::get('cart'))) {
+            BaseController::$title = 'Thanh toán - Chọn hình thức nhận hàng';
             return view('Frontend.checkout.shipping', compact('shipping')); 
         } else {
             return Redirect::to('checkout/billing');
@@ -91,6 +93,7 @@ class CheckoutController extends Controller {
             $billing = Session::get('billing');
             $cart = Session::get('cart');
             $products = DB::table('products')->whereIn('id', array_keys($cart))->get();
+            BaseController::$title = 'Thanh toán - Xác nhận';
             return view('Frontend.checkout.confirm', compact('billing', 'products', 'cart'));
         } else {
             return Redirect::to('checkout/shipping');
@@ -110,6 +113,7 @@ class CheckoutController extends Controller {
             Session::forget('cart');
             Session::forget('buy');
             
+            BaseController::$title = 'Thanh toán - Đặt hàng thành công';
             return view('Frontend.checkout.success_order', compact('shipping'));
         }
     }

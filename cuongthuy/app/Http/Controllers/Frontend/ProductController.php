@@ -72,6 +72,7 @@ class ProductController extends Controller {
          $arrProductList  = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
          // get category name
          $categories = $categoryCls->getCategoryNamebyId($categoryId);
+         BaseController::$title = 'Danh sách sản phẩm';
          return view('Frontend.list',[
              'arrProductList' => $arrProductList,
              'currentPage'    => $currentPage,

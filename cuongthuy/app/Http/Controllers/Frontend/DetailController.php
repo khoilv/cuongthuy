@@ -34,6 +34,7 @@ class DetailController extends Controller {
             //Product rating
             $a = new RatingController;
             $average = $a->getRating();
+            BaseController::$title = 'Chi tiết sản phẩm';
             return view('Frontend.detail', compact('product', 'categories', 'average'));
         }
         abort(404);

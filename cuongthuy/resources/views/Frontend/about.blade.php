@@ -1,4 +1,8 @@
-<?php use App\Http\Controllers\Frontend\BannerController; ?>
+<?php 
+    use App\Http\Controllers\Frontend\BannerController; 
+    use App\Http\Controllers\Frontend\BaseController;
+    BaseController::$title = 'Giới thiệu';
+?>
 @extends('Frontend.layout')
 @section('banner')
 {!! BannerController::getBanner(); !!}

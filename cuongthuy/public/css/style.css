@@ -14,6 +14,7 @@
     border: 1px solid #e6e6e6;
     padding: 1px;
 	margin-bottom:20px;
+	height:255px;
 }
 	.top_product li:nth-child(5),.top_product li:nth-child(10),.top_product li:nth-child(15),.top_product li:nth-child(20),.top_product li:nth-child(25),
 	.top_product li:nth-child(30),.top_product li:nth-child(35),.top_product li:nth-child(40){
@@ -96,7 +97,7 @@
 	}
 .price{
 	color:#ec0000;
-	font-size:19px;
+	font-size:19px !important;
 	font-weight:bold;
 	margin:5px;
 	line-height:30px;
@@ -105,6 +106,7 @@
 	color:#919191;
 	text-decoration: line-through;
 	font-style:italic;
+	font-size:12px;
 }
 .todetail{
 	width:100%;

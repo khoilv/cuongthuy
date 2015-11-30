@@ -13,7 +13,7 @@
 			.f_right{float:right;}
 			.clear{clear:both;}			
 			.content1{
-				background:url(images/bg.png) repeat-x bottom left;
+				background:url({!!Asset('public/images/bg.png')!!}) repeat-x bottom left;
 			}
 			.content1 img{padding:10px 0 20px 10px;}
 			.content1 ul{padding-top:80px;}

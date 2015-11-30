@@ -29,9 +29,9 @@ use App\Http\Controllers\Frontend\BannerController;
                     
                 </div>
                 <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name']; ?></a></p>
-                <span class="price"><?php echo number_format ($product['product_price'],0,",",".") . 'VNĐ'; ?></span> 
+                <span class="price"><?php echo number_format ($product['product_price'],0,",",".") . ' đ'; ?></span> 
                 <?php if ($product['product_discount_price']) { ?>
-                <span class="sale"><?php echo number_format ($product['product_discount_price'],0,",",".") . 'VNĐ'; ?></span>
+                <span class="sale"><?php echo number_format ($product['product_discount_price'],0,",",".") . ' đ'; ?></span>
                 <?php } ?>
                 <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
             </li>
@@ -60,7 +60,7 @@ use App\Http\Controllers\Frontend\BannerController;
                 <?php foreach ($arrProductList[$key] as $product){?>
                 <li>
                     <div>
-                        <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
+                        <a href="{!!action('Frontend\DetailController@getIndex')!!}"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
@@ -69,9 +69,9 @@ use App\Http\Controllers\Frontend\BannerController;
                         </div>
                     </div>
                     <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name'];?></a></p>
-                    <span class="price"><?php echo number_format ($product['product_price'],0,",",".").'VNĐ';?></span> 
+                    <span class="price"><?php echo number_format ($product['product_price'],0,",",".").' đ';?></span> 
                     <?php if ($product['product_discount_price']) { ?>
-                    <span class="sale"><?php echo number_format ($product['product_discount_price'],0,",",".").'VNĐ';?></span>
+                    <span class="sale"><?php echo number_format ($product['product_discount_price'],0,",",".").' đ';?></span>
                     <?php } ?>
                     <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
                 </li>

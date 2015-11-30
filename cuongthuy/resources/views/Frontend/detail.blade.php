@@ -64,7 +64,7 @@ $countCate = count($categories);
             <div class="add_cart">
                 <ul>
                     <li class="cart_add_detail">Thêm vào giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</li>
-                    <li><div class="fb-like" data-href="http://cuongthuy.pe.hu/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
+                    <li><div class="fb-like" data-href="http://cuongthuy.vn" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
                     <li><div class="g-plusone" data-size="medium" ></div></li>
                 </ul>
                 <div class="clear"></div>
@@ -77,9 +77,9 @@ $countCate = count($categories);
                 <div class="clear"></div> 
             </div>
             <span>Ngày đăng : {!!date("d-m-Y", strtotime($product->product_date_added))!!}</span>
-            <p style="margin-top:20px;">Giá bán :<span class="price2">{!!number_format ($product->product_price,0,",",".")!!} VNĐ</span></p>
+            <p style="margin-top:20px;">Giá bán :<span class="price2">{!!number_format ($product->product_price,0,",",".")!!}  đ</span></p>
             @if ($product->product_discount_price)
-            <p>Giá cũ :<span class="price_old">{!!number_format ($product->product_discount_price,0,",",".")!!} VNĐ</span></p>
+            <p>Giá cũ :<span class="price_old">{!!number_format ($product->product_discount_price,0,",",".")!!}  đ</span></p>
             @endif
             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product->id))!!}" ><button></button></a> 
             <div class="clear"></div>                  

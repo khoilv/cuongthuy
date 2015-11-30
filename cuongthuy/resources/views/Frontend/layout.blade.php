@@ -22,7 +22,7 @@ use App\Http\Controllers\Frontend\BaseController;
         <link href="{!!Asset('public/css/nivo-slider.css')!!}" rel="stylesheet" type="text/css">
         <!-- navigation mobile-->
         <link type="text/css" rel="stylesheet" href="{!!Asset('public/css/jquery.mmenu.all.css')!!}" />
-        <link rel="canonical" href="http://cuongthuy.pe.hu/" />
+        <link rel="canonical" href="http://cuongthuy.vn" />
         @yield('stylesheets')
         @section('javascript')
         <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
@@ -111,7 +111,7 @@ use App\Http\Controllers\Frontend\BaseController;
         <!-- InstanceBeginEditable name="doctitle" -->
         <title>home</title>
         <!-- InstanceEndEditable -->
-        <link rel="stylesheet" type="text/css" href="{!!Asset('public/css/slide.css')!!}">                
+        <link rel="stylesheet" type="text/css" href="{!!Asset('public/css/slide.css')!!}">
         <!-- porduction -->
         <script src="{!!Asset('public/js/owl.carousel.js')!!}"></script>
         <script>
@@ -133,7 +133,7 @@ use App\Http\Controllers\Frontend\BaseController;
                 updateResult(".visibleItems", this.owl.visibleItems);
                 updateResult(".dragDirection", this.owl.dragDirection);
             }
-            $(".add_to_cart").click(function () {                
+            $(".add_to_cart").click(function () {
                 var my = $(this).closest("li");
                 $.ajax({
                     url : 'addCart',
@@ -172,7 +172,7 @@ use App\Http\Controllers\Frontend\BaseController;
             <div class="content_top">
                 <div class="wrap">
                     <div class="f_left" style="margin-top:7px;">
-                        <div class="fb-like" data-href="http://cuongthuy.pe.hu/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <div class="fb-like" data-href="http://cuongthuy.vn" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                         <div class="g-plusone" data-size="medium" ></div>
                     </div>
                     <ul class="f_right">
@@ -214,7 +214,7 @@ use App\Http\Controllers\Frontend\BaseController;
                 </div>
             </div>
             <div class="clear"></div>
-            <!-- navigation mobile-->      
+            <!-- navigation mobile-->
             <div id="menu_m">
                 <div class="header">
                     <a href="#menu"></a>

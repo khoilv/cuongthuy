@@ -33,11 +33,18 @@ Route::get('rule_change_pay',function(){
     return view('Frontend/rule_change_pay');
 });
 Route::any('updateRating', 'Frontend\RatingController@updateRating');
-Route::get('test',function(){
-    return view('test');
-});
-Route::group(array('prefix'=>'test'),function(){
-//    Route::get('index.php',function(){
-//             echo 'jjk';
-//    });
+
+Route::group(array('prefix'=>'admin'),function(){
+    Route::get('/',function(){
+         return view('Admin/index');
+    });
+    Route::get('/product/index',function(){
+         return view('Admin/product/index');
+    });
+    Route::get('/product/detail',function(){
+         return view('Admin/product/detail');
+    });
+    Route::get('/product/search',function(){
+         return view('Admin/product/search');
+    });
 });

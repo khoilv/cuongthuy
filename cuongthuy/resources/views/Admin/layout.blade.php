@@ -49,7 +49,7 @@
 <!--▼ footer -->
 <div id="footer">
     <div id="footer_area">
-        <p id="copyright">cuongthuy.vn</p>
+        <p id="copyright">2015 - Trang quản trị CuongThuy.vn</p>
     </div>
 </div>
 <!--▲ footer -->

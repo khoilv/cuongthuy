@@ -1,51 +1,78 @@
 <?php
+
 /**
  * @author LinhNV
  * @version 1.00
  * @create 2015/10/25
  */
+
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Session;
 use DB;
+use Input;
+use App\Models\Frontend\ProductModel;
 
-class FrameRelativeProductsController extends Controller {
-    
-    public static function getDetailRelativeProducts ($category) {
-//        $relativeProducts = DB::table('products')->where('product_category', $category)->take(10)->get();
-        
+class FrameRelativeProductsController extends Controller
+{
+
+    public static function getDetailRelativeProducts($categoryId, $productId)
+    {
         $productCls = new ProductModel();
-        $whereArr = array();
-        $whereArr = array('categories.id' => $categoryId);
-        $joinsArr = array();
+        $whereArr = array(
+            'product_category' => $categoryId,
+            'id NOT IN' => $productId
+        );
         $limitArr = array(0, 10);
-        $arrProductList  = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
-        var_dump($relativeProducts);
-//        if(count($relativeProducts) < 10) {
-//            var_dump("test1");
-//            $productAdding = 10 - count($relativeProducts);
-//            $parrentCategory = DB::table('categories')->where('id', $category)->pluck('category_parent');
-//            var_dump($category);
-//            var_dump($parrentCategory);
-//            if($parrentCategory) {
-//                var_dump('test');
-//                $relativeProducts2 = DB::table('products')->where('product_category', $category)->take($productAdding)->get();
-//                var_dump($relativeProducts2);
-//            }
-////            $relativeProducts = array_merge($relativeProducts, $parrentCategory);
-//        }
-//        var_dump($relativeProducts);
+        $joinsArr = array();
+        $relativeProducts = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
+        if (count($relativeProducts) < 10) {
+            $productAdding = 10 - count($relativeProducts);
+            $parrentCategory = DB::table('categories')->where('id', $categoryId)->pluck('category_parent');
+            if ($parrentCategory) {
+                $whereArr['product_category'] = $parrentCategory;
+                $limitArr = array(0, $productAdding);
+                $relativeProducts2 = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
+                if ($relativeProducts2) {
+                    $relativeProducts = $relativeProducts + $relativeProducts2;
+                }
+            }
+        }
         return view('Frontend.relative_products', compact('relativeProducts'));
     }
-    
-    public static function getCartRelativeProducts () {
+
+    public static function getCartRelativeProducts()
+    {
         $arrCart = Session::get('cart');
-        
-        
-        var_dump(Session::get('cart'));
-        
-        return view('Frontend.relative_products');
-        //return view('Frontend.relative_products', compact('relativeProducts'));
+        if (!empty($arrCart)) {
+            $arrProductId = array_keys($arrCart);
+            $productCls = new ProductModel();
+            $arrProducts = $productCls->getProductList(array('products.id' => $arrProductId), array(), array());
+            $arrCategoryId = array();
+            foreach ($arrProducts as $key => $val) {
+                $arrCategoryId[] = $val['product_category'];
+            }
+            $whereArr = array(
+                'product_category' => $arrCategoryId,
+                'id NOT IN' => implode(',', $arrProductId)
+            );
+            $limitArr = array(0, 10);
+            $relativeProducts = $productCls->getProductList($whereArr, $limitArr, array());
+            if (count($relativeProducts) < 10) {
+                $productAdding = 10 - count($relativeProducts);
+                $parrentCategory = DB::table('categories')->whereIn('id', $arrCategoryId)->lists('category_parent');
+                if ($parrentCategory) {
+                    $whereArr['product_category'] = $parrentCategory;
+                    $limitArr = array(0, $productAdding);
+                    $relativeProducts2 = $productCls->getProductList($whereArr, $limitArr, array());
+                    if ($relativeProducts2) {
+                        $relativeProducts = $relativeProducts + $relativeProducts2;
+                    }
+                }
+            }
+        }
+        return view('Frontend.relative_products', compact('relativeProducts'));
     }
+
 }

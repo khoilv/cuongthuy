@@ -36,6 +36,9 @@ Route::any('updateRating', 'Frontend\RatingController@updateRating');
 
 Route::group(array('prefix'=>'admin'),function(){
     Route::get('/',function(){
+         return view('Admin/login');
+    });
+    Route::get('/top',function(){
          return view('Admin/index');
     });
     Route::get('/product/index',function(){
@@ -46,5 +49,14 @@ Route::group(array('prefix'=>'admin'),function(){
     });
     Route::get('/product/search',function(){
          return view('Admin/product/search');
+    });
+    Route::get('/order/index',function(){
+         return view('Admin/order/index');
+    });
+    Route::get('/order/search',function(){
+         return view('Admin/order/search');
+    });
+    Route::get('/order/detail',function(){
+         return view('Admin/order/detail');
     });
 });

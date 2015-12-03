@@ -62,7 +62,7 @@ use App\Http\Controllers\Frontend\FrameRelativeProductsController;
     </div>
             <!--end cart page-->
     <div class="clear"></div>
-    {{--{!!FrameRelativeProductsController::getCartRelativeProducts()!!}--}}
+    {!!FrameRelativeProductsController::getCartRelativeProducts()!!}
     <div class="clear"></div>
     <!-- InstanceEndEditable -->
     

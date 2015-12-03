@@ -64,7 +64,7 @@ $countCate = count($categories);
             <div class="add_cart">
                 <ul>
                     <li class="cart_add_detail">Thêm vào giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</li>
-                    <li><div class="fb-like" data-href="http://cuongthuy.vn" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
+                    <li><div class="fb-like" data-href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
                     <li><div class="g-plusone" data-size="medium" ></div></li>
                 </ul>
                 <div class="clear"></div>
@@ -92,7 +92,7 @@ $countCate = count($categories);
         {!!$product->product_description!!}
     </div><!-- edn detail content 2-->
 </div><!-- end content-->
-{{--{!!FrameRelativeProductsController::getDetailRelativeProducts($product->product_category)!!}--}}
+{!!FrameRelativeProductsController::getDetailRelativeProducts($product->product_category, $product->id)!!}
 <div class="clear"></div>
 <script type="text/javascript" src="{!!Asset('public/js/jquery.flexisel.js')!!}"></script>
 <script type="text/javascript" src="{!!Asset('public/js/jssor.slider.mini.js')!!}"></script>

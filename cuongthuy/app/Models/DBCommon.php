@@ -163,6 +163,17 @@ class DBCommon {
                         $orClause[] = $this->__makeOperatorSegment($orK, $orV, $params);
                     }
                     $whereClause[] = '(' . implode(' OR ', $orClause) . ')';
+                } elseif (strpos ($k, 'NOT IN') !== false) {
+                    if (is_array($v)) {
+                        $notInClause = array();
+                        foreach ($v as $notInV) {
+                            $notInClause[] = '?';
+                            array_push($params, $notInV);
+                        }
+                        $whereClause[] = $k . ' ' . '(' . implode(', ', $notInV) . ')';
+                    } else {
+                        $whereClause[] = $k . ' ' . '(' . $v . ')';
+                    }
                 } elseif (strpos ($k, 'BETWEEN') !== false && is_array($v)) {
                     $betwClause = array();
                     foreach ($v as $betwV) {

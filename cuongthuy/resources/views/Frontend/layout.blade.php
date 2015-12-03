@@ -214,63 +214,6 @@ use App\Http\Controllers\Frontend\BaseController;
                 </div>
             </div>
             <div class="clear"></div>
-            <!-- navigation mobile-->
-            <div id="menu_m">
-                <div class="header">
-                    <a href="#menu"></a>
-                </div>
-
-                <nav id="menu">
-                    <ul>
-                        <li><a href="#">Sản phẩm mới</a></li>
-                        <li><a href="#">Mỹ phẩm</a>
-                            <ul>
-                                <li><a href="#">Mascara</a></li>
-                                <li><a href="#">Phấn hồng</a></li>
-                                <li><a href="#">Phấn phủ - BB cream</a></li>
-                                <li><a href="#">Kem dưỡng da</a></li>
-                                <li><a href="#">Son môi</a></li>
-                                <li><a href="#">Chăm sóc tóc</a>
-                                    <ul>
-                                        <li><a href="#">Dầu gội</a></li>
-                                        <li><a href="#">Hấp ủ tinh chất dưỡng</a></li>
-                                        <li><a href="#">Dầu xả</a></li>
-                                        <li><a href="#">Gôm - Gel uốn tóc</a></li>
-                                        <li><a href="#">Nhuộn tóc</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Chăm sóc sức khỏe</a></li>
-                        <li><a href="#">Hàng tiêu dùng</a>
-                            <ul>
-                                <li><a href="#">Bột giặt</a></li>
-                                <li><a href="#">Bỉm</a>
-                                    <ul class="ul3">
-                                        <li><a href="#">Bỉm người lớn</a></li>
-                                        <li><a href="#">Bỉm trẻ em</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Đồ gia dụng</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Phụ kiện - Thời trang</a>
-                            <ul>
-                                <li><a href="#">Túi xách</a></li>
-                                <li><a href="#">Mũ thời trang</a></li>
-                                <li><a href="#">Bikini</a></li>
-                                <li><a href="#">Phụ kiện</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#login">Đăng nhập</a></li>
-                        <li><a href="#register">Đăng ký</a></li>
-                        <li><a href="#">Giỏ hàng (6)</a></li>
-                    </ul>
-                </nav>
-                <div class="clear"></div> 
-            </div>
-        </header>
-        <div class="clear"></div>
         <!-- banner -->
         @yield('banner')
         <div class="clear"></div>

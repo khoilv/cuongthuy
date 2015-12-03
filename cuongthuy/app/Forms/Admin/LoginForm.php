@@ -13,7 +13,7 @@ class LoginForm extends BaseForm {
      */
     protected function rules(){
         $rules = [
-            'user_name' => ['required'],
+            'username' => ['required'],
             'password' => ['required', 'max:20', 'min:6', 'regex:/\A[a-z\d|!?_-]+\z/i'],
             'remember' => 'sometimes|numeric|min:1|max:1'
         ];
@@ -22,7 +22,7 @@ class LoginForm extends BaseForm {
     
     protected function setAttributeNames(){
         return array(
-            'user_name' => "Tên đăng nhập",
+            'username' => "Tên đăng nhập",
             'password' => "Mật khẩu",
             'remember' => 'remember'
         );

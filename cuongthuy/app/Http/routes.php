@@ -35,12 +35,8 @@ Route::get('rule_change_pay',function(){
 Route::any('updateRating', 'Frontend\RatingController@updateRating');
 
 Route::group(array('prefix'=>'admin'),function(){
-    Route::get('/',function(){
-         return view('Admin/login');
-    });
-    Route::get('/top',function(){
-         return view('Admin/index');
-    });
+    Route::any('/', 'Admin\LoginController@login');
+    Route::get('/top','Admin\TopController@index');
     Route::get('/product/index',function(){
          return view('Admin/product/index');
     });

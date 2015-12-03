@@ -22,15 +22,21 @@
         <!--▼ login_content_ -->
         <div id="login_content">
             <p class="alignC mb10"><img src="{!!Asset('public/images/admin/logo.png')!!}" /></p>
-            <p class="alert_red_error mb10">Tên đăng nhập hoặc mật khẩu không đúng</p>
+            @if ($errors->has('msg_error'))
+            <p class="alert_red_error mb10">{!! $errors->first('msg_error') !!}</p>
+            @endif
+            {!! Form::open(['method' => 'POST','files' => true, 'id' => 'form']) !!}
             <div class="ma_auto">
                 <p class="alignL ml85">Tên đăng nhập</p>
-                <p class="alignC ml10"><input type="text" name="ID" class="text" style="width:300px; height:35px;" /></p>
+                <p class="alignC ml10">{!! Form::text('username', isset($username)? $username:'',['style' => 'width:300px; height:35px', 'class' => 'text' ]) !!}</p>
+                @if ($errors->has('username'))<p class ="error_comment">{!! $errors->first('username') !!}</p> @endif
                 <p class="alignL mt20 ml85">Mật khẩu</p>
-                <p class="alignC ml10"><input type="text" name="PASS" class="text" style="width:300px; height:35px;" /></p>
-                <p class="mt20"><label><input type="checkbox" name="heart_all" value=""> Ghi nhớ tài khoản</label></p>
-                <p class="ml75" id="login_button"><a href="{!!Asset('admin/index')!!}">Đăng nhập</a></p>
+                <p class="alignC ml10">{!! Form::text('password', isset($password)? $password:'',['style' => 'width:300px; height:35px', 'class' => 'text' ]) !!}</p>
+                @if ($errors->has('password'))<p class ="error_comment">{!! $errors->first('password') !!}</p> @endif
+                <p class="mt20"><label>{!! Form::checkbox('remember', '')!!} Ghi nhớ tài khoản</label></p>
+                <input type="submit" name="update" value="Đăng nhập" class="ml75" id="login_button"/>
             </div>
+            {!!Form::close()!!}
         </div>
         <!--▼ footer -->
         <div id="footer">

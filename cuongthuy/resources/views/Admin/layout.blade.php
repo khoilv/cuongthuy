@@ -18,7 +18,7 @@
         <h1 class="floatL"><img src="{!!Asset('public/images/admin/logo.png')!!}" width="180px" height="51px" /></h1>
         <div class="floatR alignR mt10">
             <p>Xin chào Lan!</p>
-            <p><a href="../web/index.html" target="_blank">Index</a>｜<a href="login.html">Logout</a></p>
+            <p><a href="{!!Asset('admin/top')!!}" target="_blank">Index</a>｜<a href="{!!Asset('admin')!!}">Logout</a></p>
         </div>
     </div>
 </div>
@@ -27,13 +27,41 @@
 <div id="main_content">
     <!--▼ left_content -->
     <div id="left_content">
+            @if (strpos($_SERVER['REQUEST_URI'], 'top' ))
             <p id="left_link_01_on">Danh mục quản lí</p>
+            @else
+            <p id="left_link_01"><a href="{!!Asset('admin/top')!!}">Danh mục quản lí</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'product' ))
+            <p id="left_link_02_on">Quản lí sản phẩm</p>
+            @else
             <p id="left_link_02"><a href="{!!Asset('admin/product/index')!!}">Quản lí sản phẩm</a></p>
-            <p id="left_link_03"><a href="order/index.html">Quản lí đơn hàng</a></p>
-            <p id="left_link_04"><a href="event/index.html">Quản lí danh mục</a></p>
-            <p id="left_link_05"><a href="user/index.html">Quản lí khách hàng</a></p>
-            <p id="left_link_06"><a href="sale/index.html">Thống kê bán hàng</a></p>
-            <p id="left_link_07"><a href="maintenance/index.html">Bảo trì hệ thống</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'order' ))
+            <p id="left_link_03_on">Quản lí đơn hàng</p>
+            @else
+            <p id="left_link_03"><a href="{!!Asset('admin/order/index')!!}">Quản lí đơn hàng</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'category' ))
+            <p id="left_link_04_on">Quản lí danh mục</p>
+            @else
+            <p id="left_link_04"><a href="{!!Asset('admin/category/index')!!}">Quản lí danh mục</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'user' ))
+            <p id="left_link_05_on">Quản lí khách hàng</p>
+            @else
+            <p id="left_link_05"><a href="{!!Asset('admin/user/index')!!}">Quản lí khách hàng</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'sale' ))
+            <p id="left_link_06_on">Thống kê bán hàng</p>
+            @else
+            <p id="left_link_06"><a href="{!!Asset('admin/sale/index')!!}">Thống kê bán hàng</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'maintenance' ))
+            <p id="left_link_07_on">Bảo trì hệ thống</p>
+            @else
+            <p id="left_link_07"><a href="{!!Asset('admin/sale/index')!!}">Bảo trì hệ thống</a></p>
+            @endif
     </div>
     <!--▲ left_content -->
 

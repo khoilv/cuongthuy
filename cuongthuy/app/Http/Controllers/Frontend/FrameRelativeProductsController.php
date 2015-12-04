@@ -26,6 +26,7 @@ class FrameRelativeProductsController extends Controller
         );
         $limitArr = array(0, 10);
         $joinsArr = array();
+        $relativeProducts = array();
         $relativeProducts = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
         if (count($relativeProducts) < 10) {
             $productAdding = 10 - count($relativeProducts);
@@ -45,6 +46,7 @@ class FrameRelativeProductsController extends Controller
     public static function getCartRelativeProducts()
     {
         $arrCart = Session::get('cart');
+        $relativeProducts = array();
         if (!empty($arrCart)) {
             $arrProductId = array_keys($arrCart);
             $productCls = new ProductModel();

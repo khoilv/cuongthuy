@@ -15,6 +15,9 @@ class DetailController extends Controller {
     public function getIndex () {
         if (Input::has('product_id')) {
             $product = DB::table('products')->where('id', Input::get('product_id'))->get();
+            if (empty ($product)) {
+                abort(404);
+            }
             $product = $product[0];
 
             //Get breadcrumbs

@@ -12,12 +12,13 @@ use App\Http\Controllers\Frontend\BaseController;
         <meta name="keywords" content="Mỹ phẩm - tạp hóa Cường Thủy" />
         <meta name="description" content="Mỹ phẩm - tạp hóa Cường Thủy" />
         <meta name="viewport" content="width=device-width, maximum-scale=1" />
-        <meta name="_token" content="{!! csrf_token() !!}"/>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Cường Thủy - {!!BaseController::$title!!}</title>
         @section('stylesheets')
+        <link rel="icon" type="image/png" href="{!!Asset('public/images/icon_logo.png')!!}">
         <link href="{!!Asset('public/css/common.css')!!}" rel="stylesheet" type="text/css">
         <link href="{!!Asset('public/css/style.css')!!}" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="{!!Asset('public/images/icon_logo.png')!!}">
+        <link rel="stylesheet" type="text/css" href="{!!Asset('public/css/slide.css')!!}">
         <!-- slider -->
         <link href="{!!Asset('public/css/nivo-slider.css')!!}" rel="stylesheet" type="text/css">
         <!-- navigation mobile-->
@@ -27,65 +28,106 @@ use App\Http\Controllers\Frontend\BaseController;
         @section('javascript')
         <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
         <script type="text/javascript" src="{!!Asset('public/js/jquery.nivo.slider.js')!!}"></script>
-        <script type="text/javascript">
-                    $(window).load(function() {
-            $('#slider').nivoSlider();
-            });</script>
         <script type="text/javascript" src="{!!Asset('public/js/jquery.mmenu.min.all.js')!!}"></script>
+        <script src="{!!Asset('public/js/owl.carousel.js')!!}"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script type="text/javascript">
-                    $(function() {
-                    $('nav#menu').mmenu({
-                    extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                            searchfield	: true,
-                            counters	: true,
-                            navbar 		: {
-                            title		: 'Menu'
-                            },
-                            navbars		: [
-                            {
-                            position	: 'top',
-                                    content		: [ 'searchfield' ]
-                            }, {
-                            position	: 'top',
-                                    content		: [
-                                            'prev',
-                                            'title',
-                                            'close'
-                                    ]
-                            }
-                            ]
-                    });
-                    });</script>
-        <!-- go to top -->
-        <script>
-                    $(function() {
-                    var showFlag = false;
-                            var topBtn = $('#top_gototop');
-                            topBtn.css('bottom', '-100px');
-                            var showFlag = false;
-                            $(window).scroll(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(window).load(function() {
+                $('#slider').nivoSlider();
+            });
+            $(function() {
+                $('nav#menu').mmenu({
+                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+                searchfield	: true,
+                counters	: true,
+                navbar 		: {
+                    title		: 'Menu'
+                },
+                navbars		: [{
+                        position	: 'top',
+                        content		: [ 'searchfield' ]
+                    }, {
+                        position	: 'top',
+                        content		: [
+                            'prev',
+                            'title',
+                            'close'
+                        ]
+                    }
+                ]
+                });
+            });
+            //  jquery go to top
+            $(function() {
+                var showFlag = false;
+                var topBtn = $('#top_gototop');
+                topBtn.css('bottom', '-100px');
+                var showFlag = false;
+                $(window).scroll(function () {
                     if ($(this).scrollTop() > 100) {
-                    if (showFlag == false) {
-                    showFlag = true;
-                            topBtn.stop().animate({'bottom' : '55px'}, 300);
-                    }
+                        if (showFlag == false) {
+                        showFlag = true;
+                                topBtn.stop().animate({'bottom' : '55px'}, 300);
+                        }
                     } else {
-                    if (showFlag) {
-                    showFlag = false;
-                            topBtn.stop().animate({'bottom' : '-100px'}, 300);
+                        if (showFlag) {
+                        showFlag = false;
+                                topBtn.stop().animate({'bottom' : '-100px'}, 300);
+                        }
                     }
-                    }
+                });
+                topBtn.click(function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 500);
+                    return false;
+                });
+                
+                
+                var owl = $(".owl-demo"),
+                status = $(".owlStatus");
+                owl.owlCarousel({
+                navigation : true,
+                        afterAction : afterAction
+                });
+                function updateResult(pos, value){
+                status.find(pos).find(".result").text(value);
+                }
+
+                function afterAction(){
+                    updateResult(".owlItems", this.owl.owlItems.length);
+                    updateResult(".currentItem", this.owl.currentItem);
+                    updateResult(".prevItem", this.prevItem);
+                    updateResult(".visibleItems", this.owl.visibleItems);
+                    updateResult(".dragDirection", this.owl.dragDirection);
+                }
+                $(".add_to_cart").click(function () {
+                    var my = $(this).closest("li");
+                    $.ajax({
+                        url : 'addCart',
+                        type : 'post',
+                        dataType: 'json',
+                        data : { product_id : $(".product_id", my).val() },
+                        beforeSend: function() {
+                            $('#img_ajax').addClass('loading');
+                        },
+                        success : function (result){
+                            $(".button_cart").html("Giỏ hàng ("+result+")");
+                            $('#img_ajax').removeClass('loading');
+                        }
+
                     });
-                            topBtn.click(function () {
-                            $('body,html').animate({
-                            scrollTop: 0
-                            }, 500);
-                                    return false;
-                            });
-                    });</script>
+                });
+            });
+          </script>
         <!-- Navigation scroll-->
         <script type="text/javascript">
-                    $("document").ready(function($){
+            $("document").ready(function($){
             // Create a clone of the nav_top, right next to original.
             $('.nav_top').addClass('original').clone().insertAfter('.nav_top').addClass('cloned').css('position', 'fixed').css('top', '0').css('margin-top', '0').css('z-index', '500').removeClass('original').hide();
                     scrollIntervalID = setInterval(stickIt, 10);
@@ -107,50 +149,7 @@ use App\Http\Controllers\Frontend\BaseController;
                             $('.original').css('visibility', 'visible');
                     }
                     }
-            });</script>
-        <!-- InstanceBeginEditable name="doctitle" -->
-        <title>home</title>
-        <!-- InstanceEndEditable -->
-        <link rel="stylesheet" type="text/css" href="{!!Asset('public/css/slide.css')!!}">
-        <!-- porduction -->
-        <script src="{!!Asset('public/js/owl.carousel.js')!!}"></script>
-        <script>
-            $(document).ready(function() {
-            var owl = $(".owl-demo"),
-                status = $(".owlStatus");
-                owl.owlCarousel({
-                navigation : true,
-                        afterAction : afterAction
-                });
-                function updateResult(pos, value){
-                status.find(pos).find(".result").text(value);
-                }
-
-            function afterAction(){
-                updateResult(".owlItems", this.owl.owlItems.length);
-                updateResult(".currentItem", this.owl.currentItem);
-                updateResult(".prevItem", this.prevItem);
-                updateResult(".visibleItems", this.owl.visibleItems);
-                updateResult(".dragDirection", this.owl.dragDirection);
-            }
-            $(".add_to_cart").click(function () {
-                var my = $(this).closest("li");
-                $.ajax({
-                    url : 'addCart',
-                    type : 'post',
-                    dataType: 'json',
-                    data : { product_id : $(".product_id", my).val() },
-                    beforeSend: function() {
-                        $('#img_ajax').addClass('loading');
-                    },
-                    success : function (result){
-                        $(".button_cart").html("Giỏ hàng ("+result+")");
-                        $('#img_ajax').removeClass('loading');
-                    }
-
-                });
             });
-        });
         </script>
         <!--like facebook -->
         <script>
@@ -162,9 +161,6 @@ use App\Http\Controllers\Frontend\BaseController;
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-         <!--like google -->
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <!-- InstanceEndEditable -->
         @yield('javascript')
     </head>
     <body>
@@ -270,6 +266,7 @@ use App\Http\Controllers\Frontend\BaseController;
         s0.parentNode.insertBefore(s1,s0);
         })();
         </script>
+        <!--<script src="http://uhchat.net/code.php?f=a30ece"></script>-->
         <!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=96204503"></script>-->
         <!--<script src='https://livesupporti.com/Scripts/client.js?acc=dcb5276e-02c3-449b-9e74-c6f89c580637&skin=Modern'></script>-->
     </body>

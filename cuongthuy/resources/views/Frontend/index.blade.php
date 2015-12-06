@@ -24,7 +24,7 @@ use App\Http\Controllers\Frontend\BannerController;
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
                             <button class="add_to_cart" title="Thêm vào giỏ"></button>
-                            <span><a href="#" class="todetail"></a></span>
+                            <span><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}" class="todetail"></a></span>
                         </div>
                     
                 </div>
@@ -65,7 +65,7 @@ use App\Http\Controllers\Frontend\BannerController;
                             <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
                             <button class="add_to_cart" title="Thêm vào giỏ"></button>
-                            <span><a href="#" class="todetail"></a></span>
+                            <span><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}" class="todetail"></a></span>
                         </div>
                     </div>
                     <p><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}"><?php echo $product['product_name'];?></a></p>

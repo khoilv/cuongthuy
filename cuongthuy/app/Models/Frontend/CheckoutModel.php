@@ -85,7 +85,7 @@ class CheckoutModel {
                 'totalOrderPrice' => $totalOrderPrice
             ],
             function($message) {
-                $message->from('noreply@cuongthuy.vn', $name = 'Cường Thủy');
+                $message->from('admin@cuongthuy.vn', $name = 'Mỹ Phẩm Cường Thủy');
                 $message->to($this->billing['email'])->subject('Tiếp nhận đơn hàng');
             }
         );

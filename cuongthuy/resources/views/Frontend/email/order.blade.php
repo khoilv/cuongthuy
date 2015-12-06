@@ -51,8 +51,8 @@
                 Chào {!!$billing['name']!!}<br>
                 Bạn đã đặt hàng thành công trên Cuongthuy.vn. <br>
                 @if($shipping['shipMethod'] == 1)
-                    Chúng tôi sẽ gọi điện để xác nhận lại đơn hàng của quý khách.
-                    Và sẽ giao hàng cho quý khách trong thời gian từ 1-3 ngày làm việc.<br>
+                    Chúng tôi sẽ gọi điện để xác nhận lại đơn hàng của quý khách,
+                    và sẽ giao hàng cho quý khách trong thời gian từ 1-3 ngày làm việc.<br>
                 @else
                     Chúng tôi trân trọng mời bạn đến cửa hàng mua các sản phẩm mà bạn đã đặt.
                 @endif

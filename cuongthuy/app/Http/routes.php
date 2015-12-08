@@ -34,6 +34,7 @@ Route::get('rule_change_pay',function(){
 });
 Route::any('updateRating', 'Frontend\RatingController@updateRating');
 
+
 Route::group(array('prefix'=>'admin'),function(){
     Route::any('/', 'Admin\LoginController@login');
     Route::get('/top','Admin\TopController@index');
@@ -46,13 +47,14 @@ Route::group(array('prefix'=>'admin'),function(){
     Route::get('/product/search',function(){
          return view('Admin/product/search');
     });
-    Route::get('/order/index',function(){
-         return view('Admin/order/index');
-    });
-    Route::get('/order/search',function(){
-         return view('Admin/order/search');
-    });
-    Route::get('/order/detail',function(){
-         return view('Admin/order/detail');
-    });
+    Route::controller('order', 'Admin\OrderController');
+//    Route::get('/order/index',function(){
+//         return view('Admin/order/index');
+//    });
+//    Route::get('/order/search',function(){
+//         return view('Admin/order/search');
+//    });
+//    Route::get('/order/detail',function(){
+//         return view('Admin/order/detail');
+//    });
 });

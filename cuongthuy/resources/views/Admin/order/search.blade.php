@@ -59,7 +59,16 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($order as $key => $value)
             <tr class="table_list bg_yellow">
+                <td><span class="lh12">2013/03/22 12:34:56</span></td>
+                <td class="bold"><a href="detailed.html">123456</a></td>
+                <td class="color_blue bold">Đơn hàng đang chờ</td>
+                <td><p class="alignC small"><a href="../product/detailed.html">Dầu gội</a></p></td>
+                <td>1</td>
+            </tr>
+            @endforeach
+<!--            <tr class="table_list bg_yellow">
                 <td rowspan="3"><span class="lh12">2013/03/22 12:34:56</span></td>
                 <td rowspan="3" class="bold"><a href="detailed.html">123456</a></td>
                 <td rowspan="3" class="color_blue bold">Đơn hàng đang chờ</td>
@@ -91,7 +100,7 @@
                 <td class="bold">Đơn hàng đã xử lý xong</td>
                 <td><p class="alignC small"><a href="../product/detailed.html">Kem che khuyết điểm</a></p></td>
                 <td>1</td>
-            </tr>
+            </tr>-->
     </table>
 
     <div id="tab_area">

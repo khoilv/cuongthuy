@@ -13,45 +13,47 @@ use App\Http\Controllers\Frontend\FrameRelativeProductsController;
 </div>
 
     <div class="wrap cart_page">
-        <table>
-            <thead>
-            <tr>
-                <th>STT</th>
-                <th>Mã Sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Hình ảnh sản phẩm</th>
-                <th>Đơn giá</th>
-                <th>Thành tiền</th>
-                <th>Xóa</th>
-            </tr>
-            </thead>
-            <tbody>
-            @if(count($products)> 0)
-                @foreach($products as $key => $product)
-                    <tr>
-                        <td class="serial">{!! $key+1 !!}</td>
-                        <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_code !!}</a></td>
-                        <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_name !!}</a></td>
-                        <td>
-                            <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' maxlength="3" value="{!! $cart[$product->id] !!}"/>
-                        </td>
-                        <td>
-                            <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
-                        </td>
-                        <td class="product_price">{!! number_format ($product->product_price,0,",",".")!!} đ</td>
-                        <td class="line_price">{!! number_format ($product->product_price * $cart[$product->id],0,",",".") !!} đ</td>
-                        <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
-                        <input type="hidden" class='product_id'  value="{!! $product->id!!}">
-                    </tr>
-                @endforeach
-            @else
+        <div class="cart_page_table">
+            <table>
+                <thead>
                 <tr>
-                    <td colspan="8"><span class="notification">Bạn không có sản phẩm nào trong giỏ hàng</span></td>
+                    <th>STT</th>
+                    <th>Mã Sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Hình ảnh sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                    <th>Xóa</th>
                 </tr>
-            </tbody>
-            @endif
-        </table>
+                </thead>
+                <tbody>
+                @if(count($products)> 0)
+                    @foreach($products as $key => $product)
+                        <tr>
+                            <td class="serial">{!! $key+1 !!}</td>
+                            <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_code !!}</a></td>
+                            <td><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}">{!! $product->product_name !!}</a></td>
+                            <td>
+                                <input type='text' class='product_quantity' name='quantity[{!!$product->id!!}]' size='5' maxlength="3" value="{!! $cart[$product->id] !!}"/>
+                            </td>
+                            <td>
+                                <a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}"><img src="public/images/upload/products/{!! $product->product_image !!}"></a>
+                            </td>
+                            <td class="product_price">{!! number_format ($product->product_price,0,",",".")!!} đ</td>
+                            <td class="line_price">{!! number_format ($product->product_price * $cart[$product->id],0,",",".") !!} đ</td>
+                            <td><button class="button delete_product" title="Xóa sản phẩm này khỏi giỏ hàng"></button></td>
+                            <input type="hidden" class='product_id'  value="{!! $product->id!!}">
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="8"><span class="notification">Bạn không có sản phẩm nào trong giỏ hàng</span></td>
+                    </tr>
+                </tbody>
+                @endif
+            </table>
+        </div>
         @if(count($products)> 0)
         <div class="cart_c2">
             <p class="f_left total_price">Tổng tiền : {!!number_format(CartController::getTotalPriceCart(),0,",",".")!!} đ</p>

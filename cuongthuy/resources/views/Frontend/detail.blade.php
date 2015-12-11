@@ -63,7 +63,6 @@ $countCate = count($categories);
             <h2>{!!$product->product_name!!}</h2>
             <div class="add_cart">
                 <ul>
-                    <li class="cart_add_detail">Thêm vào giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</li>
                     <li><div class="fb-like" data-href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
                     <li><div class="g-plusone" data-size="medium" ></div></li>
                 </ul>
@@ -81,6 +80,7 @@ $countCate = count($categories);
             @if ($product->product_discount_price)
             <p>Giá cũ :<span class="price_old">{!!number_format ($product->product_discount_price,0,",",".")!!}  đ</span></p>
             @endif
+            <div class="cart_add_detail">Thêm vào giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</div>
             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product->id))!!}" ><button></button></a> 
             <div class="clear"></div>                  
         </div> 

@@ -85,8 +85,8 @@
     <div class="clear"></div>
     {!! Form::open(array('url' => 'checkout/confirm')) !!}
     <ul class="bs1_button">
-        <li><a href="{!!Asset('checkout/shipping')!!}">Quay lại</a></li>
         <li><input type="submit" name="submit" value="Xác nhận"></li>
+        <li><a href="{!!Asset('checkout/shipping')!!}">Quay lại</a></li>
     </ul>
     {!! Form::close() !!}
     <div class="clear"></div>

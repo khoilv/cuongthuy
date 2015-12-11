@@ -190,7 +190,7 @@ li.mm-vertical.mm-opened > .mm-panel {
     .mm-listview > li, .mm-listview > li:after,
     .mm-listview > li .mm-next,
     .mm-listview > li .mm-next:before {
-      border-color: inherit; }
+      border-color: #AD5B5B; }
     .mm-listview > li > a,
     .mm-listview > li > span {
       text-overflow: ellipsis;
@@ -303,19 +303,19 @@ li.mm-vertical.mm-opened > .mm-panel {
   right: 20px; }
 
 .mm-menu {
-  background: #f3f3f3;
-  border-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.7); }
+  background: #A00107;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff; }
   .mm-menu .mm-navbar > *,
   .mm-menu .mm-navbar a {
-    color: rgba(0, 0, 0, 0.3); }
+    color: #fff; }
   .mm-menu .mm-navbar .mm-btn:before, .mm-menu .mm-navbar .mm-btn:after {
-    border-color: rgba(0, 0, 0, 0.3); }
+    border-color:rgba(255, 251, 251, 0.74); }
   .mm-menu .mm-listview {
     border-color: rgba(0, 0, 0, 0.1); }
     .mm-menu .mm-listview > li .mm-next:after,
     .mm-menu .mm-listview > li .mm-arrow:after {
-      border-color: rgba(0, 0, 0, 0.3); }
+      border-color: rgba(255, 255, 255, 0.5); }
     .mm-menu .mm-listview > li.mm-selected > a:not(.mm-next),
     .mm-menu .mm-listview > li.mm-selected > span {
       background: rgba(255, 255, 255, 0.5); }
@@ -764,10 +764,10 @@ li.mm-nosubresults > a.mm-next {
     padding-right: 10px; }
 
 .mm-menu .mm-search input {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.7); }
+  background:rgba(230, 230, 230, 0.98);
+  color: rgba(0, 0, 0, 0.9); }
 .mm-menu .mm-noresultsmsg {
-  color: rgba(0, 0, 0, 0.3); }
+  color: rgba(0, 0, 0, 0.5); }
 
 /*
 	jQuery.mmenu sectionIndexer addon CSS

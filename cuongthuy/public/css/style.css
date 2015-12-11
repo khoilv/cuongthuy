@@ -151,6 +151,7 @@ body footer .wrap > .f_left > div{
 .steps1_c1,.steps1_c2 table,.bs1_button{
 	width:100% !important;
 }
+.bs1_button{margin:20px 0 !important;}
 .steps1_c2{
 	width:90%;
 	margin:0 2%;
@@ -163,7 +164,7 @@ body footer .wrap > .f_left > div{
 .map{
 	width:94% !important;margin:20px 3%;}
 .detail_c1 .f_right button{width:60% !important;}
-
+.steps3_c .f_left{border-right:none !important;}
 
 
 }
@@ -254,6 +255,17 @@ body footer .wrap > .f_right{
 	width:94% !important;margin:20px 3%;}
 .suport img{width:100% !important;}
 .detail_c1 .f_right button{width:60% !important;}
+.steps1_c1 li{
+	padding:2% !important;
+	width:29% !important;
+}
+.steps1_c2 table tr td:nth-child(2) textarea{width:100% !important;}
+.bs1_button{margin:20px 0 !important;}
+.steps3_c .f_left{border-right:none !important;}
+.cart_page table{width:200% !important;}
+.cart_page_table{overflow:auto;width:100%;}
+body > header{    border-bottom: 2px solid #D91D24;}
+
 
 }
 
@@ -327,13 +339,12 @@ body footer .wrap > .f_right{
 .steps1_c2,.steps2_c,.steps3_c .f_left,.steps3_c .f_right{
 	width:98% !important;
 	margin:0 1%;
+	overflow:auto;
 }
 .bs1_button li{
-	width:95%;
-	margin:10px 2.5%;
+	margin:10px 0 !important;
 }
 	.bs1_button li a{
-		width:100% !important;
 		padding:10px 0 !important;
 	}
 
@@ -346,9 +357,31 @@ body footer .wrap > .f_right{
 	width:94% !important;margin:20px 3%;}
 .suport img{width:100% !important;}
 .detail_c1 .f_right button{width:100% !important;}
+.steps1_c1 li{
+	padding:2% !important;
+	width:96% !important;
+	border-bottom:1px dotted #ccc;
+}
+.steps1_c2 table tr td:nth-child(2) textarea{width:100% !important;}
+.steps1_c2 table tr td:nth-child(1),.steps1_c2 table tr td:nth-child(2){
+	width:100% !important;	
+	display:block;
+}
+.bs1_button li{
+	float:none !important;
+}
+.steps3_c .f_right table{width:200% !important;}
+.cart_page_table{overflow:auto;width:100%;}
+body > header{    border-bottom: 2px solid #D91D24;}
+
+
+
+
+
 }
 
 #menu_m{display:none;}	
+.cart_page_table{width:100%;}
 /*----------- Production top ----------*/
 .owl-carousel .owl-wrapper:after {
 	content: ".";
@@ -624,7 +657,6 @@ display:none;
 .nbs-flexisel-container {
     position:relative;
     max-width:100%;
-	margin-top:20px;
 }
 .nbs-flexisel-ul {
     position:relative;
@@ -639,7 +671,7 @@ display:none;
     overflow:hidden;
     float:left;
     width:100%;
-	height:160px;
+	height:220px;
     border:1px solid #f9f9f9;
 }
 .nbs-flexisel-item {
@@ -682,8 +714,8 @@ display:none;
     background: url(../images/prev-2.png) no-repeat;
 }	
 .nbs-flexisel-item a p{
-	margin-top:5px;	
 	color:#121212;
+	line-height:20px;
 }	
 	
 /*------------ Buy steps 1 -------------*/
@@ -753,15 +785,15 @@ display:none;
 }	
 .bs1_button{
 	width:60%;
-	margin:20px 0;
-	float:left;
+	margin:20px 40% 20px 0;
+	float:right;
 }	
 .bs1_button li{
 	float:right;
 	margin-left:20px;
 }
 	.bs1_button li input,.bs1_button li a{
-		padding:10px 20px;
+		padding:10px 0;
 		border-radius:20px;
 		width:150px;
 		display:block;
@@ -769,17 +801,18 @@ display:none;
 		color:#fff;
 		font-weight:bold;
 		border:none;
+		cursor:pointer;
 	}
 	.bs1_button li input:hover,.bs1_button li a:hover{
 		background-color:#F60 !important;
 		color:#fff;
 		transition:all ease 0.5s;
 	}	
-	.bs1_button li:nth-child(2) input,.bs1_button li:nth-child(2) a{
+	.bs1_button li:nth-child(1) input,.bs1_button li:nth-child(1) a{
 		background-color:#259a36;
 		box-shadow:0 2px 0px #016710; 
 	}
-	.bs1_button li:nth-child(1) input,.bs1_button li:nth-child(1) a{
+	.bs1_button li:nth-child(2) input,.bs1_button li:nth-child(2) a{
 		background-color:#6ab675;
 		box-shadow:0 2px 0 #2f7239; 
 	}
@@ -919,15 +952,18 @@ display:none;
 	float:left;
 	margin-right:5px;
 }
-	.add_cart li:nth-child(1){
-		padding-left:24px;
+	.cart_add_detail{
+		padding-left:40px;
 		background:url(../images/icon22.png) no-repeat left center;
-		margin-top:5px;
+		background-size:26px;
+		margin-top:70px;
+		font-size:18px;
 		margin-right:30px;
         cursor:pointer;
+		float:left;
 	}
-	.add_cart li:nth-child(1) a{color:#000;}
-	.add_cart li:nth-child(1) a:hover{ color:#00B8E4;}	
+	.cart_add_detail a{color:#000;}
+	.cart_add_detail a:hover{ color:#00B8E4 !important;}	
 	.add_cart li:nth-child(3),.add_cart li:nth-child(2){margin-top:3px;}
 /*--------------------- Slide ------------------------*/
 /*----------------- COntact page ---------------------*/
@@ -1165,5 +1201,6 @@ display:none;
     font-size: 1px;
     line-height: 1px;
 }
+.fb_iframe_widget{display:inline-flex !important;}
 
 

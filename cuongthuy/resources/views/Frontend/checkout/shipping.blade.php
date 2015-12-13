@@ -42,8 +42,8 @@
         </ul>
         <div class="clear"></div>
         <ul class="bs1_button">
-            <li><input type="submit" name="submit" value="Xác nhận"></li>
             <li><a href="{!!Asset('checkout/billing')!!}">Quay lại</a></li>
+            <li><input type="submit" name="submit" value="Xác nhận"></li>
         </ul>
     </div>
     {!! Form::close() !!}

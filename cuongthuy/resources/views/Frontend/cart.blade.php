@@ -48,7 +48,10 @@ use App\Http\Controllers\Frontend\FrameRelativeProductsController;
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="8"><span class="notification">Bạn không có sản phẩm nào trong giỏ hàng</span></td>
+                        <td colspan="8"><span class="notification">Bạn không có sản phẩm nào trong giỏ hàng <br />
+                                <a href="{!!action('Frontend\TopController@getIndex')!!}" class="btn_cm">Trở lại trang chủ</a>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
                 @endif

@@ -99,8 +99,8 @@
         </table>
         <div class="clear"></div>
         <ul class="bs1_button">
-            <li><input type="submit" name="submit" value="Hoàn thành"></li>
             <li><input type="submit" name="reset" value="Xóa"></li>
+            <li><input type="submit" name="submit" value="Hoàn thành"></li>
         </ul>
         <div class="clear"></div>
     </div>

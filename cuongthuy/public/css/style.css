@@ -809,11 +809,11 @@ display:none;
 		transition:all ease 0.5s;
 	}	
 	.bs1_button li:nth-child(1) input,.bs1_button li:nth-child(1) a{
-		background-color:#259a36;
+                background-color:#6ab675;
 		box-shadow:0 2px 0px #016710; 
 	}
 	.bs1_button li:nth-child(2) input,.bs1_button li:nth-child(2) a{
-		background-color:#6ab675;
+                background-color:#259a36;
 		box-shadow:0 2px 0 #2f7239; 
 	}
 	

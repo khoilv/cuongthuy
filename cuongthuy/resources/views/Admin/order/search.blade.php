@@ -1,9 +1,10 @@
+<?php use App\Lib\InitialDefine ?>
 @extends('Admin.layout')
 @section('stylesheets')
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
 @endsection
 @section('content')
-<p id="pankuzu"><a href="../index.html">TOP</a> &gt; <a href="index">Quản lí đơn hàng</a> &gt; Tìm kiếm đơn hàng</p>
+<p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Quản lí đơn hàng</a> &gt; Tìm kiếm đơn hàng</p>
 <h2 id="page_midashi_02">Tìm kiếm đơn hàng</h2>
 <!-- InstanceBeginEditable name="content_area" -->
 <div id="bg_blue">
@@ -16,8 +17,8 @@
         <tr class="menu">
             <th>Ngày đặt hàng</th>
             <td colspan="3">
-                <label><input type="radio" name="syoarea" id="syoarea" value="syoujun" checked>Thứ tự tăng dần</label>&nbsp;&nbsp;&nbsp;
-                <label><input type="radio" name="syoarea" id="syoarea" value="koujun" checked>Thứ tự giảm dần</label>&nbsp;&nbsp;&nbsp;
+                <label><input type="radio" name="sort" id="syoarea" value="ASC" >Thứ tự tăng dần</label>&nbsp;&nbsp;&nbsp;
+                <label><input type="radio" name="sort" id="syoarea" value="DESC" checked>Thứ tự giảm dần</label>&nbsp;&nbsp;&nbsp;
                 <input type="text" name="zip1" id="zip1" class="text" style="width:100px;" />&nbsp;
                 ～&nbsp;<input type="text" name="zip1" id="zip1" class="text" style="width:100px;" />&nbsp;
                 <p class="error_comment">Vui lòng nhập ngày đặt hàng。</p>
@@ -51,59 +52,31 @@
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
             <tr class="table_list">
+                <th>STT</th>
                 <th>Ngày đặt hàng</th>
                 <th>Mã đơn hàng</th>
                 <th>Trạng thái đơn hàng</th>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
+                <th>Tên khách hàng</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($order as $key => $value)
+            <?php //var_dump ($order); ?>
+            @foreach ($orders as $key => $order)
             <tr class="table_list bg_yellow">
-                <td><span class="lh12">2013/03/22 12:34:56</span></td>
-                <td class="bold"><a href="detailed.html">123456</a></td>
-                <td class="color_blue bold">Đơn hàng đang chờ</td>
-                <td><p class="alignC small"><a href="../product/detailed.html">Dầu gội</a></p></td>
-                <td>1</td>
+                <td class="bold"><a href="{!!action('Admin\OrderController@getDetail', array('order_id' => $order['id']))!!}">{!!$key+1!!}</a></td>
+                <td><span class="lh12">{!!$order['order_date']!!}</span></td>
+                <td class="bold"><a href="{!!action('Admin\OrderController@getDetail', array('order_id' => $order['id']))!!}">{!!$order['order_code']!!}</a></td>
+                <td class="color_blue bold">{!!InitialDefine::selectValue($order['order_status'], InitialDefine::$arrayOderStatus)!!}</td>
+                <td>{!!$order['order_customer_name']!!}</td>
+                <td>{!!$order['order_phone']!!}</td>
+                <td>{!!str_replace(";"," - ",$order['order_ship_address'])." - ".$order['order_ship_city']!!}</td>
             </tr>
             @endforeach
-<!--            <tr class="table_list bg_yellow">
-                <td rowspan="3"><span class="lh12">2013/03/22 12:34:56</span></td>
-                <td rowspan="3" class="bold"><a href="detailed.html">123456</a></td>
-                <td rowspan="3" class="color_blue bold">Đơn hàng đang chờ</td>
-                <td><p class="alignC small"><a href="../product/detailed.html">Dầu gội</a></p></td>
-                <td>1</td>
-            </tr>
-            <tr class="table_list bg_yellow">
-                <td><p class="alignC small"><a href="../product/detailed.html">Sữa tắm</a></p></td>
-                <td>3</td>
-            </tr>
-            <tr class="table_list bg_yellow">
-                <td><p class="alignC small"><a href="../product/detailed.html">Kem nền</a></p></td>
-                <td>2</td>
-            </tr>
-            <tr class="table_list">
-                <td rowspan="2"><span class="lh12">2013/03/01 00:23:16</span></td>
-                <td rowspan="2" class="bold"><a href="detailed.html">123456</a></td>
-                <td rowspan="2" class="color_red bold"> Đơn hàng đang xử lý</td>
-                <td><p class="alignC small"><a href="../product/detailed.html">Dầu gội</a></p></td>
-                <td>1</td>
-            </tr>
-            <tr class="table_list">
-                <td><p class="alignC small"><a href="../product/detailed.html">jhjdhjhfdj</a></p></td>
-                <td>1</td>
-            </tr>
-            <tr class="table_list bg_yellow">
-                <td><span class="lh12">2013/02/16 09:10:45</span></td>
-                <td class="bold"><a href="detailed.html">123456</a></td>
-                <td class="bold">Đơn hàng đã xử lý xong</td>
-                <td><p class="alignC small"><a href="../product/detailed.html">Kem che khuyết điểm</a></p></td>
-                <td>1</td>
-            </tr>-->
     </table>
 
-    <div id="tab_area">
+<!--    <div id="tab_area">
         <div id="page_tab">
             <a href="#" class="tab_off">&lt;&lt;</a>
             <a href="#" class="tab_off">&lt;</a>
@@ -118,7 +91,7 @@
             <a href="#" class="tab_off">&gt;&gt;</a>
         </div>
         <p class="alignC mt10">（1550～1600）</p>
-    </div>
+    </div>-->
 </div>
 <!-- InstanceEndEditable -->
 @endsection

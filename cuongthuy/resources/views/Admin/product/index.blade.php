@@ -12,6 +12,6 @@
 </div>
 <div class="content_list_area">
     <p class="bold"><a href="{!!Asset('admin/product/search')!!}">&diams;Tìm kiếm sản phẩm</a></p>
-    <p class="gaiyo">Thực hiện tìm kiếm danh sách các sản phẩm đã đăng ký<br />Hãy làm cũng thay đổi trạng thái của hàng hoá từ đây</p>
+    <p class="gaiyo">Thực hiện tìm kiếm danh sách các sản phẩm đã đăng ký<br />Bạn cũng có thể  thay đổi trạng thái của hàng hoá từ đây</p>
 </div>
 @endsection

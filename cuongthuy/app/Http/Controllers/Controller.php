@@ -1,12 +1,9 @@
 <?php namespace App\Http\Controllers;
-use App\Http\Controllers\Controller\Frontend\LoginController;
-use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Input;
-
-abstract class Controller extends BaseController {
-
-     //use DispatchesCommands, ValidatesRequests;
-
+use App\Http\Controllers\Admin\LoginController;
+class Controller extends BaseController {
+     public function __construct()
+     {
+         return LoginController::checkLogin();
+     }
 }

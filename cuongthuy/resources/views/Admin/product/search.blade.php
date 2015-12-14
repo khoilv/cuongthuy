@@ -2,6 +2,20 @@
 @section('stylesheets')
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
 @endsection
+@section('javascript')
+<script>
+    $(document).ready( function () {
+        $('#search_button').click(function() {
+            $('#cmd').attr({value: "search"});
+            $('#product_form').submit();
+        });
+        $('#csv_button').click(function() {
+            $('#cmd').attr({value: "csv_download"});
+            $('#product_form').submit();
+        });
+    });
+</script>
+@endsection
 @section('content')
 <p id="pankuzu"><a href="{!!Asset('admin/top')!!}">TOP</a> &gt; <a href="{!!Asset('admin/product/index')!!}">Quản lí sản phẩm</a> &gt; Tìm kiếm sản phẩm</p>
 <h2 id="page_midashi_02">Tìm kiếm sản phẩm</h2>
@@ -10,42 +24,49 @@
     <p class="mb15 floatL">
         ※ Khi bạn nhập vào các mục dưới đây bạn có thể lọc theo các điều kiện tìm kiếm<br />
     </p>
+    {!! Form::open(['method' => 'POST','files' => true, 'id' => 'product_form']) !!}
     <p id="csv_button">Lưu file CSV</p>
     <div class="clear"></div>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
             <th>Tên sản phẩm</th>
-            <td colspan="3"><input type="text" name="product_name" class="text" style="width:450px;" /></td>
+            <td colspan="3">
+                {!! Form::text('product_name', isset($form['product_name'])? $form['product_name']:'',['style' => 'width:450px', 'class' => 'text']) !!}
+                @if ($errors->has('product_name'))<p class="error_comment">{!! $errors->first('product_name') !!}</p>@endif
+            </td>
         </tr>
         <tr class="menu">
             <th>Mã sản phẩm</th>
-            <td colspan="3"><input type="text" name="product_code" class="text" style="width:450px;" /></td>
+            <td colspan="3">
+                {!! Form::text('product_code', isset($form['product_code'])? $form['product_code']:'',['style' => 'width:450px', 'class' => 'text']) !!}
+                @if ($errors->has('product_code'))<p class="error_comment">{!! $errors->first('product_code') !!}</p>@endif
+            </td>
         </tr>
         <tr class="menu">
             <th>Loại sản phẩm</th>
             <td>
-                <select name="product_category">
-                    <option label="" value="" selected>Chọn loại sản phẩm</option>
-                    <option label="" value="">Mỹ phẩm</option>
-                    <option label="" value="">Dầu gội</option>
-                    <option label="" value="">Sữa tắm</option>
-                </select>
+                {!! Form::select('product_category', 
+                [$category],
+                isset($form['product_category'])? $form['product_category']:''
+                ) !!}
+                @if ($errors->has('product_category'))<p class="error_comment">{!! $errors->first('product_category') !!}</p>@endif
             </td>
             <th>Trạng thái</th>
             <td>
-                <select name="status">
-                    <option value="0">Chọn trạng thái</option>
-                    <option value="1">Sản phẩm đang bán</option>
-                    <option value="2">Sản phẩm sắp có hàng</option>
-                    <option value="3">Sản phẩm hết hàng</option>
-                </select>
+                {!! Form::select('product_status', 
+                [$arrProductStatus],
+                isset($form['product_status'])? $form['product_status']:''
+                ) !!}
+                @if ($errors->has('product_status'))<p class="error_comment">{!! $errors->first('product_status') !!}</p>@endif
             </td>
         </tr>
     </table>
     <div class="mt15">
-        <p id="search_button">Search</p>
+        <input id="cmd" type="hidden" name="cmd" value=""/>
+        <p id="search_button">Tìm kiếm</p>
         <div class="clear"></div>
     </div>
+    {!!Form::close()!!}
 </div>
 
 <div id="bg_blue" class="mt15">
@@ -54,46 +75,59 @@
             <tr class="table_list">
                 <th>Mã sản phẩm</th>
                 <th>Tên sản phẩm</th>
+                <th>Loại sản phẩm</th>
                 <th>Giá tiền</th>
                 <th>Trạng thái</th>
                 <th>Số lượng</th>
-                <th>Mô tả</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="table_list">
-                <td><a href="../order/search.html">001</a></td>
-                <td class="bold"><p class="alignC"><a href="detailed.html">Phụ kiện-Thời trang</a></p></td>
-                <td>100000</td>
-                <td>Đang chạy</td>
-                <td>100</td>
-                <td>Deserunt non doloribus velit voluptas porro occaecati. Ab et aut voluptatem molestiae vel ullam qui</td>
+            @if (!empty($arrProductList))
+            @foreach ($arrProductList as $key => $product)
+            <tr class="table_list {!!$key % 2 == 0 ? 'bg_yellow' : ''!!}">
+                <td><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_code']!!}</a></td>
+                <td class="bold"><p class="alignC"><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_name']!!}</a></p></td>
+                <td>{!!$category[$product['product_category']]!!}</td>
+                <td>{!!$product['product_price']!!} đ</td>
+                @if ($product['product_status'] == 3)
+                <td class="color_red bold">{!!$arrProductStatus[$product['product_status']]!!}</td>
+                @else
+                <td>{!!$arrProductStatus[$product['product_status']]!!}</td>
+                @endif
+                <td class="{!!$product['product_quantity'] ? '' : 'color_red bold'!!}">{!!$product['product_quantity']!!}</td>
             </tr>
-            <tr class="table_list bg_yellow">
-                <td><a href="../order/search.html">001</a></td>
-                <td class="bold"><p class="alignC"><a href="detailed.html">Phụ kiện-Thời trang</a></p></td>
-                <td>100000</td>
-                <td>Đang chạy</td>
-                <td>100</td>
-                <td>Deserunt non doloribus velit voluptas porro occaecati. Ab et aut voluptatem molestiae vel ullam qui</td>
+            @endforeach
+            @else 
+            <tr>
+                <td colspan="7" class="alignC">Không có sản phẩm nào thoả mãn</td>
             </tr>
+            @endif
     </table>
 
     <div id="tab_area">
         <div id="page_tab">
-            <a href="#" class="tab_off">&lt;&lt;</a>
-            <a href="#" class="tab_off">&lt;</a>
-            <a href="#" class="tab_off">100</a>
-            <a href="#" class="tab_off">101</a>
-            <a href="#" class="tab_off">102</a>
-            <em>103</em>
-            <a href="#" class="tab_off">104</a>
-            <a href="#" class="tab_off">105</a>
-            <a href="#" class="tab_off">106</a>
-            <a href="#" class="tab_off">&gt;</a>
-            <a href="#" class="tab_off">&gt;&gt;</a>
+            <?php if ($lastPage > 1){
+               if($lastPage <= 5) {
+                   $begin = 1; 
+                   $end = $lastPage;
+               } else {
+                  if($currentPage < 5 ){
+                      $begin = 1;
+                      $end = 5;
+                  } elseif ($currentPage > $lastPage-5) {
+                      $begin = $lastPage - 4; 
+                      $end = $lastPage;
+                  } else {
+                      $begin = $currentPage-2; 
+                      $end = $currentPage +2;
+                  }
+              } ?>
+              @include('Admin.list_page')
+          <?php } ?>
         </div>
-        <p class="alignC mt10">（1550～1600）</p>
+        @if ($lastPage > 1)
+        <p class="alignC mt10">（{!! $maxRec * ($currentPage -1)  !!}～{!! $maxRec * $currentPage  !!}）</p>
+        @endif
     </div>
 </div>
 <!-- InstanceEndEditable -->

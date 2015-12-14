@@ -13,8 +13,8 @@ class LoginForm extends BaseForm {
      */
     protected function rules(){
         $rules = [
-            'username' => ['required'],
-            'password' => ['required', 'max:20', 'min:6', 'regex:/\A[a-z\d|!?_-]+\z/i'],
+            'username' => ['required', 'max:16', 'min:2', 'regex:/\A[a-z\d|_-]+\z/i'],
+            'password' => ['required', 'max:64', 'min:6', 'regex:/\A[a-z\d|!?_-]+\z/i'],
             'remember' => 'sometimes|numeric|min:1|max:1'
         ];
         return $rules;

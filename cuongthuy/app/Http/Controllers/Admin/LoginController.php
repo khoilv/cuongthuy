@@ -42,7 +42,7 @@ class LoginController extends Controller
         if (Cache::has('remember')) {
             $remember = Cache::get('remember');
         }
-        if (Input::has('update')) {
+        if (Input::has('login')) {
             $data = Input::except('_token', 'update');
             try {
                 // Validate
@@ -55,11 +55,12 @@ class LoginController extends Controller
                 $error = 'Thông tin đăng nhập không đúng.Vui lòng nhập lại!';
                 return Redirect::back()->withInput()->withErrors(array('msg_error' => $error));
             }
+            Session::put('username', $data['username']);
             Session::put('user_id', $userId);
             if (isset($data['remember'])) {
-                Cache::add('username', $data['username'], 60);
-                Cache::add('password', $data['password'], 60);
-                Cache::add('remember', $data['remember'], 60);
+                Cache::add('username', $data['username'], 7200);
+                Cache::add('password', $data['password'], 7200);
+                Cache::add('remember', $data['remember'], 7200);
             }
             return Redirect::action('Admin\TopController@index');
         }
@@ -69,5 +70,15 @@ class LoginController extends Controller
             'remember' => $remember
         ]);
     }
-
+    public function logout(){
+        Session::forget('username');
+        Session::forget('user_id');
+        return Redirect::action('Admin\LoginController@login');
+    }
+    
+    public static function checkLogin(){
+        if (!Session::has('user_id')) {
+            return Redirect::action('Admin\LoginController@login');
+        }
+    }
 }

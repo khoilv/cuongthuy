@@ -28,13 +28,13 @@
             {!! Form::open(['method' => 'POST','files' => true, 'id' => 'form']) !!}
             <div class="ma_auto">
                 <p class="alignL ml85">Tên đăng nhập</p>
-                <p class="alignC ml10">{!! Form::text('username', isset($username)? $username:'',['style' => 'width:300px; height:35px', 'class' => 'text' ]) !!}</p>
-                @if ($errors->has('username'))<p class ="error_comment">{!! $errors->first('username') !!}</p> @endif
+                <p class="alignC ml10">{!! Form::text('username', isset($username)? $username:'',['style' => 'width:300px; height:35px', 'class' => 'text','placeholder' => 'username' ]) !!}</p>
+                @if ($errors->has('username'))<p class ="alignL ml85 error_comment">{!! $errors->first('username') !!}</p> @endif
                 <p class="alignL mt20 ml85">Mật khẩu</p>
-                <p class="alignC ml10">{!! Form::text('password', isset($password)? $password:'',['style' => 'width:300px; height:35px', 'class' => 'text' ]) !!}</p>
-                @if ($errors->has('password'))<p class ="error_comment">{!! $errors->first('password') !!}</p> @endif
+                <p class="alignC ml10">{!! Form::password('password',['style' => 'width:300px; height:35px', 'class' => 'text' ,'placeholder' => 'password']) !!}</p>
+                @if ($errors->has('password'))<p class =" alignL ml85 error_comment">{!! $errors->first('password') !!}</p> @endif
                 <p class="mt20"><label>{!! Form::checkbox('remember', '')!!} Ghi nhớ tài khoản</label></p>
-                <input type="submit" name="update" value="Đăng nhập" class="ml75" id="login_button"/>
+                <input type="submit" name="login" value="Đăng nhập" class="ml75" id="login_button"/>
             </div>
             {!!Form::close()!!}
         </div>

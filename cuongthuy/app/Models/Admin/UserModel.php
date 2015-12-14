@@ -22,7 +22,7 @@ class UserModel extends TableBase {
             'fields' => array('id'),
             'conditions' => array(
                 'username' => $username,
-                'password' => $password,
+                'password' => md5($password),
             ),
         );
         $result =  $this->find('first', $options);

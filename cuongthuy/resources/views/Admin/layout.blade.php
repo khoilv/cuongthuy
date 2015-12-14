@@ -10,6 +10,9 @@
 @section('stylesheets')
 <link rel="stylesheet" href="{!!Asset('public/css/admin/style.css')!!}" type="text/css" />
 @yield('stylesheets')
+@section('javascript')
+<script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
+@yield('javascript')
 </head>
 <body>
 <!--▼ header -->
@@ -17,8 +20,8 @@
     <div id="header_area">
         <h1 class="floatL"><img src="{!!Asset('public/images/admin/logo.png')!!}" width="180px" height="51px" /></h1>
         <div class="floatR alignR mt10">
-            <p>Xin chào Lan!</p>
-            <p><a href="{!!Asset('admin/top')!!}" target="_blank">Index</a>｜<a href="{!!Asset('admin')!!}">Logout</a></p>
+            <p>@if (Session::has('username'))Xin chào {!!Session::get('username')!!}! @endif</p>
+            <p><a href="{!!Asset('admin/top')!!}" target="_blank">Index</a>｜<a href="{!! URL::action('Admin\LoginController@logout')!!}">Logout</a></p>
         </div>
     </div>
 </div>

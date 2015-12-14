@@ -1,13 +1,19 @@
 <?php
+
 namespace App\Models\Frontend;
+
 use App\Models\TableBase;
-class CategoryModel extends TableBase {
+
+class CategoryModel extends TableBase
+{
 
     protected $table = 'categories';
     protected $parentList = array();
     protected $childList = array();
+    protected $data = array();
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->setTableName($this->table);
         $options = array(
@@ -15,21 +21,22 @@ class CategoryModel extends TableBase {
         );
         // get list category
         $arrCategory = $this->find('all', $options);
-        foreach ( $arrCategory as $arrRow ) {
-                if ( $arrRow['category_parent'] == 0 ) {
-                    $this->parentList[$arrRow['id']] = $arrRow;
-                } else {
-                    $this->childList[$arrRow['category_parent']][$arrRow['id']]  = $arrRow;
-                }
+        foreach ($arrCategory as $arrRow) {
+            $this->data[$arrRow['id']] = $arrRow;
+            if ($arrRow['category_parent'] == 0) {
+                $this->parentList[$arrRow['id']] = $arrRow;
+            } else {
+                $this->childList[$arrRow['category_parent']][$arrRow['id']] = $arrRow;
             }
+        }
     }
 
     /**
      * Get category parrent
      * @return array $this->parentList
      */
-    
-     public function getParentList() {
+    public function getParentList()
+    {
         return $this->parentList;
     }
 
@@ -37,7 +44,8 @@ class CategoryModel extends TableBase {
      * Get category chid
      * @return array $this->childList 
      */
-    public function getChildList() {
+    public function getChildList()
+    {
         return $this->childList;
     }
 
@@ -46,7 +54,8 @@ class CategoryModel extends TableBase {
      * @param int $id
      * @return string
      */
-    public function getCategoryNamebyId($id){
+    public function getCategoryNamebyId($id)
+    {
         $categories = array();
         $options = array(
             'fields' => array('*'),
@@ -63,4 +72,19 @@ class CategoryModel extends TableBase {
         }
         return $categories;
     }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function getCategoryName()
+    {
+        $categoryName = array();
+        foreach ($this->data as $key => $val) {
+            $categoryName[$key] = $val['category_name'];
+        }
+        return $categoryName;
+    }
+
 }

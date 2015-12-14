@@ -4,6 +4,5 @@ use App\Http\Controllers\Admin\LoginController;
 class Controller extends BaseController {
      public function __construct()
      {
-         return LoginController::checkLogin();
      }
 }

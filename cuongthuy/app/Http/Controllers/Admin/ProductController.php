@@ -18,7 +18,7 @@ use Request;
 use Redirect;
 use Session;
 use App\Models\resizeImage;
-
+use App\Lib\InitialDefine;
 class ProductController extends Controller
 {
 
@@ -35,11 +35,16 @@ class ProductController extends Controller
         $this->productForm = $productForm;
         $this->resizeImage = new resizeImage();
     }
+    public function index(){
+        return view('Admin/product/index');
+    }
 
     public function detail($productId = '')
     {
         $product = array();
-        $category = $this->categoryCls->getCategoryName();
+        $category = array('' => 'Chọn loại sản phẩm') + $this->categoryCls->getCategoryName();
+        $arrProductStatus = InitialDefine::$arrProductStatus;
+        $arrProductSellStatus = InitialDefine::$arrProductSellStatus;
         if ($productId) {
             $product = $this->productCls->getProductById($productId);
             $product['product_other_image'] = explode(',', $product['product_other_image']);
@@ -62,7 +67,9 @@ class ProductController extends Controller
         return view('Admin/product/detail', [
                     'product' => $product,
                     'category' => $category,
-                    'product_id' => $productId
+                    'product_id' => $productId,
+                    'arrProductStatus' => $arrProductStatus,
+                    'arrProductSellStatus' => $arrProductSellStatus
                 ]);
     }
 
@@ -159,12 +166,7 @@ class ProductController extends Controller
 
     public function search()
     {
-        $arrProductStatus = array(
-            '' => 'Chọn trạng thái',
-            1 => 'Sản phẩm đang bán',
-            2 => 'Sản phẩm sắp có hàng',
-            3 => 'Sản phẩm hết hàng'
-        );
+        $arrProductStatus = array('' => 'Chọn trạng thái') + InitialDefine::$arrProductStatus;
         $category = array('' => 'Chọn loại sản phẩm') + $this->categoryCls->getCategoryName();
         $arrWhere = array();
         $form = array();

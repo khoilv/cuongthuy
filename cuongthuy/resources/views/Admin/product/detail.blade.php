@@ -15,7 +15,10 @@
 <p id="pankuzu"><a href="{!!Asset('admin/top')!!}">TOP</a> &gt; <a href="{!!Asset('admin/product/index')!!}">Quản lí sản phẩm</a> &gt; {!! isset($product['id']) ? 'Cập nhật sản phẩm' : 'Đăng kí sản phẩm' !!}</p>
 <h2 id="page_midashi_02">{!! isset($product['id']) ? 'Cập nhật sản phẩm' : 'Đăng kí sản phẩm' !!}</h2>
 <div id="bg_blue">
-    <p class="mb15 big">※Đăng ký sản phẩm. Tại đây bạn có thể thực hiện update sản phẩm.</p>
+    <p class="mb15 big">
+        ※Đăng ký sản phẩm. Tại đây bạn có thể thực hiện update sản phẩm.<br>
+        Các mục đánh dấu ※ là mục bắt buộc phải nhập giá trị.
+    </p>
     @if(Session::has('msg_error'))
     <p class="alert_red_error mb10">{!!Session::get('msg_error')!!}</p>
     {{ Session::forget('msg_error') }}
@@ -93,10 +96,8 @@
             <th><span class="color_red">※</span>Trạng thái sản phẩm</th>
             <td>
                 <p class="floatL mt5 mr10">
-                    {!! Form::select('product_status', [
-                        1 => 'Sản phẩm đang bán',
-                        2 => 'Sản phẩm sắp có hàng',
-                        3 => 'Sản phẩm hết hàng' ],
+                    {!! Form::select('product_status',
+                        $arrProductStatus,
                         isset($product['product_status'])? $product['product_status']:''
                      ) !!}
                 </p>
@@ -111,7 +112,7 @@
             </td>
         </tr>
         <tr class="menu">
-            <th><span class="color_red">※</span>Mô tả sản phẩm</th>
+            <th><span class="color_red">※</span>Mô tả chi tiết sản phẩm</th>
             <td>
                 {!! Form::textarea('product_description', isset($product['product_description'])? $product['product_description']:'',['style' => 'width:550px;height:150px', 'class' => 'text']) !!}
                 @if ($errors->has('product_description'))<p class="error_comment">{!! $errors->first('product_description') !!}</p>@endif
@@ -120,13 +121,15 @@
         <tr class="menu">
             <th><span class="color_red">※</span>Giá sản phẩm</th>
             <td>
+                <p><span class="color_blue bold ml30">※Giá sản phẩm là giá hiện tại được bán</span></p>
                 {!! Form::text('product_price', isset($product['product_price'])? $product['product_price']:'',['style' => 'width:200px', 'class' => 'text']) !!} VNĐ
                 @if ($errors->has('product_price'))<p class="error_comment">{!! $errors->first('product_price') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
-            <th><span class="color_red">※</span>Giá sản phẩm khi đã giảm giá</th>
+            <th><span class="color_red"></span>Giá sản phẩm khi đã giảm giá</th>
             <td>
+                <p><span class="color_blue bold ml30">※Giá sản phẩm khi đã giảm giá: là giá của sản phẩm trước khi được sale off</span></p>
                 {!! Form::text('product_discount_price', isset($product['product_discount_price'])? $product['product_discount_price']:'',['style' => 'width:200px', 'class' => 'text']) !!} VNĐ
                 @if ($errors->has('product_discount_price'))<p class="error_comment">{!! $errors->first('product_discount_price') !!}</p>@endif
             </td>
@@ -141,17 +144,17 @@
         <tr class="menu">
             <th><span class="color_red">※</span>Hiển thị sản phẩm</th>
             <td>
-                <label>{!! Form::radio('product_display',1, (isset($product['product_display']) && $product['product_display'] == 1)? $product['product_display']:'') !!} Hiển thị sản phẩm</label>&nbsp;&nbsp;&nbsp;
+                <label>{!! Form::radio('product_display',1, (isset($product['product_display']) && $product['product_display'] == 1)? $product['product_display']:'1') !!} Hiển thị sản phẩm</label>&nbsp;&nbsp;&nbsp;
                 <label>{!! Form::radio('product_display',2, (isset($product['product_display']) && $product['product_display'] == 2)? $product['product_display']:'') !!} Không hiển thị sản phẩm</label>
                 @if ($errors->has('product_display'))<p class="error_comment">{!! $errors->first('product_display') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
-            <th><span class="color_red">※</span>Trạng thái bán sản phẩm</th>
+            <th><span class="color_red"></span>Trạng thái bán sản phẩm</th>
             <td>
-                <label>{!! Form::checkbox('product_sell_status[1]', 1, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], '1') !== false)? $product['product_sell_status']:'') !!} Sản phẩm mới</label>&nbsp;&nbsp;&nbsp;
-                <label>{!! Form::checkbox('product_sell_status[2]', 2, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], '2') !== false)? $product['product_sell_status']:'') !!} Sản phẩm bán chạy</label>&nbsp;&nbsp;&nbsp;
-                <label>{!! Form::checkbox('product_sell_status[3]', 3, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], '3')!== false)? $product['product_sell_status']:'') !!} Sản phẩm nổi bật</label>&nbsp;&nbsp;&nbsp;
+                @foreach ($arrProductSellStatus as $key => $val)
+                <label>{!! Form::checkbox("product_sell_status[$key]", $key, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], "$key") !== false)? $product['product_sell_status']:'') !!} Sản phẩm mới</label>&nbsp;&nbsp;&nbsp;
+                @endforeach
                 @if ($errors->has('product_sell_status'))<p class="error_comment">{!! $errors->first('product_sell_status') !!}</p>@endif
             </td>
         </tr>

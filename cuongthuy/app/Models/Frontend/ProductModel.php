@@ -62,18 +62,6 @@ class ProductModel extends TableBase {
         $data =  $this->find('all', $option);
         return $data[0]['count'];
     }
-    
-    /**
-     * Get array product for order Admin page
-     *
-     */
-    public function getProductAdmin($arrWhere) {
-        $option = array(
-            'fields' => array('product_name', 'product_price'),
-            'conditions' => $arrWhere,
-        );
-        return $this->find('all', $options);
-    }
 }
 
 

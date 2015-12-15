@@ -43,9 +43,6 @@ class CheckoutController extends Controller {
                 'city'          => $customerInfo[0]->customer_city,
             );
         }
-        $data = file_get_contents('public/data/city.dat');
-        $arrCity = explode(",", $data);
-        Session::put('arrCity', $arrCity);
         BaseController::$title = 'Thanh toán - Nhập thông tin';
         
         return view('Frontend.checkout.billing', compact('billing'));

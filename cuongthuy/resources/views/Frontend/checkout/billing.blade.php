@@ -1,6 +1,6 @@
+<?php use App\Lib\InitialDefine ?>
 @extends('Frontend.layout')
 @section('content')
-<?php $arrCity = Session::get('arrCity'); ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -79,12 +79,7 @@
             <tr>
                 <td>Tỉnh thành :</td>
                 <td>
-                    {{--<select name="city">
-                        @foreach ($arrCity as $value)
-                        <option @if (isset( $billing['city']) && $billing['city'] == $value) selected @endif value="{!!$value!!}">{!!$value!!}</option>
-                        @endforeach
-                    </select>--}}
-                    {!! Form::select('city', $arrCity, isset($billing['city'])? $billing['city']:'') !!}
+                    {!! Form::select('city', InitialDefine::$arrCity, isset($billing['city'])? $billing['city']:'') !!}
                     @if ($errors->has('city'))<p class="error_comment">{!! $errors->first('city') !!}</p>@endif
                 </td>
             </tr>
@@ -95,7 +90,8 @@
             <tr>
                 <td>Ghi chú của quý khách về đơn hàng</td>
                 <td>
-                    <textarea name="note" rows="4" cols="57" >{!!(isset($billing['note']) && $billing['note']) ? $billing['note'] : ''!!}</textarea>
+                    {!! Form::textarea('note', isset($billing['note'])? $billing['note']:'',['size' => '57x4', 'class' => 'text']) !!}
+                    @if ($errors->has('note'))<p class="error_comment">{!! $errors->first('note') !!}</p>@endif
                 </td>
             </tr>
         </table>

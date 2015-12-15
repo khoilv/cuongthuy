@@ -1,5 +1,5 @@
 <?php
-
+Route::get('linh_test', 'TestController@getIndex');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -44,13 +44,5 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::get('/category/parent', 'Admin\CategoryController@getParentList');
     Route::get('/category/children', 'Admin\CategoryController@getChildList');
     Route::controller('order', 'Admin\OrderController');
-//    Route::get('/order/index',function(){
-//         return view('Admin/order/index');
-//    });
-//    Route::get('/order/search',function(){
-//         return view('Admin/order/search');
-//    });
-//    Route::get('/order/detail',function(){
-//         return view('Admin/order/detail');
-//    });
+    Route::controller('order_detail', 'Admin\OrderDetailController');
 });

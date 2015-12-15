@@ -81,7 +81,7 @@ class TableBase extends DBCommon {
         $sql = 'UPDATE ' . $this->getTableName()
                 . ' SET ' . $updateStr
                 . $whereStr;
-
+        
         return DB::update($sql,$bindArray);
     }
     

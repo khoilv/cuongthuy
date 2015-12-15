@@ -29,4 +29,6 @@ class OrderDetailModel extends TableBase {
         return ($result);
     }
     
+    public function 
+    
 }

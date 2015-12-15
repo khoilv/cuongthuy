@@ -1,6 +1,9 @@
+<?php 
+use App\Http\Controllers\Frontend\CartController;
+use App\Lib\InitialDefine;
+?>
 @extends('Frontend.layout')
 @section('content')
-<?php use App\Http\Controllers\Frontend\CartController ?>
 <!-- InstanceBeginEditable name="Content" -->
 <div class="title title1">
     <div class="wrap">
@@ -42,7 +45,7 @@
             </tr>
             <tr>
                 <td>Tỉnh thành :</td>
-                <td>{!!$billing['city']!!}</td>
+                <td>{!!InitialDefine::$arrCity[$billing['city']]!!}</td>
             </tr>
         </table>
         @if ($billing['note'])

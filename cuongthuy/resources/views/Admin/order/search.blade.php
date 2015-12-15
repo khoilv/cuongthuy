@@ -48,30 +48,27 @@
 </div>
 
 <div id="bg_blue" class="mt15">
-    <p class="mb15">※ Click vào mã đơn hàng để xem chi tiết đơn hàng. Click vào tên sản phẩm để xem thông tin chi tiết của sản phẩm đó</p>
+    <p class="mb15" style="color:red">※ Click vào mã đơn hàng để xem chi tiết đơn hàng.</p>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
             <tr class="table_list">
                 <th>STT</th>
-                <th>Ngày đặt hàng</th>
+                <th>Thời gian đặt hàng</th>
                 <th>Mã đơn hàng</th>
                 <th>Trạng thái đơn hàng</th>
                 <th>Tên khách hàng</th>
                 <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
             </tr>
         </thead>
         <tbody>
-            <?php //var_dump ($order); ?>
             @foreach ($orders as $key => $order)
             <tr class="table_list bg_yellow">
                 <td class="bold"><a href="{!!action('Admin\OrderController@getDetail', array('order_id' => $order['id']))!!}">{!!$key+1!!}</a></td>
-                <td><span class="lh12">{!!$order['order_date']!!}</span></td>
+                <td><span class="lh12">{!!date("H:i:s d-m-Y", strtotime($order['order_date']))!!}</span></td>
                 <td class="bold"><a href="{!!action('Admin\OrderController@getDetail', array('order_id' => $order['id']))!!}">{!!$order['order_code']!!}</a></td>
                 <td class="color_blue bold">{!!InitialDefine::selectValue($order['order_status'], InitialDefine::$arrayOderStatus)!!}</td>
                 <td>{!!$order['order_customer_name']!!}</td>
                 <td>{!!$order['order_phone']!!}</td>
-                <td>{!!str_replace(";"," - ",$order['order_ship_address'])." - ".$order['order_ship_city']!!}</td>
             </tr>
             @endforeach
     </table>

@@ -14,7 +14,7 @@
 <div class="wrap 404_page ">
     <div class="notification_2">
         <p>
-            <span>Chúng tôi không tìm thấy đường dẫn này!</span>
+            <span>Xin lỗi! Chúng tôi không tìm thấy đường dẫn này!</span>
         </p>
         <a href="{!!action('Frontend\TopController@getIndex')!!}" class="btn_cm">Trở lại trang chủ</a>
     </div>

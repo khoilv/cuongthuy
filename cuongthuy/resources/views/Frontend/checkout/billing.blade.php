@@ -79,11 +79,13 @@
             <tr>
                 <td>Tỉnh thành :</td>
                 <td>
-                    <select name="city">
+                    {{--<select name="city">
                         @foreach ($arrCity as $value)
                         <option @if (isset( $billing['city']) && $billing['city'] == $value) selected @endif value="{!!$value!!}">{!!$value!!}</option>
                         @endforeach
-                    </select>
+                    </select>--}}
+                    {!! Form::select('city', $arrCity, isset($billing['city'])? $billing['city']:'') !!}
+                    @if ($errors->has('city'))<p class="error_comment">{!! $errors->first('city') !!}</p>@endif
                 </td>
             </tr>
         </table>

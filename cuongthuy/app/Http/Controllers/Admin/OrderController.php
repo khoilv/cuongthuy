@@ -40,23 +40,28 @@ class OrderController extends Controller {
 //    }
     
     public function getDetail ($id) {
-
         if (empty ($id)) {
             abort(404);
         }
         
         $order = $this->model->getOrderById($id);
-        $orderDetail = $this->oderDetailObj->getOrderDetailById($id);
-        $arrProducts = $this->productsObj->getProductList();
+        $orderDetail = $this->oderDetailObj->getOrderDetailByOrderId($id);
+        
+        $arrProducts = array();
+        
+        foreach ($orderDetail as $value) {
+            $arrProducts[$value['product_id']] = $this->productsObj->getProductbyID($value['product_id']);
+        }
+        
+        $data = file_get_contents('public/data/city.dat');
+        $arrCity = explode(",", $data);
+//        $options['conditions'] = array('id' => array());
+//        $arrProducts = $this->productsObj->getProductAdmin();
         
         //dd();
         //DB::table('products')->where('id', Input::get('product_id'))->get();
-        
-        
 
-        return view('Admin.order.detail', compact('order', 'orderDetail'));
-//        abort(404);
-//        return view('Admin.order.search');
+        return view('Admin.order.detail', compact('order', 'orderDetail', 'arrProducts', 'arrCity'));
     }
     
     private function makeSearchResult () {

@@ -9,9 +9,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\OrderModel;
 use App\Models\Admin\OrderDetailModel;
 use App\Models\Admin\ProductModel;
+use App\Forms\FormValidationException;
 use App\Forms\Admin\OrderForm;
 use Input;
 use Session;
+use Redirect;
 
 class OrderDetailController extends Controller {
     
@@ -23,52 +25,48 @@ class OrderDetailController extends Controller {
     
     private $oderDetailObj;
     
+    private $orderDetail;
+    
     private $productsObj;
     
     private $result;
     
-    protected $orderForm;
+    private $orderForm;
     
     public function __construct(OrderForm $orderForm) {
-        $this->orderId = Input::get('order_id');
-        if (empty ($this->orderId)) {
-            abort(404);
-        }
-        
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->model = new OrderModel();
         $this->oderDetailObj = new OrderDetailModel();
         $this->productsObj = new ProductModel();
-        $this->order = $this->getOrder();
-        
-        $this->orderDetail = $this->getOrderDetail();
         $this->orderForm = $orderForm;
+
     }
     
     public function getIndex () {
+        $this->init();
         $this->result = $this->makeResult();
         
         return view('Admin.order.detail', $this->result);
     }
     
     public function postIndex () {
-        
+        $this->init();
         $input = Input::except('_token');
-//        try {
-//            $this->productForm->validate($input);
-//        } catch (FormValidationException $e) {
-//            Session::flash('msg_error', 'Đã xảy ra lỗi.Vui lòng kiểm tra các mục bên dưới');
-//            return Redirect::back()->withInput()->withErrors($e->getErrors());
-//        }
-//        var_dump($input);
-//        die;
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
         
-        foreach ($this->orderDetail as $value) {
-            $arrUpdate = [
-                'quantity'    =>  $input['quantity'][$value['product_id']],
-            ];
-            
-            $this->oderDetailObj->update($arrUpdate, array('id' => $value['id']));
+        try {
+            $this->orderForm->validate($input);
+        } catch (FormValidationException $e) {
+            return Redirect::back()->withInput()->withErrors($e->getErrors());
+        }
+        
+        if (!empty($this->orderDetail)) {
+            foreach ($this->orderDetail as $value) {
+                $arrUpdate = [
+                    'quantity'    =>  $input['quantity'][$value['product_id']],
+                ];
+
+                $this->oderDetailObj->update($arrUpdate, array('id' => $value['id']));
+            }
         }
         
         unset($input['order_id']);
@@ -88,10 +86,11 @@ class OrderDetailController extends Controller {
         $orderDetail = $this->getOrderDetail();
         $arrProducts = array();
         
-        foreach ($orderDetail as $value) {
-            $arrProducts[$value['product_id']] = $this->productsObj->getProductById($value['product_id']);
+        if (!empty($orderDetail)) {
+            foreach ($orderDetail as $value) {
+                $arrProducts[$value['product_id']] = $this->productsObj->getProductById($value['product_id']);
+            }
         }
-        
         return [
             'order'         => $this->getOrder(),
             'orderDetail'   => $this->getOrderDetail(),
@@ -106,4 +105,25 @@ class OrderDetailController extends Controller {
     private function getOrderDetail () {
         return $this->oderDetailObj->getOrderDetailByOrderId($this->orderId);
     }
+    
+    private function init () {
+        $this->orderId = Input::get('order_id');
+        if (empty ($this->orderId)) {
+            abort(404);
+        }
+        
+        $this->order = $this->getOrder();
+        $this->orderDetail = $this->getOrderDetail();
+    }
+    
+    public function postDeleteOrder () {
+        $data = Input::all();
+        $this->oderDetailObj->deleteOrderDetail($data['id']);
+        
+        $input['date_time_last_modify'] = date("Y-m-d H:i:s");
+        $this->model->update($input, array('id' => $data['order_id']));
+        
+        return 1;
+    }
+    
 }

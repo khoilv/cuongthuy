@@ -14,7 +14,9 @@ class BillingForm extends BaseForm {
             'email'         => ['email'],
             'ward'          => ['required', 'min:1','max:25'],
             'street'        => ['required', 'min:1','max:25'],
-            'district'      => ['required', 'min:1','max:25']
+            'district'      => ['required', 'min:1','max:25'],
+            'city'          => ['required', 'integer', 'min:1','max:63'],
+            'note'          => ['min:1','max:1000'],
         ];
         return $rules;
     }
@@ -26,7 +28,9 @@ class BillingForm extends BaseForm {
             'street'        => 'Số nhà, Đường/phố',
             'email'         => 'Email',
             'ward'          => 'Phường/xã',
-            'district'      => 'Quận/huyện'
+            'district'      => 'Quận/huyện',
+            'city'          => 'Giá trị tỉnh/thành',
+            'note'          => 'Ghi chú'
         );
     }
 

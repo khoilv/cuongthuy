@@ -80,7 +80,7 @@
                 <td>Tỉnh thành :</td>
                 <td>
                     {!! Form::select('city', InitialDefine::$arrCity, isset($billing['city'])? $billing['city']:'') !!}
-                    @if ($errors->has('city'))<p class="error_comment">{!! $errors->first('city') !!}</p>@endif
+                    @if ($errors->has('city'))<p style="color: red">{!! $errors->first('city') !!}</p>@endif
                 </td>
             </tr>
         </table>
@@ -91,7 +91,7 @@
                 <td>Ghi chú của quý khách về đơn hàng</td>
                 <td>
                     {!! Form::textarea('note', isset($billing['note'])? $billing['note']:'',['size' => '57x4', 'class' => 'text']) !!}
-                    @if ($errors->has('note'))<p class="error_comment">{!! $errors->first('note') !!}</p>@endif
+                    @if ($errors->has('note'))<p style="color: red">{!! $errors->first('note') !!}</p>@endif
                 </td>
             </tr>
         </table>

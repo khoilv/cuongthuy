@@ -37,7 +37,11 @@
             </td>
         </tr>
         <tr class="menu">
-            <th>Tên sản phẩm</th>
+            <th>Tên khách hàng</th>
+            <td colspan="3"><input type="text" name="" class="text" style="width:400px;" /></td>
+        </tr>
+        <tr class="menu">
+            <th>Điện thoại khách hàng</th>
             <td colspan="3"><input type="text" name="" class="text" style="width:400px;" /></td>
         </tr>
     </table>

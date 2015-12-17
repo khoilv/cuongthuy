@@ -7,11 +7,19 @@
 <meta name="keywords" content="" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="content-script-type" content="text/javascript" />
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('stylesheets')
 <link rel="stylesheet" href="{!!Asset('public/css/admin/style.css')!!}" type="text/css" />
 @yield('stylesheets')
 @section('javascript')
 <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 @yield('javascript')
 </head>
 <body>

@@ -5,15 +5,36 @@
 @endsection
 @section('content')
 <script>
-     $(document).ready( function () {
+    $(document).ready( function () {
+        $('.delete_product').click(function () {
+            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi đơn hàng của khách?")) {
+                var my = $(this).closest('tr');
+                var post = {
+                    id : $(".order_detail_id", my).val(),
+                    order_id: $(".order_id", my).val()
+                };
+
+                $.ajax({
+                    url: 'order_detail/delete-order',
+                    type: 'post',
+                    dataType: 'json',
+                    data: post,
+                    success: function() {
+                        location.reload();
+                    }
+                });
+            }
+            return false;
+        });
+        
         $('#button').click(function() {
             $('#order_form').submit();
         });
-     });
+    });
 </script>
-<p id="pankuzu"><a href="../top">TOP</a> &gt; 
-    <a href="index">Quản lí đơn hàng</a> &gt; 
-    <a href="index">Tìm kiếm đơn hàng</a> &gt; 
+<p id="pankuzu"><a href="{!!Asset('admin/top')!!}">TOP</a> &gt; 
+    <a href="{!!Asset('admin/order/index')!!}">Quản lí đơn hàng</a> &gt; 
+    <a href="{!!Asset('admin/order/search')!!}">Tìm kiếm đơn hàng</a> &gt; 
     Chi tiết đơn hàng</p>
 <h2 id="page_midashi_02">Xem và chỉnh sửa thông tin đơn hàng</h2>
 <div id="bg_blue">
@@ -34,8 +55,7 @@
         <tr class="menu">
             <th style="width:150px">Mã đơn hàng</th>
             <td colspan='5'>
-                {!! Form::text('order_code', isset($order['order_code'])? $order['order_code']:'',['style' => 'width:300px', 'class' => 'text']) !!}
-                @if ($errors->has('order_code'))<p class="error_comment">{!! $errors->first('order_code') !!}</p>@endif
+                {!!$order['order_code']!!}
             </td>
         </tr>
         <tr class="menu">
@@ -46,56 +66,56 @@
             <th>Tên khách hàng</th>
             <td colspan='5'>
             {!! Form::text('order_customer_name', isset($order['order_customer_name'])? $order['order_customer_name']:'',['style' => 'width:300px', 'class' => 'text']) !!}
-            @if ($errors->has('order_customer_name'))<p class="error_comment">{!! $errors->first('order_customer_name') !!}</p>@endif
+            @if ($errors->has('order_customer_name'))<p style="color: red">{!! $errors->first('order_customer_name') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Số điện thoại</th>
             <td colspan='5'>
             {!! Form::text('order_phone', isset($order['order_phone'])? $order['order_phone']:'',['style' => 'width:200px', 'class' => 'text']) !!}
-            @if ($errors->has('order_phone'))<p class="error_comment">{!! $errors->first('order_phone') !!}</p>@endif
+            @if ($errors->has('order_phone'))<p style="color: red">{!! $errors->first('order_phone') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Email</th>
             <td colspan='5'>
                 {!! Form::text('order_email', isset($order['order_email'])? $order['order_email']:'',['style' => 'width:300px', 'class' => 'text']) !!}
-                @if ($errors->has('order_email'))<p class="error_comment">{!! $errors->first('order_email') !!}</p>@endif
+                @if ($errors->has('order_email'))<p style="color: red">{!! $errors->first('order_email') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Địa chỉ</th>
             <td colspan='5'>
             {!! Form::text('order_ship_address', isset($order['order_ship_address'])? str_replace(";"," - ",$order['order_ship_address']):'',['style' => 'width:300px', 'class' => 'text']) !!}
-            @if ($errors->has('order_ship_address'))<p class="error_comment">{!! $errors->first('order_ship_address') !!}</p>@endif
+            @if ($errors->has('order_ship_address'))<p style="color: red">{!! $errors->first('order_ship_address') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Tỉnh/Thành</th>
             <td colspan="5">
             {!! Form::select('order_ship_city', InitialDefine::$arrCity, isset($order['order_ship_city'])? $order['order_ship_city']:'') !!}
-            @if ($errors->has('order_ship_city'))<p class="error_comment">{!! $errors->first('order_ship_city') !!}</p>@endif
+            @if ($errors->has('order_ship_city'))<p style="color: red">{!! $errors->first('order_ship_city') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Trạng thái đơn hàng</th>
             <td colspan="5">
             {!! Form::select('order_status', InitialDefine::$arrayOderStatus, isset($order['order_status'])? $order['order_status']:'') !!}
-            @if ($errors->has('order_status'))<p class="error_comment">{!! $errors->first('order_status') !!}</p>@endif
+            @if ($errors->has('order_status'))<p style="color: red">{!! $errors->first('order_status') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Phương thức nhận hàng</th>
             <td colspan="5">
             {!! Form::select('payment_method', InitialDefine::$arrayPaymentMethod, isset($order['payment_method'])? $order['payment_method']:'') !!}
-            @if ($errors->has('payment_method'))<p class="error_comment">{!! $errors->first('payment_method') !!}</p>@endif
+            @if ($errors->has('payment_method'))<p style="color: red">{!! $errors->first('payment_method') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Ghi chú của khách hàng về đơn hàng</th>
             <td colspan='5'>
             {!! Form::textarea('order_note', isset($order['order_note'])? $order['order_note']:'',['style' => 'width:550px;height:50px', 'class' => 'text']) !!}
-            @if ($errors->has('order_note'))<p class="error_comment">{!! $errors->first('order_note') !!}</p>@endif
+            @if ($errors->has('order_note'))<p style="color: red">{!! $errors->first('order_note') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
@@ -114,22 +134,26 @@
             <th>Xóa</th>
         </tr>
         <?php $totalPrice = 0 ?>
-        @foreach ($orderDetail as $key => $value)
-        <?php $linePrice = $value['quantity']*$value['unitPrice'] ?>
-        <?php $totalPrice += $linePrice; ?>
-        <tr class="menu">
-            <td>{!!$arrProducts[$value['product_id']]['product_name']!!}</td>
-            <td>{!! Form::text('quantity['.$value['product_id'].']', isset($value['quantity'])? $value['quantity']:'',['style' => 'width:30px', 'class' => 'product_quantity']) !!}
-                @if ($errors->has('quantity['.$value['product_id'].']'))
-                    <p class="error_comment">{!! $errors->first('quantity['.$value['product_id'].']') !!}</p>
-                @endif
-            </td>
-            <td>{!!number_format ($value['unitPrice'],0,",",".")!!} đ</td>
-            <td>{!!number_format ($arrProducts[$value['product_id']]['product_price'],0,",",".")!!} đ</td>
-            <td class="line_price">{!!number_format ($linePrice,0,",",".")!!} đ</td>
-            <td> <button class="button" title="Xóa sản phẩm này khỏi đơn hàng"><img src="{!!Asset('public/images/icon16.png')!!}"></button> </img></td>
-        </tr>
-        @endforeach
+        @if (!empty($orderDetail))
+            @foreach ($orderDetail as $key => $value)
+            <?php $linePrice = $value['quantity']*$value['unitPrice'] ?>
+            <?php $totalPrice += $linePrice; ?>
+            <tr class="menu">
+                <td>{!!$arrProducts[$value['product_id']]['product_name']!!}</td>
+                <td>{!! Form::text('quantity['.$value['product_id'].']', isset($value['quantity'])? $value['quantity']:'',['style' => 'width:30px', 'class' => 'product_quantity']) !!}
+                    @if ($errors->has('quantity['.$value['product_id'].']'))
+                        <p style="color: red">{!! $errors->first('quantity['.$value['product_id'].']') !!}</p>
+                    @endif
+                </td>
+                <td>{!!number_format ($value['unitPrice'],0,",",".")!!} đ</td>
+                <td>{!!number_format ($arrProducts[$value['product_id']]['product_price'],0,",",".")!!} đ</td>
+                <td class="line_price">{!!number_format ($linePrice,0,",",".")!!} đ</td>
+                <td> <p class="delete_product" title="Xóa sản phẩm này khỏi đơn hàng"><img src="{!!Asset('public/images/icon16.png')!!}"></p> </img></td>
+                <input type="hidden" class="order_detail_id" value="{!! $value['id'] !!}">
+                <input type="hidden" class="order_id" value="{!! $order['id'] !!}">
+            </tr>
+            @endforeach
+        @endif
         <tr class="table_list">
             <th class="total_price" colspan='6' style="text-align:right">Tổng tiền: {!!number_format ($totalPrice,0,",",".")!!} đ</th>
         </tr>

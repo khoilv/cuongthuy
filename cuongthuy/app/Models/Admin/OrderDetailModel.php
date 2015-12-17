@@ -9,6 +9,7 @@
 namespace App\Models\Admin;
 
 use App\Models\TableBase;
+use DB;
 
 class OrderDetailModel extends TableBase {
 
@@ -29,6 +30,8 @@ class OrderDetailModel extends TableBase {
         return ($result);
     }
     
-    public function 
+    public function deleteOrderDetail($id) {
+        DB::table($this->table)->where('id', $id)->delete();
+    }
     
 }

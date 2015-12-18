@@ -200,25 +200,25 @@ class ProductController extends Controller
         if (Input::has('cmd') && Input::get('cmd') == 'csv_download') {
             $csvProducts = $this->productCls->getProductList($arrWhere, array());
             $strCSV = '';
-            $strCSV .= 'Id,Mã sản phẩm,Tên sản phẩm,Loại sản phẩm,Giá tiền,Trạng thái,Số lượng';
+            $strCSV .= "Id\tMã sản phẩm\tTên sản phẩm\tLoại sản phẩm\tGiá tiền\tTrạng thái\tSố lượng";
             $strCSV .= "\n";
             foreach ($csvProducts as $line) {
                 $line['product_category'] = $category[$line['product_category']];
                 $line['product_status'] = $arrProductStatus[$line['product_status']];
-                $strCSV .= implode(',', $line);
-                $strCSV.= "\n";
+                $strCSV .= implode("\t", $line);
+                $strCSV.= "\r\n";
             }
-            $strXLS = mb_convert_encoding($strCSV, "UTF-8");
-            $filename = 'product_data_' . date('YmdHis') . '.xls';
+            $strCSV = mb_convert_encoding($strCSV, 'UTF-16LE', "UTF-8");
+            $filename = 'product_data_' . date('YmdHis') . '.csv';
             $strFileName = mb_convert_encoding($filename, "UTF-8");
-            $intLen = strlen($strXLS);
+            $intLen = strlen($strCSV);
             header("Cache-Control: public");
             header("Pragma: public");
             header("Content-Disposition: attachment; filename={$strFileName}");
-            header("Content-Type: text/xls; charset=UTF-8");
+            header("Content-Type: text/csv; charset=UTF-8");
             header("Content-Type: application/download; name={$strFileName}");
             header("Content-Length: {$intLen}");
-            print $strCSV;
+            echo chr(255) . chr(254) . $strCSV;
             exit;
         }
         return view('Admin.product.search', [

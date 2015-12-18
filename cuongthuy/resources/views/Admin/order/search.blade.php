@@ -1,4 +1,7 @@
-<?php use App\Lib\InitialDefine ?>
+<?php use App\Lib\InitialDefine;
+//namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller\Admin\OrderController;
+?>
 @extends('Admin.layout')
 @section('stylesheets')
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
@@ -13,6 +16,8 @@
     </p>
     <p id="csv_button">Lưu file CSV</p>
     <div class="clear"></div>
+    <!--{{ Form::open(['method' => 'GET', 'url' => action('Admin\OrderController@postIndex'), 'name' => 'form1']) }}-->
+    {{ Form::open(array('action' => 'Admin\OrderController@postIndex')) }}
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
             <th>Ngày đặt hàng</th>
@@ -21,7 +26,6 @@
                 <label><input type="radio" name="sort" id="syoarea" value="DESC" checked>Thứ tự giảm dần</label>&nbsp;&nbsp;&nbsp;
                 <input type="text" name="zip1" id="zip1" class="text" style="width:100px;" />&nbsp;
                 ～&nbsp;<input type="text" name="zip1" id="zip1" class="text" style="width:100px;" />&nbsp;
-                <p class="error_comment">Vui lòng nhập ngày đặt hàng。</p>
             </td>
         </tr>
         <tr class="menu">
@@ -45,6 +49,7 @@
             <td colspan="3"><input type="text" name="" class="text" style="width:400px;" /></td>
         </tr>
     </table>
+    {{ Form::close() }}
     <div class="mt15">
         <p id="search_button">Search</p>
         <div class="clear"></div>
@@ -53,6 +58,27 @@
 
 <div id="bg_blue" class="mt15">
     <p class="mb15" style="color:red">※ Click vào mã đơn hàng để xem chi tiết đơn hàng.</p>
+    <?php /*
+    @if (isset ($intItemCount) && $intItemCount)
+        全{{ $intItemCount }}件中 {{ $offset+1 }}～
+        @if (($intItemCount - $offset) < $limit)
+            {{ $intItemCount }}
+        @else
+            {{ $offset + $limit }}
+        @endif
+        件
+    @endif
+    <br />
+    @if (isset($pager))
+        {{ $pager->appends(array(
+                    'limit'                 => $limit,
+                    'point_uid'             => $point_uid,
+                    'item_master_id'        => $item_master_id, 
+                    'item_status'           => $item_status,
+                    'item_adlink_pid_select'=> $item_adlink_pid_select,
+                    'item_adlink_pid'       => $item_adlink_pid,
+                    ))->links() }}
+    @endif */ ?>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
             <tr class="table_list">
@@ -75,8 +101,10 @@
                 <td>{!!$order['order_phone']!!}</td>
             </tr>
             @endforeach
-    </table>
-
+    </table><?php /*
+    @if (isset($pager))
+        {{ $pager->links() }}
+    @endif--}} */ ?>
 <!--    <div id="tab_area">
         <div id="page_tab">
             <a href="#" class="tab_off">&lt;&lt;</a>
@@ -94,5 +122,4 @@
         <p class="alignC mt10">（1550～1600）</p>
     </div>-->
 </div>
-<!-- InstanceEndEditable -->
 @endsection

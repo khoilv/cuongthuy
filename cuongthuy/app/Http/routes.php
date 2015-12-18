@@ -43,6 +43,7 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::any('/product/search', 'Admin\ProductController@search');
     Route::get('/category/parent', 'Admin\CategoryController@getParentList');
     Route::get('/category/children', 'Admin\CategoryController@getChildList');
-    Route::controller('order', 'Admin\OrderController');
+//    Route::controller('order', 'Admin\OrderController');
+    Route::get('/order/search',  ['uses' => 'OrderController@getSearch']);
     Route::controller('order_detail', 'Admin\OrderDetailController');
 });

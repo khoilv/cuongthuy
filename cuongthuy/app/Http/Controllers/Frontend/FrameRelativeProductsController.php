@@ -26,7 +26,6 @@ class FrameRelativeProductsController extends Controller
         );
         $limitArr = array(0, 10);
         $joinsArr = array();
-        $relativeProducts = array();
         $relativeProducts = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
         if (count($relativeProducts) < 10) {
             $productAdding = 10 - count($relativeProducts);
@@ -74,7 +73,9 @@ class FrameRelativeProductsController extends Controller
                 }
             }
         }
-        return view('Frontend.relative_products', compact('relativeProducts'));
+        if (!empty($relativeProducts)){
+            return view('Frontend.relative_products', compact('relativeProducts'));
+        }
     }
 
 }

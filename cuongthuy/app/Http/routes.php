@@ -41,9 +41,9 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::get('/product/index', 'Admin\ProductController@index');
     Route::any('/product/detail/{id?}', 'Admin\ProductController@detail');
     Route::any('/product/search', 'Admin\ProductController@search');
-    Route::get('/category/parent', 'Admin\CategoryController@getParentList');
-    Route::get('/category/children', 'Admin\CategoryController@getChildList');
-//    Route::controller('order', 'Admin\OrderController');
+    Route::get('/category/index', 'Admin\CategoryController@getParentList');
+    Route::post('/category/api', 'Admin\CategoryController@procAjax');
+    Route::controller('order', 'Admin\OrderController');
     Route::get('/order/search',  ['uses' => 'OrderController@getSearch']);
     Route::controller('order_detail', 'Admin\OrderDetailController');
 });

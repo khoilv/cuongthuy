@@ -68,7 +68,7 @@ class TableBase extends DBCommon {
     public function update($updateArray, $whereArray)
     {
         $updateStr = $this->makeUpdateStr($updateArray);
-        $whereStr = $this->makeWhereStr($whereArray);        
+        $whereStr = $this->makeWhereStr($whereArray);
         $updateParams = array_values($updateArray);
         $whereParams = array_values($whereArray);
         $bindArray = array();
@@ -146,12 +146,21 @@ class TableBase extends DBCommon {
                 return $this->getFirstResult($data);
             }
         }
-        return false;
+        return array();
     }
     
     public function getIdMax($id){
          return DB::table($this->getTableName())->max($id);
     }
-
+    public function delete($whereArray){
+        $whereStr = $this->makeWhereStr($whereArray);
+        $whereParams = array_values($whereArray);
+        $bindArray = array();
+        foreach ($whereParams as $val) {
+            $bindArray[] = $val;
+        }
+        $sql = 'DELETE FROM ' . $this->getTableName() . $whereStr;
+        return  DB::delete($sql,$bindArray);
+    }
 }
 

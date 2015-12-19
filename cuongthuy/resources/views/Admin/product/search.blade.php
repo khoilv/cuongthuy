@@ -46,7 +46,7 @@
             <th>Loại sản phẩm</th>
             <td>
                 {!! Form::select('product_category', 
-                [$category],
+                $category,
                 isset($form['product_category'])? $form['product_category']:''
                 ) !!}
                 @if ($errors->has('product_category'))<p class="error_comment">{!! $errors->first('product_category') !!}</p>@endif
@@ -54,7 +54,7 @@
             <th>Trạng thái</th>
             <td>
                 {!! Form::select('product_status', 
-                [$arrProductStatus],
+                $arrProductStatus,
                 isset($form['product_status'])? $form['product_status']:''
                 ) !!}
                 @if ($errors->has('product_status'))<p class="error_comment">{!! $errors->first('product_status') !!}</p>@endif
@@ -85,7 +85,7 @@
             @if (!empty($arrProductList))
             @foreach ($arrProductList as $key => $product)
             <tr class="table_list {!!$key % 2 == 0 ? 'bg_yellow' : ''!!}">
-                <td><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_code']!!}</a></td>
+                <td>{!!$product['product_code']!!}</td>
                 <td class="bold"><p class="alignC"><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_name']!!}</a></p></td>
                 <td>{!!$category[$product['product_category']]!!}</td>
                 <td>{!!$product['product_price']!!} đ</td>

@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Frontend\ProductModel;
 use App\Models\Frontend\CategoryModel;
 use Input;
-
+use DB;
 class ProductController extends Controller {
      private static $PRODUCT_MAX = 25;
 
@@ -21,18 +21,20 @@ class ProductController extends Controller {
          $categoryId = '';
          if (Input::has('category_id')){
             $categoryId = Input::get('category_id');
+            $joinsArr = array(
+                array(
+                    'table' => 'categories',
+                    'type' => 'RIGHT',
+                    'conditions' => 'products.product_category = categories.id'
+                )
+            );
             if ($categoryId > 0) {
                 $whereArr['OR']= array('categories.id' => $categoryId,'categories.category_parent' => $categoryId);
-                $joinsArr = array(
-                    array(
-                    'table'=> 'categories',
-                    'type' => 'INNER',
-                    'conditions' => 'products.product_category = categories.id'
-                    )
-                );
-            } else {
-                $whereArr['product_sell_status LIKE'] = "%1%";
-            }
+           } else {
+               $whereArr['OR']= array('categories.id' => $categoryId);
+           }
+         } else {
+             $whereArr['product_sell_status LIKE'] = "%1%";
          }
          $searchKey = '';
          $searchValue = '';
@@ -70,6 +72,7 @@ class ProductController extends Controller {
          $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
          $limitArr = array($offset, $maxRec);
          $arrProductList  = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
+         //var_dump($arrProductList);
          // get category name
          $categories = $categoryCls->getCategoryNamebyId($categoryId);
          BaseController::$title = 'Danh sách sản phẩm';

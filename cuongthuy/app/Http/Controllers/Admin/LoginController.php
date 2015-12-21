@@ -75,10 +75,4 @@ class LoginController extends Controller
         Session::forget('user_id');
         return Redirect::action('Admin\LoginController@login');
     }
-    
-    public static function checkLogin(){
-        if (!Session::has('user_id')) {
-            return Redirect::action('Admin\LoginController@login');
-        }
-    }
 }

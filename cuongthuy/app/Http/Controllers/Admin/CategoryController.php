@@ -23,26 +23,16 @@ class CategoryController extends Controller
         $this->categoryCls = new CategoryModel();
     }
 
-    public function getParentList()
+    public function getIndex()
     {
         $parentList = $this->categoryCls->getParentList();
         $childList = $this->categoryCls->getChildList();
-        return view('admin.category.index', [
+        return view('Admin.category.index', [
                     'parentList' => $parentList,
                     'childList' => $childList,
                 ]);
     }
 
-    public function getChildList()
-    {
-        $parentList = $this->categoryCls->getParentList();
-        $childList = $this->categoryCls->getChildList();
-        return view('admin.category.category_child', [
-                    'childList' => $childList,
-                    'parentList' => $parentList
-                ]);
-    }
-    
     public function procAjax(){
         if (Request::has('name')) {
             $data = Request::all();

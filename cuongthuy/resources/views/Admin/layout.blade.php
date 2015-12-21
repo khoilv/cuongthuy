@@ -71,7 +71,7 @@
             @if (strpos($_SERVER['REQUEST_URI'], 'maintenance' ))
             <p id="left_link_07_on">Bảo trì hệ thống</p>
             @else
-            <p id="left_link_07"><a href="{!!Asset('admin/sale/index')!!}">Bảo trì hệ thống</a></p>
+            <p id="left_link_07"><a href="{!!Asset('admin/maintenance')!!}">Bảo trì hệ thống</a></p>
             @endif
     </div>
     <!--▲ left_content -->

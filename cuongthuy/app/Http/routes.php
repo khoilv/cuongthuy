@@ -47,4 +47,5 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::get('/order/search',  ['uses' => 'OrderController@getSearch']);
     Route::post('/order/search',  ['uses' => 'OrderController@postSearch']);
     Route::controller('order_detail', 'Admin\OrderDetailController');
+    Route::any('/maintenance','Admin\MaintenanceController@index');
 });

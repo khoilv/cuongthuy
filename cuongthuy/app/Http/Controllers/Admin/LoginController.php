@@ -64,7 +64,7 @@ class LoginController extends Controller
             }
             return Redirect::action('Admin\TopController@index');
         }
-        return view('admin/login',[
+        return view('Admin/login',[
             'username' => $username,
             'password' => $password,
             'remember' => $remember

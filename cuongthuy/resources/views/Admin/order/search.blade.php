@@ -14,19 +14,14 @@ use App\Http\Controllers\Controller\Admin\OrderController;
             $('#order_form').submit();
         });
         
-//        $('#datetimepicker12').datetimepicker({
-//            beforeShowDay: function(date) {
-//            if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
-//                    return [true, "custom-date-style"];
-//            }
-//            return [true, ""];
-//	}
-//});   
+        $('#csv_button').click(function() {
+            $('#cmd').attr({value: "csv_download"});
+            $('#order_form').submit();
+        });
+        
         $('.default_datetimepicker').datetimepicker({
             format:'d/m/Y',
             formatDate:'d.m.Y',
-//            value:'2015/04/15',
-//            defaultDate:'20/12/2015',
             timepicker:false,
             timepickerScrollbar:false
         });
@@ -53,7 +48,7 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 <label><input type="radio" name="order_sort" value="DESC" @if (!isset($input['order_sort']) || (isset($input['order_sort']) && $input['order_sort'] == "DESC")) checked @endif>
                     Thứ tự giảm dần
                 </label>
-                    <input type="text" name="order_date_start" class="default_datetimepicker" style='width:100px;'/> ~ <input type="text" name="order_date_end" class="default_datetimepicker" style='width:100px;'/>
+                    <input type="text" name="order_date_start" value="{!!isset($input['order_date_start'])? $input['order_date_start']:''!!}" class="default_datetimepicker" readonly style='width:100px;'/> ~ <input type="text" name="order_date_end" class="default_datetimepicker" value="{!!isset($input['order_date_end'])? $input['order_date_end']:''!!}" readonly style='width:100px;'/>
             </td>
         </tr>
         <tr class="menu">

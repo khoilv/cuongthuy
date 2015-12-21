@@ -11,6 +11,7 @@ use App\Forms\FormValidationException;
 use App\Forms\Admin\OrderForm;
 use Input;
 use Redirect;
+use DateTime;
 
 class OrderController extends Controller {
     
@@ -46,17 +47,13 @@ class OrderController extends Controller {
                 $option['arrWhere'][] = ['order_phone' => $input['order_phone']];
             }
             if ($input['order_sort']) {
-                var_dump("nhu cac");
                 $option['order'] = ['id' => $input['order_sort']];
             }
             if ($input['order_date_start']) {
-                $a = date_create($input['order_date_start']);
-                $b = date_create($a);
-                dd($b);
-//                $option['arrWhereStart'] = ['order_date' => date_format(date_create($input['order_date_start']), "Y:m:d")];
+                $option['arrWhereStart'] = ['order_date' => date_format(DateTime::createFromFormat('d/m/Y', $input['order_date_start']), "Y:m:d")];
             }
             if ($input['order_date_end']) {
-//                $option['arrWhereEnd'] = ['order_date' => date_format(date_create($input['order_date_end']), "Y:m:d")];
+                $option['arrWhereEnd'] = ['order_date' => date_format(DateTime::createFromFormat('d/m/Y', $input['order_date_end']), "Y:m:d")];
             }
             $option['limit'] = 25;
             if (isset($input['page'])) {
@@ -64,6 +61,7 @@ class OrderController extends Controller {
             }
             
             list($count,$orders) = $this->model->getOrderList($option);
+            var_dump($count);
         }
         
         return view('Admin.order.search', compact('orders', 'input'));

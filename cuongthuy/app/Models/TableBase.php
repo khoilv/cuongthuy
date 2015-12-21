@@ -81,7 +81,7 @@ class TableBase extends DBCommon {
         $sql = 'UPDATE ' . $this->getTableName()
                 . ' SET ' . $updateStr
                 . $whereStr;
-        var_dump ($sql);
+        
         return DB::update($sql,$bindArray);
     }
     
@@ -96,8 +96,7 @@ class TableBase extends DBCommon {
      * order: list of fields and type will be used to sort result
      * @return mixed depend on param $type
      */
-    public function find($type = 'all', $options = array())
-    {
+    public function find($type = 'all', $options = array()) {
 
         $fieldsClause = '*';
         if (isset($options['fields'])) {
@@ -138,6 +137,8 @@ class TableBase extends DBCommon {
                 $havingClause
                 $orderClause
                 $limitClause";
+        var_dump($sql);
+//        dd($sql);
         $data = DB::select($sql,$params);
         if ($data) {
             if ($type == 'all') {

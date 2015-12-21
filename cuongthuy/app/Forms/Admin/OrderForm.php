@@ -16,7 +16,7 @@ class OrderForm extends BaseForm {
             'order_ship_city'           => ['required', 'integer', 'min:1','max:63'],
             'order_status'              => ['required', 'integer', 'min:1','max:4'],
             'payment_method'            => ['required', 'integer', 'min:1','max:2'],
-            'quantity'                  => ['required','numeric','min:1']
+            'quantity'                  => ['numeric','min:1']
         ];
         return $rules;
     }

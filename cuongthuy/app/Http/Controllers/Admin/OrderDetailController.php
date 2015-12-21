@@ -10,7 +10,7 @@ use App\Models\Admin\OrderModel;
 use App\Models\Admin\OrderDetailModel;
 use App\Models\Admin\ProductModel;
 use App\Forms\FormValidationException;
-use App\Forms\Admin\OrderForm;
+use App\Forms\Admin\OrderDetailForm;
 use Input;
 use Session;
 use Redirect;
@@ -33,13 +33,12 @@ class OrderDetailController extends Controller {
     
     private $orderForm;
     
-    public function __construct(OrderForm $orderForm) {
+    public function __construct(OrderDetailForm $orderForm) {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->model = new OrderModel();
         $this->oderDetailObj = new OrderDetailModel();
         $this->productsObj = new ProductModel();
         $this->orderForm = $orderForm;
-
     }
     
     public function getIndex () {
@@ -50,7 +49,6 @@ class OrderDetailController extends Controller {
     }
     
     public function postIndex () {
-        echo "clgv";
         $this->init();
         $input = Input::except('_token');
         
@@ -60,8 +58,6 @@ class OrderDetailController extends Controller {
             return Redirect::back()->withInput()->withErrors($e->getErrors());
         }
         
-        echo "ngu vai";
-        var_dump($this->oderDetailObj);
         if (!empty($this->orderDetail)) {
             foreach ($this->orderDetail as $value) {
                 $arrUpdate = [

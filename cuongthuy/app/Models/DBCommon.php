@@ -289,6 +289,7 @@ class DBCommon {
         if (!empty($orders)) {
             $orderClause = 'ORDER BY ' . $orderClause;
         }
+//        dd($orderClause);
         return $orderClause;
     }
      /**

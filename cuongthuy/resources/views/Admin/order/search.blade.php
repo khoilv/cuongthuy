@@ -7,6 +7,13 @@ use App\Http\Controllers\Controller\Admin\OrderController;
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
 @endsection
 @section('content')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#search_button').click(function() {
+            $('#order_form').submit();
+        });
+    });
+</script>
 <p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Quản lí đơn hàng</a> &gt; Tìm kiếm đơn hàng</p>
 <h2 id="page_midashi_02">Tìm kiếm đơn hàng</h2>
 <!-- InstanceBeginEditable name="content_area" -->
@@ -16,44 +23,50 @@ use App\Http\Controllers\Controller\Admin\OrderController;
     </p>
     <p id="csv_button">Lưu file CSV</p>
     <div class="clear"></div>
-    <!--{{ Form::open(['method' => 'GET', 'url' => action('Admin\OrderController@postIndex'), 'name' => 'form1']) }}-->
-    {{ Form::open(array('action' => 'Admin\OrderController@postIndex')) }}
+    {!! Form::open(['method' => 'GET', 'url' => 'admin/order/search', 'id' => 'order_form']) !!}
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
             <th>Ngày đặt hàng</th>
             <td colspan="3">
                 <label><input type="radio" name="sort" id="syoarea" value="ASC" >Thứ tự tăng dần</label>&nbsp;&nbsp;&nbsp;
-                <label><input type="radio" name="sort" id="syoarea" value="DESC" checked>Thứ tự giảm dần</label>&nbsp;&nbsp;&nbsp;
-                <input type="text" name="zip1" id="zip1" class="text" style="width:100px;" />&nbsp;
-                ～&nbsp;<input type="text" name="zip1" id="zip1" class="text" style="width:100px;" />&nbsp;
+                <label><input type="radio" name="sort" id="syoarea" value="DESC" >Thứ tự giảm dần</label>&nbsp;&nbsp;&nbsp;
+                <input type="text" name="order_date_start" class="text" style="width:100px;" />&nbsp;
+                ～&nbsp;<input type="text" name="order_date_end" class="text" style="width:100px;" />&nbsp;
             </td>
         </tr>
         <tr class="menu">
             <th>Mã đơn hàng</th>
-            <td><input type="text" name="gift_no" class="text" style="width:180px;" /></td>
+            <td><input type="text" name="order_code" class="text" style="width:180px;" /></td>
             <th>Trạng thái đơn hàng </th>
             <td>
-                <select name="status">
-                    <option label="" value="" selected>Chọn trạng thái</option>
-                    <option label="" value="status_on">Đã order</option>
-                    <option label="" value="status_off">Đang đợi comfirm</option>
-                </select>
+                {!! Form::select('order_status', InitialDefine::$arrayOderStatus, isset($order['order_status'])? $order['order_status']:'') !!}
+                @if ($errors->has('order_status'))<p style="color: red">{!! $errors->first('order_status') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Tên khách hàng</th>
-            <td colspan="3"><input type="text" name="" class="text" style="width:400px;" /></td>
+            <td colspan="3">
+                {!! Form::text('order_customer_name', isset($order['order_customer_name'])? $order['order_customer_name']:'',['style' => 'width:400px', 'class' => 'text']) !!}
+                @if ($errors->has('order_customer_name'))<p style="color: red">{!! $errors->first('order_customer_name') !!}</p>@endif
+            </td>
+            
         </tr>
         <tr class="menu">
             <th>Điện thoại khách hàng</th>
-            <td colspan="3"><input type="text" name="" class="text" style="width:400px;" /></td>
+            <td colspan="3">
+                <!--<input type="text" name="order_phone" class="text" style="width:400px;" />-->
+                {!! Form::text('order_phone', isset($order['order_phone'])? $order['order_phone']:'',['style' => 'width:400px', 'class' => 'text']) !!}
+                @if ($errors->has('order_phone'))<p style="color: red">{!! $errors->first('order_phone') !!}</p>@endif
+            </td>
         </tr>
     </table>
-    {{ Form::close() }}
     <div class="mt15">
         <p id="search_button">Search</p>
+        <!--<input type="submit" id="search_button" value="Search">-->
         <div class="clear"></div>
     </div>
+    {!! Form::close() !!}
+    <!--</form>-->
 </div>
 
 <div id="bg_blue" class="mt15">

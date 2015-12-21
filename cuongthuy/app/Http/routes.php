@@ -45,5 +45,6 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::post('/category/api', 'Admin\CategoryController@procAjax');
     Route::controller('order', 'Admin\OrderController');
     Route::get('/order/search',  ['uses' => 'OrderController@getSearch']);
+    Route::post('/order/search',  ['uses' => 'OrderController@postSearch']);
     Route::controller('order_detail', 'Admin\OrderDetailController');
 });

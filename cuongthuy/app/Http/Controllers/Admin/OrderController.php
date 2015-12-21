@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\OrderModel;
+use Input;
 
 class OrderController extends Controller {
     
@@ -23,6 +24,10 @@ class OrderController extends Controller {
     public function getSearch () {
         $options['order'] = array('id DESC');
         $orders = $this->model->getOrders('all', $options);
+        
+        $input = Input::get();
+        
+        var_dump($input);
         
         return view('Admin.order.search', compact('orders'));
     }

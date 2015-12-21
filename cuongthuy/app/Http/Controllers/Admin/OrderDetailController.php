@@ -50,6 +50,7 @@ class OrderDetailController extends Controller {
     }
     
     public function postIndex () {
+        echo "clgv";
         $this->init();
         $input = Input::except('_token');
         
@@ -59,6 +60,8 @@ class OrderDetailController extends Controller {
             return Redirect::back()->withInput()->withErrors($e->getErrors());
         }
         
+        echo "ngu vai";
+        var_dump($this->oderDetailObj);
         if (!empty($this->orderDetail)) {
             foreach ($this->orderDetail as $value) {
                 $arrUpdate = [

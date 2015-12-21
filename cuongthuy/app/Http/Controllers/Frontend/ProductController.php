@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Frontend\ProductModel;
 use App\Models\Frontend\CategoryModel;
 use Input;
-use DB;
 class ProductController extends Controller {
      private static $PRODUCT_MAX = 25;
 
@@ -72,7 +71,6 @@ class ProductController extends Controller {
          $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
          $limitArr = array($offset, $maxRec);
          $arrProductList  = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
-         //var_dump($arrProductList);
          // get category name
          $categories = $categoryCls->getCategoryNamebyId($categoryId);
          BaseController::$title = 'Danh sách sản phẩm';

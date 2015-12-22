@@ -22,7 +22,7 @@ use App\Lib\InitialDefine;
 class ProductController extends Controller
 {
 
-    private $PRODUCT_MAX = 25;
+    private $PRODUCT_MAX = 5;
     private $productCls;
     private $categoryCls;
     protected $productForm;

@@ -17,6 +17,7 @@ use DateTime;
 class OrderController extends Controller {
     
     private $model;
+    private static $ORDER_MAX = 5;
     
     public function __construct(OrderForm $orderForm) {
         $this->model = new OrderModel();
@@ -31,13 +32,15 @@ class OrderController extends Controller {
         $option['order'] = ['id' => 'DESC'];
         $orders = $this->model->getOrderList($option);
         $count = $this->model->getCountOrderList($option);
+        
+        $this->makePage();
         return view('Admin.order.search', compact('orders', 'input', 'count'));
     }
     
-    public function postSearch () {
+    public function search () {
         $input = Input::except('_token');
         
-        var_dump($input);
+        //var_dump($input);
         $option = [];
         if ($input['order_code']) {
             $option['arrWhereLike'][] = ['order_code' => $input['order_code']];
@@ -60,14 +63,19 @@ class OrderController extends Controller {
         if ($input['order_date_end']) {
             $option['arrWhereEnd'] = ['order_date' => date_format(DateTime::createFromFormat('d/m/Y', $input['order_date_end']), "Y:m:d")];
         }
-        $option['limit'] = 25;
-        if (isset($input['page'])) {
-            $option['offset'] = $option['limit']*$input['page'];
+        $option['limit'] = $maxRec = self::$ORDER_MAX;
+        if (Input::has('page')) {
+            $page = Input::get('page');
+            $option['offset'] = $option['limit']*($input['page'] - 1);
         }
 
         $orders = $this->model->getOrderList($option);
         $count = $this->model->getCountOrderList($option);
-        var_dump($count);
+        
+        $lastPage = ceil($count / $maxRec);
+        $currentPage = $page;
+        $previousPage = $page > 1 ? $page - 1 : 1;
+        $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
         
         if (Input::has('cmd') && Input::get('cmd') == 'csv_download') {
             $csvOrders = $this->model->getAllOrderList($option);
@@ -102,7 +110,18 @@ class OrderController extends Controller {
             exit;
         }
         
-        return view('Admin.order.search', compact('orders', 'input'));
+        return view('Admin.order.search', [
+                    'orders'    => $orders,
+                    'input'     => $input,
+                    'lastPage'  => $lastPage,
+                    'currentPage' => $currentPage,
+                    'previousPage'  => $previousPage,
+                    'nextPage'      => $nextPage
+                    ]);
+    }
+    
+    private function makePage () {
+        
     }
 }
 

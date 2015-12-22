@@ -119,21 +119,31 @@ use App\Http\Controllers\Controller\Admin\OrderController;
             @endforeach
             @endif
     </table>
-<!--    <div id="tab_area">
+    
+    <div id="tab_area">
         <div id="page_tab">
-            <a href="#" class="tab_off">&lt;&lt;</a>
-            <a href="#" class="tab_off">&lt;</a>
-            <a href="#" class="tab_off">100</a>
-            <a href="#" class="tab_off">101</a>
-            <a href="#" class="tab_off">102</a>
-            <em>103</em>
-            <a href="#" class="tab_off">104</a>
-            <a href="#" class="tab_off">105</a>
-            <a href="#" class="tab_off">106</a>
-            <a href="#" class="tab_off">&gt;</a>
-            <a href="#" class="tab_off">&gt;&gt;</a>
+            <?php if ($lastPage > 1){
+                if($lastPage <= 5) {
+                   $begin = 1; 
+                   $end = $lastPage;
+                } else {
+                    if($currentPage < 5 ){
+                       $begin = 1;
+                       $end = 5;
+                    } elseif ($currentPage > $lastPage-5) {
+                       $begin = $lastPage - 4; 
+                       $end = $lastPage;
+                    } else {
+                       $begin = $currentPage-2; 
+                       $end = $currentPage +2;
+                    }
+                } ?>
+              @include('Admin.order.list_page')
+          <?php } ?>
         </div>
-        <p class="alignC mt10">（1550～1600）</p>
-    </div>-->
+        @if ($lastPage > 1)
+        <p class="alignC mt10">（{!! $maxRec * ($currentPage -1)  !!}～{!! $maxRec * $currentPage  !!}）</p>
+        @endif
+    </div>
 </div>
 @endsection

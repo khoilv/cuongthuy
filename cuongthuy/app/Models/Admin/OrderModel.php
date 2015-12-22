@@ -94,7 +94,6 @@ class OrderModel extends TableBase {
         $table->where('order_date', '>', "$today 00:00:00");
         $table->where('order_date', '<', "$tomorow 00:00:00");
         $count = $table->count();
-//        var_dump($table->toSql());
         return $count;
     }
     

@@ -107,22 +107,22 @@
     <div id="tab_area">
         <div id="page_tab">
             <?php if ($lastPage > 1){
-               if($lastPage <= 5) {
+                if($lastPage <= 5) {
                    $begin = 1; 
                    $end = $lastPage;
-               } else {
-                  if($currentPage < 5 ){
-                      $begin = 1;
-                      $end = 5;
-                  } elseif ($currentPage > $lastPage-5) {
-                      $begin = $lastPage - 4; 
-                      $end = $lastPage;
-                  } else {
-                      $begin = $currentPage-2; 
-                      $end = $currentPage +2;
-                  }
-              } ?>
-              @include('Admin.list_page')
+                } else {
+                    if($currentPage < 5 ){
+                       $begin = 1;
+                       $end = 5;
+                    } elseif ($currentPage > $lastPage-5) {
+                       $begin = $lastPage - 4; 
+                       $end = $lastPage;
+                    } else {
+                       $begin = $currentPage-2; 
+                       $end = $currentPage +2;
+                    }
+                } ?>
+              @include('Admin.product.list_page')
           <?php } ?>
         </div>
         @if ($lastPage > 1)

@@ -31,14 +31,14 @@ class OrderDetailController extends Controller {
     
     private $result;
     
-    private $orderForm;
+    private $orderDetailForm;
     
-    public function __construct(OrderDetailForm $orderForm) {
+    public function __construct(OrderDetailForm $orderDetailForm) {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->model = new OrderModel();
         $this->oderDetailObj = new OrderDetailModel();
         $this->productsObj = new ProductModel();
-        $this->orderForm = $orderForm;
+        $this->orderDetailForm = $orderDetailForm;
     }
     
     public function getIndex () {
@@ -53,8 +53,9 @@ class OrderDetailController extends Controller {
         $input = Input::except('_token');
         
         try {
-            $this->orderForm->validate($input);
+            $this->orderDetailForm->validate($input);
         } catch (FormValidationException $e) {
+            dd($e->getErrors());
             return Redirect::back()->withInput()->withErrors($e->getErrors());
         }
         
@@ -72,7 +73,6 @@ class OrderDetailController extends Controller {
         unset($input['quantity']);
         $input['customer_id'] = $this->order['customer_id'];
         $input['date_time_last_modify'] = date("Y-m-d H:i:s");
-        
         if ($this->model->update($input, array('id' => $this->orderId))) {
             Session::flash('success', 'Cập nhật đơn hàng thành công!');
         }

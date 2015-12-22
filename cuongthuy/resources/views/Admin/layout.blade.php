@@ -26,10 +26,10 @@
 <!--▼ header -->
 <div id="header">
     <div id="header_area">
-        <h1 class="floatL"><img src="{!!Asset('public/images/admin/logo.png')!!}" width="180px" height="51px" /></h1>
+        <h1 class="floatL"><a href="{!!Asset('admin/top')!!}"><img src="{!!Asset('public/images/admin/logo.png')!!}" width="180px" height="51px" /></a></h1>
         <div class="floatR alignR mt10">
             <p>@if (Session::has('username'))Xin chào {!!Session::get('username')!!}! @endif</p>
-            <p><a href="{!!Asset('admin/top')!!}" target="_blank">Index</a>｜<a href="{!! URL::action('Admin\LoginController@logout')!!}">Logout</a></p>
+            <p><a href="{!!Asset('admin/top')!!}">Trang chủ</a>｜<a href="{!! URL::action('Admin\LoginController@logout')!!}">Logout</a></p>
         </div>
     </div>
 </div>
@@ -72,6 +72,11 @@
             <p id="left_link_07_on">Bảo trì hệ thống</p>
             @else
             <p id="left_link_07"><a href="{!!Asset('admin/maintenance')!!}">Bảo trì hệ thống</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'password' ))
+            <p id="left_link_08_on">Đổi mật khẩu</p>
+            @else
+            <p id="left_link_08"><a href="{!!Asset('admin/password/change')!!}">Đổi mật khẩu</a></p>
             @endif
     </div>
     <!--▲ left_content -->

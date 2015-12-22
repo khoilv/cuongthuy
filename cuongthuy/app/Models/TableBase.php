@@ -137,8 +137,6 @@ class TableBase extends DBCommon {
                 $havingClause
                 $orderClause
                 $limitClause";
-        var_dump($sql);
-//        dd($sql);
         $data = DB::select($sql,$params);
         if ($data) {
             if ($type == 'all') {

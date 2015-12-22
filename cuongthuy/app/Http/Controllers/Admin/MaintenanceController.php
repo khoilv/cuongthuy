@@ -7,7 +7,7 @@ use App\Forms\Admin\MaintenanceForm;
 use App\Forms\FormValidationException;
 use Request;
 use Redirect;
-
+use Session;
 class MaintenanceController extends Controller
 {
 
@@ -37,7 +37,10 @@ class MaintenanceController extends Controller
                 Session::flash('msg_error', 'Đã xảy ra lỗi.Vui lòng kiểm tra các mục bên dưới');
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
-            //var_dump($data['message']);
+            if (strtotime($data['start_date']) > strtotime($data['end_date'])){
+                Session::flash('msg_error', 'Ngày bắt đầu không được nhỏ hơn ngày kết thúc. Vui lòng nhập lại.');
+                return Redirect::back()->withInput();
+            }
             //save in ini file
             $tmpArr = array("\r\n" => "<br>", "\n" => "<br>");
             $data['message'] = stripslashes(strtr($data['message'], $tmpArr));

@@ -85,14 +85,14 @@ class ProductController extends Controller
                 // Upload img
                 $extension = $input[$key]->getClientOriginalExtension(); // getting image extension
                 $filename = 'product' . $productId . '.' . $extension;
-                $input[$key]->move($destinationPath, $filename);
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 186, 182);
                 $input[$key] = $filename;
             }
             if (strpos($key, 'product_other_image') !== false) {
                 // Upload img
                 $extension = $input[$key]->getClientOriginalExtension(); // getting image extension
                 $filename = 'product' . $productId . '_' . $i . '.' . $extension;
-                $input[$key]->move($destinationPath, $filename);
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 492, 300);
                 $product_other_image .= $filename . ',';
                 $i++;
                 unset($input[$key]);
@@ -122,7 +122,7 @@ class ProductController extends Controller
                 // Upload img
                 $extension = $input['product_image']->getClientOriginalExtension(); // getting image extension
                 $filename = 'product' . $productId . '.' . $extension;
-                $input['product_image']->move($destinationPath, $filename);
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 186, 182);
                 $input['product_image'] = $filename;
             }
             if (strpos($key, 'product_other_image') !== false && isset($product['product_other_image'])) {
@@ -138,7 +138,7 @@ class ProductController extends Controller
                 // Upload img
                 $extension = $input[$key]->getClientOriginalExtension(); // getting image extension
                 $filename = 'product' . $productId . '_' . $i . '.' . $extension;
-                $input[$key]->move($destinationPath, $filename);
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 492, 300);
                 $product['product_other_image'][$i] = $filename;
                 $product_other_image = implode(',', $product['product_other_image']);
                 unset($input[$key]);
@@ -159,9 +159,16 @@ class ProductController extends Controller
     public function createThumbImg($destinationPath,$filename)
     {
         $this->resizeImage->load($destinationPath . '/' . $filename);
-        $this->resizeImage->resizeToWidth(94);
-        $this->resizeImage->resizeToHeight(86);
+        $this->resizeImage->resizeToWidth(100);
+        $this->resizeImage->resizeToHeight(72);
         $this->resizeImage->save($destinationPath . '/thumb_' . $filename);
+    }
+    
+    public function uploadImage($fileUpload, $filePath, $width, $height){
+        $this->resizeImage->load($fileUpload);
+        $this->resizeImage->resizeToWidth($width);
+        $this->resizeImage->resizeToHeight($height);
+        $this->resizeImage->save($filePath);
     }
 
     public function search()

@@ -62,7 +62,7 @@ class LoginController extends Controller
                 Cache::add('password', $data['password'], 7200);
                 Cache::add('remember', $data['remember'], 7200);
             }
-            return Redirect::action('Admin\TopController@index');
+            return Redirect::action('Admin\TopController@getIndex');
         }
         return view('Admin/login',[
             'username' => $username,

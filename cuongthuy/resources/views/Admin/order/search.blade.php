@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller\Admin\OrderController;
 <script type="text/javascript">
     $(document).ready(function() {
         $('#search_button').click(function() {
+            $('#cmd').attr({value: "search"});
             $('#order_form').submit();
         });
         
@@ -35,9 +36,9 @@ use App\Http\Controllers\Controller\Admin\OrderController;
     <p class="mb15 floatL color_red">
         ※ Khi bạn nhập vào các mục dưới đây bạn có thể lọc theo các điều kiện tìm kiếm<br />
     </p>
+    {!! Form::open(['method' => 'POST', 'url' => 'admin/order/search', 'id' => 'order_form', 'name' => 'form1']) !!}
     <p id="csv_button">Lưu file CSV</p>
     <div class="clear"></div>
-    {!! Form::open(['method' => 'GET', 'url' => 'admin/order/search', 'id' => 'order_form']) !!}
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
             <th>Ngày đặt hàng</th>
@@ -48,7 +49,9 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 <label><input type="radio" name="order_sort" value="DESC" @if (!isset($input['order_sort']) || (isset($input['order_sort']) && $input['order_sort'] == "DESC")) checked @endif>
                     Thứ tự giảm dần
                 </label>
-                    <input type="text" name="order_date_start" value="{!!isset($input['order_date_start'])? $input['order_date_start']:''!!}" class="default_datetimepicker" readonly style='width:100px;'/> ~ <input type="text" name="order_date_end" class="default_datetimepicker" value="{!!isset($input['order_date_end'])? $input['order_date_end']:''!!}" readonly style='width:100px;'/>
+                    <input type="text" name="order_date_start" value="{!!isset($input['order_date_start'])? $input['order_date_start']:''!!}" class="default_datetimepicker" readonly style='width:100px;'/> 
+                    ~ <input type="text" name="order_date_end" class="default_datetimepicker" value="{!!isset($input['order_date_end'])? $input['order_date_end']:''!!}" readonly style='width:100px;'/>
+                    <a href="#" onClick="f=document.form1;f['order_date_start'].value='';f['order_date_end'].value='';">Xóa ngày tháng</a>
             </td>
         </tr>
         <tr class="menu">
@@ -82,7 +85,8 @@ use App\Http\Controllers\Controller\Admin\OrderController;
         </tr>
     </table>
     <div class="mt15">
-        <p id="search_button">Search</p>
+        <input id="cmd" type="hidden" name="cmd" value=""/>
+        <p id="search_button">Tìm kiếm</p>
         <div class="clear"></div>
     </div>
     {!! Form::close() !!}

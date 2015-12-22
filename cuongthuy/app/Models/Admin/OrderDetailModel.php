@@ -34,4 +34,15 @@ class OrderDetailModel extends TableBase {
         DB::table($this->table)->where('id', $id)->delete();
     }
     
+    public function getOrderDetailByArrayId($arrId) {
+        $revenue = 0;
+        foreach ($arrId as $id) {
+            $result = $this->getOrderDetailByOrderId($id);
+            foreach ($result as $value) {
+                $revenue += $value['unitPrice'] * $value['quantity'];
+            }
+        }
+        
+        return $revenue;
+    }
 }

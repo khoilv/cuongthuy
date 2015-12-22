@@ -39,7 +39,7 @@ Route::get('maintenance', 'Frontend\MaintenanceController@index');
 Route::any('admin/', 'Admin\LoginController@login');
 Route::get('admin//logout', 'Admin\LoginController@logout');
 Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
-    Route::get('/top','Admin\TopController@index');
+    Route::get('/top','Admin\TopController@getIndex');
     Route::get('/product/index', 'Admin\ProductController@index');
     Route::any('/product/detail/{id?}', 'Admin\ProductController@detail');
     Route::any('/product/search', 'Admin\ProductController@search');

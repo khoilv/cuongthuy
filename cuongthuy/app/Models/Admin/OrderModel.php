@@ -17,6 +17,7 @@ class OrderModel extends TableBase {
 
     public function __construct() {
         parent::__construct();
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->setTableName($this->table);
     }
 
@@ -37,6 +38,32 @@ class OrderModel extends TableBase {
     
     
     public function getOrderList ($option) {
+        $table = $this->makeParam($option);
+        
+        if (!empty ($option['offset'])) {
+            $table->skip($option['offset']);
+        }
+        if (!empty ($option['limit'])) {
+            $table->take($option['limit']);
+        }
+//        var_dump($table->toSql());
+        $result = $table->get();
+        return $result;
+    }
+    
+    public function getAllOrderList ($option) {
+        $table = $this->makeParam($option);
+        $result = $table->get();
+        return $result;
+    }
+    
+    public function getCountOrderList ($option) {
+        $table = $this->makeParam($option);
+        $count = $table->count();
+        return $count;
+    }
+    
+    private function makeParam ($option) {
         $table = DB::table($this->table);
         $table->select('*');
         if (!empty($option['arrWhere']) && is_array($option['arrWhere'])) {
@@ -55,34 +82,33 @@ class OrderModel extends TableBase {
         if (!empty($option['arrWhereEnd']) && is_array($option['arrWhereEnd'])) {
             $table->where(array_keys($option['arrWhereEnd'])[0], '<' , array_values($option['arrWhereEnd'])[0]);
         }
-        $count = $table->count();
-        
-        if (!empty ($option['offset'])) {
-            $table->skip($option['offset']);
-        }
-        if (!empty ($option['limit'])) {
-            $table->take($option['limit']);
-        }
         if (!empty($option['order']) && is_array($option['order'])) {
             $table->orderBy(array_keys($option['order'])[0], array_values($option['order'])[0]);
         }
-        var_dump($table->toSql());
-        $result = $table->get();
-        return [$count, $result];
+        return $table;
     }
     
-    /**
-     * Get count orders by input params
-     * @param array $whereArr
-     * @param array $joinsArr
-     * @return int
-     */
-    public function getCountResult($arrWhere){
-        $option = array(
-            'fields' => array('count(id) as count'),
-            'conditions' => $arrWhere,
-        );
-        $data =  $this->find('all', $option);
-        return $data[0]['count'];
+    public function getCountOrderToday($today, $tomorow){
+        $table = DB::table($this->table);
+        $table->select('*');
+        $table->where('order_date', '>', "$today 00:00:00");
+        $table->where('order_date', '<', "$tomorow 00:00:00");
+        $count = $table->count();
+//        var_dump($table->toSql());
+        return $count;
+    }
+    
+    public function getArrOrderId ($monthFirstDay, $monthLastDay) {
+        $table = DB::table($this->table);
+        $table->select('id');
+        $table->where('order_date', '>', "$monthFirstDay 00:00:00");
+        $table->where('order_date', '<=', "$monthLastDay 23:59:59");
+        $table->where('order_status', 3);
+        $result = $table->get();
+        $return = [];
+        foreach ($result as $value) {
+            $return[] = $value['id'];
+        }
+        return $return;
     }
 }

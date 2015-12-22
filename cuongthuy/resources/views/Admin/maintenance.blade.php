@@ -22,7 +22,10 @@
 <h2 id="page_midashi_07">Bảo trì hệ thống</h2>
 <!-- InstanceBeginEditable name="content_area" -->
 <div id="bg_blue">
-    <p class="mb15 big">Bạn có thể thiết lập bảo trì hệ thống tại đây.Việc cài đặt sẽ có hiệu lực ngay lập tức.</p>
+    <p class="mb15 big">Bạn có thể thiết lập bảo trì hệ thống tại đây. Việc cài đặt sẽ có hiệu lực ngay lập tức.</p>
+    <p class="mb15 big">Chế độ này được có thể được thiết lập khi bạn muốn thay đổi code hệ thống, backup cơ sở dữ liệu, bảo trì server...</p>
+    <p class="mb15 big">Chú ý: Khi chức năng này được thiết lập, mọi hoạt động của khách hàng như xem, mua sản phẩm sẽ bị dừng lại. 
+        Chế độ dành cho người quản lý (trang admin) vẫn có thể sử dụng được</p>
     @if(Session::has('msg_error'))
     <p class="alert_red_error mb10">{!!Session::get('msg_error')!!}</p>
     {{ Session::forget('msg_error') }}

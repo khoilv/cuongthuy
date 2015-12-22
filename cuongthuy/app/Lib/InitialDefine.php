@@ -101,7 +101,7 @@ class InitialDefine {
     );
     
     public static function selectValue($key, $arrayValue) {
-        if ($arrayValue[$key] != null) {
+        if (isset ($arrayValue[$key]) && $arrayValue[$key] != null) {
             return $arrayValue[$key];
         }
     }

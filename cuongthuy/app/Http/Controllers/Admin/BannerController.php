@@ -56,10 +56,10 @@ class BannerController extends Controller
                     $filename = 'banner' . $id . '.' . $extension;
                     $input['banner_image_path']->move($destinationPath, $filename);
                     $input['banner_image_path'] = $filename;
-                    if ($this->bannerCls->update($input, array('id' => $id))) {
-                        Session::flash('success', 'Bạn đã cập nhật thành công!');
-                        return Redirect::action('Admin\BannerController@detail', $id);
-                    }
+                }
+                if ($this->bannerCls->update($input, array('id' => $id))) {
+                    Session::flash('success', 'Bạn đã cập nhật thành công!');
+                    return Redirect::action('Admin\BannerController@detail', $id);
                 }
             } else {
                 $id = $this->bannerCls->getIdMax('id') + 1;

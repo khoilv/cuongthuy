@@ -1,12 +1,9 @@
 <?php
-namespace App\Models\Frontend;
+namespace App\Models\Admin;
 use App\Models\TableBase;
 class BannerModel extends TableBase {
 
     protected $table = 'banner';
-    protected $parentList = array();
-    protected $childList = array();
-    private $BANNER_MAX = 5;
 
     public function __construct() {
         parent::__construct();
@@ -20,12 +17,18 @@ class BannerModel extends TableBase {
     
      public function getBannerList() {
         $options = array(
-            'fields' => array('*'),
-            'conditions' => array(
-                'banner_status' => 1
-                ),
-            'limit'  => array($this->BANNER_MAX)
+            'fields' => array('*')
         );
         return $this->find('all', $options);
+    }
+    
+    public function getBannerById($id) {
+        $options = array(
+            'fields' => array('*'),
+            'conditions' => array(
+                'id' => $id
+            )
+        );
+        return $this->find('first', $options);
     }
 }

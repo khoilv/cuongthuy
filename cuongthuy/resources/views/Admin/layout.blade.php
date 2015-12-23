@@ -68,6 +68,11 @@
             @else
             <p id="left_link_06"><a href="{!!Asset('admin/sale/index')!!}">Thống kê bán hàng</a></p>
             @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'banner' ))
+            <p id="left_link_08_on">Quản lí banner</p>
+            @else
+            <p id="left_link_08"><a href="{!!Asset('admin/banner/index')!!}">Quản lí banner</a></p>
+            @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'maintenance' ))
             <p id="left_link_07_on">Bảo trì hệ thống</p>
             @else

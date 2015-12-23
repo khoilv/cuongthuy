@@ -63,7 +63,7 @@ $countCate = count($categories);
             <h2>{!!$product->product_name!!}</h2>
             <div class="add_cart">
                 <ul>
-                    <li><div class="fb-like" data-href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product->id))!!}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
+                    <li><div class="fb-like" data-href="{!!Asset('detail?product_id='.$product->id)!!}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></a></li>
                     <li><div class="g-plusone" data-size="medium" ></div></li>
                 </ul>
                 <div class="clear"></div>

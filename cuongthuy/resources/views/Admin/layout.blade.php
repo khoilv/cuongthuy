@@ -61,12 +61,12 @@
             @if (strpos($_SERVER['REQUEST_URI'], 'user' ))
             <p id="left_link_05_on">Quản lí khách hàng</p>
             @else
-            <p id="left_link_05"><a href="{!!Asset('admin/user/index')!!}">Quản lí khách hàng</a></p>
+            <p id="left_link_05"><a href="">Quản lí khách hàng</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'sale' ))
             <p id="left_link_06_on">Thống kê bán hàng</p>
             @else
-            <p id="left_link_06"><a href="{!!Asset('admin/sale/index')!!}">Thống kê bán hàng</a></p>
+            <p id="left_link_06"><a href="">Thống kê bán hàng</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'banner' ))
             <p id="left_link_08_on">Quản lí banner</p>
@@ -82,6 +82,11 @@
             <p id="left_link_08_on">Đổi mật khẩu</p>
             @else
             <p id="left_link_08"><a href="{!!Asset('admin/password/change')!!}">Đổi mật khẩu</a></p>
+            @endif
+            @if (strpos($_SERVER['REQUEST_URI'], 'chat' ))
+            <p id="left_link_08_on">Quản lý chat</p>
+            @else
+            <p id="left_link_08"><a href="{!!Asset('admin/chat/index')!!}">Quản lý chat</a></p>
             @endif
     </div>
     <!--▲ left_content -->

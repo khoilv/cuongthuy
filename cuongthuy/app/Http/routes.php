@@ -45,7 +45,7 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::any('/product/search', 'Admin\ProductController@search');
     Route::get('/category/index', 'Admin\CategoryController@getIndex');
     Route::post('/category/api', 'Admin\CategoryController@procAjax');
-    Route::controller('order', 'Admin\OrderController');
+    Route::get('/order/index', 'Admin\OrderController@getIndex');
     Route::any('order/search', 'Admin\OrderController@search');
     Route::controller('order_detail', 'Admin\OrderDetailController');
     Route::any('/maintenance','Admin\MaintenanceController@index');
@@ -53,8 +53,7 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::any('/banner/detail/{id?}', 'Admin\BannerController@detail');
     Route::get('/banner/list', 'Admin\BannerController@listBanner');
     Route::any('/password/change','Admin\UserController@changePassword');
-//    Route::get('order_detail', 'Admin\OrderDetailController@getIndex');
-//    Route::post('order_detail', ['uses' => 'Admin\OrderDetailController@chanvl']);
-//    Route::get('/order/search',  ['uses' => 'OrderController@getSearch']);
-//    Route::post('/order/search',  ['uses' => 'OrderController@postSearch']);
+    Route::get('chat/index',function(){
+        return view('Admin/chat');
+    });
 });

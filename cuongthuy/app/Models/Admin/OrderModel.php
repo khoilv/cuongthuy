@@ -46,7 +46,6 @@ class OrderModel extends TableBase {
         if (!empty ($option['limit'])) {
             $table->take($option['limit']);
         }
-//        var_dump($table->toSql());
         $result = $table->get();
         return $result;
     }

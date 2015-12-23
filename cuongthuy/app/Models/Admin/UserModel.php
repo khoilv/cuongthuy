@@ -1,6 +1,8 @@
 <?php
 namespace App\Models\Admin;
 use App\Models\TableBase;
+use DB;
+
 class UserModel extends TableBase {
 
     protected $table = 'users';
@@ -47,5 +49,25 @@ class UserModel extends TableBase {
         );
         $result =  $this->find('first', $options);
         return $result['customer_name'];
+    }
+    
+    public function getUserByUsername($userName) {
+        $options = array(
+            'fields' => array('*'),
+            'conditions' => array(
+                'username' => $userName
+            )
+        );
+        $result =  $this->find('first', $options);
+        
+        return $result;
+    }
+    
+    public function updatePassword ($userName, $password) {
+        $table = DB::table($this->table)
+                ->where('username', 'admin')
+                 ->update(['password' => $password]);
+        
+        return $table;
     }
 }

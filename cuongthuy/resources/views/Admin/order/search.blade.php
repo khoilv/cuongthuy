@@ -109,7 +109,7 @@ use App\Http\Controllers\Controller\Admin\OrderController;
             @if (isset($orders))
             @foreach ($orders as $key => $order)
             <tr class="table_list bg_yellow">
-                <td class="bold"><a href="{!!action('Admin\OrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$key+1!!}</a></td>
+                <td class="bold"><a href="{!!action('Admin\OrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$offset+$key+1!!}</a></td>
                 <td><span class="lh12">{!!date("H:i:s d-m-Y", strtotime($order['order_date']))!!}</span></td>
                 <td class="bold"><a href="{!!action('Admin\OrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$order['order_code']!!}</a></td>
                 <td class="color_blue bold">{!!InitialDefine::selectValue($order['order_status'], InitialDefine::$arrayOderStatus)!!}</td>
@@ -144,6 +144,6 @@ use App\Http\Controllers\Controller\Admin\OrderController;
         @if ($lastPage > 1)
         <p class="alignC mt10">（{!! $maxRec * ($currentPage -1)  !!}～{!! $maxRec * $currentPage  !!}）</p>
         @endif
-    </div>
+    </div> 
 </div>
 @endsection

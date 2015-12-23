@@ -206,7 +206,6 @@ class ProductController extends Controller
         //download csv
         if (Input::has('cmd') && Input::get('cmd') == 'csv_download') {
             $csvProducts = $this->productCls->getProductList($arrWhere, array());
-            dd($csvProducts);
             $strCSV = '';
             $strCSV .= "Id\tMã sản phẩm\tTên sản phẩm\tLoại sản phẩm\tGiá tiền\tTrạng thái\tSố lượng";
             $strCSV .= "\n";

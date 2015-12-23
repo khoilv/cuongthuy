@@ -13,7 +13,7 @@
 @endsection
 @section('content')
 <p id="pankuzu"><a href="{!!Asset('admin/top')!!}">TOP</a> &gt; <a href="{!!Asset('admin/banner/index')!!}">Quản lí banner</a></p>
-<h2 id="page_midashi_07">@if(isset($banner['id'])) Cập nhật tin tức @else Đăng kí banner @endif</h2>
+<h2 id="page_midashi_07">@if(isset($banner['id'])) Cập nhật banner @else Đăng kí banner @endif</h2>
 <!-- InstanceBeginEditable name="content_area" -->
 <div id="bg_blue">
     <p class="mb15 big">Các mục có dấu ※ là mục bắt buộc phải nhập</p>

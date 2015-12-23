@@ -1,3 +1,4 @@
+<?php use App\Http\Controllers\Frontend\CartController ?>
 <!-- navigation mobile-->
 <div id="menu_m">
     <div class="header">
@@ -28,7 +29,7 @@
             <?php } ?>
             <li><a href="#login">Đăng nhập</a></li>
             <li><a href="#register">Đăng ký</a></li>
-            <li><a href="#">Giỏ hàng (6)</a></li>
+            <li><a href="{!!Asset(cart)!!}">Giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif</a></li>
         </ul>
     </nav>
     <div class="clear"></div> 

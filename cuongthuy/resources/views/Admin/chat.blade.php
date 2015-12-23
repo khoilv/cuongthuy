@@ -10,8 +10,9 @@
     <p class="bold"><a href="">&diams;Chat với khách hàng</a></p>
     <p class="gaiyo">Bạn có thể chat, hỗ trợ, giải đáp cho khách hàng những thắc mắc về hóa đơn, sản phẩm...<br /></p>
     <p class="gaiyo">Truy cập vào link sau và đăng nhập</p>
-    <a href="https://dashboard.tawk.to/login">https://dashboard.tawk.to/login</a>
-    <p class="gaiyo">Tên đăng nhập: </p>
-    <p class="gaiyo">Mật khẩu: </p>
+    <a href="https://dashboard.tawk.to/login" target="_blank">https://dashboard.tawk.to/login</a>
+    <p class="gaiyo">Tên đăng nhập: myphamcuongthuy@gmail.com</p>
+    <p class="gaiyo">Mật khẩu: cuong03042008</p>
+    <p class="gaiyo">Các tin nhắn offline sẽ được gửi vào mail myphamcuongthuy@gmail.com khi khách hàng gửi</p>
 </div>
 @endsection

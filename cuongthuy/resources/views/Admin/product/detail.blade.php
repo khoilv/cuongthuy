@@ -44,6 +44,14 @@
                 @if ($errors->has('product_name'))<p class="error_comment">{!! $errors->first('product_name') !!}</p>@endif
             </td>
         </tr>
+        @if ($product_id)
+        <tr class="menu">
+            <th>Ngày tạo sản phẩm</th>
+            <td colspan="2">
+                {!!$product['product_date_added']!!}
+            </td>
+        </tr>
+        @endif
         <tr class="menu">
             <th><span class="color_red">※</span>Loại sản phẩm</th>
             <td colspan="2">
@@ -169,6 +177,14 @@
                 @if ($errors->has('product_sell_status'))<p class="error_comment">{!! $errors->first('product_sell_status') !!}</p>@endif
             </td>
         </tr>
+        @if ($product_id)
+        <tr class="menu">
+            <th>Ngày sửa đổi sản phẩm lần cuối</th>
+            <td colspan="2">
+                {!!$product['product_date_modify']!!}
+            </td>
+        </tr>
+        @endif
     </table>
 
     <div class="mt15">

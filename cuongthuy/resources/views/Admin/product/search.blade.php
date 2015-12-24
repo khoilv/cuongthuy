@@ -87,7 +87,7 @@
             <tr class="table_list {!!$key % 2 == 0 ? 'bg_yellow' : ''!!}">
                 <td>{!!$product['product_code']!!}</td>
                 <td class="bold"><p class="alignC"><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_name']!!}</a></p></td>
-                <td>{!!$category[$product['product_category']]!!}</td>
+                <td>{!!(isset($category[$product['product_category']])) ? $category[$product['product_category']] : ''!!}</td>
                 <td>{!!$product['product_price']!!} đ</td>
                 @if ($product['product_status'] == 3)
                 <td class="color_red bold">{!!$arrProductStatus[$product['product_status']]!!}</td>

@@ -19,7 +19,7 @@
             <tr class="table_list {!!$key % 2 == 0 ? 'bg_yellow' : ''!!}">
                 <td class="bold"><p class="alignC"><a href="{!!Asset('admin/banner/detail/'. $banner['id'])!!}">{!!$banner['id']!!}</a></p></td>
                 <td><p class="alignC">{!!($banner['banner_status'] == 1) ? 'Đang hoạt động' : 'Kết thúc'!!}</p></td>
-                <td ><p class="alignC"><img src="@if(isset($banner['banner_image_path'])) {!!Asset('public/images/upload/banner/'. $banner['banner_image_path'])!!} @endif" width="500px" height="134px"/></p></td>
+                <td ><p class="alignC"><a href="{!!Asset('admin/banner/detail/'. $banner['id'])!!}"><img src="@if(isset($banner['banner_image_path'])) {!!Asset('public/images/upload/banner/'. $banner['banner_image_path'])!!} @endif" width="500px" height="134px"/></a></p></td>
             </tr>
             @endforeach
     </table>

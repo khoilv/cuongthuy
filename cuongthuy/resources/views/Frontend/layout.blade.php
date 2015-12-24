@@ -23,7 +23,7 @@ use App\Http\Controllers\Frontend\BaseController;
         <link href="{!!Asset('public/css/nivo-slider.css')!!}" rel="stylesheet" type="text/css">
         <!-- navigation mobile-->
         <link type="text/css" rel="stylesheet" href="{!!Asset('public/css/jquery.mmenu.all.css')!!}" />
-        <link rel="canonical" href="http://cuongthuy.vn" />
+        <link rel="canonical" href="https://www.facebook.com/cuahangcuongthuy" />
         @yield('stylesheets')
         @section('javascript')
         <script type="text/javascript" src="{!!Asset('public/js/jquery-1.9.0.min.js')!!}"></script>
@@ -168,7 +168,7 @@ use App\Http\Controllers\Frontend\BaseController;
             <div class="content_top">
                 <div class="wrap">
                     <div class="f_left" style="margin-top:7px;">
-                        <div class="fb-like" data-href="http://cuongthuy.vn" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <div class="fb-like" data-href="https://www.facebook.com/cuahangcuongthuy" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                         <div class="g-plusone" data-size="medium" ></div>
                     </div>
                     <ul class="f_right">

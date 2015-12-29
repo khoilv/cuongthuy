@@ -22,22 +22,24 @@ class DetailController extends Controller {
 
             //Get breadcrumbs
             $categoriesTmp = DB::table('categories')->where('id', $product->product_category)->get();
+            $categories = [];
+            if(!empty($categoriesTmp)) {
             $categories[0] = $categoriesTmp[0];
-
-            $i = 1;
-            while ($categories[$i-1]->category_parent) {
-                //Get parrent categories
-                $categoriesTmp = DB::table('categories')->where('id', $categories[$i-1]->category_parent)->get();
-                if ($categoriesTmp[0]->id) {
-                    $categories[$i] = $categoriesTmp[0];
+                $i = 1;
+                while ($categories[$i-1]->category_parent) {
+                    //Get parrent categories
+                    $categoriesTmp = DB::table('categories')->where('id', $categories[$i-1]->category_parent)->get();
+                    if ($categoriesTmp[0]->id) {
+                        $categories[$i] = $categoriesTmp[0];
+                    }
+                    $i++;
                 }
-                $i++;
             }
             
             //Product rating
             $rating = new RatingController;
             $average = $rating->getRating();
-            BaseController::$title = 'Chi tiết sản phẩm';
+            BaseController::$title = $product->product_name;
             return view('Frontend.detail', compact('product', 'categories', 'average'));
         }
         abort(404);

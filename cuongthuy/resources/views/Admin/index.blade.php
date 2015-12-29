@@ -23,7 +23,7 @@
 
 <div class="top_alert_area mr20">
     <h3 id="page_midashi_05">Tình trạng bán hàng</h3>
-    <p class="alert_normal"><a href="{!!Asset('admin/sale/search')!!}">Số tiền bán hàng tháng này: {!!number_format ($curRevenue,0,",",".")!!}đ<span class="floatR"><img src="{!!Asset('public/images/admin/alert_blue.png')!!}" /></span></a></p>
-    <p class="alert_normal"><a href="{!!Asset('admin/sale/search')!!}">Tổng số tiền bán hàng tháng trước：{!!number_format ($lastRevenue,0,",",".")!!}đ<span class="floatR"><img src="{!!Asset('public/images/admin/alert_blue.png')!!}" /></span></a></p>
+    <p class="alert_normal"><a>Số tiền bán hàng tháng này: {!!number_format ($curRevenue,0,",",".")!!}đ<span class="floatR"><img src="{!!Asset('public/images/admin/alert_blue.png')!!}" /></span></a></p>
+    <p class="alert_normal"><a>Tổng số tiền bán hàng tháng trước：{!!number_format ($lastRevenue,0,",",".")!!}đ<span class="floatR"><img src="{!!Asset('public/images/admin/alert_blue.png')!!}" /></span></a></p>
 </div>
 @endsection

@@ -13,6 +13,6 @@
     <a href="https://dashboard.tawk.to/login" target="_blank">https://dashboard.tawk.to/login</a>
     <p class="gaiyo">Tên đăng nhập: myphamcuongthuy@gmail.com</p>
     <p class="gaiyo">Mật khẩu: cuong03042008</p>
-    <p class="gaiyo">Các tin nhắn offline sẽ được gửi vào mail myphamcuongthuy@gmail.com khi khách hàng gửi</p>
+    <p class="gaiyo">Các tin nhắn offline sẽ được gửi vào email myphamcuongthuy@gmail.com khi bạn không thể online hỗ trợ khách hàng</p>
 </div>
 @endsection

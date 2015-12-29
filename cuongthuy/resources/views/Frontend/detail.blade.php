@@ -10,13 +10,16 @@ $countCate = count($categories);
 <div class="title title1">
     <div class="wrap">
         <div class="f_left"><span class="title_red"></span>
-            @for ($i = $countCate; $i > 0; $i--)
-            <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categories[$i-1]->id))!!}">
-                <span>{!!$categories[$i-1]->category_name!!}
-                    @if ($i != 1) > @endif
-                </span>
-            </a>
-            @endfor
+            @if($countCate > 0)
+                @for ($i = $countCate; $i > 0; $i--)
+                <a href="{!!action('Frontend\ProductController@getIndex', array('category_id' => $categories[$i-1]->id))!!}">
+                    <span>{!!$categories[$i-1]->category_name!!}
+                        @if ($i != 1) > @endif
+                    </span>
+                </a>
+                @endfor
+                @else <a><span>Uncategory</span></a>
+            @endif
         </div>
     </div>
     <div class="clear"></div>
@@ -88,7 +91,7 @@ $countCate = count($categories);
     </div><!-- end detail content 1-->
     <div class="clear"></div>
     <div class="detail_c2">
-        <h3>Mô tả chi tiết</h3>
+        <h3>Thông tin chi tiết</h3>
         {!!$product->product_description!!}
     </div><!-- edn detail content 2-->
 </div><!-- end content-->

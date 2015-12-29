@@ -64,14 +64,14 @@
             <p id="left_link_05"><a href="">Quản lí khách hàng</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'sale' ))
-            <p id="left_link_06_on">Thống kê bán hàng</p>
+            <p id="left_link_06_on">Liên hệ từ khách hàng</p>
             @else
-            <p id="left_link_06"><a href="">Thống kê bán hàng</a></p>
+            <p id="left_link_06"><a href="{!!Asset('admin/contact/index')!!}">Liên hệ từ khách hàng</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'banner' ))
-            <p id="left_link_08_on">Quản lí banner</p>
+            <p id="left_link_07_on">Quản lí banner</p>
             @else
-            <p id="left_link_08"><a href="{!!Asset('admin/banner/index')!!}">Quản lí banner</a></p>
+            <p id="left_link_07"><a href="{!!Asset('admin/banner/index')!!}">Quản lí banner</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'maintenance' ))
             <p id="left_link_07_on">Bảo trì hệ thống</p>

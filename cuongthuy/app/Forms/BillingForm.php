@@ -12,9 +12,9 @@ class BillingForm extends BaseForm {
             'name'          => ['required', 'min:1','max:25'],
             'telephone'     => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/','min:9','max:11'],
             'email'         => ['email'],
-            'ward'          => ['required', 'min:1','max:25'],
-            'street'        => ['required', 'min:1','max:25'],
-            'district'      => ['required', 'min:1','max:25'],
+            'ward'          => ['required', 'min:1', 'max:50'],
+            'street'        => ['required', 'min:1'],
+            'district'      => ['required', 'min:1', 'max:50'],
             'city'          => ['required', 'integer', 'min:1','max:63'],
             'note'          => ['min:1','max:1000'],
         ];

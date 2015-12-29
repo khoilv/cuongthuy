@@ -52,6 +52,7 @@ class TableBase extends DBCommon {
      */
     public function insert($insertArray)
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $insertStmtArray = $this->makeInsertStr($insertArray);
         $sql = 'INSERT INTO ' . $this->getTableName()
                 . ' (' . $insertStmtArray['insertColStr'] . ') '
@@ -67,6 +68,7 @@ class TableBase extends DBCommon {
 
     public function update($updateArray, $whereArray)
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $updateStr = $this->makeUpdateStr($updateArray);
         $whereStr = $this->makeWhereStr($whereArray);
         $updateParams = array_values($updateArray);

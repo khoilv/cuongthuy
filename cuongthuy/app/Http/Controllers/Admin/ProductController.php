@@ -17,8 +17,8 @@ use Input;
 use Request;
 use Redirect;
 use Session;
-use App\Models\resizeImage;
 use App\Lib\InitialDefine;
+use Imagick;
 class ProductController extends Controller
 {
 
@@ -26,14 +26,12 @@ class ProductController extends Controller
     private $productCls;
     private $categoryCls;
     protected $productForm;
-    private $resizeImage;
 
     public function __construct(ProductForm $productForm)
     {
         $this->productCls = new ProductModel();
         $this->categoryCls = new CategoryModel();
         $this->productForm = $productForm;
-        $this->resizeImage = new resizeImage();
     }
     public function index(){
         return view('Admin/product/index');
@@ -97,7 +95,7 @@ class ProductController extends Controller
                 $i++;
                 unset($input[$key]);
                 // update image thumb
-                $this->createThumbImg($destinationPath, $filename);
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/thumb_' . $filename, 100, 72);
             }
         }
         if ($product_other_image) {
@@ -113,7 +111,6 @@ class ProductController extends Controller
 
     public function update($input, $product, $productId)
     {
-        $resizeImage = new resizeImage();
         $destinationPath = 'public/images/upload/products';
         $input['product_sell_status'] = implode(',', $input['product_sell_status']);
         $product_other_image = '';
@@ -122,8 +119,8 @@ class ProductController extends Controller
                 // Upload img
                 $extension = $input['product_image']->getClientOriginalExtension(); // getting image extension
                 $filename = 'product' . $productId . '.' . $extension;
-                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 186, 182);
-                $input['product_image'] = $filename;
+                $this ->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 186, 182);
+                $input['product_image'] = $filename; 
             }
             if (strpos($key, 'product_other_image') !== false && isset($product['product_other_image'])) {
                 $image = explode('_', $key);
@@ -143,7 +140,7 @@ class ProductController extends Controller
                 $product_other_image = implode(',', $product['product_other_image']);
                 unset($input[$key]);
                 // update image thumb
-                $this->createThumbImg($destinationPath, $filename);
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/thumb_' . $filename, 100, 72);
             }
         }
         if ($product_other_image) {
@@ -155,20 +152,32 @@ class ProductController extends Controller
             return Redirect::action('Admin\ProductController@detail', $productId);
         }
     }
-
-    public function createThumbImg($destinationPath,$filename)
-    {
-        $this->resizeImage->load($destinationPath . '/' . $filename);
-        $this->resizeImage->resizeToWidth(100);
-        $this->resizeImage->resizeToHeight(72);
-        $this->resizeImage->save($destinationPath . '/thumb_' . $filename);
-    }
     
-    public function uploadImage($fileUpload, $filePath, $width, $height){
-        $this->resizeImage->load($fileUpload);
-        $this->resizeImage->resizeToWidth($width);
-        $this->resizeImage->resizeToHeight($height);
-        $this->resizeImage->save($filePath);
+    public function uploadImage($fileUpload, $filePath, $cropWidth, $cropHeight){
+        $imagick = new Imagick($fileUpload);
+        $width = $imagick->getImageWidth();
+        $height = $imagick->getImageHeight();
+        if ($width > $cropWidth && $height > $cropHeight) {
+            if ($cropWidth > $cropHeight) {
+                $newWidth = $cropWidth;
+                $newHeight = $height/($width/$cropWidth);
+            } else {
+                $newWidth = $width/($height/$cropHeight);
+                $newHeight = $cropHeight;
+            }
+        } else if($width < $cropWidth && $height > $cropHeight) {
+            $newWidth = $width/($height/$cropHeight);
+            $newHeight = $cropHeight;
+        } else if($width > $cropWidth && $height < $cropHeight) {
+            $newWidth = $cropWidth;
+            $newHeight = $height/($width/$cropWidth);
+        } else {
+            $newWidth = $width;
+            $newHeight = $height;
+        }
+        $imagick->resizeImage($newWidth, $newHeight, Imagick::FILTER_LANCZOS, 1);
+        $imagick->writeImage($filePath);
+        $imagick->destroy();
     }
 
     public function search()

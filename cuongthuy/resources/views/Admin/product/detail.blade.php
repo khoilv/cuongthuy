@@ -172,7 +172,7 @@
             <th><span class="color_red"></span>Trạng thái bán sản phẩm</th>
             <td colspan="2">
                 @foreach ($arrProductSellStatus as $key => $val)
-                <label>{!! Form::checkbox("product_sell_status[$key]", $key, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], "$key") !== false)? $product['product_sell_status']:'') !!} Sản phẩm mới</label>&nbsp;&nbsp;&nbsp;
+                <label>{!! Form::checkbox("product_sell_status[$key]", $key, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], "$key") !== false)? $product['product_sell_status']:'') !!} {!!$val !!}</label>&nbsp;&nbsp;&nbsp;
                 @endforeach
                 @if ($errors->has('product_sell_status'))<p class="error_comment">{!! $errors->first('product_sell_status') !!}</p>@endif
             </td>

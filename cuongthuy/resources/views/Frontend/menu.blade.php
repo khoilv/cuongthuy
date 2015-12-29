@@ -64,7 +64,8 @@
             </ul>
         </nav>
         <div class="f_right">
-            HOTLINE : 0988 123 123
+            <p class="nav_hotline">HOTLINE : 096 677 1102</p>
+			<input type="text" placeholder="Tìm kiếm">
         </div>
         <div class="clear"></div>
     </div>

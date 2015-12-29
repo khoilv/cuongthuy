@@ -180,7 +180,7 @@ use App\Http\Controllers\Frontend\BaseController;
                             <li><a href="#register">Đăng ký</a></li>
                         <?php } ?>
                         <li><a href="{!!Asset(cart)!!}" class="button_cart">Giỏ hàng @if (CartController::getCart()) ({!! CartController::getCart() !!})@endif </a></li>
-                        <li><a href="#">Hỗ trợ : 0988 123 123</a></li>
+                        <li><a href="#">Hỗ trợ : 096 677 1102 - (04)3 999 2325 </a></li>
                     </ul>
                     <div class="clear"></div>
                 </div>
@@ -199,11 +199,11 @@ use App\Http\Controllers\Frontend\BaseController;
                     </ul>
                     <form name="form1" action="list" method="GET">
                         <div class="search">
+							<input type="text" name="search_value" value="<?php echo $search_value; ?>" placeholder="Nhập từ khóa">
                             <select class="f_left" name="search_key">
                                 <option value ="product_code" select="selected" >Mã sản phẩm</option>
                                 <option value="product_name" <?php if ($search_key == 'product_name') { ?> selected="selected"<?php } ?>>Tên sản phẩm</option>
                             </select>
-                            <input type="text" name="search_value" value="<?php echo $search_value; ?>" placeholder="Nhập từ khóa">
                             <button onclick="document.form1.submit()"></button>
                         </div>
                     </form>

@@ -147,11 +147,21 @@ ul,li{
 	}
 .nav_top .f_right{
 	line-height:50px;
+}
+.nav_hotline{
 	color:#fff;
-	background:url(../images/icon9.png) no-repeat left center;
 	padding-left:25px;
 	font-weight:bold;
+	background:url(../images/icon9.png) no-repeat left center;
 }
+	.nav_top .f_right input{
+		display:none;
+		height:30px;
+		border:none;
+		background:url(../images/icon13.png) no-repeat 95% center #fff;
+		padding:0 5px;
+		background-size:15px;
+	}
 .ul2{background: #fff;
 	background: -moz-linear-gradient(#fff, #eceaea);
 	background: -webkit-linear-gradient(#fff, #eceaea);

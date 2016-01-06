@@ -165,10 +165,10 @@ class ProductController extends Controller
                 $newWidth = $width/($height/$cropHeight);
                 $newHeight = $cropHeight;
             }
-        } else if($width < $cropWidth && $height > $cropHeight) {
+        } else if($width <= $cropWidth && $height > $cropHeight) {
             $newWidth = $width/($height/$cropHeight);
             $newHeight = $cropHeight;
-        } else if($width > $cropWidth && $height < $cropHeight) {
+        } else if($width > $cropWidth && $height <= $cropHeight) {
             $newWidth = $cropWidth;
             $newHeight = $height/($width/$cropWidth);
         } else {

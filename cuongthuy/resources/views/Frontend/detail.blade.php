@@ -36,8 +36,13 @@ $countCate = count($categories);
                 <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 492px; height: 300px; overflow: hidden;">
                     <?php $arrImg = explode(",", $product->product_other_image); ?>
                     @foreach($arrImg as $img)
+                    <?php
+                        $imgSize = (getimagesize('public/images/upload/products/'.$img));
+                        $left = (492-$imgSize[0])/2;
+                        $top = (300-$imgSize[1])/2;
+                    ?>
                     <div data-p="144.50" style="display: none;">
-                        <img u="image" src="{!!Asset('public/images/upload/products/'.$img)!!}" />
+                        <img u="image" class="image_slide" left="{!!$left!!}" top="{!!$top!!}" src="{!!Asset('public/images/upload/products/'.$img)!!}" />
                         <img u="thumb" src="{!!Asset('public/images/upload/products/thumb_'.$img)!!}" />
                     </div>
                     @endforeach
@@ -103,11 +108,16 @@ $countCate = count($categories);
 <script type="text/javascript" src="{!!Asset('public/js/jRate.js')!!}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+    $(".image_slide").each(function(){
+        $(this).css('left',$(this).attr('left')+'px')
+               .css('top',$(this).attr('top')+'px');
+    });
+    
     $("#sliderOtherProducts").flexisel({
         visibleItems: 5,
         animationSpeed: 1000,
         autoPlay: true,
-        autoPlaySpeed: 3000,
+        autoPlaySpeed: 4000,
         pauseOnHover: true,
         enableResponsiveBreakpoints: true,
         responsiveBreakpoints: {

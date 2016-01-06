@@ -2,32 +2,31 @@
 /**
  * @author LinhNV
  * @version 1.00
- * @create 2015/12/25
+ * @create 2016/01/06
  */
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-//use App\Models\Admin\OrderModel;
-use App\Lib\InitialDefine;
-use Input;
+//use App\Lib\InitialDefine;
+//use Input;
 //use DateTime;
 
-class OrderController extends Controller {
+class ContactController extends Controller {
     
     private $model;
     private static $CONTACT_MAX = 25;
     
     public function __construct() {
-        $this->model = new ContactModel();
+        //$this->model = new ContactModel();
     }
     
-    public function index () {
+    public function index () {/*
         $input = Input::except('_token');
         
         $page = 1;
         $option = [];
         $option['order'] = ['id' => 'DESC'];
         
-        if (Input::has('contact_name')) {
+        if (Input::has('order_code')) {
             $option['arrWhereLike'][] = ['order_code' => $input['order_code']];
         }
         if (Input::has('order_customer_name')) {
@@ -61,9 +60,6 @@ class OrderController extends Controller {
         $currentPage = $page;
         $previousPage = $page > 1 ? $page - 1 : 1;
         $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
-        if (Input::has('cmd') && Input::get('cmd') == 'csv_download') {
-            $this->downloadCsv($option);
-        }
         
         return view('Admin.order.search', [
                     'orders'        => $orders,
@@ -75,7 +71,8 @@ class OrderController extends Controller {
                     'maxRec'        => $maxRec,
                     'offset'        => isset($option['offset'])?$option['offset']:0
                 ]);
+        */
+        return view('Admin.contact.index');
     }
     
 }
-

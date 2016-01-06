@@ -14,7 +14,7 @@ class ContactForm extends BaseForm {
     protected function rules(){
         $rules = [
             'contact_email' => ['required', 'email'],
-            'contact_content' => ['required'],
+            'contact_content' => ['required', 'max:3000'],
             'contact_name' => ['required','max:255'],
         ];
         return $rules;

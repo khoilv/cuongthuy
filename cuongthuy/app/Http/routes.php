@@ -56,4 +56,5 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::get('chat/index',function(){
         return view('Admin/chat');
     });
+    Route::any('contact/index', 'Admin\ContactController@index');
 });

@@ -13,7 +13,7 @@
             </div>
             <table class="p_table clear">
                 <tr>
-                    <td>Email</td>
+                    <td>Tên / Email</td>
                     <td>
                         <input type="text" id="email" value="<?php echo $email; ?>">
                         <div class="error-message error_email">

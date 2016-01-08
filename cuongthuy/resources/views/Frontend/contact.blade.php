@@ -16,7 +16,7 @@
     <p>
         cuongthuy.vn là sàn giao dịch thương mại điện tử uy tín, là cầu nối thương mại giữa nhà cung cấp với người mua và là nơi cung cấp các sản phẩm chính hãng, sản phẩm siêu sạch với giá cả tốt nhất có thể.
         <br> <br>
-        Để liên hệ hợp tác với Cường Thủy, xin Quý khách vui lòng gọi quản lý 0987 49 59 57 hoặc để lại thông tin và nội dung đề nghị hợp tác theo mẫu bên dưới. Chúng tôi sẽ liên hệ với Quý khách trong thời gian sớm nhất. <br>
+        Để liên hệ hợp tác với Cường Thủy, xin Quý khách vui lòng gọi <b>hotline : 096 677 1102 - (04)3 999 2325</b> hoặc để lại thông tin và nội dung đề nghị hợp tác theo mẫu bên dưới. Chúng tôi sẽ liên hệ với Quý khách trong thời gian sớm nhất. <br>
     </p>
     <div>
         @if(Session::has('success'))

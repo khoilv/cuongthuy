@@ -16,6 +16,8 @@ class ContactForm extends BaseForm {
             'contact_email' => ['required', 'email'],
             'contact_content' => ['required', 'max:3000'],
             'contact_name' => ['required','max:255'],
+            'contact_phone' => ['regex:/^([0-9\s\-\+\(\)]*)$/','min:9','max:11'],
+            'contact_address' => ['max:500'],
         ];
         return $rules;
     }
@@ -24,7 +26,9 @@ class ContactForm extends BaseForm {
         return array(
             'contact_email' => "Email",
             'contact_content' => "Nội dung",
-            'contact_name' => 'Họ tên'
+            'contact_name' => 'Họ tên',
+            'contact_phone' => 'Điện thoại',
+            'contact_addresst' => 'Địa chỉ'
         );
     }
 }

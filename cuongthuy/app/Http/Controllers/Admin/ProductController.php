@@ -32,6 +32,7 @@ class ProductController extends Controller
         $this->productCls = new ProductModel();
         $this->categoryCls = new CategoryModel();
         $this->productForm = $productForm;
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
     public function index(){
         return view('Admin/product/index');

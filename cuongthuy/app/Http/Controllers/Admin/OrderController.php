@@ -94,7 +94,7 @@ class OrderController extends Controller {
             unset ($line['payment_method']);
             unset ($line['date_time_last_modify']);
             $line['order_status'] = InitialDefine::$arrayOderStatus[$line['order_status']];
-            $line['order_date'] = date("H:i:s d-m-Y", strtotime($line['order_date']));
+            $line['order_date'] = "'".date("H:i:s d-m-Y", strtotime($line['order_date']));
             $line['order_phone'] = "'".$line['order_phone'];
             $strCSV .= implode("\t", $line);
             $strCSV.= "\r\n";

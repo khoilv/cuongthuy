@@ -37,9 +37,11 @@ $countCate = count($categories);
                     <?php $arrImg = explode(",", $product->product_other_image); ?>
                     @foreach($arrImg as $img)
                     <?php
-                        $imgSize = (getimagesize('public/images/upload/products/'.$img));
-                        $left = (492-$imgSize[0])/2;
-                        $top = (300-$imgSize[1])/2;
+                        if (isset($img)) {
+                            $imgSize = getimagesize('public/images/upload/products/'.$img);
+                            $left = (492-$imgSize[0])/2;
+                            $top = (300-$imgSize[1])/2;
+                        }
                     ?>
                     <div data-p="144.50" style="display: none;">
                         <img u="image" class="image_slide" left="{!!$left!!}" top="{!!$top!!}" src="{!!Asset('public/images/upload/products/'.$img)!!}" />

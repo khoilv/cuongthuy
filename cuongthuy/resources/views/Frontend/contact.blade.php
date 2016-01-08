@@ -38,7 +38,15 @@
             </tr>
             <tr>
                 <td>Điện thoại</td>
-                <td><input type="text" class="input box1" ></td>
+                <td>
+                    {!! Form::text('contact_phone','',['class' => 'input box1']) !!}
+                    @if ($errors->has('contact_phone'))
+                    <div class="error-message">
+                        <div class="arrow"></div>
+                        <div class="message"><p>{!! $errors->first('contact_phone') !!}</p></div>
+                    </div>
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td>Email (*)</td>
@@ -54,7 +62,15 @@
             </tr>
             <tr>
                 <td>Địa chỉ</td>
-                <td><input type="text" class="input box1" ></td>
+                <td>
+                    {!! Form::text('contact_address','',['class' => 'input box1']) !!}
+                    @if ($errors->has('contact_address'))
+                    <div class="error-message">
+                        <div class="arrow"></div>
+                        <div class="message"><p>{!! $errors->first('contact_address') !!}</p></div>
+                    </div>
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td>Nội dung (*)</td>
@@ -68,6 +84,7 @@
                     @endif
                 </td>
             </tr>
+            <input type="hidden" name="contact_datetime" value="{!!date('Y-m-d H:i:s')!!}">
         </table>
         <div class="map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.8005398974337!2d105.82023421407582!3d21.00063109411576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac85c54a62f1%3A0x12d0d05337be4b5d!2zMzEgVsawxqFuZyBUaOG7q2EgVsWpLCBLaMawxqFuZyBUaMaw4bujbmcsIFRoYW5oIFh1w6JuLCBIw6AgTuG7mWksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1445021066100" width="100%" height="280" frameborder="0" style="border:0" allowfullscreen></iframe>

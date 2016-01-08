@@ -55,7 +55,6 @@ class OrderDetailController extends Controller {
         try {
             $this->orderDetailForm->validate($input);
         } catch (FormValidationException $e) {
-            dd($e->getErrors());
             return Redirect::back()->withInput()->withErrors($e->getErrors());
         }
         

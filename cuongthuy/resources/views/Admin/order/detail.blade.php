@@ -43,11 +43,11 @@
     </p>
     @if(Session::has('msg_error'))
     <p class="alert_red_error mb10">{!!Session::get('msg_error')!!}</p>
-    {{ Session::forget('msg_error') }}
+    {!! Session::forget('msg_error') !!}
     @endif
     @if(Session::has('success'))
         <p class="alignC mt15 mb10 bold" style="font-size:1.6em;">{!!Session::get('success')!!}</p>
-        {{ Session::forget('success') }}
+        {!! Session::forget('success') !!}
     @endif
     <div class="clear"></div>
     {!! Form::open(['method' => 'POST', 'url' => 'admin/order_detail?order_id='.$order['id'], 'id' => 'order_form']) !!}
@@ -136,22 +136,24 @@
         <?php $totalPrice = 0 ?>
         @if (!empty($orderDetail))
             @foreach ($orderDetail as $key => $value)
-            <?php $linePrice = $value['quantity']*$value['unitPrice'] ?>
-            <?php $totalPrice += $linePrice; ?>
-            <tr class="menu">
-                <td>{!!$arrProducts[$value['product_id']]['product_name']!!}</td>
-                <td>{!! Form::text('quantity['.$value['product_id'].']', isset($value['quantity'])? $value['quantity']:'',['style' => 'width:30px', 'class' => 'product_quantity']) !!}
-                    @if ($errors->has('quantity['.$value['product_id'].']'))
-                        <p style="color: red">{!! $errors->first('quantity['.$value['product_id'].']') !!}</p>
-                    @endif
-                </td>
-                <td>{!!number_format ($value['unitPrice'],0,",",".")!!} đ</td>
-                <td>{!!number_format ($arrProducts[$value['product_id']]['product_price'],0,",",".")!!} đ</td>
-                <td class="line_price">{!!number_format ($linePrice,0,",",".")!!} đ</td>
-                <td> <p class="delete_product" title="Xóa sản phẩm này khỏi đơn hàng"><img src="{!!Asset('public/images/icon16.png')!!}"></p> </img></td>
-                <input type="hidden" class="order_detail_id" value="{!! $value['id'] !!}">
-                <input type="hidden" class="order_id" value="{!! $order['id'] !!}">
-            </tr>
+                @if (isset($arrProducts[$value['product_id']]['product_name']))
+                <?php $linePrice = $value['quantity']*$value['unitPrice'] ?>
+                <?php $totalPrice += $linePrice; ?>
+                <tr class="menu">
+                    <td>{!!$arrProducts[$value['product_id']]['product_name']!!}</td>
+                    <td>{!! Form::text('quantity['.$value['product_id'].']', isset($value['quantity'])? $value['quantity']:'',['style' => 'width:30px', 'class' => 'product_quantity']) !!}
+                        @if ($errors->has('quantity['.$value['product_id'].']'))
+                            <p style="color: red">{!! $errors->first('quantity['.$value['product_id'].']') !!}</p>
+                        @endif
+                    </td>
+                    <td>{!!number_format ($value['unitPrice'],0,",",".")!!} đ</td>
+                    <td>{!!number_format ($arrProducts[$value['product_id']]['product_price'],0,",",".")!!} đ</td>
+                    <td class="line_price">{!!number_format ($linePrice,0,",",".")!!} đ</td>
+                    <td> <p class="delete_product" title="Xóa sản phẩm này khỏi đơn hàng"><img src="{!!Asset('public/images/icon16.png')!!}"></p> </img></td>
+                    <input type="hidden" class="order_detail_id" value="{!! $value['id'] !!}">
+                    <input type="hidden" class="order_id" value="{!! $order['id'] !!}">
+                </tr>
+                @endif
             @endforeach
         @endif
         <tr class="table_list">

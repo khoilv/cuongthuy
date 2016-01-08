@@ -48,7 +48,7 @@
         <tr class="menu">
             <th>Ngày tạo sản phẩm</th>
             <td colspan="2">
-                {!!$product['product_date_added']!!}
+                {!!date("H:i:s d-m-Y", strtotime($product['product_date_added']))!!}
             </td>
         </tr>
         @endif
@@ -181,7 +181,7 @@
         <tr class="menu">
             <th>Ngày sửa đổi sản phẩm lần cuối</th>
             <td colspan="2">
-                {!!$product['product_date_modify']!!}
+                {!!date("H:i:s d-m-Y", strtotime($product['product_date_modify']))!!}
             </td>
         </tr>
         @endif

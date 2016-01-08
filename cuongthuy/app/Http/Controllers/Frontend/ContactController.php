@@ -17,8 +17,8 @@ class ContactController extends Controller {
     
     protected $contactForm;
 
-    public function __construct(ContactForm $contactForm)
-    {
+    public function __construct(ContactForm $contactForm) {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->contactForm = $contactForm;
     }
 

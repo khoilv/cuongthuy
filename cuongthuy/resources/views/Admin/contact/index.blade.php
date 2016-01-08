@@ -12,12 +12,12 @@ use App\Http\Controllers\Controller\Admin\OrderController;
     $(document).ready(function() {
         $('#search_button').click(function() {
             $('#cmd').attr({value: "search"});
-            $('#order_form').submit();
+            $('#contact_form').submit();
         });
         
         $('#csv_button').click(function() {
             $('#cmd').attr({value: "csv_download"});
-            $('#order_form').submit();
+            $('#contact_form').submit();
         });
         
         $('.default_datetimepicker').datetimepicker({
@@ -59,13 +59,19 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 {!! Form::text('contact_name', isset($input['contact_name'])? $input['contact_name']:'',['style' => 'width:180px', 'class' => 'text']) !!}
                 @if ($errors->has('contact_name'))<p style="color: red">{!! $errors->first('contact_name') !!}</p>@endif
             </td>
-            
         </tr>
         <tr class="menu">
             <th>Điện thoại</th>
             <td colspan="3">
                 {!! Form::text('contact_phone', isset($input['contact_phone'])? $input['contact_phone']:'',['style' => 'width:180px', 'class' => 'text']) !!}
                 @if ($errors->has('contact_phone'))<p style="color: red">{!! $errors->first('contact_phone') !!}</p>@endif
+            </td>
+        </tr>
+        <tr class="menu">
+            <th>Email</th>
+            <td colspan="3">
+                {!! Form::text('contact_email', isset($input['contact_email'])? $input['contact_email']:'',['style' => 'width:180px', 'class' => 'text']) !!}
+                @if ($errors->has('contact_email'))<p style="color: red">{!! $errors->first('contact_email') !!}</p>@endif
             </td>
         </tr>
     </table>
@@ -82,29 +88,28 @@ use App\Http\Controllers\Controller\Admin\OrderController;
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
             <tr class="table_list">
-                <th>STT</th>
-                <th>Họ và tên</th>
-                <th>Điện thoại</th>
-                <th>Email</th>
-                <th>Địa chỉ</th>
-                <th>Nội dung</th>
+                <th width='5%'>STT</th>
+                <th width='20%'>Họ và tên</th>
+                <th width='15%'>Email</th>
+                <th width='10%'>Điện thoại</th>
+                <th width='13%'>Ngày gửi</th>
+                <th width='27%'>Nội dung</th>
             </tr>
         </thead>
         <tbody>
-            @if (isset($orders))
-            @foreach ($orders as $key => $order)
+            @if (isset($contacts))
+            @foreach ($contacts as $key => $contact)
             <tr class="table_list bg_yellow">
-                <td class="bold"><a href="{!!action('Admin\OrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$offset+$key+1!!}</a></td>
-                <td><span class="lh12">{!!date("H:i:s d-m-Y", strtotime($order['order_date']))!!}</span></td>
-                <td class="bold"><a href="{!!action('Admin\OrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$order['order_code']!!}</a></td>
-                <td class="color_blue bold">{!!InitialDefine::selectValue($order['order_status'], InitialDefine::$arrayOderStatus)!!}</td>
-                <td>{!!$order['order_customer_name']!!}</td>
-                <td>{!!$order['order_phone']!!}</td>
+                <td class="bold">{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">--}}{!!$offset+$key+1!!}{{--</a>--}}</td>
+                <td>{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact['id']))!!}">--}}{!!$contact->contact_name!!}{{--</a>--}}</td>
+                <td class="color_blue bold">{!!$contact->contact_email!!}</td>
+                <td class="bold">{!!$contact->contact_phone!!}</td>
+                <td>{!!date("d-m-Y", strtotime($contact->contact_datetime))!!}</td>
+                <td><span class="lh12">{!!$contact->contact_content!!}</span></td>
             </tr>
             @endforeach
             @endif
     </table>
-    <?php /*
     <div id="tab_area">
         <div id="page_tab">
             <?php if ($lastPage > 1){
@@ -123,12 +128,12 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                        $end = $currentPage +2;
                     }
                 } ?>
-              @include('Admin.order.list_page')
+              @include('Admin.contact.list_page')
           <?php } ?>
         </div>
         @if ($lastPage > 1)
         <p class="alignC mt10">（{!! $maxRec * ($currentPage -1)  !!}～{!! $maxRec * $currentPage  !!}）</p>
         @endif
-    </div> */ ?>
+    </div>
 </div>
 @endsection

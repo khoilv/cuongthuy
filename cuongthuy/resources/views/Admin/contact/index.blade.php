@@ -29,7 +29,7 @@ use App\Http\Controllers\Controller\Admin\OrderController;
        
     });
 </script>
-<p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Quản lí đơn hàng</a> &gt; Danh sách đơn hàng</p>
+<p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Danh sách liên hệ</a></p>
 <h2 id="page_midashi_02">Danh sách liên hệ</h2>
 <!-- InstanceBeginEditable name="content_area" -->
 <div id="bg_blue">
@@ -105,7 +105,14 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 <td class="color_blue bold">{!!$contact->contact_email!!}</td>
                 <td class="bold">{!!$contact->contact_phone!!}</td>
                 <td>{!!date("d-m-Y", strtotime($contact->contact_datetime))!!}</td>
-                <td><span class="lh12">{!!$contact->contact_content!!}</span></td>
+                <td><span class="lh12"><a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">
+                        @if(strlen($contact->contact_content) < 100)
+                            {!!$contact->contact_content!!}
+                        @else
+                            {!!substr($contact->contact_content,0,100)!!}...
+                        @endif
+                        </a>
+                    </span></td>
             </tr>
             @endforeach
             @endif

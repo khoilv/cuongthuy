@@ -262,7 +262,8 @@ body footer .wrap > .f_right{
 .steps1_c2 table tr td:nth-child(2) textarea{width:100% !important;}
 .bs1_button{margin:20px 0 !important;}
 .steps3_c .f_left{border-right:none !important;}
-.cart_page table{width:200% !important;}
+.cart_page2{width:100%; overflow:auto;}
+.cart_page table,.cart_page2 table{width:200% !important;}
 .cart_page_table{overflow:auto;width:100%;}
 body > header{    border-bottom: 2px solid #D91D24;}
 
@@ -547,51 +548,59 @@ body > header{    border-bottom: 2px solid #D91D24;}
 	}
 	
 /*---------------- Cart page --------------------*/
-.cart_page{
+.cart_page,.cart_page2{
 	margin-top:15px;
 }	
-.cart_page table{
+.cart_page table,.cart_page2 table{
 	width:100%;
 }
-	.cart_page table,.cart_page table th,.cart_page table tr,.cart_page table td{
+	.cart_page table,.cart_page table th,.cart_page table tr,.cart_page table td,
+	.cart_page2 table,.cart_page2 table th,.cart_page2 table tr,.cart_page2 table td{
 		border-collapse:collapse;
 		border:none;
 	}
-	.cart_page table td{
+	.cart_page table td,.cart_page2 table td{
 		text-align:center;
 	}
-	.cart_page table thead{
+	.cart_page table thead,.cart_page2 table thead{
 		background-color:#38b54a;
 	}
-	.cart_page table thead th{
+	.cart_page table thead th,.cart_page2 table thead th{
 		padding: 10px 0;
 		color:#fff;
 	}
 	.cart_page table tbody input{
 		width:50px;
 	}	
-	.cart_page table tbody tr,.cart_page table tbody td{
+	.cart_page table tbody tr,.cart_page table tbody td,
+	.cart_page2 table tbody tr,.cart_page2 table tbody td{
 		padding:10px 0;
 	}
 		.cart_page table tbody tr > td:nth-child(5){
 			width:17%;
 		}
-		.cart_page table tbody img{
+		.cart_page table tbody img,.cart_page2 table tbody img{
 			border:1px solid #ccc;
 			width:90%
 		}
-		.cart_page table tbody button{
+		.cart_page table tbody button,.cart_page2 table tbody button{
 			width:25px;
 			height:25px;
 			background:url(../images/icon16.png) no-repeat center center;
 			border:none;
 			cursor:pointer;
 		}
-	.cart_page table tbody tr:nth-child(odd){
+	.cart_page table tbody tr:nth-child(odd),.cart_page2 table tbody tr:nth-child(odd){
 		background-color:#f3fbf4;
 	}
 	.cart_page table tbody tr td:nth-child(3){
 		width:25%;
+	}
+	.cart_page2 table tr td:nth-child(2){
+		width:30%;
+	}
+	.cart_page2 table tr td:nth-child(4){
+		width:15%;
 	}
 .cart_c2 {
 	margin:20px 0;
@@ -1211,4 +1220,8 @@ footer .fb_iframe_widget{margin-top:20px !important;}
 	width:auto !important;
 	height:auto !important;
 }
-
+.cart_page table,.cart_page2 table{
+	border-bottom:1px solid #ddd;
+}
+.cart_page table a,.cart_page2 table a{color:#000;}
+.cart_page table a:hover,.cart_page2 table a:hover{color:#5F5FFF;}

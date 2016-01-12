@@ -220,7 +220,7 @@ use App\Http\Controllers\Frontend\BaseController;
         <!-- connent -->
         @yield('content')
         <div class="content_bottom">
-            <div class="wrap">
+            <!--div class="wrap">
                 <div class="f_left">
                     <ul>
                         <li>
@@ -243,7 +243,30 @@ use App\Http\Controllers\Frontend\BaseController;
                     <img src="{!!Asset('public/images/banner-b.png')!!}">
                 </div>
                 <div class="clear"></div>
-            </div>
+            </div-->
+			<div class="wrap tags">
+				<a href="#">Sản phẩm mới</a>
+				<a href="#">Mỹ phẩm</a>
+				<a href="#">Phấn hồng</a>
+				<a href="#">Son môi</a>
+				<a href="#">Dầu gội</a>
+				<a href="#">Sữa tắm</a>
+				<a href="#">Chăm sóc tóc</a>
+				<a href="#">Dầu gội</a>
+				<a href="#">Hấp ủ tinh chất dưỡng</a>
+				<a href="#">Dầu xả</a>
+				<a href="#">Gôm - Gel uốn tóc</a>
+				<a href="#">Nhuộn tóc</a>
+				<a href="#">Chăm sóc sức khoẻ</a>
+				<a href="#">Hàng tiêu dùng</a>
+				<a href="#">Bột giặt</a>
+				<a href="#">Bỉm</a>
+				<a href="#">Bỉm người lớn</a>
+				<a href="#">Bỉm trẻ em</a>
+				<a href="#">Phụ kiện-Thời trang</a>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
         </div><!-- end content bottom-->
         <div class="clear"></div>
         <!-- footer -->

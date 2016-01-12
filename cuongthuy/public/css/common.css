@@ -272,8 +272,7 @@ ul,li{
 /*---------- Content bottom ----------*/
 .content_bottom{
 	margin-top:30px;
-	padding-top:20px;
-		background:url(../images/bg1.png) no-repeat bottom right #404040;
+	background:url(../images/bg1.png) bottom left;
 }
 .content_bottom .f_left{
 	width:40%;
@@ -285,21 +284,34 @@ ul,li{
 		margin-right:1%;
 		color:#fff;
 	}
-	.content_bottom .f_left > ul > li h3{
-		text-transform:uppercase;
-		padding-bottom:10px;
-		font-size:16px;
+	.f_c2{width:48%;
+		width: 42%;
+		float: right;
+		margin-top: 30px;
+		border-left: 1px dotted #F39397;
+		padding-left: 25px;
 	}
-	.content_bottom .f_left > ul > li li{
+	.f_c2 li{width:100%;}
+	.f_c2 > ul > li{
+		margin-bottom:20px;
+		color:#fff;
+	}
+	.content_bottom .f_left > ul > li h3,.f_c2 h3{
+		text-transform:uppercase;
+		padding-bottom:5px;
+		font-size:16px;
+		color:#fff;
+	}
+	.content_bottom .f_left > ul > li li,.f_c2 li li{
 		width:95%;
 		padding-left:5%;
 		list-style:disc inside;
 	}
-	.content_bottom .f_left > ul > li li a{
+	.content_bottom .f_left > ul > li li a,.f_c2 li li a{
 		color:#fff;
 		font-size:13px;
 	}
-	.content_bottom .f_left > ul > li li a:hover{
+	.content_bottom .f_left > ul > li li a:hover,.f_c2 li li a:hover{
 		color:#39F;
 	}
 .content_bottom .f_right{
@@ -309,6 +321,24 @@ ul,li{
 	.content_bottom .f_right img{
 		width:100%;
 	}
+.tags{
+	color:#fff;
+	padding:20px 0;
+}	
+	.tags a{
+		padding:7px;
+		color:#fff;
+		line-height:20px;
+		display:block;
+		float:left;
+		margin-right:5px;
+	}
+	.tags a:hover{
+		background-color:#f9f9f9;
+		color:#000;
+		border-radius:5px;
+		transition:all ease 0.3s;
+	}
 /*---------- Footer ----------*/
 body footer{
 	background-color:#da2027;
@@ -316,24 +346,23 @@ body footer{
     padding-bottom: 20px;
 }
 body footer .wrap > .f_left{
-	width:60%;
+	width:65%;
 }
-	body footer .wrap > .f_left > img{
-		width:35%;
+	body footer .wrap > .f_left .f_c1 img{
+		margin:0 0 10px 0;
+	}
+	body footer .wrap > .f_left .f_c1{
+		margin-top: 20px;
+		color: #F3CACC;
+		width:48%;
 		float:left;
-		margin:20px 0;
+		font-size:13px;
 	}
-	body footer .wrap > .f_left > div{
-		    float: right;
-    width: 59%;
-    margin-top: 28px;
-    color: #fff;
-	}
-	body footer .wrap > .f_left > div h2{
+	body footer .wrap > .f_left .f_c1 h2{
 		font-size:16px;
 		font-weight:bold;
 		padding:5px 0;
-		color:#fff;
+		color:#F3CACC;
 	}
 body footer .wrap > .f_right{
 	text-align:right;

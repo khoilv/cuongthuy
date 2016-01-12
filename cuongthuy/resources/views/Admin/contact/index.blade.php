@@ -105,14 +105,14 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 <td class="color_blue bold">{!!$contact->contact_email!!}</td>
                 <td class="bold">{!!$contact->contact_phone!!}</td>
                 <td>{!!date("d-m-Y", strtotime($contact->contact_datetime))!!}</td>
-                <td><span class="lh12"><a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">
+                <td><p class="lh12 alignC"><a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">
                         @if(strlen($contact->contact_content) < 100)
                             {!!$contact->contact_content!!}
                         @else
                             {!!substr($contact->contact_content,0,100)!!}...
                         @endif
                         </a>
-                    </span></td>
+                    </p></td>
             </tr>
             @endforeach
             @endif

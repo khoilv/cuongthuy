@@ -1,4 +1,4 @@
-<?php
+ <?php
 error_reporting(E_ALL & ~(E_NOTICE));
 
 use App\Http\Controllers\Frontend\MenuController as MenuController;
@@ -199,11 +199,11 @@ use App\Http\Controllers\Frontend\BaseController;
                     </ul>
                     <form name="form1" action="list" method="GET">
                         <div class="search">
-							<input type="text" name="search_value" value="<?php echo $search_value; ?>" placeholder="Nhập từ khóa">
-                            <select class="f_left" name="search_key">
-                                <option value ="product_code" select="selected" >Mã sản phẩm</option>
+							<select class="f_left" name="search_key">
                                 <option value="product_name" <?php if ($search_key == 'product_name') { ?> selected="selected"<?php } ?>>Tên sản phẩm</option>
+								<option value ="product_code" select="selected" >Mã sản phẩm</option>
                             </select>
+							<input type="text" name="search_value" value="<?php echo $search_value; ?>" placeholder="Nhập từ khóa">
                             <button onclick="document.form1.submit()"></button>
                         </div>
                     </form>

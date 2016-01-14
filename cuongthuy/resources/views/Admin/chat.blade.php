@@ -3,6 +3,14 @@
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
 @endsection
 @section('content')
+<!--<script type="text/javascript">
+    $(document).ready(function() {
+        $('#search_button').click(function() {
+            $('#cmd').attr({value: "search"});
+            $('#chat_form').submit();
+        });
+    });
+</script>-->
 <p id="pankuzu"><a href="{!!Asset('admin/top')!!}">TOP </a> &gt;Quản lí chat</p>
 <h2 id="page_midashi_02">Quản lí chat</h2>
 <!-- InstanceBeginEditable name="content_area" -->
@@ -14,5 +22,13 @@
     <p class="gaiyo">Tên đăng nhập: myphamcuongthuy@gmail.com</p>
     <p class="gaiyo">Mật khẩu: cuong03042008</p>
     <p class="gaiyo">Các tin nhắn offline sẽ được gửi vào email myphamcuongthuy@gmail.com khi bạn không thể online hỗ trợ khách hàng</p>
+    <p class="gaiyo bold">Download bản hướng dẫn sử dụng ở dưới đây</p>
 </div>
+{!! Form::open(['method' => 'POST', 'url' => 'admin/chat/index', 'id' => 'chat_form', 'name' => 'form1']) !!}
+<div align="center">
+    <input type="hidden" name="file" value="{!!isset($file) ? $file : ''!!}" />
+    <input type="hidden" name ="strFilePath" value="{!!$strFilePath!!}"/>
+    <input type="submit" name="download" value="Download" />
+</div>
+{!! Form::close() !!}
 @endsection

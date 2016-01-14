@@ -28,49 +28,35 @@
        
     });
 </script>
-<p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Danh sách liên hệ</a></p>
-<h2 id="page_midashi_02">Danh sách liên hệ</h2>
+<p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Danh sách khách hàng</a></p>
+<h2 id="page_midashi_02">Danh sách khách hàng</h2>
 <!-- InstanceBeginEditable name="content_area" -->
 <div id="bg_blue">
     <p class="mb15 floatL color_red">
         ※ Khi bạn nhập vào các mục dưới đây bạn có thể lọc theo các điều kiện tìm kiếm<br />
     </p>
-    {!! Form::open(['method' => 'POST', 'url' => 'admin/contact/index', 'id' => 'contact_form', 'name' => 'form1']) !!}
+    {!! Form::open(['method' => 'POST', 'url' => 'admin/customer/index', 'id' => 'customer_form', 'name' => 'form1']) !!}
     <div class="clear"></div>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
-            <th>Ngày gửi liên hệ</th>
-            <td colspan="3">
-                <label><input type="radio" name="contact_sort" value="ASC" @if (isset($input['contact_sort']) && $input['contact_sort'] == "ASC") checked @endif>
-                    Thứ tự tăng dần
-                </label>
-                <label><input type="radio" name="contact_sort" value="DESC" @if (!isset($input['contact_sort']) || (isset($input['contact_sort']) && $input['contact_sort'] == "DESC")) checked @endif>
-                    Thứ tự giảm dần
-                </label>
-                    <input type="text" name="contact_date_start" value="{!!isset($input['contact_date_start'])? $input['contact_date_start']:''!!}" class="default_datetimepicker" readonly style='width:100px;'/> 
-                    ~ <input type="text" name="contact_date_end" class="default_datetimepicker" value="{!!isset($input['contact_date_end'])? $input['contact_date_end']:''!!}" readonly style='width:100px;'/>
-                    <a href="#" onClick="f=document.form1;f['contact_date_start'].value='';f['contact_date_end'].value='';">Xóa ngày tháng</a>
-            </td>
-        </tr>
-        <tr class="menu">
             <th>Họ tên</th>
             <td colspan="3">
-                {!! Form::text('contact_name', isset($input['contact_name'])? $input['contact_name']:'',['style' => 'width:180px', 'class' => 'text']) !!}
-                @if ($errors->has('contact_name'))<p style="color: red">{!! $errors->first('contact_name') !!}</p>@endif
+                {!! Form::text('customer_name', isset($input['customer_name'])? $input['customer_name']:'',['style' => 'width:180px', 'class' => 'text']) !!}
+                @if ($errors->has('customer_name'))<p style="color: red">{!! $errors->first('customer_name') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Điện thoại</th>
             <td colspan="3">
-                {!! Form::text('contact_phone', isset($input['contact_phone'])? $input['contact_phone']:'',['style' => 'width:180px', 'class' => 'text']) !!}
-                @if ($errors->has('contact_phone'))<p style="color: red">{!! $errors->first('contact_phone') !!}</p>@endif
+                {!! Form::text('customer_phone', isset($input['customer_phone'])? $input['customer_phone']:'',['style' => 'width:180px', 'class' => 'text']) !!}
+                @if ($errors->has('customer_phone'))<p style="color: red">{!! $errors->first('customer_phone') !!}</p>@endif
             </td>
         </tr>
         <tr class="menu">
             <th>Email</th>
             <td colspan="3">
-                {!! Form::text('contact_email', isset($input['contact_email'])? $input['contact_email']:'',['style' => 'width:180px', 'class' => 'text']) !!}
-                @if ($errors->has('contact_email'))<p style="color: red">{!! $errors->first('contact_email') !!}</p>@endif
+                {!! Form::text('customer_email', isset($input['customer_email'])? $input['customer_email']:'',['style' => 'width:180px', 'class' => 'text']) !!}
+                @if ($errors->has('customer_email'))<p style="color: red">{!! $errors->first('customer_email') !!}</p>@endif
             </td>
         </tr>
     </table>
@@ -83,7 +69,7 @@
 </div>
 
 <div id="bg_blue" class="mt15">
-    <p class="mb15" style="color:red">※ Click vào nội dung liên hệ để xem chi tiết.</p>
+    <p class="mb15" style="color:red">※ Click vào mã khách hàng để xem thông tin chi tiết khách hàng.</p>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
             <tr class="table_list">
@@ -91,13 +77,12 @@
                 <th width='20%'>Họ và tên</th>
                 <th width='15%'>Email</th>
                 <th width='10%'>Điện thoại</th>
-                <th width='13%'>Ngày gửi</th>
-                <th width='27%'>Nội dung</th>
+                <th width='13%'>Mã khách hàng</th>
             </tr>
         </thead>
         <tbody>
-            @if (isset($contacts))
-            @foreach ($contacts as $key => $contact)
+            @if (isset($customers))
+            @foreach ($customers as $key => $customer)
             <tr class="table_list bg_yellow">
                 <td class="bold">{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">--}}{!!$offset+$key+1!!}{{--</a>--}}</td>
                 <td>{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact['id']))!!}">--}}{!!$contact->contact_name!!}{{--</a>--}}</td>
@@ -105,11 +90,6 @@
                 <td class="bold">{!!$contact->contact_phone!!}</td>
                 <td>{!!date("d-m-Y", strtotime($contact->contact_datetime))!!}</td>
                 <td><p class="lh12 alignC"><a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">
-                        @if(strlen($contact->contact_content) < 100)
-                            {!!$contact->contact_content!!}
-                        @else
-                            {!!substr($contact->contact_content,0,100)!!}...
-                        @endif
                         </a>
                     </p></td>
             </tr>

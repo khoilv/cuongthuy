@@ -28,10 +28,24 @@ class FrameRelativeProductsController extends Controller
         $joinsArr = array();
         $relativeProducts = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
         if (count($relativeProducts) < 10) {
+            $arrPid = array($productId);
+            foreach ($relativeProducts as $key => $val){
+                array_push($arrPid,$val['id']);
+            }
             $productAdding = 10 - count($relativeProducts);
             $parrentCategory = DB::table('categories')->where('id', $categoryId)->pluck('category_parent');
             if ($parrentCategory) {
-                $whereArr['product_category'] = $parrentCategory;
+                $joinsArr = array(
+                    array(
+                        'table' => 'categories',
+                        'type' => 'LEFT',
+                        'conditions' => 'products.product_category = categories.id'
+                    )
+               );
+                $whereArr = array(
+                    'categories.category_parent' => $parrentCategory,
+                    'products.id NOT IN' => $arrPid
+                );
                 $limitArr = array(0, $productAdding);
                 $relativeProducts2 = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
                 if ($relativeProducts2) {

@@ -170,7 +170,7 @@ class DBCommon {
                             $notInClause[] = '?';
                             array_push($params, $notInV);
                         }
-                        $whereClause[] = $k . ' ' . '(' . implode(', ', $notInV) . ')';
+                        $whereClause[] = $k . ' ' . '(' . implode(', ', $notInClause) . ')';
                     } else {
                         $whereClause[] = $k . ' ' . '(' . $v . ')';
                     }

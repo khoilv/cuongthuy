@@ -104,6 +104,8 @@ class ProductController extends Controller
         }
         $input['product_date_added'] = date("Y-m-d H:i:s");
         $input['product_date_modify'] = date("Y-m-d H:i:s");
+        $tmpArr = array("&nbsp;" => " ");
+        $input['product_description'] = stripslashes(strtr($input['product_description'], $tmpArr));
         if ($this->productCls->insert($input)) {
             Session::flash('success', 'Bạn đã tạo sản phẩm thành công!');
             return Redirect::action('Admin\ProductController@detail', $productId);
@@ -148,6 +150,8 @@ class ProductController extends Controller
             $input['product_other_image'] = trim($product_other_image, ",");
         }
         $input['product_date_modify'] = date("Y-m-d H:i:s");
+        $tmpArr = array("&nbsp;" => " ");
+        $input['product_description'] = stripslashes(strtr($input['product_description'], $tmpArr));
         if ($this->productCls->update($input, array('id' => $productId))) {
             Session::flash('success', 'Bạn đã cập nhật sản phẩm thành công!');
             return Redirect::action('Admin\ProductController@detail', $productId);

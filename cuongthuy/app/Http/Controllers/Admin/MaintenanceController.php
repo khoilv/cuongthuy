@@ -16,6 +16,7 @@ class MaintenanceController extends Controller
     public function __construct(MaintenanceForm $Form)
     {
         $this->form = $Form;
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
 
     public function index()

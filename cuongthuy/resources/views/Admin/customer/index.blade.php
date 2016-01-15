@@ -11,21 +11,8 @@
     $(document).ready(function() {
         $('#search_button').click(function() {
             $('#cmd').attr({value: "search"});
-            $('#contact_form').submit();
+            $('#customer_form').submit();
         });
-        
-        $('#csv_button').click(function() {
-            $('#cmd').attr({value: "csv_download"});
-            $('#contact_form').submit();
-        });
-        
-        $('.default_datetimepicker').datetimepicker({
-            format:'d/m/Y',
-            formatDate:'d.m.Y',
-            timepicker:false,
-            timepickerScrollbar:false
-        });
-       
     });
 </script>
 <p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Danh sách khách hàng</a></p>
@@ -59,6 +46,13 @@
                 @if ($errors->has('customer_email'))<p style="color: red">{!! $errors->first('customer_email') !!}</p>@endif
             </td>
         </tr>
+        <tr class="menu">
+            <th>Mã khách hàng</th>
+            <td colspan="3">
+                {!! Form::text('customer_code', isset($input['customer_code'])? $input['customer_code']:'',['style' => 'width:180px', 'class' => 'text']) !!}
+                @if ($errors->has('customer_code'))<p style="color: red">{!! $errors->first('customer_code') !!}</p>@endif
+            </td>
+        </tr>
     </table>
     <div class="mt15">
         <input id="cmd" type="hidden" name="cmd" value=""/>
@@ -69,31 +63,40 @@
 </div>
 
 <div id="bg_blue" class="mt15">
-    <p class="mb15" style="color:red">※ Click vào mã khách hàng để xem thông tin chi tiết khách hàng.</p>
+    <p class="mb15" style="color:red">※ Click vào mã khách hàng để xem các đơn hàng của khách hàng này.</p>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
             <tr class="table_list">
                 <th width='5%'>STT</th>
                 <th width='20%'>Họ và tên</th>
                 <th width='15%'>Email</th>
-                <th width='10%'>Điện thoại</th>
-                <th width='13%'>Mã khách hàng</th>
+                <th width='15%'>Điện thoại</th>
+                <th width='20%'>Mã khách hàng</th>
+                <th width='25%'>Địa chỉ</th>
             </tr>
         </thead>
         <tbody>
-            @if (isset($customers))
+            @if (isset($customers) && (count($customers) > 0))
             @foreach ($customers as $key => $customer)
             <tr class="table_list bg_yellow">
-                <td class="bold">{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">--}}{!!$offset+$key+1!!}{{--</a>--}}</td>
-                <td>{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact['id']))!!}">--}}{!!$contact->contact_name!!}{{--</a>--}}</td>
-                <td class="color_blue bold">{!!$contact->contact_email!!}</td>
-                <td class="bold">{!!$contact->contact_phone!!}</td>
-                <td>{!!date("d-m-Y", strtotime($contact->contact_datetime))!!}</td>
-                <td><p class="lh12 alignC"><a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">
-                        </a>
+                <td class="bold">{!!$offset+$key+1!!}</td>
+                <td><p class="alignC">{!!$customer['customer_name']!!}</p></td>
+                <td class="color_blue bold"><p class="alignC">{!!$customer['customer_email']!!}</p></td>
+                <td class="bold">{!!$customer['customer_phone']!!}</td>
+                <td><a href="{!!action('Admin\OrderController@search', array('customer_id' => $customer['id']))!!}">{!!$customer['customer_code']!!}<a></td>
+                <td><p class="lh12 alignC">
+                    @if (isset($customer['customer_city']))
+                        {!!$customer['customer_address']!!}, {!!$customer['customer_city']!!}
+                    @else
+                         {!!$customer['customer_address']!!}
+                    @endif
                     </p></td>
             </tr>
             @endforeach
+            @else
+            <tr class="table_list bg_yellow">
+                <td colspan="6"><p class='alignC'>Không có khách hàng nào thỏa mãn<p></td>
+            </tr>
             @endif
     </table>
     <div id="tab_area">
@@ -114,7 +117,7 @@
                        $end = $currentPage +2;
                     }
                 } ?>
-              @include('Admin.contact.list_page')
+              @include('Admin.customer.list_page')
           <?php } ?>
         </div>
         @if ($lastPage > 1)

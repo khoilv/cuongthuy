@@ -58,10 +58,10 @@
             @else
             <p id="left_link_04"><a href="{!!Asset('admin/category/index')!!}">Quản lí danh mục</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'user' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'customer' ))
             <p id="left_link_05_on">Quản lí khách hàng</p>
             @else
-            <p id="left_link_05"><a href="">Quản lí khách hàng</a></p>
+            <p id="left_link_05"><a href="{!!Asset('admin/customer/index')!!}">Quản lí khách hàng</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'contact' ))
             <p id="left_link_06_on">Liên hệ từ khách hàng</p>

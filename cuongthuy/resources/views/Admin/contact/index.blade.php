@@ -96,7 +96,7 @@
             </tr>
         </thead>
         <tbody>
-            @if (isset($contacts))
+            @if (isset($contacts) && (count($contacts) > 0))
             @foreach ($contacts as $key => $contact)
             <tr class="table_list bg_yellow">
                 <td class="bold">{{--<a href="{!!action('Admin\ContactDetailController@getIndex', array('contact_id' => $contact->id))!!}">--}}{!!$offset+$key+1!!}{{--</a>--}}</td>
@@ -114,6 +114,10 @@
                     </p></td>
             </tr>
             @endforeach
+            @else
+            <tr class="table_list bg_yellow">
+                <td colspan="6"><p class='alignC'>Không tìm thấy liên hệ nào thỏa mãn<p></td>
+            </tr>
             @endif
     </table>
     <div id="tab_area">

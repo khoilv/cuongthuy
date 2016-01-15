@@ -53,10 +53,8 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::any('/banner/detail/{id?}', 'Admin\BannerController@detail');
     Route::get('/banner/list', 'Admin\BannerController@listBanner');
     Route::any('/password/change','Admin\UserController@changePassword');
-//    Route::get('chat/index',function(){
-//        return view('Admin/chat');
-//    });
     Route::any('chat/index', 'Admin\ChatController@index');
     Route::any('contact/index', 'Admin\ContactController@index');
     Route::get('contact/detail', 'Admin\ContactDetailController@getIndex');
+    Route::any('customer/index', 'Admin\CustomerController@index');
 });

@@ -52,6 +52,9 @@ class OrderController extends Controller {
         if (Input::has('order_date_end')) {
             $option['arrWhereEnd'] = ['order_date' => date_format(DateTime::createFromFormat('d/m/Y', $input['order_date_end']), "Y:m:d")];
         }
+        if (Input::has('customer_id')) {
+            $option['arrWhere'][] = ['customer_id' => $input['customer_id']];
+        }
         $option['limit'] = $maxRec = self::$ORDER_MAX;
         if (Input::has('page')) {
             $page = $input['page'];

@@ -106,7 +106,7 @@ use App\Http\Controllers\Controller\Admin\OrderController;
             </tr>
         </thead>
         <tbody>
-            @if (isset($orders))
+            @if (isset($orders) && (count ($orders) > 0) )
             @foreach ($orders as $key => $order)
             <tr class="table_list bg_yellow">
                 <td class="bold"><a href="{!!action('Admin\OrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$offset+$key+1!!}</a></td>
@@ -117,6 +117,10 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 <td>{!!$order['order_phone']!!}</td>
             </tr>
             @endforeach
+            @else
+            <tr class="table_list bg_yellow">
+                <td colspan="6"><p class='alignC'>Không có đơn hàng nào thỏa mãn<p></td>
+            </tr>
             @endif
     </table>
     

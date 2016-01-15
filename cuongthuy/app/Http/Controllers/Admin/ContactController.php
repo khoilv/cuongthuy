@@ -13,7 +13,7 @@ use DateTime;
 class ContactController extends Controller {
     
     private $model;
-    private static $CONTACT_MAX = 5;
+    private static $CONTACT_MAX = 25;
     
     public function __construct() {
         $this->model = new ContactModel();

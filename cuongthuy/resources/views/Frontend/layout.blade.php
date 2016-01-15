@@ -13,7 +13,7 @@ use App\Http\Controllers\Frontend\BaseController;
         <meta name="description" content="Mỹ phẩm - tạp hóa Cường Thủy" />
         <meta name="viewport" content="width=device-width, maximum-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <title>Mỹ Phẩm - Tạp hóa Cường Thủy - {!!BaseController::$title!!}</title>
+        <title>Mỹ Phẩm, Tạp hóa Cường Thủy - {!!BaseController::$title!!}</title>
         @section('stylesheets')
         <link rel="icon" type="image/png" href="{!!Asset('public/images/icon_logo.png')!!}">
         <link href="{!!Asset('public/css/common.css')!!}" rel="stylesheet" type="text/css">

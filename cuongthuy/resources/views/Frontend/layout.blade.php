@@ -4,6 +4,7 @@ error_reporting(E_ALL & ~(E_NOTICE));
 use App\Http\Controllers\Frontend\MenuController as MenuController;
 use App\Http\Controllers\Frontend\CartController as CartController;
 use App\Http\Controllers\Frontend\BaseController;
+use App\Http\Controllers\Frontend\FrameCategoryListController;
 ?>
 <!doctype html>
 <html>
@@ -244,7 +245,7 @@ use App\Http\Controllers\Frontend\BaseController;
                 </div>
                 <div class="clear"></div>
             </div-->
-			<div class="wrap tags">
+<!--			<div class="wrap tags">
 				<a href="#">Sản phẩm mới</a>
 				<a href="#">Mỹ phẩm</a>
 				<a href="#">Phấn hồng</a>
@@ -265,7 +266,8 @@ use App\Http\Controllers\Frontend\BaseController;
 				<a href="#">Bỉm trẻ em</a>
 				<a href="#">Phụ kiện-Thời trang</a>
 				<div class="clear"></div>
-			</div>
+			</div>-->
+                        {!!FrameCategoryListController::getList()!!}
 			<div class="clear"></div>
         </div><!-- end content bottom-->
         <div class="clear"></div>

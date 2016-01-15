@@ -40,6 +40,7 @@
         <tr class="menu">
             <th><span class="color_red">※</span>Ảnh banner</th>
             <td>
+                <p><span class="color_blue bold ml30">※Yêu cầu kích thước ảnh:W1024 x H289px </span></p>
                 {!! Form::file('banner_image_path') !!}
                 @if ($errors->has('banner_image_path'))<p class="error_comment">{!! $errors->first('banner_image_path') !!}</p>@endif
                 <p><img src="@if(isset($banner['banner_image_path'])) {!!Asset('public/images/upload/banner/'. $banner['banner_image_path'])!!} @endif" width="500px" height="134px"/></p>

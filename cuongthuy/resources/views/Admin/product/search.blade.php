@@ -103,7 +103,7 @@
                 <th>Giá tiền</th>
                 <th>Trạng thái</th>
                 <th>Số lượng</th>
-                <th></th>
+                <th>Xóa</th>
             </tr>
         </thead>
         <tbody>
@@ -120,7 +120,7 @@
                 <td>{!!$arrProductStatus[$product['product_status']]!!}</td>
                 @endif
                 <td class="{!!$product['product_quantity'] ? '' : 'color_red bold'!!}">{!!$product['product_quantity']!!}</td>
-                <td><button name="delete" class="delete_product">Xoá</button></td>
+                <td> <p class="delete_product" style="cursor: pointer;" title="Xóa sản phẩm này"><img src="{!!Asset('public/images/icon16.png')!!}"></p> </img></td>
                 <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
             </tr>
             @endforeach

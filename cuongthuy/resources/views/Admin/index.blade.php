@@ -17,7 +17,7 @@
 <!--▼ top_alert_area -->
 <div class="top_alert_area">
     <h3 id="page_midashi_04">Tình trạng người dùng</h3>
-    <p class="alert_normal"><a href="{!!Asset('admin/user/search')!!}">Tổng số thành viên：{!!$numberCustomer!!} người<span class="floatR"><img src="{!!Asset('public/images/admin/alert_blue.png')!!}" /></span></a></p>
+    <p class="alert_normal"><a href="{!!Asset('admin/customer/index')!!}">Tổng số thành viên：{!!$numberCustomer!!} người<span class="floatR"><img src="{!!Asset('public/images/admin/alert_blue.png')!!}" /></span></a></p>
 </div>
 <!--▲ top_alert_area -->
 

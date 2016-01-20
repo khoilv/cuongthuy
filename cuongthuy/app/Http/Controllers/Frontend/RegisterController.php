@@ -39,7 +39,7 @@ class RegisterController extends Controller {
             }
             if (!$error) {
                 if ($this->customersCls->getUserByEmail($data['email'])) {
-                    $errorMsg = (object)array('email' => 'Email này đã đuwọc đăng kí.Vui lòng nhập email khác!');
+                    $errorMsg = (object)array('email' => 'Email này đã được đăng kí. Vui lòng nhập email khác!');
                     $error = true;
                 } else {
                     $insertArray = array(

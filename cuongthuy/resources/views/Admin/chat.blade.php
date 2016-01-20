@@ -3,17 +3,8 @@
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
 @endsection
 @section('content')
-<!--<script type="text/javascript">
-    $(document).ready(function() {
-        $('#search_button').click(function() {
-            $('#cmd').attr({value: "search"});
-            $('#chat_form').submit();
-        });
-    });
-</script>-->
 <p id="pankuzu"><a href="{!!Asset('admin/top')!!}">TOP </a> &gt;Quản lí chat</p>
 <h2 id="page_midashi_02">Quản lí chat</h2>
-<!-- InstanceBeginEditable name="content_area" -->
 <div class="content_list_area">
     <p class="bold"><a href="">&diams;Chat với khách hàng</a></p>
     <p class="gaiyo">Bạn có thể chat, hỗ trợ, giải đáp cho khách hàng những thắc mắc về hóa đơn, sản phẩm...<br /></p>

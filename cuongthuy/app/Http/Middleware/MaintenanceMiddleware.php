@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
 use Redirect;
 class MaintenanceMiddleware {
 
@@ -15,6 +14,7 @@ class MaintenanceMiddleware {
      * @return mixed
      */
     public function handle($request, Closure $next) {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         if (file_exists("public/data/maintenance.dat")) {
             list($start_date, $end_date, $message) = file("public/data/maintenance.dat", FILE_IGNORE_NEW_LINES);
             if (strtotime($start_date) <= strtotime('now') && strtotime($end_date) >= strtotime('now')){

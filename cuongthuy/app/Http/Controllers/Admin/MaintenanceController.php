@@ -8,19 +8,17 @@ use App\Forms\FormValidationException;
 use Request;
 use Redirect;
 use Session;
-class MaintenanceController extends Controller
-{
+
+class MaintenanceController extends Controller {
 
     private $form;
 
-    public function __construct(MaintenanceForm $Form)
-    {
+    public function __construct(MaintenanceForm $Form) {
         $this->form = $Form;
         date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
 
-    public function index()
-    {
+    public function index() {
         $start_date = '';
         $end_date = '';
         $message = '';
@@ -32,13 +30,12 @@ class MaintenanceController extends Controller
         if (Request::isMethod('post')) {
             $data = Request::except('_token');
             try {
-                // Validate
                 $this->form->validate($data);
             } catch (FormValidationException $e) {
-                Session::flash('msg_error', 'Đã xảy ra lỗi.Vui lòng kiểm tra các mục bên dưới');
+                Session::flash('msg_error', 'Đã xảy ra lỗi. Vui lòng kiểm tra các mục bên dưới');
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
-            if (strtotime($data['start_date']) > strtotime($data['end_date'])){
+            if (strtotime($data['start_date']) > strtotime($data['end_date'])) {
                 Session::flash('msg_error', 'Ngày bắt đầu không được nhỏ hơn ngày kết thúc. Vui lòng nhập lại.');
                 return Redirect::back()->withInput();
             }
@@ -49,7 +46,7 @@ class MaintenanceController extends Controller
             fwrite($fp, $data['start_date'] . "\n" . $data['end_date'] . "\n" . $data['message']);
             return redirect('admin/maintenance');
         }
-        return view('Admin/maintenance',[
+        return view('Admin/maintenance', [
             'end_date' => $end_date,
             'start_date' => $start_date,
             'message' => $message

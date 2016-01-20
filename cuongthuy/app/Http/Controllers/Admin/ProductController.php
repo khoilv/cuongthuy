@@ -19,6 +19,7 @@ use Redirect;
 use Session;
 use App\Lib\InitialDefine;
 use Imagick;
+use File;
 class ProductController extends Controller
 {
 
@@ -58,7 +59,7 @@ class ProductController extends Controller
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
             if ($productId) {
-                return $this->update($input, $product, $productId);
+                    return $this->update($input, $product, $productId);
             } else {
                 return $this->insert($input);
             }
@@ -107,8 +108,9 @@ class ProductController extends Controller
         $tmpArr = array("&nbsp;" => " ");
         $input['product_description'] = stripslashes(strtr($input['product_description'], $tmpArr));
         if ($this->productCls->insert($input)) {
+            $idMax = $this->productCls->getIdMax('id') + 1;
             Session::flash('success', 'Bạn đã tạo sản phẩm thành công!');
-            return Redirect::action('Admin\ProductController@detail', $productId);
+            return Redirect::action('Admin\ProductController@detail', $idMax);
         }
     }
 
@@ -157,7 +159,33 @@ class ProductController extends Controller
             return Redirect::action('Admin\ProductController@detail', $productId);
         }
     }
-    
+    public function delete(){
+        $result['error'] = false;
+        $product_other_image = array();
+        if(Request::ajax()) {
+            $data = Input::all();
+            $product = $this->productCls->getProductById($data['product_id']);
+            $product_other_image = explode(',', $product['product_other_image']);
+            foreach ($product_other_image as $key => $val) {
+                $filename = public_path().'/images/upload/products/'. $val;
+                $imageThumb = public_path().'/images/upload/products/thumb_'. $val;
+                if (File::exists($filename)) {
+                    File::delete($filename);
+                }
+                if (File::exists($imageThumb)) {
+                    File::delete($imageThumb);
+                }
+                if (File::exists(public_path().'/images/upload/products/'. $product['product_image'])) {
+                    File::delete(public_path().'/images/upload/products/'. $product['product_image']);
+                }
+            }
+            if (!$this->productCls->delete(array('id' => $data['product_id']))) {
+                $result['error'] = true;
+            }
+            return (json_encode($result));
+        }
+    }
+
     public function uploadImage($fileUpload, $filePath, $cropWidth, $cropHeight){
         $imagick = new Imagick($fileUpload);
         $width = $imagick->getImageWidth();
@@ -182,6 +210,7 @@ class ProductController extends Controller
         }
         $imagick->resizeImage($newWidth, $newHeight, Imagick::FILTER_LANCZOS, 1);
         $imagick->writeImage($filePath);
+        @chmod($filePath, 0664);
         $imagick->destroy();
     }
 

@@ -13,6 +13,30 @@
             $('#cmd').attr({value: "csv_download"});
             $('#product_form').submit();
         });
+        $(".delete_product").click(function() {
+            var my = $(this).closest('tr');
+            var retVal = confirm("Bạn có muốn xoá sản phẩm này không?");
+            var post = {
+                product_id: $(".product_id", my).val()
+            };
+            if( retVal == true ){
+                $.ajax({
+                    url: 'delete',
+                    type: 'post',
+                    dataType: 'json',
+                    data: post,
+                    success: function(result) {
+                        if(result['error']) {
+                            alert('Có lỗi xảy ra. Sản phẩm của bạn chưa xoá được.');
+                        } else {
+                            my.remove();
+                            alert('Bạn đã xoá sản phẩm thành công.');
+                        }
+                    }
+                });
+            } else {
+            }
+        });
     });
 </script>
 @endsection
@@ -79,6 +103,7 @@
                 <th>Giá tiền</th>
                 <th>Trạng thái</th>
                 <th>Số lượng</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -95,6 +120,8 @@
                 <td>{!!$arrProductStatus[$product['product_status']]!!}</td>
                 @endif
                 <td class="{!!$product['product_quantity'] ? '' : 'color_red bold'!!}">{!!$product['product_quantity']!!}</td>
+                <td><button name="delete" class="delete_product">Xoá</button></td>
+                <input type="hidden" class='product_id'  value="{!! $product['id']!!}">
             </tr>
             @endforeach
             @else 

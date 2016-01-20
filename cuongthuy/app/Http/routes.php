@@ -44,6 +44,7 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::get('/product/index', 'Admin\ProductController@index');
     Route::any('/product/detail/{id?}', 'Admin\ProductController@detail');
     Route::any('/product/search', 'Admin\ProductController@search');
+    Route::post('/product/delete', 'Admin\ProductController@delete');
     Route::get('/category/index', 'Admin\CategoryController@getIndex');
     Route::post('/category/api', 'Admin\CategoryController@procAjax');
     Route::get('/order/index', 'Admin\OrderController@getIndex');

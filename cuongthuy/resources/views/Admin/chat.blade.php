@@ -28,7 +28,10 @@
 <div align="center">
     <input type="hidden" name="file" value="{!!isset($file) ? $file : ''!!}" />
     <input type="hidden" name ="strFilePath" value="{!!$strFilePath!!}"/>
-    <input type="submit" name="download" value="Download" />
+    <div class="mt15">
+        <input type="submit" class="btn" name="download" value="Download" />
+    <div class="clear"></div>
+    </div>
 </div>
 {!! Form::close() !!}
 @endsection

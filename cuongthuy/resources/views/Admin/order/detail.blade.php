@@ -149,7 +149,7 @@
                     <td>{!!number_format ($value['unitPrice'],0,",",".")!!} đ</td>
                     <td>{!!number_format ($arrProducts[$value['product_id']]['product_price'],0,",",".")!!} đ</td>
                     <td class="line_price">{!!number_format ($linePrice,0,",",".")!!} đ</td>
-                    <td> <p class="delete_product" title="Xóa sản phẩm này khỏi đơn hàng"><img src="{!!Asset('public/images/icon16.png')!!}"></p> </img></td>
+                    <td> <p class="delete_product" style="cursor: pointer;" title="Xóa sản phẩm này khỏi đơn hàng"><img src="{!!Asset('public/images/icon16.png')!!}"></p> </img></td>
                     <input type="hidden" class="order_detail_id" value="{!! $value['id'] !!}">
                     <input type="hidden" class="order_id" value="{!! $order['id'] !!}">
                 </tr>
@@ -166,6 +166,4 @@
     </div>
     {!! Form::close() !!}
 </div>
-<!--<script type="text/javascript" src="public/js/jquery_order_update.js"></script>-->
-
 @endsection

@@ -89,9 +89,9 @@
             <p id="left_link_08"><a href="{!!Asset('admin/chat/index')!!}">Quản lý chat</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'static' ))
-            <p id="left_link_08_on">Thống kê</p>
+            <p id="left_link_03_on">Thống kê</p>
             @else
-            <p id="left_link_08"><a href="{!!Asset('admin/static/index')!!}">Thống kê</a></p>
+            <p id="left_link_03"><a href="{!!Asset('admin/static/index')!!}">Thống kê</a></p>
             @endif
     </div>
     <!--▲ left_content -->

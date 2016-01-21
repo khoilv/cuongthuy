@@ -60,7 +60,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{!!$revenue!!} đ</td>
+                <td>{!!number_format ($revenue,0,",",".")!!} đ</td>
                 <td>{!!$countOrder!!}</td>
                 <td>{!!$countProduct!!}</td>
             </tr>
@@ -71,30 +71,46 @@
         <thead>
            <tr class="menu">
             <th>Tên sản phẩm</th>
-            <th>Số lượng đã bán</th>
             <th>Đơn giá (thời điểm mua hàng)</th>
+            <th>Số lượng đã bán</th>
             <th>Đơn giá (hiện tại)</th>
             <th>Thành tiền</th>
         </tr>
         </thead>
         <tbody>
-            @foreach ($products as $key => $value)
-            <?php $count = 0 ?>
-                @foreach ($value as $key1 => $value1) 
-                <tr>
-                    <?php $count++ ;?>
-                        @if ($count == 1)
-                        <td rowspan="{!!count($value)!!}"><a href="{!!Asset('admin/product/detail/'. $key)!!}">{!!@isset ($product2[$key]['product_name']) ? $product2[$key]['product_name'] : '<--Sản phẩm bị xóa hoặc không có giá-->'!!}</a></td>
-                        @endif
-                        <td>{!!$value1['quantity']!!}</td>
-                        <td>{!!$key1!!}</td>
-                        @if ($count == 1)
-                        <td rowspan="{!!count($value)!!}" >{!!@isset ($product2[$key]['product_price']) ? $product2[$key]['product_price'] : '<--Sản phẩm bị xóa hoặc không có giá-->'!!}</td>
-                        @endif
-                        <td>{!!$value1['quantity']*$key1!!}</td>
-                </tr>
+            @if (!empty($products))
+                @foreach ($products as $key => $value)
+                <?php $count = 0 ?>
+                    @foreach ($value as $key1 => $value1) 
+                    <tr>
+                        <?php $count++ ;?>
+                            @if ($count == 1)
+                            <td rowspan="{!!count($value)!!}">
+                                @if(isset ($product2[$key]['product_name']))
+                                <a href="{!!Asset('admin/product/detail/'. $key)!!}">
+                                    {!!$product2[$key]['product_name']!!}
+                                </a>
+                                @else
+                                    <--Sản phẩm bị xóa hoặc không có giá-->
+                                @endif
+                            </td>
+                            @endif
+                            <td>{!!number_format ($key1,0,",",".")!!}</td>
+                            <td>{!!$value1['quantity']!!}</td>
+                            @if ($count == 1)
+                            <td rowspan="{!!count($value)!!}" >{!!@isset ($product2[$key]['product_price']) ? number_format ($product2[$key]['product_price'],0,",","."): '<--Sản phẩm bị xóa hoặc không có giá-->'!!}</td>
+                            @endif
+                            <td>{!!number_format ($value1['quantity']*$key1,0,",",".")!!}</td>
+                    </tr>
+                    @endforeach
                 @endforeach
-            @endforeach
+            @else
+                <tr>
+                    <td colspan="5">
+                        <p class='alignC'>Không có sản phẩm nào được bán trong giai đoạn này</p>
+                    </td>
+                <tr>
+            @endif
         </tbody>
     </table>
     <?php /*

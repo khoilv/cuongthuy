@@ -18,6 +18,7 @@ class OrderDetailModel extends TableBase {
     private $productModel; 
 
     public function __construct() {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         parent::__construct();
         $this->setTableName($this->table);
         $this->productModel = new ProductModel();
@@ -51,9 +52,11 @@ class OrderDetailModel extends TableBase {
     
     public function getOrderProductDetail($arrOrderId) {
         $arrProduct = $arrProduct2 = [];
+        $productNum = 0;
         foreach ($arrOrderId as $orderId) {
             $arrOrDetail =  $this->getOrderDetailByOrderId($orderId);
             foreach ($arrOrDetail as $value) {
+                $productNum += $value['quantity'];
                 if (isset($arrProduct[$value['product_id']])) {
                     if (isset ($arrProduct[$value['product_id']][$value['unitPrice']])) {
                         $arrProduct[$value['product_id']][$value['unitPrice']]['quantity'] += $value['quantity'];
@@ -68,7 +71,7 @@ class OrderDetailModel extends TableBase {
         foreach ($arrProduct as $key => $value) {
             $arrProduct2[$key] = $this->productModel->getProductById($key);
         }
-        return [$arrProduct, count($arrProduct), $arrProduct2];
+        return [$arrProduct, $productNum, $arrProduct2];
     }
     
     public function getProductOrder () {

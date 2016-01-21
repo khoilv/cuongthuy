@@ -2,7 +2,7 @@
 /**
  * @author LinhNV
  * @version 1.00
- * @create 2016/01/212
+ * @create 2016/01/21
  */
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
@@ -16,6 +16,7 @@ class StaticController extends Controller {
     private static $PRODUCT_MAX = 25;
     
     public function __construct() {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->model = new StaticModel();
     }
     

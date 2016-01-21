@@ -96,11 +96,15 @@ class OrderModel extends TableBase {
         return $count;
     }
     
-    public function getArrOrderId ($monthFirstDay, $monthLastDay) {
+    public function getArrOrderId ($firstDay, $lastDay) {
         $table = DB::table($this->table);
         $table->select('id');
-        $table->where('order_date', '>', "$monthFirstDay 00:00:00");
-        $table->where('order_date', '<=', "$monthLastDay 23:59:59");
+        if ($firstDay) {
+            $table->where('order_date', '>=', "$firstDay 00:00:00");
+        }
+        if ($lastDay) {
+            $table->where('order_date', '<=', "$lastDay 23:59:59");
+        }
         $table->where('order_status', 3);
         $result = $table->get();
         $return = [];

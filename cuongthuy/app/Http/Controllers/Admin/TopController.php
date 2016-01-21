@@ -35,7 +35,7 @@ class TopController extends Controller {
         $countOrderToday = $this->orderModel->getCountOrderToday($today, $tomorow);
         
         //Revenue in this month
-        $arrId = $this->orderModel->getArrOrderId(date('Y:n').':01', date('Y:n').date('t'));
+        $arrId = $this->orderModel->getArrOrderId(date('Y:n').':01', date('Y:n:').date('t'));
         $curRevenue = $this->orderDetailModel->getOrderDetailByArrayId($arrId);
         
         //Revenue in last month

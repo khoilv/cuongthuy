@@ -140,7 +140,7 @@
                 <?php $linePrice = $value['quantity']*$value['unitPrice'] ?>
                 <?php $totalPrice += $linePrice; ?>
                 <tr class="menu">
-                    <td>{!!$arrProducts[$value['product_id']]['product_name']!!}</td>
+                    <td><a href="{!!Asset('admin/product/detail/'. $value['product_id'])!!}">{!!$arrProducts[$value['product_id']]['product_name']!!}</a></td>
                     <td>{!! Form::text('quantity['.$value['product_id'].']', isset($value['quantity'])? $value['quantity']:'',['style' => 'width:30px', 'class' => 'product_quantity']) !!}
                         @if ($errors->has('quantity['.$value['product_id'].']'))
                             <p style="color: red">{!! $errors->first('quantity['.$value['product_id'].']') !!}</p>

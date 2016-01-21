@@ -38,7 +38,7 @@ Route::group(array('middleware' => 'checkMaintenance'),function(){
 });
 Route::get('maintenance', 'Frontend\MaintenanceController@index');
 Route::any('admin/', 'Admin\LoginController@login');
-Route::get('admin//logout', 'Admin\LoginController@logout');
+Route::get('admin/logout', 'Admin\LoginController@logout');
 Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::get('/top','Admin\TopController@getIndex');
     Route::get('/product/index', 'Admin\ProductController@index');
@@ -59,4 +59,9 @@ Route::group(array('prefix'=>'admin','middleware' => 'checkLogin'),function(){
     Route::any('contact/index', 'Admin\ContactController@index');
     Route::get('contact/detail', 'Admin\ContactDetailController@getIndex');
     Route::any('customer/index', 'Admin\CustomerController@index');
+    Route::any('static/index', 'Admin\StaticController@index');
 });
+
+//Event::listen('illuminate.query', function($query) {
+//    var_dump($query);
+//});

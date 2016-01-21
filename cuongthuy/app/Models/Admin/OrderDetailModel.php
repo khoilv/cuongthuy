@@ -9,15 +9,18 @@
 namespace App\Models\Admin;
 
 use App\Models\TableBase;
+use App\Models\Admin\ProductModel;
 use DB;
 
 class OrderDetailModel extends TableBase {
 
     protected $table = 'orderdetail';
+    private $productModel; 
 
     public function __construct() {
         parent::__construct();
         $this->setTableName($this->table);
+        $this->productModel = new ProductModel();
     }
 
     public function getOrderDetailByOrderId($id) {
@@ -44,5 +47,31 @@ class OrderDetailModel extends TableBase {
         }
         
         return $revenue;
+    }
+    
+    public function getOrderProductDetail($arrOrderId) {
+        $arrProduct = $arrProduct2 = [];
+        foreach ($arrOrderId as $orderId) {
+            $arrOrDetail =  $this->getOrderDetailByOrderId($orderId);
+            foreach ($arrOrDetail as $value) {
+                if (isset($arrProduct[$value['product_id']])) {
+                    if (isset ($arrProduct[$value['product_id']][$value['unitPrice']])) {
+                        $arrProduct[$value['product_id']][$value['unitPrice']]['quantity'] += $value['quantity'];
+                    } else {
+                        $arrProduct[$value['product_id']][$value['unitPrice']]['quantity'] = $value['quantity'];
+                    }
+                } else {
+                    $arrProduct[$value['product_id']][$value['unitPrice']]['quantity'] = $value['quantity'];
+                }
+            }
+        }
+        foreach ($arrProduct as $key => $value) {
+            $arrProduct2[$key] = $this->productModel->getProductById($key);
+        }
+        return [$arrProduct, count($arrProduct), $arrProduct2];
+    }
+    
+    public function getProductOrder () {
+//        $this->productModel->getProductById();
     }
 }

@@ -37,7 +37,9 @@ $countCate = count($categories);
                     <?php $arrImg = explode(",", $product->product_other_image); ?>
                     @foreach($arrImg as $img)
                     <?php
-                        if (isset($img)) {
+                        $left = $top = 0;
+                        if (isset($img) && @getimagesize('public/images/upload/products/'.$img)) {
+                            dd ("chan vl");
                             $imgSize = getimagesize('public/images/upload/products/'.$img);
                             $left = (492-$imgSize[0])/2;
                             $top = (300-$imgSize[1])/2;

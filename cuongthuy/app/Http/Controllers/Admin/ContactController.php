@@ -13,7 +13,6 @@ use DateTime;
 class ContactController extends Controller {
     
     private $model;
-    private static $CONTACT_MAX = 25;
     
     public function __construct() {
         $this->model = new ContactModel();
@@ -44,7 +43,10 @@ class ContactController extends Controller {
         if (Input::has('contact_date_end')) {
             $option['arrWhereEnd'] = ['contact_datetime' => date_format(DateTime::createFromFormat('d/m/Y', $input['contact_date_end']), "Y:m:d")];
         }
-        $option['limit'] = $maxRec = self::$CONTACT_MAX;
+        
+        $input['limit'] = isset ($input['limit']) ? $input['limit'] : 25;
+        $option['limit'] = $maxRec = $input['limit'];
+        
         if (Input::has('page')) {
             $page = $input['page'];
             $option['offset'] = $option['limit']*($input['page'] - 1);

@@ -47,9 +47,9 @@ class MaintenanceController extends Controller {
             return redirect('admin/maintenance');
         }
         return view('Admin/maintenance', [
-            'end_date' => $end_date,
-            'start_date' => $start_date,
-            'message' => $message
+            'end_date'      => $end_date,
+            'start_date'    => $start_date,
+            'message'       => $message
         ]);
     }
 

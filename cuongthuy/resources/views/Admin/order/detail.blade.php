@@ -39,7 +39,9 @@
 <h2 id="page_midashi_02">Xem và chỉnh sửa thông tin đơn hàng</h2>
 <div id="bg_blue">
     <p class="mb15 big" style="color:red">
-        ※ Bạn có thể thay đổi thông tin đơn hàng sau đó click vào "Lưu đơn hàng" để lưu lại<br />
+        ※ Bạn có thể thay đổi thông tin đơn hàng sau đó click vào "Lưu đơn hàng" để lưu lại<br /> </p>
+    <p class="mb15 big"> Chú ý: Khi bạn thay đổi trạng thái đơn hàng sang "Đã xử lý xong" nghĩa là đã giao dịch thành công với khách hàng, <br />
+        số lượng sản phẩm đã bán sẽ tự động được cập nhật. <br />
     </p>
     @if(Session::has('msg_error'))
     <p class="alert_red_error mb10">{!!Session::get('msg_error')!!}</p>

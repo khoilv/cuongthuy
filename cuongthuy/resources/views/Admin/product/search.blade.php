@@ -1,3 +1,5 @@
+<?php use App\Lib\InitialDefine;
+?>
 @extends('Admin.layout')
 @section('stylesheets')
 <link rel="stylesheet" href="{!!Asset('public/css/admin/sub_page.css')!!}" type="text/css" />
@@ -84,6 +86,13 @@
                 @if ($errors->has('product_status'))<p class="error_comment">{!! $errors->first('product_status') !!}</p>@endif
             </td>
         </tr>
+        <tr class="menu">
+            <th>Số sản phẩm hiển thị</th>
+            <td colspan="3">
+                {!! Form::select('limit', InitialDefine::$arrLimit, isset($form['limit'])? $form['limit']:'') !!}
+                @if ($errors->has('limit'))<p style="color: red">{!! $errors->first('limit') !!}</p>@endif
+            </td>
+        </tr>
     </table>
     <div class="mt15">
         <input id="cmd" type="hidden" name="cmd" value=""/>
@@ -110,7 +119,7 @@
             @if (!empty($arrProductList))
             @foreach ($arrProductList as $key => $product)
             <tr class="table_list {!!$key % 2 == 0 ? 'bg_yellow' : ''!!}">
-                <td>{!!$product['product_code']!!}</td>
+                <td><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_code']!!}</a></td>
                 <td class="bold"><p class="alignC"><a href="{!!Asset('admin/product/detail/'. $product['id'])!!}">{!!$product['product_name']!!}</a></p></td>
                 <td>{!!(isset($category[$product['product_category']])) ? $category[$product['product_category']] : ''!!}</td>
                 <td>{!!$product['product_price']!!} đ</td>

@@ -1,6 +1,10 @@
 <?php
+
 namespace App\Models\Admin;
+
 use App\Models\TableBase;
+use DB;
+
 class ProductModel extends TableBase {
 
     protected $table = 'products';
@@ -9,8 +13,8 @@ class ProductModel extends TableBase {
         parent::__construct();
         $this->setTableName($this->table);
     }
-    
-    public function getProductById($id){
+
+    public function getProductById($id) {
         $options = array(
             'fields' => array('*'),
             'conditions' => array('id' => $id)
@@ -25,7 +29,6 @@ class ProductModel extends TableBase {
      * @param array $joinsArr
      * @return array
      */
-
     public function getProductList($whereArr, $limitArr) {
         $options = array(
             'fields' => array('id,product_code,product_name,product_category,product_price,product_status,product_quantity'),
@@ -41,12 +44,21 @@ class ProductModel extends TableBase {
      * @param array $joinsArr
      * @return int
      */
-    public function getCountResult($arrWhere){
+    public function getCountResult($arrWhere) {
         $option = array(
             'fields' => array('count(products.id) as count'),
             'conditions' => $arrWhere,
         );
-        $data =  $this->find('all', $option);
+        $data = $this->find('all', $option);
         return $data[0]['count'];
     }
+
+    public function updateProduct($arrUpdate) {
+        foreach ($arrUpdate as $key => $value) {
+            DB::table($this->table)
+                    ->where('id', $key)
+                    ->update($value);
+        }
+    }
+
 }

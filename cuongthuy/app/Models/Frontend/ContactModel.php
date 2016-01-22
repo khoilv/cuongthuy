@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Models\Frontend;
+
 use App\Models\TableBase;
+
 class ContactModel extends TableBase {
 
     protected $table = 'contact';
@@ -9,4 +12,5 @@ class ContactModel extends TableBase {
         parent::__construct();
         $this->setTableName($this->table);
     }
+
 }

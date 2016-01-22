@@ -20,27 +20,25 @@ use Session;
 use App\Lib\InitialDefine;
 use Imagick;
 use File;
-class ProductController extends Controller
-{
 
-    private $PRODUCT_MAX = 25;
+class ProductController extends Controller {
+
     private $productCls;
     private $categoryCls;
     protected $productForm;
 
-    public function __construct(ProductForm $productForm)
-    {
+    public function __construct(ProductForm $productForm) {
         $this->productCls = new ProductModel();
         $this->categoryCls = new CategoryModel();
         $this->productForm = $productForm;
         date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
-    public function index(){
+
+    public function index() {
         return view('Admin/product/index');
     }
 
-    public function detail($productId = '')
-    {
+    public function detail($productId = '') {
         $product = array();
         $category = array('' => 'Chọn loại sản phẩm') + $this->categoryCls->getCategoryName();
         $arrProductStatus = InitialDefine::$arrProductStatus;
@@ -59,22 +57,21 @@ class ProductController extends Controller
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
             if ($productId) {
-                    return $this->update($input, $product, $productId);
+                return $this->update($input, $product, $productId);
             } else {
                 return $this->insert($input);
             }
         }
         return view('Admin/product/detail', [
-                    'product' => $product,
-                    'category' => $category,
-                    'product_id' => $productId,
-                    'arrProductStatus' => $arrProductStatus,
-                    'arrProductSellStatus' => $arrProductSellStatus
-                ]);
+            'product' => $product,
+            'category' => $category,
+            'product_id' => $productId,
+            'arrProductStatus' => $arrProductStatus,
+            'arrProductSellStatus' => $arrProductSellStatus
+        ]);
     }
 
-    public function insert($input)
-    {
+    public function insert($input) {
         $destinationPath = 'public/images/upload/products';
         $input['product_sell_status'] = implode(',', $input['product_sell_status']);
         $product_other_image = '';
@@ -114,8 +111,7 @@ class ProductController extends Controller
         }
     }
 
-    public function update($input, $product, $productId)
-    {
+    public function update($input, $product, $productId) {
         $destinationPath = 'public/images/upload/products';
         $input['product_sell_status'] = implode(',', $input['product_sell_status']);
         $product_other_image = '';
@@ -124,8 +120,8 @@ class ProductController extends Controller
                 // Upload img
                 $extension = $input['product_image']->getClientOriginalExtension(); // getting image extension
                 $filename = 'product' . $productId . '.' . $extension;
-                $this ->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 186, 182);
-                $input['product_image'] = $filename; 
+                $this->uploadImage($_FILES[$key]['tmp_name'], $destinationPath . '/' . $filename, 186, 182);
+                $input['product_image'] = $filename;
             }
             if (strpos($key, 'product_other_image') !== false && isset($product['product_other_image'])) {
                 $image = explode('_', $key);
@@ -159,24 +155,25 @@ class ProductController extends Controller
             return Redirect::action('Admin\ProductController@detail', $productId);
         }
     }
-    public function delete(){
+
+    public function delete() {
         $result['error'] = false;
         $product_other_image = array();
-        if(Request::ajax()) {
+        if (Request::ajax()) {
             $data = Input::all();
             $product = $this->productCls->getProductById($data['product_id']);
             $product_other_image = explode(',', $product['product_other_image']);
             foreach ($product_other_image as $key => $val) {
-                $filename = public_path().'/images/upload/products/'. $val;
-                $imageThumb = public_path().'/images/upload/products/thumb_'. $val;
+                $filename = public_path() . '/images/upload/products/' . $val;
+                $imageThumb = public_path() . '/images/upload/products/thumb_' . $val;
                 if (File::exists($filename)) {
                     File::delete($filename);
                 }
                 if (File::exists($imageThumb)) {
                     File::delete($imageThumb);
                 }
-                if (File::exists(public_path().'/images/upload/products/'. $product['product_image'])) {
-                    File::delete(public_path().'/images/upload/products/'. $product['product_image']);
+                if (File::exists(public_path() . '/images/upload/products/' . $product['product_image'])) {
+                    File::delete(public_path() . '/images/upload/products/' . $product['product_image']);
                 }
             }
             if (!$this->productCls->delete(array('id' => $data['product_id']))) {
@@ -186,24 +183,24 @@ class ProductController extends Controller
         }
     }
 
-    public function uploadImage($fileUpload, $filePath, $cropWidth, $cropHeight){
+    public function uploadImage($fileUpload, $filePath, $cropWidth, $cropHeight) {
         $imagick = new Imagick($fileUpload);
         $width = $imagick->getImageWidth();
         $height = $imagick->getImageHeight();
         if ($width > $cropWidth && $height > $cropHeight) {
             if ($cropWidth > $cropHeight) {
                 $newWidth = $cropWidth;
-                $newHeight = $height/($width/$cropWidth);
+                $newHeight = $height / ($width / $cropWidth);
             } else {
-                $newWidth = $width/($height/$cropHeight);
+                $newWidth = $width / ($height / $cropHeight);
                 $newHeight = $cropHeight;
             }
-        } else if($width <= $cropWidth && $height > $cropHeight) {
-            $newWidth = $width/($height/$cropHeight);
+        } else if ($width <= $cropWidth && $height > $cropHeight) {
+            $newWidth = $width / ($height / $cropHeight);
             $newHeight = $cropHeight;
-        } else if($width > $cropWidth && $height <= $cropHeight) {
+        } else if ($width > $cropWidth && $height <= $cropHeight) {
             $newWidth = $cropWidth;
-            $newHeight = $height/($width/$cropWidth);
+            $newHeight = $height / ($width / $cropWidth);
         } else {
             $newWidth = $width;
             $newHeight = $height;
@@ -214,8 +211,7 @@ class ProductController extends Controller
         $imagick->destroy();
     }
 
-    public function search()
-    {
+    public function search() {
         $arrProductStatus = array('' => 'Chọn trạng thái') + InitialDefine::$arrProductStatus;
         $category = array('' => 'Chọn loại sản phẩm') + $this->categoryCls->getCategoryName();
         $arrWhere = array();
@@ -238,7 +234,9 @@ class ProductController extends Controller
             $page = Input::get('page');
         }
         $totalRecord = $this->productCls->getCountResult($arrWhere);
-        $maxRec = $this->PRODUCT_MAX;
+
+        $form['limit'] = isset($form['limit']) ? $form['limit'] : 25;
+        $maxRec = $form['limit'];
         $offset = ($page - 1) * $maxRec;
         $lastPage = ceil($totalRecord / $maxRec);
         $currentPage = $page;
@@ -259,7 +257,7 @@ class ProductController extends Controller
                 $strCSV.= "\r\n";
             }
             $strCSV = mb_convert_encoding($strCSV, 'UTF-16LE', "UTF-8");
-            $filename = 'product_data_' . date('YmdHis') . '.csv';
+            $filename = 'product_data_' . date('d_m_Y') . '.csv';
             $strFileName = mb_convert_encoding($filename, "UTF-8");
             $intLen = strlen($strCSV);
             header("Cache-Control: public");
@@ -272,16 +270,16 @@ class ProductController extends Controller
             exit;
         }
         return view('Admin.product.search', [
-                    'arrProductList' => $arrProductList,
-                    'category' => $category,
-                    'arrProductStatus' => $arrProductStatus,
-                    'form' => $form,
-                    'currentPage' => $currentPage,
-                    'lastPage' => $lastPage,
-                    'previousPage' => $previousPage,
-                    'nextPage' => $nextPage,
-                    'maxRec' => $maxRec
-                ]);
+            'arrProductList'    => $arrProductList,
+            'category'          => $category,
+            'arrProductStatus'  => $arrProductStatus,
+            'form'              => $form,
+            'currentPage'       => $currentPage,
+            'lastPage'          => $lastPage,
+            'previousPage'      => $previousPage,
+            'nextPage'          => $nextPage,
+            'maxRec'            => $maxRec
+        ]);
     }
 
 }

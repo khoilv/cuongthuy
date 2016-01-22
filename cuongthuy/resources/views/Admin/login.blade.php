@@ -2,7 +2,7 @@
 <html lang="ja">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Cương thuy</title>
+        <title>Mỹ Phẩm Cường Thủy</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <meta http-equiv="Content-Style-Type" content="text/css" />

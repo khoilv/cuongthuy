@@ -56,7 +56,9 @@
                 {!! Form::textarea('message', isset($message)? $message:'',['style' => 'width:550px;height:50px', 'class' => 'text']) !!}
                 @if ($errors->has('message'))<p class="error_comment">{!! $errors->first('message') !!}</p>@endif
                 <script>
-                    CKEDITOR.replace( 'message' );
+                    CKEDITOR.replace( 'message', {
+                                language: 'vi'
+                            });
                 </script>
             </td>
         </tr>

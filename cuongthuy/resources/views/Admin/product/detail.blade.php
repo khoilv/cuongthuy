@@ -130,7 +130,9 @@
                 {!! Form::textarea('product_description', isset($product['product_description'])? $product['product_description']:'',['style' => 'width:550px;height:150px', 'class' => 'text']) !!}
                 @if ($errors->has('product_description'))<p class="error_comment">{!! $errors->first('product_description') !!}</p>@endif
                 <script>
-                    CKEDITOR.replace( 'product_description' );
+                    CKEDITOR.replace( 'product_description', {
+                                language: 'vi'
+                            });
                 </script>
             </td>
         </tr>
@@ -175,6 +177,12 @@
                 <label>{!! Form::checkbox("product_sell_status[$key]", $key, (isset($product['product_sell_status']) && strpos($product['product_sell_status'], "$key") !== false)? $product['product_sell_status']:'') !!} {!!$val !!}</label>&nbsp;&nbsp;&nbsp;
                 @endforeach
                 @if ($errors->has('product_sell_status'))<p class="error_comment">{!! $errors->first('product_sell_status') !!}</p>@endif
+            </td>
+        </tr>
+        <tr class="menu">
+            <th>Số lượng đã bán</th>
+            <td colspan="2">
+                {!!$product['product_buy_count']!!}
             </td>
         </tr>
         @if ($product_id)

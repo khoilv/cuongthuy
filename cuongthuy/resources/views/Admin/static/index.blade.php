@@ -19,6 +19,10 @@
             timepicker:false,
             timepickerScrollbar:false
         });
+        $('#csv_button').click(function() {
+            $('#cmd').attr({value: "csv_download"});
+            $('#static_form').submit();
+        });
     });
 </script>
 <p id="pankuzu"><a href="../top">TOP</a> &gt; <a href="index">Thống kê tình hình kinh doanh</a></p>
@@ -29,14 +33,22 @@
         ※ Nhập ngày tháng để xem các thông số<br />
     </p>
     {!! Form::open(['method' => 'POST', 'url' => 'admin/static/index', 'id' => 'static_form', 'name' => 'form1']) !!}
+    <p id="csv_button">Lưu file CSV</p>
     <div class="clear"></div>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
             <th>Xem theo ngày</th>
             <td>
-                    Từ ngày <input type="text" name="start_date" value="{!!isset($input['start_date'])? $input['start_date']:''!!}" class="default_datetimepicker" readonly style='width:100px;'/> 
-                    Đến ngày <input type="text" name="end_date" class="default_datetimepicker" value="{!!isset($input['end_date'])? $input['end_date']:''!!}" readonly style='width:100px;'/>
-                    <a href="#" onClick="f=document.form1;f['start_date'].value='';f['end_date'].value='';">Xóa ngày tháng</a>
+                Từ ngày <input type="text" name="start_date" value="{!!isset($input['start_date'])? $input['start_date']:''!!}" class="default_datetimepicker" readonly style='width:100px;'/> 
+                Đến ngày <input type="text" name="end_date" class="default_datetimepicker" value="{!!isset($input['end_date'])? $input['end_date']:''!!}" readonly style='width:100px;'/>
+                <a href="#" onClick="f=document.form1;f['start_date'].value='';f['end_date'].value='';">Xóa ngày tháng</a>
+            </td>
+        </tr>
+        <tr class="menu">
+            <th>Số sản phẩm hiển thị</th>
+            <td>
+                {!! Form::select('limit', InitialDefine::$arrLimit, isset($input['limit'])? $input['limit']:'') !!}
+                @if ($errors->has('limit'))<p style="color: red">{!! $errors->first('limit') !!}</p>@endif
             </td>
         </tr>
     </table>
@@ -49,13 +61,20 @@
 </div>
 
 <div id="bg_blue" class="mt15">
-    <p class="mb15" style="color:red">※ Thống kê:</p>
+    <p class="mb15" style="color:red">※ Thống kê
+    @if(!empty($input['start_date']))
+        từ ngày {!!$input['start_date']!!}
+    @endif
+    @if(!empty($input['end_date']))
+        đến ngày {!!$input['end_date']!!}
+    @endif
+    :</p>
     <table boder="0" class="table_static">
         <thead>
            <tr class="menu">
                 <th>Doanh thu:</th>
-                <th>Số lượng đơn hàng đã xử lý: </th>
-                <th>Số lượng sản phẩm đã bán:</th>
+                <th>Số đơn hàng đã xử lý:</th>
+                <th>Số sản phẩm đã bán:</th>
             </tr>
         </thead>
         <tbody>
@@ -70,11 +89,12 @@
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <thead>
            <tr class="menu">
-            <th>Tên sản phẩm</th>
-            <th>Đơn giá (thời điểm mua hàng)</th>
-            <th>Số lượng đã bán</th>
-            <th>Đơn giá (hiện tại)</th>
-            <th>Thành tiền</th>
+            <th align="center">Tên sản phẩm</th>
+            <th align="center">Mã sản phẩm</th>
+            <th align="center">Đơn giá (thời điểm mua hàng)</th>
+            <th align="center">Số lượng đã bán</th>
+            <th align="center">Đơn giá (hiện tại)</th>
+            <th align="center">Thành tiền</th>
         </tr>
         </thead>
         <tbody>
@@ -85,22 +105,31 @@
                     <tr>
                         <?php $count++ ;?>
                             @if ($count == 1)
-                            <td rowspan="{!!count($value)!!}">
+                            <td rowspan="{!!count($value)!!}" align="center" class="bold">
                                 @if(isset ($product2[$key]['product_name']))
                                 <a href="{!!Asset('admin/product/detail/'. $key)!!}">
                                     {!!$product2[$key]['product_name']!!}
                                 </a>
                                 @else
-                                    <--Sản phẩm bị xóa hoặc không có giá-->
+                                    <--Sản phẩm bị xóa hoặc không có tên-->
+                                @endif
+                            </td>
+                            <td rowspan="{!!count($value)!!}" align="center">
+                                @if(isset ($product2[$key]['product_code']))
+                                <a href="{!!Asset('admin/product/detail/'. $key)!!}">
+                                    {!!$product2[$key]['product_code']!!}
+                                </a>
+                                @else
+                                    <--Sản phẩm bị xóa hoặc không có code-->
                                 @endif
                             </td>
                             @endif
-                            <td>{!!number_format ($key1,0,",",".")!!}</td>
-                            <td>{!!$value1['quantity']!!}</td>
+                            <td align="center">{!!number_format ($key1,0,",",".")!!}</td>
+                            <td align="center">{!!$value1['quantity']!!}</td>
                             @if ($count == 1)
-                            <td rowspan="{!!count($value)!!}" >{!!@isset ($product2[$key]['product_price']) ? number_format ($product2[$key]['product_price'],0,",","."): '<--Sản phẩm bị xóa hoặc không có giá-->'!!}</td>
+                            <td rowspan="{!!count($value)!!}" align="center">{!!@isset ($product2[$key]['product_price']) ? number_format ($product2[$key]['product_price'],0,",","."): '<--Sản phẩm bị xóa hoặc không có giá-->'!!}</td>
                             @endif
-                            <td>{!!number_format ($value1['quantity']*$key1,0,",",".")!!}</td>
+                            <td align="center">{!!number_format ($value1['quantity']*$key1,0,",",".")!!}</td>
                     </tr>
                     @endforeach
                 @endforeach
@@ -113,7 +142,6 @@
             @endif
         </tbody>
     </table>
-    <?php /*
     <div id="tab_area">
         <div id="page_tab">
             <?php if ($lastPage > 1){
@@ -139,6 +167,5 @@
         <p class="alignC mt10">（{!! $maxRec * ($currentPage -1)  !!}～{!! $maxRec * $currentPage  !!}）</p>
         @endif
     </div>
-    */ ?>
 </div>
 @endsection

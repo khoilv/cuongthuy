@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @author LinhNV
  * @version 1.00
  * @create 2015/10/9
  */
+
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
@@ -17,18 +19,18 @@ use Redirect;
 use DB;
 
 class CheckoutController extends Controller {
-    
+
     protected $billingForm;
-    
+
     public function __construct(BillingForm $billingForm) {
         $this->billingForm = $billingForm;
     }
-    
-    public function getIndex () {
+
+    public function getIndex() {
         return $this->getBilling();
     }
-    
-    public function getBilling () {
+
+    public function getBilling() {
         if (!CartController::getCart()) {
             return Redirect::to('cart');
         }
@@ -37,18 +39,18 @@ class CheckoutController extends Controller {
         } else if (Session::get('customer_email')) {
             $customerInfo = DB::table('customers')->where('customer_email', Session::get('customer_email'))->get();
             $billing = array(
-                'name'          => $customerInfo[0]->customer_name,
-                'telephone'     => $customerInfo[0]->customer_phone,
-                'email'         => $customerInfo[0]->customer_email,
-                'city'          => $customerInfo[0]->customer_city,
+                'name' => $customerInfo[0]->customer_name,
+                'telephone' => $customerInfo[0]->customer_phone,
+                'email' => $customerInfo[0]->customer_email,
+                'city' => $customerInfo[0]->customer_city,
             );
         }
         BaseController::$title = 'Thanh toán - Nhập thông tin';
-        
+
         return view('Frontend.checkout.billing', compact('billing'));
     }
-    
-    public function postBilling () {
+
+    public function postBilling() {
         if (Input::has('submit')) {
             $data = Input::except('_token');
             try {
@@ -56,35 +58,35 @@ class CheckoutController extends Controller {
             } catch (FormValidationException $e) {
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
-            
+
             Session::put('billing', $data);
             return Redirect::to('checkout/shipping');
-        } elseif (Input::has('reset')){
+        } elseif (Input::has('reset')) {
             Session::forget('billing');
             return view('Frontend.checkout.billing');
         }
     }
-    
-    public function getShipping () {
+
+    public function getShipping() {
         $billing = Session::get('billing');
         $shipping = Session::get('shipping');
         if (isset($billing['submit']) && $billing['submit'] && !empty(Session::get('cart'))) {
             BaseController::$title = 'Thanh toán - Chọn hình thức nhận hàng';
-            return view('Frontend.checkout.shipping', compact('shipping')); 
+            return view('Frontend.checkout.shipping', compact('shipping'));
         } else {
             return Redirect::to('checkout/billing');
         }
     }
-    
-    public function postShipping () {
+
+    public function postShipping() {
         if (Input::has('submit')) {
             $data = Input::except('_token');
             Session::put('shipping', $data);
         }
         return Redirect::to('checkout/confirm');
     }
-    
-    public function getConfirm () {
+
+    public function getConfirm() {
         $shipping = Session::get('shipping');
         if (isset($shipping['submit']) && $shipping['submit'] && !empty(Session::get('cart'))) {
             $billing = Session::get('billing');
@@ -96,23 +98,23 @@ class CheckoutController extends Controller {
             return Redirect::to('checkout/shipping');
         }
     }
-    
-    public function postConfirm () {
+
+    public function postConfirm() {
         Session::put('buy', Session::get('cart'));
         $checkOutObject = new CheckoutModel;
         $result = $checkOutObject->InsertOrder();
         $shipping = Session::get('shipping');
-        
+
         if ($result) {
             //Clear session
             Session::forget('billing');
             Session::forget('shipping');
             Session::forget('cart');
             Session::forget('buy');
-            
+
             BaseController::$title = 'Thanh toán - Đặt hàng thành công';
             return view('Frontend.checkout.success_order', compact('shipping'));
         }
     }
-    
+
 }

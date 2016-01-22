@@ -51,7 +51,7 @@
             @if (strpos($_SERVER['REQUEST_URI'], 'order' ))
             <p id="left_link_03_on">Quản lí đơn hàng</p>
             @else
-            <p id="left_link_03"><a href="{!!Asset('admin/order/index')!!}">Quản lí đơn hàng</a></p>
+            <p id="left_link_03"><a href="{!!Asset('admin/order/search')!!}">Quản lí đơn hàng</a></p>
             @endif
             @if (strpos($_SERVER['REQUEST_URI'], 'category' ))
             <p id="left_link_04_on">Quản lí danh mục</p>

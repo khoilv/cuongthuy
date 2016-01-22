@@ -14,7 +14,6 @@ use DateTime;
 class OrderController extends Controller {
     
     private $model;
-    private static $ORDER_MAX = 25;
     
     public function __construct() {
         $this->model = new OrderModel();
@@ -55,7 +54,10 @@ class OrderController extends Controller {
         if (Input::has('customer_id')) {
             $option['arrWhere'][] = ['customer_id' => $input['customer_id']];
         }
-        $option['limit'] = $maxRec = self::$ORDER_MAX;
+        
+        $input['limit'] = isset ($input['limit']) ? $input['limit'] : 25;
+        $option['limit'] = $maxRec = $input['limit'];
+        
         if (Input::has('page')) {
             $page = $input['page'];
             $option['offset'] = $option['limit']*($input['page'] - 1);
@@ -103,7 +105,7 @@ class OrderController extends Controller {
             $strCSV.= "\r\n";
         }
         $strCSV = mb_convert_encoding($strCSV, 'UTF-16LE', "UTF-8");
-        $filename = 'order_data_' . date('YmdHis') . '.csv';
+        $filename = 'order_data_' . date('d_m_Y') . '.csv';
         $strFileName = mb_convert_encoding($filename, "UTF-8");
         $intLen = strlen($strCSV);
         header("Cache-Control: public");

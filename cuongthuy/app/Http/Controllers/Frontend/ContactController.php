@@ -1,10 +1,13 @@
 <?php
+
 /**
  * @author LanNT
  * @version 1.00
  * @create 2015/10/10
  */
+
 namespace App\Http\Controllers\Frontend;
+
 use App\Http\Controllers\Controller;
 use App\Forms\ContactForm;
 use App\Forms\FormValidationException;
@@ -13,8 +16,9 @@ use Input;
 use Request;
 use Redirect;
 use Session;
+
 class ContactController extends Controller {
-    
+
     protected $contactForm;
 
     public function __construct(ContactForm $contactForm) {
@@ -22,8 +26,8 @@ class ContactController extends Controller {
         $this->contactForm = $contactForm;
     }
 
-     public  function getContact(){
-         if (Request::isMethod('post')){
+    public function getContact() {
+        if (Request::isMethod('post')) {
             $input = Input::except('_token');
             try {
                 // Validate
@@ -32,10 +36,11 @@ class ContactController extends Controller {
                 return Redirect::back()->withInput()->withErrors($e->getErrors());
             }
             $contactModel = new ContactModel();
-            if ($contactModel->insert($input)){
+            if ($contactModel->insert($input)) {
                 Session::flash('success', 'Cảm ơn bạn đã gửi ý kiến đóng góp cho chúng tôi!');
             }
         }
-         return view('Frontend.contact');
-     }
+        return view('Frontend.contact');
+    }
+
 }

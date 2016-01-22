@@ -11,14 +11,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Session;
 use DB;
-use Input;
 use App\Models\Frontend\ProductModel;
 
-class FrameRelativeProductsController extends Controller
-{
+class FrameRelativeProductsController extends Controller {
 
-    public static function getDetailRelativeProducts($categoryId, $productId)
-    {
+    public static function getDetailRelativeProducts($categoryId, $productId) {
         $productCls = new ProductModel();
         $whereArr = array(
             'product_category' => $categoryId,
@@ -29,8 +26,8 @@ class FrameRelativeProductsController extends Controller
         $relativeProducts = $productCls->getProductList($whereArr, $limitArr, $joinsArr);
         if (count($relativeProducts) < 10) {
             $arrPid = array($productId);
-            foreach ($relativeProducts as $key => $val){
-                array_push($arrPid,$val['id']);
+            foreach ($relativeProducts as $key => $val) {
+                array_push($arrPid, $val['id']);
             }
             $productAdding = 10 - count($relativeProducts);
             $parrentCategory = DB::table('categories')->where('id', $categoryId)->pluck('category_parent');
@@ -41,7 +38,7 @@ class FrameRelativeProductsController extends Controller
                         'type' => 'LEFT',
                         'conditions' => 'products.product_category = categories.id'
                     )
-               );
+                );
                 $whereArr = array(
                     'categories.category_parent' => $parrentCategory,
                     'products.id NOT IN' => $arrPid
@@ -56,8 +53,7 @@ class FrameRelativeProductsController extends Controller
         return view('Frontend.relative_products', compact('relativeProducts'));
     }
 
-    public static function getCartRelativeProducts()
-    {
+    public static function getCartRelativeProducts() {
         $arrCart = Session::get('cart');
         $relativeProducts = array();
         if (!empty($arrCart)) {
@@ -87,7 +83,7 @@ class FrameRelativeProductsController extends Controller
                 }
             }
         }
-        if (!empty($relativeProducts)){
+        if (!empty($relativeProducts)) {
             return view('Frontend.relative_products', compact('relativeProducts'));
         }
     }

@@ -1,21 +1,24 @@
 <?php
+
 /**
  * @author LinhNV
  * @version 1.00
  * @create 2015/10/20
  */
+
 namespace App\Http\Controllers\Frontend;
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\RatingController;
 use Input;
 use DB;
-    
+
 class DetailController extends Controller {
-    
-    public function getIndex () {
+
+    public function getIndex() {
         if (Input::has('product_id')) {
             $product = DB::table('products')->where('id', Input::get('product_id'))->get();
-            if (empty ($product)) {
+            if (empty($product)) {
                 abort(404);
             }
             $product = $product[0];
@@ -23,19 +26,19 @@ class DetailController extends Controller {
             //Get breadcrumbs
             $categoriesTmp = DB::table('categories')->where('id', $product->product_category)->get();
             $categories = [];
-            if(!empty($categoriesTmp)) {
-            $categories[0] = $categoriesTmp[0];
+            if (!empty($categoriesTmp)) {
+                $categories[0] = $categoriesTmp[0];
                 $i = 1;
-                while ($categories[$i-1]->category_parent) {
+                while ($categories[$i - 1]->category_parent) {
                     //Get parrent categories
-                    $categoriesTmp = DB::table('categories')->where('id', $categories[$i-1]->category_parent)->get();
+                    $categoriesTmp = DB::table('categories')->where('id', $categories[$i - 1]->category_parent)->get();
                     if ($categoriesTmp[0]->id) {
                         $categories[$i] = $categoriesTmp[0];
                     }
                     $i++;
                 }
             }
-            
+
             //Product rating
             $rating = new RatingController;
             $average = $rating->getRating();
@@ -44,4 +47,5 @@ class DetailController extends Controller {
         }
         abort(404);
     }
+
 }

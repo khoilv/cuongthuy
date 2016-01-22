@@ -15,18 +15,21 @@ use App\Forms\FormValidationException;
 use Request;
 use Redirect;
 use Session;
-class BannerController extends Controller
-{
+
+class BannerController extends Controller {
+
     private $bannerCls;
     protected $bannerForm;
-    public function __construct(BannerForm $bannerForm)
-    {
+
+    public function __construct(BannerForm $bannerForm) {
         $this->bannerCls = new BannerModel();
         $this->bannerForm = $bannerForm;
     }
-    public function index(){
+
+    public function index() {
         return view('Admin/banner/index');
     }
+
     public function detail($id = '') {
         $banner = array();
         $arrBannerStatus = array(
@@ -47,7 +50,7 @@ class BannerController extends Controller
             }
             $destinationPath = 'public/images/upload/banner';
             if ($id) {
-                 if (isset($input['banner_image_path'])) {
+                if (isset($input['banner_image_path'])) {
                     $error = $this->checkSizeImage($_FILES['banner_image_path']['tmp_name']);
                     if ($error) {
                         return Redirect::back()->withInput()->withErrors($error);
@@ -82,30 +85,31 @@ class BannerController extends Controller
                 }
             }
         }
-        return view('Admin/banner/detail',[
-            'banner' => $banner,
-            'arrBannerStatus' => $arrBannerStatus
+        return view('Admin/banner/detail', [
+            'banner'            => $banner,
+            'arrBannerStatus'   => $arrBannerStatus
         ]);
     }
-    
-    public function listBanner(){
+
+    public function listBanner() {
         $banners = $this->bannerCls->getBannerList();
-        return view('Admin/banner/list',[
+        return view('Admin/banner/list', [
             'banners' => $banners
         ]);
     }
-    
-    public function checkSizeImage($image){
+
+    public function checkSizeImage($image) {
         $error = array();
         list($width, $height, $type) = @getimagesize($image);
-        if ($width  != 1024 ) {
-             $error['banner_image_path'] = 'Kích thước chiều rộng ảnh không đúng';
-             return $error;
+        if ($width != 1024) {
+            $error['banner_image_path'] = 'Kích thước chiều rộng ảnh không đúng';
+            return $error;
         }
-        if ($height != 289 ) {
+        if ($height != 289) {
             $error['banner_image_path'] = 'Kích thước chiều dài ảnh không đúng';
             return $error;
         }
         return false;
     }
+
 }

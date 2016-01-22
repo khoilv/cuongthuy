@@ -12,11 +12,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Frontend\CategoryModel;
 
 class FrameCategoryListController extends Controller {
-    
+
     public static function getList() {
         $model = new CategoryModel();
         $categories = $model->getData();
-        
+
         return view('Frontend.category_list', compact('categories'));
     }
+
 }

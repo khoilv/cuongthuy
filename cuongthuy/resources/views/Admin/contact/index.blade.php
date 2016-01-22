@@ -73,6 +73,13 @@
                 @if ($errors->has('contact_email'))<p style="color: red">{!! $errors->first('contact_email') !!}</p>@endif
             </td>
         </tr>
+        <tr class="menu">
+            <th>Số liên hệ hiển thị</th>
+            <td colspan="3">
+                {!! Form::select('limit', InitialDefine::$arrLimit, isset($input['limit'])? $input['limit']:'') !!}
+                @if ($errors->has('limit'))<p style="color: red">{!! $errors->first('limit') !!}</p>@endif
+            </td>
+        </tr>
     </table>
     <div class="mt15">
         <input id="cmd" type="hidden" name="cmd" value=""/>

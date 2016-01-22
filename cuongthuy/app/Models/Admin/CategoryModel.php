@@ -4,16 +4,14 @@ namespace App\Models\Admin;
 
 use App\Models\TableBase;
 
-class CategoryModel extends TableBase
-{
+class CategoryModel extends TableBase {
 
     protected $table = 'categories';
     protected $parentList = array();
     protected $childList = array();
     protected $data = array();
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->setTableName($this->table);
         $options = array(
@@ -35,11 +33,10 @@ class CategoryModel extends TableBase
      * Get category parrent
      * @return array $this->parentList
      */
-    public function getParentList()
-    {
+    public function getParentList() {
         $arrParent = array();
-        foreach ($this->data as $key => $val){
-            if ($val['category_parent'] !== 0 && isset($this->parentList[$val['category_parent']])){
+        foreach ($this->data as $key => $val) {
+            if ($val['category_parent'] !== 0 && isset($this->parentList[$val['category_parent']])) {
                 $arrParent[$key] = $val;
             }
         }
@@ -50,23 +47,24 @@ class CategoryModel extends TableBase
      * Get category chid
      * @return array $this->childList 
      */
-    public function getChildList()
-    {
+    public function getChildList() {
         return $this->childList;
     }
 
-    public function getCategoryName()
-    {
+    public function getCategoryName() {
         $categoryName = array();
         foreach ($this->data as $key => $val) {
             $categoryName[$key] = $val['category_name'];
         }
         return $categoryName;
     }
-    public function getCategoryNameById($id){
+
+    public function getCategoryNameById($id) {
         return $this->data[$id]['category_name'];
     }
-    public function getParentIdById($id){
+
+    public function getParentIdById($id) {
         return $this->data[$id]['category_parent'];
     }
+
 }

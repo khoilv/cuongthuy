@@ -34,6 +34,13 @@ class InitialDefine {
         3 => 'Sản phẩm nổi bật'
     );
     
+    public static $arrLimit = array(
+        25  => '25',
+        50  => '50',
+        100 => '100',
+        500 => '500',
+    );
+    
     public static $arrCity = array (
         1 => 'Hà Nội',
         2 => 'TP HCM',

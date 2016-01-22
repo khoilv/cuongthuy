@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Models\Admin;
+
 use App\Models\TableBase;
+
 class BannerModel extends TableBase {
 
     protected $table = 'banner';
@@ -14,14 +17,13 @@ class BannerModel extends TableBase {
      * Get list banner
      * @return array
      */
-    
-     public function getBannerList() {
+    public function getBannerList() {
         $options = array(
             'fields' => array('*')
         );
         return $this->find('all', $options);
     }
-    
+
     public function getBannerById($id) {
         $options = array(
             'fields' => array('*'),
@@ -31,4 +33,5 @@ class BannerModel extends TableBase {
         );
         return $this->find('first', $options);
     }
+
 }

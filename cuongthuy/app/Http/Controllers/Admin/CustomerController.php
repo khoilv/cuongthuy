@@ -12,7 +12,6 @@ use Input;
 class CustomerController extends Controller {
     
     private $model;
-    private static $CUSTOMER_MAX = 25;
     
     public function __construct() {
         $this->model = new CustomerModel();
@@ -36,7 +35,9 @@ class CustomerController extends Controller {
         if (Input::has('customer_code')) {
             $option['arrWhere'][] = ['customer_code' => $input['customer_code']];
         }
-        $option['limit'] = $maxRec = self::$CUSTOMER_MAX;
+        $input['limit'] = isset ($input['limit']) ? $input['limit'] : 25;
+        $option['limit'] = $maxRec = $input['limit'];
+        
         if (Input::has('page')) {
             $page = $input['page'];
             $option['offset'] = $option['limit']*($input['page'] - 1);
@@ -50,7 +51,7 @@ class CustomerController extends Controller {
         $previousPage = $page > 1 ? $page - 1 : 1;
         $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
         return view('Admin.customer.index', [
-                    'customers'      => $customers,
+                    'customers'     => $customers,
                     'input'         => $input,
                     'lastPage'      => $lastPage,
                     'currentPage'   => $currentPage,

@@ -17,18 +17,15 @@ use Session;
 use Cache;
 use Redirect;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
 
     protected $loginForm;
 
-    public function __construct(LoginForm $loginForm)
-    {
+    public function __construct(LoginForm $loginForm) {
         $this->loginForm = $loginForm;
     }
 
-    public function login()
-    {
+    public function login() {
         $userModel = new UserModel();
         $username = '';
         $password = '';
@@ -64,15 +61,17 @@ class LoginController extends Controller
             }
             return Redirect::action('Admin\TopController@getIndex');
         }
-        return view('Admin/login',[
+        return view('Admin/login', [
             'username' => $username,
             'password' => $password,
             'remember' => $remember
         ]);
     }
-    public function logout(){
+
+    public function logout() {
         Session::forget('username');
         Session::forget('user_id');
         return Redirect::action('Admin\LoginController@login');
     }
+
 }

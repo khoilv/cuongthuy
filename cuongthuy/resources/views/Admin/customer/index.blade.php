@@ -53,6 +53,13 @@
                 @if ($errors->has('customer_code'))<p style="color: red">{!! $errors->first('customer_code') !!}</p>@endif
             </td>
         </tr>
+        <tr class="menu">
+            <th>Số khách hàng hiển thị</th>
+            <td>
+                {!! Form::select('limit', InitialDefine::$arrLimit, isset($input['limit'])? $input['limit']:'') !!}
+                @if ($errors->has('limit'))<p style="color: red">{!! $errors->first('limit') !!}</p>@endif
+            </td>
+        </tr>
     </table>
     <div class="mt15">
         <input id="cmd" type="hidden" name="cmd" value=""/>

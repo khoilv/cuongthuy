@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Models\Frontend;
+
 use App\Models\TableBase;
+
 class BannerModel extends TableBase {
 
     protected $table = 'banner';
@@ -17,15 +20,15 @@ class BannerModel extends TableBase {
      * Get list banner
      * @return array
      */
-    
-     public function getBannerList() {
+    public function getBannerList() {
         $options = array(
             'fields' => array('*'),
             'conditions' => array(
                 'banner_status' => 1
-                ),
-            'limit'  => array($this->BANNER_MAX)
+            ),
+            'limit' => array($this->BANNER_MAX)
         );
         return $this->find('all', $options);
     }
+
 }

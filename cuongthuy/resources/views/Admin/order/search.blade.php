@@ -83,6 +83,13 @@ use App\Http\Controllers\Controller\Admin\OrderController;
                 @if ($errors->has('order_phone'))<p style="color: red">{!! $errors->first('order_phone') !!}</p>@endif
             </td>
         </tr>
+        <tr class="menu">
+            <th>Số đơn hàng hiển thị</th>
+            <td colspan="3">
+                {!! Form::select('limit', InitialDefine::$arrLimit, isset($input['limit'])? $input['limit']:'') !!}
+                @if ($errors->has('limit'))<p style="color: red">{!! $errors->first('limit') !!}</p>@endif
+            </td>
+        </tr>
     </table>
     <div class="mt15">
         <input id="cmd" type="hidden" name="cmd" value=""/>

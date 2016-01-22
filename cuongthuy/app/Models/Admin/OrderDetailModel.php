@@ -15,7 +15,7 @@ use DB;
 class OrderDetailModel extends TableBase {
 
     protected $table = 'orderdetail';
-    private $productModel; 
+    private $productModel;
 
     public function __construct() {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -33,11 +33,11 @@ class OrderDetailModel extends TableBase {
 
         return ($result);
     }
-    
+
     public function deleteOrderDetail($id) {
         DB::table($this->table)->where('id', $id)->delete();
     }
-    
+
     public function getOrderDetailByArrayId($arrId) {
         $revenue = 0;
         foreach ($arrId as $id) {
@@ -46,19 +46,19 @@ class OrderDetailModel extends TableBase {
                 $revenue += $value['unitPrice'] * $value['quantity'];
             }
         }
-        
+
         return $revenue;
     }
-    
+
     public function getOrderProductDetail($arrOrderId) {
         $arrProduct = $arrProduct2 = [];
         $productNum = 0;
         foreach ($arrOrderId as $orderId) {
-            $arrOrDetail =  $this->getOrderDetailByOrderId($orderId);
+            $arrOrDetail = $this->getOrderDetailByOrderId($orderId);
             foreach ($arrOrDetail as $value) {
                 $productNum += $value['quantity'];
                 if (isset($arrProduct[$value['product_id']])) {
-                    if (isset ($arrProduct[$value['product_id']][$value['unitPrice']])) {
+                    if (isset($arrProduct[$value['product_id']][$value['unitPrice']])) {
                         $arrProduct[$value['product_id']][$value['unitPrice']]['quantity'] += $value['quantity'];
                     } else {
                         $arrProduct[$value['product_id']][$value['unitPrice']]['quantity'] = $value['quantity'];
@@ -73,8 +73,5 @@ class OrderDetailModel extends TableBase {
         }
         return [$arrProduct, $productNum, $arrProduct2];
     }
-    
-    public function getProductOrder () {
-//        $this->productModel->getProductById();
-    }
+
 }

@@ -43,37 +43,37 @@
             @else
             <p id="left_link_01"><a href="{!!Asset('admin/top')!!}">Danh mục quản lí</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'product' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/product' ))
             <p id="left_link_02_on">Quản lí sản phẩm</p>
             @else
             <p id="left_link_02"><a href="{!!Asset('admin/product/index')!!}">Quản lí sản phẩm</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'order' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/order' ))
             <p id="left_link_03_on">Quản lí đơn hàng</p>
             @else
             <p id="left_link_03"><a href="{!!Asset('admin/order/search')!!}">Quản lí đơn hàng</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'category' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/category' ))
             <p id="left_link_04_on">Quản lí danh mục</p>
             @else
             <p id="left_link_04"><a href="{!!Asset('admin/category/index')!!}">Quản lí danh mục</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'customer' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/customer' ))
             <p id="left_link_05_on">Quản lí khách hàng</p>
             @else
             <p id="left_link_05"><a href="{!!Asset('admin/customer/index')!!}">Quản lí khách hàng</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'contact' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/contact' ))
             <p id="left_link_06_on">Liên hệ từ khách hàng</p>
             @else
             <p id="left_link_06"><a href="{!!Asset('admin/contact/index')!!}">Liên hệ từ khách hàng</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'banner' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/banner' ))
             <p id="left_link_07_on">Quản lí banner</p>
             @else
             <p id="left_link_07"><a href="{!!Asset('admin/banner/index')!!}">Quản lí banner</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'maintenance' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/maintenance' ))
             <p id="left_link_07_on">Bảo trì hệ thống</p>
             @else
             <p id="left_link_07"><a href="{!!Asset('admin/maintenance')!!}">Bảo trì hệ thống</a></p>
@@ -83,12 +83,12 @@
             @else
             <p id="left_link_08"><a href="{!!Asset('admin/password/change')!!}">Đổi mật khẩu</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'chat' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/chat' ))
             <p id="left_link_08_on">Quản lý chat</p>
             @else
             <p id="left_link_08"><a href="{!!Asset('admin/chat/index')!!}">Quản lý chat</a></p>
             @endif
-            @if (strpos($_SERVER['REQUEST_URI'], 'static' ))
+            @if (strpos($_SERVER['REQUEST_URI'], 'admin/static' ))
             <p id="left_link_03_on">Thống kê</p>
             @else
             <p id="left_link_03"><a href="{!!Asset('admin/static/index')!!}">Thống kê</a></p>

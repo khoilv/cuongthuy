@@ -148,9 +148,13 @@
             <th><span class="color_red"></span>Giá sản phẩm khi đã giảm giá</th>
             <td colspan="2">
                 <p><span class="color_blue bold ml30">
-                        ※Giá sản phẩm khi đã giảm giá: là giá của sản phẩm trước khi được sale off<br />
-                        ※ Nếu sản phẩm không giảm giá thì không cần nhập
-                </span></p>
+                    ※Giá sản phẩm khi đã giảm giá: là giá của sản phẩm trước khi được sale off
+                    </span>
+                </p>
+                <p><span class="color_blue bold ml30">
+                    ※Nếu sản phẩm không giảm giá thì không cần nhập
+                    </span>
+                </p>
                 {!! Form::text('product_discount_price', isset($product['product_discount_price'])? $product['product_discount_price']:'',['style' => 'width:200px', 'class' => 'text']) !!} VNĐ
                 @if ($errors->has('product_discount_price'))<p class="error_comment">{!! $errors->first('product_discount_price') !!}</p>@endif
             </td>
@@ -179,13 +183,13 @@
                 @if ($errors->has('product_sell_status'))<p class="error_comment">{!! $errors->first('product_sell_status') !!}</p>@endif
             </td>
         </tr>
+        @if ($product_id)
         <tr class="menu">
             <th>Số lượng đã bán</th>
             <td colspan="2">
                 {!!$product['product_buy_count']!!}
             </td>
         </tr>
-        @if ($product_id)
         <tr class="menu">
             <th>Ngày sửa đổi sản phẩm lần cuối</th>
             <td colspan="2">

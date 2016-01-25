@@ -39,7 +39,6 @@ $countCate = count($categories);
                     <?php
                         $left = $top = 0;
                         if (isset($img) && @getimagesize('public/images/upload/products/'.$img)) {
-                            dd ("chan vl");
                             $imgSize = getimagesize('public/images/upload/products/'.$img);
                             $left = (492-$imgSize[0])/2;
                             $top = (300-$imgSize[1])/2;
@@ -96,7 +95,7 @@ $countCate = count($categories);
             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product->id))!!}" ><button></button></a> 
             <div class="clear"></div>                  
         </div> 
-        <div class="clear"></div>                
+        <div class="clear"></div>
     </div><!-- end detail content 1-->
     <div class="clear"></div>
     <div class="detail_c2">

@@ -499,7 +499,6 @@ body > header{    border-bottom: 2px solid #D91D24;}
 }
 	.list_button li{
 		float:left;
-		margin-left:20px;
 	}	
 	.list_button li button{
 		padding:7px 20px;
@@ -548,59 +547,69 @@ body > header{    border-bottom: 2px solid #D91D24;}
 	}
 	
 /*---------------- Cart page --------------------*/
-.cart_page,.cart_page2{
+.cart_page{
 	margin-top:15px;
 }	
-.cart_page table,.cart_page2 table{
+.cart_page table{
 	width:100%;
 }
-	.cart_page table,.cart_page table th,.cart_page table tr,.cart_page table td,
-	.cart_page2 table,.cart_page2 table th,.cart_page2 table tr,.cart_page2 table td{
+	.cart_page table,.cart_page table th,.cart_page table tr,.cart_page table td{
 		border-collapse:collapse;
 		border:none;
 	}
-	.cart_page table td,.cart_page2 table td{
+	.cart_page table td{
 		text-align:center;
 	}
-	.cart_page table thead,.cart_page2 table thead{
+	.cart_page table thead{
 		background-color:#38b54a;
 	}
-	.cart_page table thead th,.cart_page2 table thead th{
+	.cart_page table thead th{
 		padding: 10px 0;
 		color:#fff;
 	}
 	.cart_page table tbody input{
 		width:50px;
 	}	
-	.cart_page table tbody tr,.cart_page table tbody td,
-	.cart_page2 table tbody tr,.cart_page2 table tbody td{
+	.cart_page table tbody tr,.cart_page table tbody td{
 		padding:10px 0;
 	}
 		.cart_page table tbody tr > td:nth-child(5){
 			width:17%;
 		}
-		.cart_page table tbody img,.cart_page2 table tbody img{
+		.cart_page table tbody img{
 			border:1px solid #ccc;
 			width:90%
 		}
-		.cart_page table tbody button,.cart_page2 table tbody button{
-			width:25px;
-			height:25px;
-			background:url(../images/icon16.png) no-repeat center center;
+		.cart_page table tbody button,.add_cart2{
+			width:30px;
+			height:30px;
 			border:none;
 			cursor:pointer;
 		}
-	.cart_page table tbody tr:nth-child(odd),.cart_page2 table tbody tr:nth-child(odd){
+		.cart_page table tbody button{
+			background:url(../images/icon16.png) no-repeat center center;
+		}
+		.add_cart2{
+			background:url(../images/icon23.png) no-repeat center center;
+			display:block;
+			background-size:100%;
+		}
+	.cart_page table tbody tr:nth-child(odd){
 		background-color:#f3fbf4;
 	}
 	.cart_page table tbody tr td:nth-child(3){
 		width:25%;
 	}
-	.cart_page2 table tr td:nth-child(2){
-		width:30%;
-	}
-	.cart_page2 table tr td:nth-child(4){
-		width:15%;
+#myorder table button{
+	background:url(../images/icon13.png) no-repeat center center;
+	background-size:18px;
+}	
+#myorder table tbody tr td:nth-child(3), #myorder table tbody tr > td:nth-child(5),
+#myorder_detail table tbody tr td:nth-child(3), #myorder_detail table tbody tr > td:nth-child(5){
+	width:auto !important;
+}
+	#myorder_detail table tbody tr td:nth-child(1){
+		width:12% !important;
 	}
 .cart_c2 {
 	margin:20px 0;

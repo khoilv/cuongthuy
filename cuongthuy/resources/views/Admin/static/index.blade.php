@@ -135,7 +135,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         <p class='alignC'>Không có sản phẩm nào được bán trong giai đoạn này</p>
                     </td>
                 <tr>

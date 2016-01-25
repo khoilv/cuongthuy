@@ -3,6 +3,7 @@
 namespace App\Models\Frontend;
 
 use App\Models\TableBase;
+use DB;
 
 class ProductModel extends TableBase {
 
@@ -63,6 +64,14 @@ class ProductModel extends TableBase {
         $option['conditions']['product_display'] = 1;
         $data = $this->find('all', $option);
         return $data[0]['count'];
+    }
+    
+    public function getProductById ($id) {
+        $table = DB::table($this->table)
+                ->select('*')
+                ->where('id', $id)
+                ->first();
+        return $table;
     }
 
 }

@@ -33,7 +33,7 @@
                     <div>
                         <a href="#"><img src="{!!Asset('public/images/upload/products/'.$product['product_image'])!!}"></a>
                         <div>
-                            <p>Giao sản phẩm miễ phí tại Hà Nội</p>
+                            <p>Giao sản phẩm miễn phí tại Hà Nội</p>
                             <a href="{!!action('Frontend\CartController@addCart', array('product_id' => $product['id']))!!}" title="Mua sản phẩm này">Mua</a>
                             <button class="add_to_cart" title="Thêm vào giỏ"></button>
                             <span><a href="{!!action('Frontend\DetailController@getIndex', array('product_id' => $product['id']))!!}" class="todetail"></a></span>

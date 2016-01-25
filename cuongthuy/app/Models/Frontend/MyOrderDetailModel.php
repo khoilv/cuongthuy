@@ -26,20 +26,21 @@ class MyOrderDetailModel {
                 ->first();
         return (array) $table;
     }
-    
-    public function getOrderDetail ($order_id) {
+
+    public function getOrderDetail($order_id) {
         $table = DB::table($this->table2)
                 ->select('*')
                 ->where('order_id', $order_id)
                 ->get();
         return $table;
     }
-    
-    public function getOrderByCustomer ($customerId) {
+
+    public function getOrderByCustomer($customerId) {
         $table = DB::table($this->table1)
                 ->select('id')
                 ->where('customer_id', $customerId)
                 ->get();
         return $table;
     }
+
 }

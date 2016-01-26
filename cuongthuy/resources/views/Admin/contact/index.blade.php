@@ -19,6 +19,7 @@
             $('#contact_form').submit();
         });
         
+        jQuery.datetimepicker.setLocale('vi');
         $('.default_datetimepicker').datetimepicker({
             format:'d/m/Y',
             formatDate:'d.m.Y',

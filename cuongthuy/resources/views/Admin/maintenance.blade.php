@@ -12,6 +12,8 @@
         $('#button').click(function() {
             $('#maintenance_form').submit();
         });
+        
+        jQuery.datetimepicker.setLocale('vi');
         $('#start_date').datetimepicker();
         $('#end_date').datetimepicker();
     });

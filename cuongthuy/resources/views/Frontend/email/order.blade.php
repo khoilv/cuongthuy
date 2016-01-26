@@ -143,7 +143,7 @@
 
         </div><!-- end wrap-->
         <footer>
-            <b>Copyright © 2015. Bản quyền thuộc Cuongthuy.vn</b><br>
+            <b>Copyright © 2016. Bản quyền thuộc Cuongthuy.vn</b><br>
             Địa chỉ : Số 31 Vương Thừa Vũ - Thanh Xuân - Hà Nội<br>
             Tell : 097 123 123 <br>
             Mail : laihuycuong1812@gmail.com<br>

@@ -26,8 +26,8 @@
     <div class="clear"></div>
     <table cellspacing="0" class="table_blue" cellpadding="15">
         <tr class="menu">
-            <th>Họ tên</th>
-            <td colspan="3">
+            <th width="25%">Họ tên</th>
+            <td colspan="3" width="75%">
                 {!! Form::text('customer_name', isset($input['customer_name'])? $input['customer_name']:'',['style' => 'width:180px', 'class' => 'text']) !!}
                 @if ($errors->has('customer_name'))<p style="color: red">{!! $errors->first('customer_name') !!}</p>@endif
             </td>

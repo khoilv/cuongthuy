@@ -35,6 +35,8 @@ Route::group(array('middleware' => 'checkMaintenance'),function(){
     });
     Route::any('updateRating', 'Frontend\RatingController@updateRating');
     Route::get('myorder/detail', 'Frontend\MyOrderDetailController@getIndex');
+    Route::get('myorder','Frontend\MyOrderController@getIndex');
+    Route::get('myorder/detail', 'Frontend\MyOrderDetailController@getIndex');
 });
 Route::get('maintenance', 'Frontend\MaintenanceController@index');
 Route::any('admin/', 'Admin\LoginController@login');

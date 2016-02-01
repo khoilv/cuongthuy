@@ -28,5 +28,41 @@ class OrdersModel extends TableBase {
         );
         return $this->find('all', $options);
     }
-
+    
+    /**
+     * Get list order by Customer
+     * @param int $customerId
+     * @param array $limitArr
+     * @return array
+     */
+    public function getOrderListByCustomer($customerId, $limitArr) {
+        $options = array(
+            'fields' => array('orders.id','order_code','order_date','order_status','SUM(unitPrice) as totalPrice'),
+            'conditions' => array('customer_id' => $customerId),
+            'joins' => array(
+                    array(
+                        'table' => 'orderdetail',
+                        'type' => 'LEFT',
+                        'conditions' => 'orders.id = orderdetail.order_id'
+                    )
+                ),
+            'group' => array('orders.id'),
+            'limit' => $limitArr
+        );
+        return $this->find('all', $options);
+    }
+    
+    /**
+     * Get count order of Customer
+     * @param int $customerId
+     * @return int
+     */
+    public function getCountOrderOfCustomer($customerId) {
+        $option = array(
+            'fields' => array('count(id) as count'),
+            'conditions' => array('customer_id' => $customerId)
+        );
+        $data = $this->find('all', $option);
+        return $data[0]['count'];
+    }
 }

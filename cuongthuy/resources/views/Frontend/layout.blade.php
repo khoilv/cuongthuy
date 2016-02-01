@@ -174,7 +174,7 @@ use App\Http\Controllers\Frontend\FrameCategoryListController;
                     </div>
                     <ul class="f_right">
                         <?php if (Session::has('customer_name')) { ?>
-                            <li><a><?php echo 'Xin chào ' . Session::get('customer_name'); ?></a></li>
+                            <li><a href="{!!action('Frontend\MyOrderController@getIndex')!!}"><?php echo 'Xin chào ' . Session::get('customer_name'); ?></a></li>
                             <li><a style="cursor:pointer" id="logout">Thoát</a></li>
                         <?php } else { ?>
                             <li><a href="#login">Đăng nhập</a></li>

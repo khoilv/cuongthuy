@@ -1,5 +1,4 @@
 <?php
-Route::get('linh_test', 'TestController@getIndex');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

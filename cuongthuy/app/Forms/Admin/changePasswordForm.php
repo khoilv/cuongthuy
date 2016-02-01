@@ -14,7 +14,7 @@ class changePasswordForm extends BaseForm {
     protected function rules(){
         $rules = [
             'old_password'       => ['required', 'max:64', 'regex:/\A[a-z\d|!?_-]+\z/i'],
-            'new_password'       => ['required', 'max:64', 'min:8', 'regex:/\A[a-z\d|!?_-]+\z/i'],
+            'new_password'       => ['required', 'max:64', 'min:9', 'regex:/\A[a-z\d|!?_-]+\z/i'],
         ];
         return $rules;
     }

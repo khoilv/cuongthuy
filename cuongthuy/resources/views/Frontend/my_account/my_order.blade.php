@@ -29,7 +29,7 @@ BaseController::$title = 'Liên hệ';
                 @foreach($arrOrderList as $order)
                     <tr>
                         <td><a href="{!!action('Frontend\MyOrderDetailController@getIndex', array('order_id' => $order['id']))!!}">{!!$order['order_code']!!}</a></td>
-                        <td>{!!$order['order_date'][1]!!} <br>Ngày : {!!$order['order_date'][0]!!}</td>
+                        <td>{!!date("H:i:s", strtotime($order['order_date']))!!} <br>Ngày: {!!date("d-m-Y", strtotime($order['order_date']))!!}</td>
                         <td>{!!$order['order_status']!!}</td>
                         <td><span style="color:#38b54a;font-weight:bold;">{!!$order['totalPrice']!!} vnđ</span></td>
                         <td><a href="{!!action('Frontend\MyOrderDetailController@getIndex', array('order_id' => $order['id']))!!}"><button></button></a></td>

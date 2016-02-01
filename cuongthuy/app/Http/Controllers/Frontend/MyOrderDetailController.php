@@ -45,7 +45,8 @@ class MyOrderDetailController extends Controller {
                     foreach ($orderDetail as $key => $value) {
                         $orderDetail[$key]['detail'] = $this->proModel->getProductById($value['product_id']);
                     }
-
+                    
+                    BaseController::$title = 'Chi tiết đơn hàng';
                     return view('Frontend.my_order_detail', compact('orderDetail', 'id'));
                 }
             }

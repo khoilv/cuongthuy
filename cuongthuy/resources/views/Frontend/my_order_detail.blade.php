@@ -24,7 +24,7 @@
 </script>
 <div class="title title1">
             <div class="wrap">
-                <div class="f_left"><span class="title_red"></span><a href="{!!action('Frontend\MyOrderController@getIndex')!!}"><span>Đơn hàng của tôi ></span></a><a href="{!!action('Frontend\MyOrderDetailController@getIndex', array('order_id' => $id))!!}"><span> Chi tiết đơn hàng</span></a></div>
+                <div class="f_left"><span class="title_red"></span><a {{--href="{!!action('Frontend\MyOrderController@getIndex')!!}"--}}><span>Đơn hàng của tôi ></span></a><a href="{!!action('Frontend\MyOrderDetailController@getIndex', array('order_id' => $id))!!}"><span> Chi tiết đơn hàng</span></a></div>
             </div>
             <div class="clear"></div>
         </div>

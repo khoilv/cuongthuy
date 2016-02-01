@@ -47,8 +47,6 @@ class MyOrderController extends Controller {
         $limitArr = array($offset, $maxRec);
         $arrOrderList = $this->model->getOrderListByCustomer($customerId,$limitArr);
         foreach ($arrOrderList as $key => $val) {
-            $arrDate = explode(' ',$val['order_date']);
-            $arrOrderList[$key]['order_date'] = $arrDate;
             $arrOrderList[$key]['order_status'] = InitialDefine::$arrayOderStatus[$val['order_status']];
         }
         BaseController::$title = 'My Order';

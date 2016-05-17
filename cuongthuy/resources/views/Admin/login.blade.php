@@ -41,7 +41,7 @@
         <!--▼ footer -->
         <div id="footer">
             <div id="footer_area">
-                <p id="copyright">&copy; 2016 - Trang quản trị CuongThuy.vn</p>
+                <p id="copyright">&copy; 2016 - Trang quản trị myphamtienthoi.vn</p>
             </div>
         </div>
         <!--▲ footer -->

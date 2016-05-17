@@ -17,7 +17,7 @@
 <div class="wrap about_page">
     <h3>Cường Thủy.vn</h3><br>
     <p style="line-height:20px;">
-        Cuongthuy.vn là sàn giao dịch thương mại điện tử uy tín, là cầu nối thương mại giữa nhà cung cấp với người mua và là nơi cung cấp các sản phẩm chính hãng, sản phẩm siêu sạch với giá cả tốt nhất có thể. 
+        myphamtienthoi.vn là sàn giao dịch thương mại điện tử uy tín, là cầu nối thương mại giữa nhà cung cấp với người mua và là nơi cung cấp các sản phẩm chính hãng, sản phẩm siêu sạch với giá cả tốt nhất có thể. 
     </p>
     <div class="avanta_list">
         <ul>

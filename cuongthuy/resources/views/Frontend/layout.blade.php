@@ -192,7 +192,7 @@ use App\Http\Controllers\Frontend\FrameCategoryListController;
             </div>
             <div class="clear"></div>
             <div class="wrap header_top">
-                <a class="f_left" href="{!!action('Frontend\TopController@getIndex')!!}"><img src="{!!Asset('public/images/logo.png')!!}" alt="cuongthuy.vn"></a>
+                <a class="f_left" href="{!!action('Frontend\TopController@getIndex')!!}"><img src="{!!Asset('public/images/logo.png')!!}" alt="myphamtienthoi.vn"></a>
                 <div class="f_right ">
                     <ul>
                         <li>Giao hàng 24h miễn phí</li>

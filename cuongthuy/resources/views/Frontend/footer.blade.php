@@ -2,9 +2,9 @@
     <div class="wrap">
         <div class="f_left">
             <div class="f_c1">
-				<img src="{!!Asset('public/images/logo-2.png')!!}" alt="cuongthuy.vn">
+				<img src="{!!Asset('public/images/logo-2.png')!!}" alt="myphamtienthoi.vn">
 				<div>
-					<h2>BẢN QUYỀN THUỘC cuongthuy.vn</h2>
+					<h2>BẢN QUYỀN THUỘC myphamtienthoi.vn</h2>
 					<p>Địa chỉ : Số 31 Vương Thừa Vũ - Thanh Xuân - Hà Nội<br>Tell : 096 677 1102 - (04)3 999 2325  <br>Mail : myphamcuongthuy@gmail.com </p>
 				</div>
 			</div>

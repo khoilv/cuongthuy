@@ -41,7 +41,7 @@
                 <img src="{!!Asset('public/images/logo.png')!!}" class="f_left">
                 <ul>
                     <li><a href="{!!action('Frontend\ContactController@getContact')!!}">Liên hệ</a> </li> 
-                    <li><a href="{!!action('Frontend\TopController@getIndex')!!}">cuongthuy.vn</a> | </li>
+                    <li><a href="{!!action('Frontend\TopController@getIndex')!!}">myphamtienthoi.vn</a> | </li>
 
                 </ul>
                 <div class="clear"></div>
@@ -49,7 +49,7 @@
             <p class="content2">
                 <span style="font-size:18px;font-weight:bold;">Xác nhận đặt hàng thành công !</span> <br><br>
                 Chào {!!$billing['name']!!}<br>
-                Bạn đã đặt hàng thành công trên Cuongthuy.vn. <br>
+                Bạn đã đặt hàng thành công trên myphamtienthoi.vn. <br>
                 @if($shipping['shipMethod'] == 1)
                     Chúng tôi sẽ gọi điện để xác nhận lại đơn hàng của quý khách,
                     và sẽ giao hàng cho quý khách trong thời gian từ 1-3 ngày làm việc.<br>
@@ -137,13 +137,13 @@
                 <div class="clear"></div>
                 <p class="note">
                     Nếu quý khách cần hỗ trợ, vui lòng gọi <span class="red">(04) 73068386</span> hoặc gửi email đến: <a href="#">laihuycuong1812@gmail.com</a>
-                    Cảm ơn Quý khách đã mua sắm trên cuongthuy.vn!
+                    Cảm ơn Quý khách đã mua sắm trên myphamtienthoi.vn!
                 </p>
             </div>
 
         </div><!-- end wrap-->
         <footer>
-            <b>Copyright © 2016. Bản quyền thuộc Cuongthuy.vn</b><br>
+            <b>Copyright © 2016. Bản quyền thuộc myphamtienthoi.vn</b><br>
             Địa chỉ : Số 31 Vương Thừa Vũ - Thanh Xuân - Hà Nội<br>
             Tell : 097 123 123 <br>
             Mail : laihuycuong1812@gmail.com<br>

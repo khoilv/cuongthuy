@@ -30,14 +30,14 @@
             	<img src="{!!Asset('public/images/logo.png')!!}" class="f_left">
                 <ul>
                 	<li><a href="#">Liên hệ</a> </li> 
-                	<li><a href="#">cuongthuy.vn</a> | </li>
+                	<li><a href="#">myphamtienthoi.vn</a> | </li>
                 	                   
                 </ul>
                 <div class="clear"></div>
             </div>
             <p class="content2">
 				Kính chào Quý khách ! <br><br>
-                Quý khách đã đăng ký tài khoản trên cuongthuy.vn<br>
+                Quý khách đã đăng ký tài khoản trên myphamtienthoi.vn<br>
                 &nbsp;&nbsp; - Họ và tên : {!!$customer_name!!}<br>
                 &nbsp;&nbsp; - Điện thoại: {!!$customer_phone!!}<br>
                 &nbsp;&nbsp; - Email: {!!$customer_email!!}<br>
@@ -47,7 +47,7 @@
             </p>
         </div><!-- end wrap-->
         <footer>
-        	<b>Copyright © 2016. Bản quyền thuộc Cuongthuy.vn</b><br>
+        	<b>Copyright © 2016. Bản quyền thuộc myphamtienthoi.vn</b><br>
             Địa chỉ : Số 31 Vương Thừa Vũ - Thanh Xuân - Hà Nội<br>
             Tell : 097 123 123 <br>
             Mail : laihuycuong1812@gmail.com<br>
